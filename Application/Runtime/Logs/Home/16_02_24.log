@@ -1,0 +1,1798 @@
+[ 2016-02-24T08:57:44+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.010000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.010000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0100s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T08:57:57+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0050s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T08:58:07+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0100s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0100s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T08:58:16+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0100s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T08:59:20+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0060s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T09:00:05+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T09:07:45+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0100s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T09:07:51+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T09:08:28+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0100s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T09:08:29+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0100s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T09:11:47+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0050s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T09:12:37+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T09:12:38+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0100s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T09:15:20+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0100s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T09:15:23+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0100s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T09:18:27+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0100s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T09:18:50+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T09:19:23+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T09:20:03+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T09:23:22+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0100s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T09:23:39+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T09:23:40+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T09:23:47+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.010000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.010000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0100s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T09:25:08+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0100s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+ERR: Could not close zip file helloWorld.doc.
+
+[ 2016-02-24T09:25:13+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0100s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T09:26:07+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0100s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T09:26:33+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0100s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T09:27:36+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T09:27:59+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0100s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T09:30:54+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0100s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T09:42:10+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0030s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T09:42:34+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0100s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T10:11:10+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T10:12:49+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T10:13:14+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T10:13:55+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:14:03+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:14:46+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T14:14:48+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T14:19:55+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:20:06+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:21:14+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:22:01+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:23:39+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:23:56+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:32:08+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.015600s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0156s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+
+[ 2016-02-24T14:33:59+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:34:39+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+ERR: Could not close zip file helloWorld.doc.
+
+[ 2016-02-24T14:34:43+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:35:10+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0156s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:35:35+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:37:37+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:38:24+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:39:33+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:43:13+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:49:26+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:49:39+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:50:20+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:50:45+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0156s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+ERR: Could not close zip file helloWorld.doc.
+
+[ 2016-02-24T14:50:51+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:51:42+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:52:12+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:54:03+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:54:45+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0156s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T14:55:40+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:01:45+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:02:15+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:02:40+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.015600s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0156s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:17:42+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:18:33+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:20:37+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0030s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:23:20+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:23:50+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0030s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:24:16+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0030s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:24:44+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0030s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:25:16+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0030s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:30:00+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0156s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:30:26+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.015600s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.015600s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:43:37+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:44:00+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:44:21+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0030s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:44:41+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0030s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:45:45+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:46:11+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:47:43+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:48:02+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0030s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:48:22+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T15:59:28+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] unlink(helloWorld.doc): Permission denied D:\xampp\htdocs\tiku\ThinkPHP\Library\Vendor\PhpWord\src\PhpWord\Writer\AbstractWriter.php 第 278 行.
+ERR: Could not close zip file helloWorld.doc.
+
+[ 2016-02-24T15:59:31+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T16:39:21+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0030s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0010s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T16:39:46+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T16:41:17+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+
+[ 2016-02-24T16:41:49+08:00 ] 127.0.0.1 /shijuan/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_collected` [ RunTime:0.0040s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `tiku_course` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT `tiku_id` FROM `user_collected` WHERE ( user_id=12 )  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+SQL: SELECT * FROM `tiku_course` WHERE ( status=1 )  [ RunTime:0.0000s ]
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [8] Undefined variable: arr D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\xampp\htdocs\tiku\Application\Home\Controller\TikuController.class.php 第 195 行.
+

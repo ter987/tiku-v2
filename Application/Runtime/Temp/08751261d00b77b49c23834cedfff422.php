@@ -1,0 +1,3 @@
+<?php
+//000002592000a:6:{i:0;a:3:{s:2:"id";s:1:"1";s:11:"course_type";s:1:"1";s:9:"type_name";s:12:"高考真题";}i:1;a:3:{s:2:"id";s:1:"2";s:11:"course_type";s:1:"1";s:9:"type_name";s:12:"名校模拟";}i:2;a:3:{s:2:"id";s:1:"3";s:11:"course_type";s:1:"1";s:9:"type_name";s:12:"月考试卷";}i:3;a:3:{s:2:"id";s:1:"4";s:11:"course_type";s:1:"1";s:9:"type_name";s:12:"期中试卷";}i:4;a:3:{s:2:"id";s:1:"5";s:11:"course_type";s:1:"1";s:9:"type_name";s:12:"期末试卷";}i:5;a:3:{s:2:"id";s:1:"6";s:11:"course_type";s:1:"1";s:9:"type_name";s:12:"单元测试";}}
+?>

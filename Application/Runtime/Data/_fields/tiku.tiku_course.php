@@ -1,0 +1,1 @@
+a:6:{i:0;s:2:"id";i:1;s:11:"course_name";i:2;s:11:"course_type";i:3;s:6:"status";s:3:"_pk";s:2:"id";s:5:"_type";a:4:{s:2:"id";s:12:"mediumint(3)";s:11:"course_name";s:11:"varchar(32)";s:11:"course_type";s:10:"tinyint(1)";s:6:"status";s:10:"tinyint(1)";}}

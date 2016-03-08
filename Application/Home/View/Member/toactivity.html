@@ -1,0 +1,57 @@
+<include file="common:header_reg" />
+<div id="main">
+		<div class="main_bg">	
+			<div class="main">
+				<!-- <div class="left main_left">
+					<div class="l_k_check">
+						我是老师
+						<div class="l_check"></div>
+					</div>
+					<div class="l_k1_1">
+						我是学生
+					</div>
+					<div class="l_k2"></div>
+				</div> -->
+				<div class="left main_left">
+					<div class="<eq name="user_type" value="1">l_k_1<else />l_k1_check</eq>">
+						我是老师
+						<eq name="user_type" value="2"><div class="l_check"></div></eq>
+					</div>
+					<div class="<eq name="user_type" value="2">l_k_1<else />l_k1_check</eq>">
+						我是学生
+						<eq name="user_type" value="1"><div class="l_check"></div></eq>
+					</div>
+					<div class="l_k2"></div>
+				</div>
+				<div class="left main-right">
+					<div class="main_r">
+						<div class="stu_nav">
+							<div class="left s_nav blue_back">1.新用户注册</div>
+							<div class="left s_nav blue_back">2.激活</div>
+							<div class="left s_nav nav_left">3.注册成功</div>
+						</div>
+						<div style="width:680px;margin:60px auto;border-bottom:1px solid #666666;padding-bottom:70px;">
+							<div style="width:500px;color:#1a1a1a;">
+								<div class="" style="font-size:36px;color:#ff9c00;line-height:76px;margin:35px 0px;">	
+									<div class="email_img"></div>
+								</div>
+								<div class="f18 text_c c_1a">
+									验证邮件已发出，请在20分钟内登陆您的邮箱验证
+								</div>
+								<div class="text_c">
+									登陆邮箱<span style="color:#dc0000;">{$email_sub}</span>,并按邮件提示操作即可
+								</div>
+							</div>
+						</div>	
+						<div style="width:640px;margin:40px auto;font-size:18px;padding:20px;">
+							<div class="btn_1" style="margin:0px 50px;" ><a href="/member/sendMailAgain?id={$user_id}">重新发送</a></div>
+							<div class="btn_2" onclick="window.open('{$mail_domain}')">马上登陆邮箱</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+<!--footer-->
+<include file="common:footer" />
