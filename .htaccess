@@ -18,4 +18,7 @@
   RewriteRule ^tongbu/$ index.php/home/tongbu/
   RewriteRule ^ceping/(\w*)$ index.php/home/ceping/$1/
   RewriteRule ^onlinetest/(\w*)$ index.php/home/onlinetest/$1/
+  RewriteRule ^qqconnect/(\w*)$ index.php/home/qqconnect/$1/
+  RewriteRule ^sinaconnect/(\w*)$ index.php/home/sinaconnect/$1/
+  RewriteRule ^weixinconnect/(\w*)$ index.php/home/weixinconnect/$1/
 </IfModule>
