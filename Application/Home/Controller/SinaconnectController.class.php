@@ -84,10 +84,8 @@ class SinaconnectController extends GlobalController {
 	}
 	
 	public function selType(){
-		if(!isset($_SESSION['_user_id'])){
-			redirect('/');
-		}
-		$this->display();
+		$Member = A('Member');
+		$Member->selType();
 	}
 	public function downFile($file_path,$login_type)
 	{	

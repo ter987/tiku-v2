@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><?php echo ($meta_title); ?></title>
 <link href="/Public/css/index.css" rel="stylesheet" type="text/css" />
+<?php echo ($loginCss); ?>
 <script src="/Public/js/jquery.min.js" type="text/javascript"></script>
 </head>
 <body>
@@ -48,7 +49,7 @@
 						</div>
 						<div><?php echo ($error_msg); ?></div>
 						<form id="add_form" action="/member/register" method="post" enctype="multipart/form-data">
-						<input type="hidden" id="type" name="type" value="1" />
+						<input type="hidden" id="type" name="type" value="2" />
 						<input type="hidden" name="is_mail" id="is_mail" value="0"/>
 						<div class="form_list" style="margin-top:-5px;">
 							<div class="l_list ph_li">

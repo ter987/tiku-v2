@@ -1,0 +1,38 @@
+<include file="common:header_reg" />
+<!--main-->
+		<div id="third_fram">	
+			<div class="thirddiv">
+				<div class="third-center">
+                		<form id="conform_form" action="/member/seltype" method="post">
+						<div class="usertype">
+						<span>您好,<font style="color:#09F">{$nickname}</font></span><br/>
+                        <span>请选择您的用户类型</span>
+                        </div>
+													
+							<div class="third" style="font-size:15px;display:inline;">
+								<label>
+								<div id="div1" style="margin-left:60px;float:left;">
+                                <div class="student"></div><br/>
+                                <input name="type" type="radio" value="1" checked="" style="margin-left:70px;"/>
+                                 </div>
+                               </label>
+                               <label>
+                                <div id="div2" style="float:inherit;">
+                                <div class="teacher"></div>
+                                 <input name="type" type="radio" value="2" style="margin-left:150px;"/>
+                                </div>
+                                </label>
+							</div>
+                            
+							<div>
+								<div class="btn_conf" onclick="$('form').submit();">
+									确定
+								</div>
+							</div>
+						</form> 
+					</div>
+				</div>
+	</div>
+	
+           
+<include file="common:footer" />

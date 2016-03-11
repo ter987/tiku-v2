@@ -55,7 +55,7 @@ class WeixinconnectController extends GlobalController {
 			$userData['last_login'] = time();
 			$userData['login_ip'] = get_client_ip();
 			$userData['login_type'] = 'wx';
-			$userData['sina_id'] = $weixinId;
+			$userData['wx_id'] = $weixinId;
 			//var_dump($userData);exit;
 			$userId = $userModel->add($userData);
 			if($weixinId && $userId){
@@ -85,10 +85,8 @@ class WeixinconnectController extends GlobalController {
 	}
 	
 	public function selType(){
-		if(!isset($_SESSION['_user_id'])){
-			redirect('/');
-		}
-		$this->display();
+		$Member = A('Member');
+		$Member->selType();
 	}
 	public function downFile($file_path,$login_type)
 	{	

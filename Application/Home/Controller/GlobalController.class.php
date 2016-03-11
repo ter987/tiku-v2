@@ -458,5 +458,17 @@ class GlobalController extends Controller{
 	 public function setMetaDescription($description){
 	 	$this->assign('meta_description',$description);
 	 }
+	 public function addCss($cssArr){
+	 	foreach($cssArr as $val){
+	 		$css .= '<link href="'.C('CSS_PATH').$val.'" rel="stylesheet" type="text/css" />'."\n";
+	 	}
+		return $css;
+	 }
+	 public function addJs($jsArr){
+	 	foreach($jsArr as $val){
+	 		$js .= '<script src="'.C('JS_PATH').$val.'" type="text/javascript"></script>'."\n";
+	 	}
+		return $js;
+	 }
 }
 ?>

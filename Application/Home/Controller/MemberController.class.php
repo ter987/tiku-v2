@@ -423,10 +423,38 @@ INNER JOIN tiku ON a.tiku_id=tiku.`id`");
 			}
 			
 		}else{
+			$css = $this->addCss(array('login.css'));
+			$this->assign('loginCss',$css);
+			$this->setMetaTitle('登录'.C('TITLE_SUFFIX'));
 			setcookie('pre_page',$_SERVER['HTTP_REFERER']);
 			$this->display();
 		}
 		
+	}
+	public function selType(){
+		if(!isset($_SESSION['_user_id'])){
+			redirect('/');
+		}
+		$Model = M('user');
+		$user = $Model->where("id=".$_SESSION['_user_id'])->find();
+		if($_POST){
+			$type = I('post.type');
+			if($type != 1 && $type != 2){
+				redirect('/');
+			}
+			if($Model->where("id=".$_SESSION['_user_id'])->save(array('type'=>$type))){
+				$_SESSION['nick_name'] = $user['nick_name'];
+				$_SESSION['user_id'] = $user['id'];
+				$_SESSION['user_type'] = $user['type'];
+				redirect('/member/index');
+			}
+		}else{
+			$this->assign('nickname',$user['nick_name']);
+			$css = $this->addCss(array('login.css'));
+			$this->assign('loginCss',$css);
+			$this->setMetaTitle('选择登录类型'.C('TITLE_SUFFIX'));
+			$this->display('Member/seltype');
+		}
 	}
 	public function resetpass(){
 		$this->display();

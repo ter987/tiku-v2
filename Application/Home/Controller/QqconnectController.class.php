@@ -53,7 +53,7 @@ class QqconnectController extends GlobalController {
 			if($qqId && $userId){
 				$Model->commit();
 				$_SESSION['_user_id'] = $userId;//用于选择老师或学生时用，选择后销毁
-				redirect('/');
+				redirect('/qqconnect/seltype');
 			}else{
 				$Model->rollback();
 			}
@@ -78,10 +78,8 @@ class QqconnectController extends GlobalController {
 	}
 	
 	public function selType(){
-		if(!isset($_SESSION['_user_id'])){
-			redirect('/');
-		}
-		$this->display();
+		$Member = A('Member');
+		$Member->selType();
 	}
 	public function downFile($file_path,$login_type)
 	{	
