@@ -60,6 +60,7 @@ class SinaconnectController extends GlobalController {
 			if($sinaId && $userId){
 				$Model->commit();
 				$_SESSION['_user_id'] = $userId;//用于选择老师或学生时用，选择后销毁
+				$_SESSION['open_login'] = 'sina';
 				redirect('/sinaconnect/seltype');
 			}else{
 				$Model->rollback();
@@ -69,6 +70,7 @@ class SinaconnectController extends GlobalController {
 			if($user){
 				if($user['type']==0){
 					$_SESSION['_user_id'] = $result['id'];//用于选择老师或学生时用，选择后销毁
+					$_SESSION['open_login'] = 'sina';
 					redirect('/sinaconnect/seltype');
 				}else{
 					$_SESSION['nick_name'] = $user['nick_name'];

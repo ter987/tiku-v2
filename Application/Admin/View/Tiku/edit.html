@@ -181,7 +181,7 @@
 		<div class="row cl">
 			<div class="col-10 col-offset-2">
 				<eq name="tiku_data.status" value="0"><button onClick="article_save_submit();" class="btn btn-primary radius" ><i class="Hui-iconfont">&#xe632;</i> 保存并审核通过</button></eq>
-				<button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+				<button onClick="$('#form1').submit()" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
 				<button onClick="window.location.href='/index.php/admin/tikusource/edit/id/{$tiku_data.sid}'" class="btn btn-success radius" type="button">修改试卷</button>
 				<button onClick="history.back(-1)" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
 				
@@ -207,9 +207,26 @@ function article_save_submit(){
 	$('#status').val(1);
 }
 function article_save(){
-	$('#form1').submit();
+	$('#form1').Validform({ajaxPost:true});
 }
 $(function(){
+	$('#form1').Validform({
+		ajaxPost:true,
+		tiptype:4,
+		callback:function(data){
+			if(data.status=='success'){
+				layer.confirm('编辑成功！', {
+				btn: ['下一题','返回'], 
+			},
+			function(){
+				window.location.href = '/index.php/admin/tiku/edit/id/'+data.nextId;
+			},
+			function(){
+				window.location.href = data.backTo;
+			});	
+			}
+		}
+	});
 	$('.skin-minimal input').iCheck({
 		checkboxClass: 'icheckbox-blue',
 		radioClass: 'iradio-blue',

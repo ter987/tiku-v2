@@ -95,7 +95,7 @@ class TikuController extends GlobalController {
 			$data['type_id'] = $_POST['type_id'];
 			$data['update_time'] = time();
 			if($data['type_id']==1 || $data['type_id']==6){
-				$data['options'] = json_encode(trim($_POST['options']));
+				$data['options'] = json_encode($_POST['options']);
 			}
 			
 			$Model = M('tiku');
@@ -108,7 +108,13 @@ class TikuController extends GlobalController {
 				$pointModel->data($point_data)->where("tiku_id=".$data['id'])->save();
 				$System = A('System');
 				$System->logWrite($_SESSION['admin_id'],"编辑题库成功(ID:".$data['id'].")");
-				$this->_message('success','更新成功',$_SESSION['jump_url'],1);exit;
+				$next = $Model->where("course_id=".$data['course_id']." AND status=0")->find();
+				if($next){
+					$nextId = $next['id'];
+				}else{
+					$nextId = 0;
+				}
+				$this->ajaxReturn(array('status'=>'success','nextId'=>$nextId,'backTo'=>$_SESSION['jump_url']));
 			}else{
 				$this->_message('error','更新失败',$_SERVER['HTTP_REFERER'],1);exit;
 			}

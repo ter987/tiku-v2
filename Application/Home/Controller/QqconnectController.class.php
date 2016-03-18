@@ -53,6 +53,7 @@ class QqconnectController extends GlobalController {
 			if($qqId && $userId){
 				$Model->commit();
 				$_SESSION['_user_id'] = $userId;//用于选择老师或学生时用，选择后销毁
+				$_SESSION['open_login'] = 'qq';
 				redirect('/qqconnect/seltype');
 			}else{
 				$Model->rollback();
@@ -62,7 +63,8 @@ class QqconnectController extends GlobalController {
 			if($user){
 				if($user['type']==0){
 					$_SESSION['_user_id'] = $result['id'];//用于选择老师或学生时用，选择后销毁
-					redirect('/');
+					$_SESSION['open_login'] = 'qq';
+					redirect('/qqconnect/seltype');
 				}else{
 					$_SESSION['nick_name'] = $user['nick_name'];
 					$_SESSION['user_type'] = $user['type'];

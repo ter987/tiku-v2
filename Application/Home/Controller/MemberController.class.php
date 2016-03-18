@@ -442,7 +442,7 @@ INNER JOIN tiku ON a.tiku_id=tiku.`id`");
 			if($type != 1 && $type != 2){
 				redirect('/');
 			}
-			if($Model->where("id=".$_SESSION['_user_id'])->save(array('type'=>$type))){
+			if($Model->where($_SESSION['open_login']."_id=".$_SESSION['_user_id'])->save(array('type'=>$type))){
 				$_SESSION['nick_name'] = $user['nick_name'];
 				$_SESSION['user_id'] = $user['id'];
 				$_SESSION['user_type'] = $user['type'];
