@@ -43,6 +43,9 @@ class AddtikuController extends Controller {
 		}
 		echo 'Filter Success!';
 	}
+	public function resetPoint(){
+		
+	}
 	/*
 	 * 过滤答案中的非法字符
 	 */ 
@@ -76,8 +79,11 @@ class AddtikuController extends Controller {
 	}
 	public function pipei_tiku(){
 		$Model = M('tiku');
-		for($id=250000;$id<=974901;$id++){//974901
+		for($id=1;$id<=5000;$id++){//974901
 			//$id = 258910;
+			$options = '';
+			$spider_error = 0;
+			$error_msg = '';
 			$data = array();
 			$result = $Model->field('content_old,type_id,answer,analysis')->where("id=$id AND status=0")->find();
 			if(!$result) continue;
@@ -96,75 +102,113 @@ class AddtikuController extends Controller {
 				$content= preg_replace('/<p[\s|\S]*>/U','',$content,1);
 				$content = preg_replace('/<\/p>/','',$content,1);
 			}
-			//echo $content;exit;
-			if($type_id==1){
+			//检查是否有图片找不到
+			preg_match_all('/src="(.+)"/iU',$content,$img_matchs);
+			foreach($img_matchs[1] as $v){
+				if(!file_exists($_SERVER['DOCUMENT_ROOT'].$v)){
+					$spider_error = 1;
+					$error_msg = '图片找不到'.'/';
+				}
+			}
+			//过滤空行
+			$matchs = array();
+			preg_match_all('/<p class=MsoNormal[\s|\S]*<\/p>/U',$content,$matchs);
+			foreach($matchs[0] as $key=>$val){
+				$result = preg_replace('/(&nbsp;)| /','',strip_tags($val,'<img>'));
+				if($result ==''){
+					$content = str_replace($matchs[0][$key],'',$content);
+				}
+			}
+			//过滤网址
+			$content = preg_replace('/(金太阳)|(www.jtyzujuan.com)|(学科网)|(www.zxxk.com)|(http:\/\/wx\.jtyjy\.com\/)/','', $content);
+			if($type_id==1 || $type_id==6){
 				$a=$b=$c=$d='';
-				$spider_error = 0;
 				$option_arr = array();
 				$str = strip_tags($content,'<img><sup><sub><strong><em><p>');
 				//$str= preg_replace('/\s*/','',$str);
 				//echo $content;exit;
 				$str = preg_replace('/\n/','',$str);
-				$result = preg_match('/A(．|\.|、){1}[^\n]+B(．|\.|、)/',$str,$match);
-		
-				if(!$result){ if(preg_match('/A(．|\.|、){1}[\s|\S]+\n/U',$str,$match)){}else{preg_match('/（A）[\s|\S]+（B）/U',$str,$match);$match[0] = preg_replace('/（A）|（B）/','',$match[0]);}}
+				$result = preg_match('/A\s{0,1}(．|\.|、){1}[^\n]+B\s{0,1}(．|\.|、)/',$str,$match);
+				//echo $str;
+				if(!$result){ if(preg_match('/A(．|\.|、){1}[\s|\S]+\n/U',$str,$match)){}if(preg_match('/\(A\)[\s|\S]+\(B\)/U',$str,$match)){$match[0] = preg_replace('/(\(A\)|\(B\))/','',$match[0]);}else{preg_match('/\（A）[\s|\S]+（B）/U',$str,$match);$match[0] = preg_replace('/（A）|（B）/','',$match[0]);}}
 				//var_dump($match);exit;
 				
-				$a = trim(preg_replace('/A．|A\.|A、|B．|B\.|B、|&nbsp;/','',$match[0]));
+				$a = trim(preg_replace('/A\s{0,1}．|A\s{0,1}\.|A、|B\s{0,1}．|B\s{0,1}\.|B、|&nbsp;/','',$match[0]));
 				$a = strip_tags($a,'<img><sup><sub><strong><em>');
 				//echo $a;exit;
-				$result = preg_match('/B(．|\.|、){1}[^\n]+C(．|\.|、)/',$str,$match);
-				if(!$result){ if(preg_match('/B(．|\.|、){1}[\s|\S]+\n/U',$str,$match)){}else{preg_match('/（B）[\s|\S]+（C）/U',$str,$match);$match[0] = preg_replace('/（B）|（C）/','',$match[0]);}}
-				//var_dump($match);exit;
+				$result = preg_match('/B\s{0,1}(．|\.|、){1}[^\n]+C\s{0,1}(．|\.|、)/',$str,$match);
+				if(!$result){ if(preg_match('/B(．|\.|、){1}[\s|\S]+\n/U',$str,$match)){}if(preg_match('/\(B\)[\s|\S]+\(C\)/U',$str,$match)){$match[0] = preg_replace('/(\(B\)|\(C\))/','',$match[0]);}else{preg_match('/（B）[\s|\S]+（C）/U',$str,$match);$match[0] = preg_replace('/（B）|（C）/','',$match[0]);}}
+				//echo $str;var_dump($match);exit;
 				
-				$b = trim(preg_replace('/B．|B\.|B、|C．|C\.|C、|&nbsp;/','',$match[0]));
+				$b = trim(preg_replace('/B\s{0,1}．|B\s{0,1}\.|B、|C\s{0,1}．|C\.|C、|&nbsp;/','',$match[0]));
 				$b = strip_tags($b,'<img><sup><sub><strong><em>');
-				$result = preg_match('/C(．|\.|、){1}[^\n]+D(．|\.|、)/',$str,$match);
-				if(!$result){ if(preg_match('/C(．|\.|、){1}[\s|\S]+\n/U',$str,$match)){}else{preg_match('/（C）[\s|\S]+（D）/U',$str,$match);$match[0] = preg_replace('/（C）|（D）/','',$match[0]);}}
-				
-				$c = trim(preg_replace('/C．|C\.|C、|D．|D\.|D、|&nbsp;/','',$match[0]));
+				//echo $b;exit;
+				$result = preg_match('/C\s{0,1}(．|\.|、){1}[^\n]+D\s{0,1}(．|\.|、)/',$str,$match);
+				if(!$result){ if(preg_match('/C(．|\.|、){1}[\s|\S]+\n/U',$str,$match)){}if(preg_match('/\(C\)[\s|\S]+\(D\)/U',$str,$match)){$match[0] = preg_replace('/(\(C\)|\(D\))/','',$match[0]);}else{preg_match('/（C）[\s|\S]+（D）/U',$str,$match);$match[0] = preg_replace('/（C）|（D）/','',$match[0]);}}
+				//var_dump($match);
+				$c = trim(preg_replace('/C\s{0,1}．|C\.|C、|D\s{0,1}．|D\.|D、|&nbsp;/','',$match[0]));
 				$c = strip_tags($c,'<img><sup><sub><strong><em>');
-				$result = preg_match('/(&nbsp;)*\s*D(．|\.|、){1}[\s|\S]+(<\/p>){0,1}/',$str,$match);
-				if(!$result){ if(preg_match('/D(．|\.|、){1}[\s|\S]+(<\/p>){0,1}/',$str,$match)){}else{preg_match('/（D）[\s|\S]+(<\/p>){0,1}/',$str,$match);$match[0] = preg_replace('/（D）/','',$match[0]);}}
+				//echo $c;exit;
+				$result = preg_match('/(&nbsp;)*\s*D\s{0,1}(．|\.|、){1}[\s|\S]+(<\/p>){0,1}/',$str,$match);
+				if(!$result){ if(preg_match('/D(．|\.|、){1}[\s|\S]+(<\/p>){0,1}/',$str,$match)){}if(preg_match('/\(D\)[\s|\S]+(<\/p>){0,1}/',$str,$match)){$match[0] = preg_replace('/\(D\)/','',$match[0]);}else{preg_match('/（D）[\s|\S]+(<\/p>){0,1}/',$str,$match);$match[0] = preg_replace('/（D）/','',$match[0]);}}
 				//exit($str);
 				//var_dump($match);exit;
-				$d = trim(preg_replace('/D．|D\.|D、|&nbsp;/i','',$match[0]));
+				$d = trim(preg_replace('/D\s{0,1}．|D\s{0,1}\.|D、|&nbsp;/i','',$match[0]));
 				$d = strip_tags($d,'<img><sup><sub><strong><em>');
 				$option_arr = array(0=>$a,1=>$b,2=>$c,3=>$d);
-				if(!empty($a) || !empty($b) || !empty($c) || !empty($d)){
+				//if(!empty($a) || !empty($b) || !empty($c) || !empty($d)){
 					$options = json_encode($option_arr);
-				}
+				//}
 				
-				if(empty($a) || empty($b) || empty($c) || empty($d)){
+				if($a==='' || $b==='' || $c==='' || $d===''){
 				 	$spider_error = 1;
+					$error_msg .= '选项为空或不是选择题'.'/';
 				}
 				
 				preg_match_all('/<p[\s|\S]*<\/p>/U',$content,$matchs);
 				$count = count($matchs[0]);
-				
+				//echo $content;exit;
 				if($count){
 					$i = 0;
 					while($i<$count){
 						if(preg_match('/[ABCD](．|\.|、){1}/',strip_tags($matchs[0][$i]),$m) || preg_match('/（[ABCD]）/',strip_tags($matchs[0][$i]),$m)){
 							$content = str_replace($matchs[0][$i],'',$content);
 						}else{
-							$spider_error = 0;
+							//$spider_error = 1;
 						}
 						$i++;
 					}
 				}else{
-					$spider_error = 1;
-				}
-				preg_match_all('/<p class=MsoNormal[\s|\S]*<\/p>/U',$content,$matchs);
-				foreach($matchs[0] as $key=>$val){
-					$result = preg_replace('/(&nbsp;)| /','',strip_tags($val,'<img>'));
-					if($result ==''){
-						$content = str_replace($matchs[0][$key],'',$content);
+					//echo $content;
+					$matchs = array();
+					preg_match('/<span lang="{0,1}EN-US"{0,1}><br\/{0,1}>\s*A<\/span>[\s|\S]+D<\/span>．<span .*>.*<\/span>/U',$content,$matchs);
+					//var_dump($matchs);
+					if(!empty($matchs[0])){
+						$content = preg_replace('/<span lang="{0,1}EN-US"{0,1}><br\/{0,1}>\s*A<\/span>[\s|\S]+D<\/span>．<span .*>.*<\/span>/U','',$content);
+					}else{
+						$matchs = array();
+						preg_match('/<span style=[\'|"]{0,1}background:white[\'|"]{0,1}>\s*A<\/span>[\s|\S]+D<\/span>.*．.*<span .*>.*<\/span>/U',$content,$matchs);
+						//var_dump($matchs);exit;
+						if(!empty($matchs[0])){
+							$content = preg_replace('/<span style=[\'|"]{0,1}background:white[\'|"]{0,1}>\s*A<\/span>[\s|\S]+D<\/span>.*．.*<span .*>.*<\/span>/U','',$content);
+						}else{
+							$matchs = array();
+							preg_match('/<span lang="{0,1}EN-US"{0,1}><br\/{0,1}>\s*A<\/span>[\s|\S]+D<\/span>.*．.*/',$content,$matchs);
+							//var_dump($matchs);exit;
+							if(!empty($matchs[0])){
+								$content = preg_replace('/<span lang="{0,1}EN-US"{0,1}><br\/{0,1}>\s*A<\/span>[\s|\S]+D<\/span>.*．.*/','',$content);
+							}else{
+								$spider_error = 1;
+								$error_msg .= '题目中包含选项未去掉';
+							}
+						}
+						
 					}
 				}
+				
 			}
 			//过滤答案
-			if($type_id==1){
+			if($type_id==1 || $type_id ==6){
 				$answer = preg_replace('/(&nbsp;)|(&amp;)|(nbsp;)|(&lt;p&gt;)|(&lt;\/p&gt;)|\s{2,}| /','',$answer);
 			}else{
 				$answer = htmlspecialchars_decode($answer);
@@ -179,7 +223,7 @@ class AddtikuController extends Controller {
 			}
 			//过滤解析
 			$analysis = htmlspecialchars_decode($analysis);
-			
+			$analysis = preg_replace('/(金太阳)|(www.jtyzujuan.com)|(学科网)|(www.zxxk.com)/','', $analysis);
 			$analysis = preg_replace('/<div[\s|\S]*>/U','',$analysis);
 			$analysis = preg_replace('/<\/div>/U','',$analysis);
 			
@@ -197,6 +241,7 @@ class AddtikuController extends Controller {
 			$data['answer'] = $answer;
 			$data['analysis'] = $analysis;
 			$data['spider_error'] = $spider_error;
+			$data['error_msg'] = $error_msg;
 			$data['options'] = $options;
 			$Model->where("id=$id")->save($data);
 			unset($data);

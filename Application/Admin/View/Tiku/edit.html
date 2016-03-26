@@ -25,7 +25,11 @@
 <body>
 <div class="pd-20">
 	<form action="/index.php/admin/tiku/edit" method="post" onsubmit="return true;" id="form1" class="form form-horizontal" id="form-article-add">
-		<input type="hidden" name="id" value="{$tiku_data.id}" />
+		<input type="hidden" name="id" id="shiti_id" value="{$tiku_data.id}" />
+		<div class="row cl">
+			<label class="form-label col-2">ID：</label>
+			{$tiku_data.id}&nbsp;&nbsp;&nbsp;采集：<eq name="tiku_data.spider_error" value="1">错误&nbsp;&nbsp;&nbsp;错误信息：{$tiku_data.error_msg}<else />正常</eq>
+		</div> 
 		<div class="row cl">
 			<label class="form-label col-2"><span class="c-red">*</span>题目：</label>
 			<div class="formControls col-10">
@@ -39,7 +43,7 @@
                     			$options = json_decode($tiku_data['options']);
                     			$options_index = array(0=>'A',1=>'B',2=>'C',3=>'D');
                     	</php>
-                    	<div class="row cl">
+                    	<div class="row cl" id="option_div">
 						<label class="form-label col-2"><span class="c-red">*</span>选项：</label>
 						<div class="formControls col-10">
 							<table>
@@ -108,7 +112,7 @@
 		<div class="row cl">
 			<label class="form-label col-2"><span class="c-red">*</span>科目：</label>
 			<div class="formControls col-2"> <span class="select-box">
-				<select name="course_id" class="select" onchange="select_course(this.value)">
+				<select name="course_id" id="course_id" class="select" onchange="select_course(this.value)">
 					<volist name="course_data" id="vo">
 					<option value="{$vo.id}" <eq name="tiku_data.course_id" value="$vo.id">selected=""</eq>>{$vo.course_name}</option>
 					</volist>
@@ -180,10 +184,11 @@
 		</div>
 		<div class="row cl">
 			<div class="col-10 col-offset-2">
-				<eq name="tiku_data.status" value="0"><button onClick="article_save_submit();" class="btn btn-primary radius" ><i class="Hui-iconfont">&#xe632;</i> 保存并审核通过</button></eq>
+				<neq name="tiku_data.status" value="1"><button onClick="article_save_submit();" class="btn btn-primary radius" ><i class="Hui-iconfont">&#xe632;</i> 保存并审核通过</button></neq>
+				<button onClick="shiti_del()" class="btn btn-danger radius" type="button"> 删除</button>
 				<button onClick="$('#form1').submit()" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
 				<button onClick="window.location.href='/index.php/admin/tikusource/edit/id/{$tiku_data.sid}'" class="btn btn-success radius" type="button">修改试卷</button>
-				<button onClick="history.back(-1)" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+				<button onClick="nextT()" class="btn btn-default radius" type="button">&nbsp;&nbsp;下一题&nbsp;&nbsp;</button>
 				
 			</div>
 		</div>
@@ -206,6 +211,32 @@
 function article_save_submit(){
 	$('#status').val(1);
 }
+function nextT(){
+	$.post(
+		'/index.php/admin/tiku/nextT',
+		{id:$('#shiti_id').val(),course_id:$('#course_id').val(),status:$('#status').val()},
+		function(data){
+			if(data.status=='ok'){
+				window.location.href = '/index.php/admin/tiku/edit/id/'+data.nextId;
+			}
+		}
+	);
+}
+function shiti_del(){
+	layer.confirm('确认要删除吗？',function(index){
+		$.getJSON(
+		'/index.php/admin/tiku/deleteAndNext',
+		{id:$('#shiti_id').val(),course_id:$('#course_id').val()},
+		function(data){
+			if(data.status=='ok'){
+				window.location.href = '/index.php/admin/tiku/edit/id/'+data.nextId;
+			}
+		}
+		
+	);
+		
+	});
+}
 function article_save(){
 	$('#form1').Validform({ajaxPost:true});
 }
@@ -219,11 +250,17 @@ $(function(){
 				btn: ['下一题','返回'], 
 			},
 			function(){
+				if(data.nextId==0){
+					alert('您指定的条件下已经没有未审核的题目了！');
+					return false;
+				}
 				window.location.href = '/index.php/admin/tiku/edit/id/'+data.nextId;
 			},
 			function(){
 				window.location.href = data.backTo;
 			});	
+			}else{
+				alert(data.msg);
 			}
 		}
 	});

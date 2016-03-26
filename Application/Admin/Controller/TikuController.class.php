@@ -24,12 +24,14 @@ class TikuController extends GlobalController {
 		$source_name = $_REQUEST['source_name'];
 		$content = $_REQUEST['content'];
 		$status = $_REQUEST['status'];
+		$spider_error = $_REQUEST['spider_error'];
 		
 		$this->assign('course_id',$course_id);
 		$this->assign('type_id',$type_id);
 		$this->assign('source_name',$source_name);
 		$this->assign('content',$content);
 		$this->assign('status',$status);
+		$this->assign('spider_error',$spider_error);
 		$where = '1=1';
 		$jump_url = '/index.php?m=Admin&c='.CONTROLLER_NAME.'&a='.ACTION_NAME.'&';
 		if($course_id){
@@ -40,9 +42,14 @@ class TikuController extends GlobalController {
 			$where .= " && tiku.type_id=$type_id ";
 			$jump_url .= 'type_id='.$type_id.'&';
 		}
-		if($status){
+		
+		if($status !== ''){
 			$where .= " && tiku.status=$status ";
 			$jump_url .= 'status='.$status.'&';
+		}
+		if($spider_error !== ''){
+			$where .= " && tiku.spider_error=$spider_error ";
+			$jump_url .= 'spider_error='.$spider_error.'&';
 		}
 		if($content){
 			$where .= " && tiku.content like '%".$content."%'";
@@ -52,9 +59,11 @@ class TikuController extends GlobalController {
 			$where .= " && tiku_source.source_name like '%".$source_name."%'";
 			$jump_url .= 'type_id='.$type_id.'&';
 		}
+		$this->assign('jump_to',$jump_url);
 		if($_GET['p']){
 			$jump_url .= 'p='.$_GET['p'];
 		}	
+
 		$_SESSION['jump_url'] = $jump_url;
 		//获取题库数据
 		$Model = M('tiku');
@@ -63,6 +72,8 @@ class TikuController extends GlobalController {
 		$Page = new \Think\Page($count,50);
 		$Page->parameter['course_id'] = $course_id;
 		$Page->parameter['type_id'] = $type_id;
+		$Page->parameter['status'] = $status;
+		$Page->parameter['spider_error'] = $spider_error;
 		$Page->parameter['content'] = $content;
 		$Page->parameter['source_name'] = $source_name;
 		$Page->setConfig('first','第一页');
@@ -70,16 +81,21 @@ class TikuController extends GlobalController {
 		$Page->setConfig('next','下一页');
 		$page_show = $Page->show();
 		$this->assign('page_show',$page_show);
-		$tiku_data = $Model->field(" tiku.`id`,tiku.`content`,tiku.`clicks`,tiku.`status`,tiku.`create_time`,tiku_source.`source_name`")
+		$tiku_data = $Model->field(" tiku.`id`,tiku.`content`,tiku.`clicks`,tiku.`status`,tiku.`spider_error`,tiku.`create_time`,tiku_source.`source_name`")
 		->join("left join tiku_source on tiku.`source_id`=tiku_source.id")
 		->where($where)->limit($Page->firstRow.','.$Page->listRows)->select();
-		//echo $Model->getLastSql();
+		echo $Model->getLastSql();
 		//var_dump($tiku_data);
 		$this->assign('tiku_data',$tiku_data);
 		$this->assign('count',$count);
 		$this->display();
 		
         
+	}
+	public function ajaxBianji(){
+		$name = I('get.name');
+		$id = I('get.id');
+		setcookie($name,$id);
 	}
 	public function edit(){
 		if($_POST){
@@ -95,7 +111,12 @@ class TikuController extends GlobalController {
 			$data['type_id'] = $_POST['type_id'];
 			$data['update_time'] = time();
 			if($data['type_id']==1 || $data['type_id']==6){
+				if($_POST['options'][0]==='' || $_POST['options'][1]==='' || $_POST['options'][2]==='' || $_POST['options'][3]===''){
+					$this->ajaxReturn(array('status'=>'error','msg'=>'选项不能为空！'));
+				}
 				$data['options'] = json_encode($_POST['options']);
+			}else{
+				$data['options'] = '';
 			}
 			
 			$Model = M('tiku');
@@ -108,7 +129,20 @@ class TikuController extends GlobalController {
 				$pointModel->data($point_data)->where("tiku_id=".$data['id'])->save();
 				$System = A('System');
 				$System->logWrite($_SESSION['admin_id'],"编辑题库成功(ID:".$data['id'].")");
-				$next = $Model->where("course_id=".$data['course_id']." AND status=0")->find();
+				$where = '1=1';
+				if(isset($_COOKIE['course_id']) and $_COOKIE['course_id'] != 0){
+					$where = 'course_id='.$_COOKIE['course_id'];
+				}
+				if(isset($_COOKIE['type_id']) and $_COOKIE['type_id'] != 0){
+					$where .= ' AND type_id='.$_COOKIE['type_id'];
+				}
+				if(isset($_COOKIE['spider_error'])){
+					$where .= ' AND spider_error='.$_COOKIE['spider_error'];
+				}
+				if(isset($_COOKIE['status'])){
+					$where .= ' AND status='.$_COOKIE['status'];
+				}
+				$next = $Model->where($where)->find();
 				if($next){
 					$nextId = $next['id'];
 				}else{
@@ -116,12 +150,12 @@ class TikuController extends GlobalController {
 				}
 				$this->ajaxReturn(array('status'=>'success','nextId'=>$nextId,'backTo'=>$_SESSION['jump_url']));
 			}else{
-				$this->_message('error','更新失败',$_SERVER['HTTP_REFERER'],1);exit;
+				$this->ajaxReturn(array('status'=>'error','msg'=>'更新失败！'));
 			}
 		}else{
 			$tiku_id = $_GET['id'];
 			$Model = M('tiku');
-			$tiku_data = $Model->field(" tiku.`id`,tiku.difficulty_id,tiku.options,tiku.content_old,tiku.type_id,tiku_to_point.point_id,province.province_name,tiku.`content`,tiku.`clicks`,tiku.`status`,tiku.`answer`,tiku.`analysis`,tiku.`create_time`,tiku_source.course_id,tiku_source.source_name,tiku_source.course_id,year,tiku_source.grade,tiku_source.source_type_id,tiku_source.id as sid,tiku_source.wen_li")
+			$tiku_data = $Model->field(" tiku.`id`,tiku.difficulty_id,tiku.options,tiku.content_old,tiku.type_id,tiku_to_point.point_id,province.province_name,tiku.`content`,tiku.`clicks`,tiku.`status`,tiku.`spider_error`,tiku.`error_msg`,tiku.`answer`,tiku.`analysis`,tiku.`create_time`,tiku_source.course_id,tiku_source.source_name,tiku_source.course_id,year,tiku_source.grade,tiku_source.source_type_id,tiku_source.id as sid,tiku_source.wen_li")
 			->join("tiku_source on tiku.`source_id`=tiku_source.id")
 			->join("left join province on tiku_source.province_id=province.id")
 			->join("tiku_to_point on tiku_to_point.tiku_id=tiku.id")
@@ -140,6 +174,48 @@ class TikuController extends GlobalController {
 		//var_dump($source_type_data);
 		$this->assign('source_type_data',$source_type_data);
 		$this->display();
+	}
+	public function nextT(){
+		$id = I('post.id');
+		$course_id = I('post.course_id');
+		$status = I('post.status');
+		$Model = M('tiku');
+		$where = '1=1';
+		if(isset($_COOKIE['course_id']) and $_COOKIE['course_id'] != 0){
+			$where = 'course_id='.$_COOKIE['course_id'];
+		}
+		if(isset($_COOKIE['type_id']) and $_COOKIE['type_id'] != 0){
+			$where .= ' AND type_id='.$_COOKIE['type_id'];
+		}
+		if(isset($_COOKIE['spider_error'])){
+			$where .= ' AND spider_error='.$_COOKIE['spider_error'];
+		}
+		if(isset($_COOKIE['status'])){
+			$where .= ' AND status='.$_COOKIE['status'];
+		}
+		if($status==1){
+			$next = $Model->where($where)->find();
+			if($next){
+				$nextId = $next['id'];
+			}else{
+				$nextId = 0;
+			}
+			$this->ajaxReturn(array('status'=>'ok','nextId'=>$nextId));
+		}else{
+			$result = $Model->where("id=$id")->save(array('status'=>2,'update_time'=>time()));
+			if($result){
+				$next = $Model->where($where)->find();
+				//echo $Model->getLastSql();exit;
+				if($next){
+					$nextId = $next['id'];
+				}else{
+					$nextId = 0;
+				}
+				$this->ajaxReturn(array('status'=>'ok','nextId'=>$nextId));
+			}else{
+				$this->ajaxReturn(array('status'=>'error'));
+			}
+		}
 	}
 	public function getSourceType($course_id){
 		$Model = M('source_type');
@@ -243,6 +319,34 @@ class TikuController extends GlobalController {
 			$System = A('System');
 			$System->logWrite($_SESSION['admin_id'],"删除题库成功(ID:$result)");
 			$this->ajaxReturn(array('status'=>'success'));
+		}else{
+			$Model->rollback();
+			$this->ajaxReturn(array('status'=>'error'));
+		}
+		
+	}
+	/**
+	 * 删除并返回下一题id
+	 */
+	public function deleteAndNext(){
+		$id = $_GET['id'];
+		$course_id = $_GET['course_id'];
+		$Model = M('tiku');
+		$Model->startTrans();
+		$result = $Model->where("id=$id")->delete();
+		$pointModel = M('tiku_to_point');
+		$result_2 = $pointModel->where("tiku_id=$id")->delete();
+		if($result && $result_2){
+			$Model->commit();
+			$System = A('System');
+			$System->logWrite($_SESSION['admin_id'],"删除题库成功(ID:$result)");
+			$next = $Model->where("course_id=".$course_id." AND status=0")->find();
+			if($next){
+				$nextId = $next['id'];
+			}else{
+				$nextId = 0;
+			}
+			$this->ajaxReturn(array('status'=>'ok','nextId'=>$nextId));
 		}else{
 			$Model->rollback();
 			$this->ajaxReturn(array('status'=>'error'));

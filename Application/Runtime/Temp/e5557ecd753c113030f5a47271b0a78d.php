@@ -1,3 +1,0 @@
-<?php
-//000000000000a:4:{i:0;a:4:{s:2:"id";s:2:"33";s:12:"version_name";s:9:"人教版";s:9:"course_id";s:1:"7";s:9:"spider_id";s:7:"2402228";}i:1;a:4:{s:2:"id";s:2:"34";s:12:"version_name";s:9:"鲁教版";s:9:"course_id";s:1:"7";s:9:"spider_id";s:7:"2402229";}i:2;a:4:{s:2:"id";s:2:"35";s:12:"version_name";s:9:"湘教版";s:9:"course_id";s:1:"7";s:9:"spider_id";s:7:"2402230";}i:3;a:4:{s:2:"id";s:2:"36";s:12:"version_name";s:9:"中图版";s:9:"course_id";s:1:"7";s:9:"spider_id";s:7:"2402231";}}
-?>
