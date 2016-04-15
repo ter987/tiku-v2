@@ -184,11 +184,11 @@
 		</div>
 		<div class="row cl">
 			<div class="col-10 col-offset-2">
-				<neq name="tiku_data.status" value="1"><button onClick="article_save_submit();" class="btn btn-primary radius" ><i class="Hui-iconfont">&#xe632;</i> 保存并审核通过</button></neq>
-				<button onClick="shiti_del()" class="btn btn-danger radius" type="button"> 删除</button>
-				<button onClick="$('#form1').submit()" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
-				<button onClick="window.location.href='/index.php/admin/tikusource/edit/id/{$tiku_data.sid}'" class="btn btn-success radius" type="button">修改试卷</button>
-				<button onClick="nextT()" class="btn btn-default radius" type="button">&nbsp;&nbsp;下一题&nbsp;&nbsp;</button>
+				<neq name="tiku_data.status" value="1"><button type="button" onClick="article_save_submit();" class="btn btn-primary radius" ><i class="Hui-iconfont">&#xe632;</i> 保存并审核通过</button></neq>
+				<button onClick="shiti_del()" type="button" class="btn btn-danger radius" type="button"> 删除</button>
+				<button onClick="$('#form1').submit()" type="button" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+				<button type="button" onClick="window.location.href='/index.php/admin/tikusource/edit/id/{$tiku_data.sid}'" class="btn btn-success radius" type="button">修改试卷</button>
+				<button type="button" onClick="nextT()" class="btn btn-default radius" type="button">&nbsp;&nbsp;下一题&nbsp;&nbsp;</button>
 				
 			</div>
 		</div>
@@ -210,6 +210,7 @@
 <script type="text/javascript">
 function article_save_submit(){
 	$('#status').val(1);
+	$('#form1').submit();
 }
 function nextT(){
 	$.post(

@@ -1,10 +1,33 @@
+	<!-- footer -->
+	{$my_js}
 	<div id="footer">
 		<div class="footer">
 			<div><a href="">关于我们</a> 丨 <a href="">隐私保护政策</a>  丨  <a href="">服务条款</a> 丨 <a href="">联系我们</a> </div>  
 			<div><span style="font-size:12px;">COPYRIGHT 2015  哈学库  版权所有   www.haxueku.com</span></div>
 		</div>
 	</div>
-	
-	
+	<!-- footer end -->
+	<!-- 清空试卷 -->
+	<div class="xf_tishijjpop xf_qksjpop">
+		<p>
+			<img src="images/ico_tsjj.png" alt="">
+			<span>收集那么多的好试题，确定要清空试卷吗？</span>
+		</p>
+		<div><a href="JavaScript:;">确定</a><a href="JavaScript:;">取消</a></div>
+	</div>
+	<!-- 清空试卷end -->
+	<script>
+		
+		$(window).scroll(function() {
+			var xf_scroll = $(window).scrollTop();
+			if(xf_scroll>462){
+				$(".xf_xuanzetxnd,.j_c_list").addClass('cur');
+				$(".xf_centerbox").addClass('xf_scroll');
+			}else{
+				$(".xf_xuanzetxnd,.j_c_list").removeClass('cur');
+				$(".xf_centerbox").removeClass('xf_scroll');
+			}
+		});
+	</script>
 </body>
 </html>

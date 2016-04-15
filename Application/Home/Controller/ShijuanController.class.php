@@ -117,6 +117,12 @@ class ShijuanController extends GlobalController {
 		$this->assign('second_juan',$second_juan);
 		$this->assign('shijuan',$shijuan);
 		$this->assign('score',$_SESSION['shijuan']['score']);
+		//SEO
+		$this->setMetaTitle('组卷'.C('TITLE_SUFFIX'));
+		$this->setMetaKeyword('登录'.C('TITLE_SUFFIX'));
+		$this->setMetaDescription('登录'.C('TITLE_SUFFIX'));
+		$this->addCss(array('xf.css','style_content.css','preview.css',''));
+		$this->addJs(array('/js/menu.js','/js/xf.js'));
         $this->display();
 	}
 	public function ajaxEditXiaotiScore(){

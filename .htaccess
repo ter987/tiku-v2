@@ -4,8 +4,8 @@
 
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteRule ^tiku/(\w+)\/$ index.php/home/tiku/index/param/$1/
-  RewriteRule ^tiku/(\w*)$ index.php/home/tiku/$1/
+  RewriteRule ^tiku/(\w+)\/(\d*)\/{0,1}$ index.php/home/tiku/index/course/$1/p/$2/
+  RewriteRule ^tiku/(\w+)\/([\w|-]+)\/(\d*)\/{0,1}$ index.php/home/tiku/index/course/$1/param/$2/p/$3/
   RewriteRule ^tiku/detail/(\d+).html$ index.php/home/tiku/detail/id/$1/
   RewriteRule ^member/(\w*)$ index.php/home/member/$1/
   RewriteRule ^shijuan/(\w*)$ index.php/home/shijuan/$1/
@@ -14,8 +14,8 @@
   RewriteRule ^jingpin/(\w+)\/$ index.php/home/jingpin/index/param/$1/
   RewriteRule ^jingpin/$ index.php/home/jingpin/
   RewriteRule ^jingpin/detail/(\d+).html$ index.php/home/jingpin/detail/id/$1/
-  RewriteRule ^tongbu/(\w+)\/$ index.php/home/tongbu/index/param/$1/
-  RewriteRule ^tongbu/$ index.php/home/tongbu/
+  RewriteRule ^tongbu/(\w+)\/(\d*)\/{0,1}$ index.php/home/tongbu/index/course/$1/p/$2/
+  RewriteRule ^tongbu/(\w+)\/([\w|-]+)\/(\d*)\/{0,1}$ index.php/home/tongbu/index/course/$1/param/$2/p/$3/
   RewriteRule ^ceping/(\w*)$ index.php/home/ceping/$1/
   RewriteRule ^onlinetest/(\w*)$ index.php/home/onlinetest/$1/
   RewriteRule ^qqconnect/(\w*)$ index.php/home/qqconnect/$1/

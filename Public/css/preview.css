@@ -1,0 +1,224 @@
+
+.lt, .left { float: left; }
+.rt, .right { float: right; }
+.hr_10 { clear: both; height: 10px; overflow: hidden; font-size: 1px; line-height: 1px; }
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+address, cite, dfn, em, var { font-style: normal; }
+.ft14 { font-size: 14px; }
+a { color: rgb(0, 0, 0); text-decoration: none; }
+.bm5 { margin-bottom: 5px; }
+.rm10 { margin-right: 15px; }
+.wrapper, .area { width: 950px; margin: 0px auto; }
+
+/* :::::::::: */
+
+
+
+
+ 
+ /*右边主体内容*/
+.content {  width:1000px ; height:auto; position:relative;}
+
+
+.preview-box { display:block; width: 1000px; height:auto; margin:20px auto; padding-left: 0px; border-radius: 5px ; border:1px solid #ccc;  position: relative;background:#fff; }
+
+.ks_top_title{ width:1000px; height:56px;background:url(../images/subjec.png) 0px 0px no-repeat;}
+.type{float:left;color:#484c53;height:32px;margin-left:18px;display:inline;margin-top:3px;font-family:"Microsoft Yahei";}
+.type ul{font-size:16px;padding:0px;margin-top:9px;}
+.type ul li{float:left; width:81px;text-align:center;border:1px solid #ccc; border-radius: 4px ; text-align: center;  font-size:14px;   display:inline;  height:30px; margin-right:10px; line-height:30px; cursor:pointer;}
+.type ul li a{display: block; }
+.type ul li a:hover{ display: block; background:#1194F3;color:#FFF; text-decoration:none}
+.type ul li a.yl-on{display: block; background:#1194F3;color:#FFF;border:1px solid #1194F3;border-radius: 4px;margin-left: -1px;margin-top: -1px;}
+
+
+.ui-dialog-buttonset button:hover{opacity: 0.7;}
+.topcy{float:right;font-family:微软雅黑;padding-top: 8px;}
+.topcy li{margin-right:10px;overflow: hidden;float:left;}
+.topcy li:hover{opacity: 0.8;}
+.topcy li a{
+	border-radius: 3px;
+	width:120px;height:34px;
+	float:left;display:inline; 
+	line-height:32px; 
+	font-size:16px; 
+	text-align:center;
+	color:#fff;
+}
+.topcy a.ending{background:url(../images/subject.png) no-repeat -685px -156px;width:110px;height:36px;float:left;text-indent:-9999px;font-size:0px;margin-right:5px;display:inline;}
+.topcy a.ending:hover{background:url(../images/subject.png) no-repeat -804px -156px;}
+.topcy a.goon{background:#1194F3;}
+.topcy a.goon_1{background:#FF9118;}
+.topcy li.on,.topcy li.out{position:relative;z-index:100;cursor:pointer;}
+.topcy span{display:block; font-size:16px; }
+
+.topcy .on span{width:82px; height:34px; line-height:33px;padding-left:35px;background:url(../images/subject.png) no-repeat -123px -59px #fff;position:relative;z-index:2;float:left;cursor:pointer;color:#484c53!important; }
+.topcy .on a{text-decoration:none}
+.topcy .out span{background:url(../images/subject.png) no-repeat 0px -59px;width:82px; height:34px;padding-left:35px; line-height:33px;z-index:2;float:left;cursor:pointer;color:#484c53;}
+.topcy .navp{position:absolute;display:none;right:0px;top:33px;z-index:1;border:1px solid #8cdd4a;background:#fff; padding:5px 0px 10px 12px}
+.topcy .navp table{float:left; }
+.topcy .navp table td{width:60px; margin-left:5px;}
+.topcy .navp a{filter:alpha(opacity=50);-moz-opacity:0.5;opacity: 0.5;width:60px;height:auto;float:left;padding-top:35px;text-align:center;margin-top:5px;display:block; text-align:left;}
+.topcy .navp a:hover{filter:alpha(opacity=100);-moz-opacity:1;opacity:1;text-decoration:none;color:#026ba3;}
+.topcy .navp .analysis{background:url(../images/subject.png) no-repeat -490px -400px;}
+.topcy .navp .save{background:url(../images/subject.png) no-repeat -550px -400px;}
+.topcy .navp .return{background:url(../images/subject.png) no-repeat -610px -400px;}
+.topcy .navp .play{background:url(../images/subject.png) no-repeat -670px -400px;}
+.topcy .navp .help{background:url(../images/subject.png) no-repeat -730px -400px;}
+.topcy .navp .chongzhi{background:url(../images/subject.png) no-repeat -790px -400px;}
+
+
+.topcy .out{z-index:0}
+.topcy .on .navp{display:block;}
+.topcy .out .navp{display:none;}
+
+
+.preview-end{width:185px;height:73px; margin:0 auto; margin-bottom:30px; }
+.scsj-btn{ float:left;width:185px;height:73px;background:url(../images/subject.png) no-repeat -58px -380px;text-indent:-9999px;font-size:0px;display:inline; }
+.scsj-btn:hover{background-position:-270px -380px;}
+
+.box-inp{width:300px;height:30px; padding-left:10px; margin-bottom:10px; line-height:30px;border:1px solid #ccc; border-radius:2px;}
+.box-text{width:300px;height:60px;padding-left:10px; margin-top:2px; line-height:30px; border:1px solid #ccc; border-radius:2px;}
+.box-tnp{width:150px;height:30px; padding-left:10px; margin-bottom:10px; line-height:30px;border:1px solid #ccc; border-radius:2px;}
+.box-error{display:none;border:1px solid #ffc2c2 ;padding:5px 5px 5px 20px;background:url(../images/error.png) no-repeat 5px 8px  #ffe8e8;font-size:12px;
+           color:#f43c5e}
+.box table td { line-height:30px;}
+
+.pre-topbox{background-color: rgb(232, 232, 232); margin-bottom:10px;border-bottom:1px solid #ccc;border-left:1px solid #ccc;border-top:1px solid #ccc;padding:5px;line-height:24px;font:14px/24px "微软雅黑";}
+.pre-title{width:550px;overflow-x:hidden;overflow-y:auto;position:relative; }
+.pre-title b{ color:#000}
+.src-title{line-height: 32px;margin: 10px 20px;padding-bottom: 20px;border-bottom-color: rgb(216, 216, 216);border-bottom-width: 1px;border-bottom-style: dashed;}
+.src-title b{width: 76px;height: 32px;text-align: center;line-height: 32px;font-size: 14px;font-weight: bold;margin-right: 20px;float: left;display: block;background-color: rgb(232, 232, 232);}
+.papersavesucceed{font:16px/30px "微软雅黑"; }
+.topcy a.ending{background:url(../images/subject.png) no-repeat -685px -156px;width:110px;height:34px;float:left;text-indent:-9999px;font-size:0px;margin-right:5px;display:inline;}
+.topcy a.ending:hover{background:url(../images/subject.png) no-repeat -804px -156px;}
+.topcy a.answer{background:url(../images/subject.png) no-repeat -685px -460px;width:110px;height:34px;float:left;text-indent:-9999px;font-size:0px;margin-right:5px;display:inline;}
+.topcy a.answer:hover{background:url(../images/subject.png) no-repeat -804px -460px;}
+
+/*答题卡样式*/
+
+#windown-content img, #windown-content iframe {
+	display: block;
+}
+#windown-content .loading {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -8px;
+	margin-top: -8px;
+}
+.mbprintTxt {
+	width: 520px;
+	float: left;
+	padding: 10px;
+}
+.mbprintTxt .title {
+	width: 490px;
+	float: left;
+	height: 30px;
+	margin: 2px 0px 10px 0px;
+	background-position: 0px -169px;
+}
+.mbprintTxt .title span {
+	display: block;
+	float: left;
+	line-height: 26px;
+	color: #1f262d;
+	font-size: 14px;
+	padding-bottom: 4px;
+	font-family: "Microsoft YaHei";
+	background-position: 0px -80px;
+}
+.mbprintTxt p, .mbprintTxt li i, .mbquesTxt p {
+	line-height: 20px;
+	color: #f43c5e;
+	font-size: 14px;
+}
+.mbquesTxt p {
+	padding: 10px 20px 0px 20px;
+}
+.mbprintTxt ul, .mbprintTxt li {
+	width: 100%;
+	float: left;
+}
+.mbprintTxt li {
+	margin-bottom: 0px;
+	font-size: 14px;
+}
+.mbprintTxt li label, .mbprintTxt li input, .mbprintTxt li span , .mbprintTxt li font{
+	display: block;
+	float: left;
+	text-align: right;
+	font-size: 14px;
+	line-height:15px;
+	padding-bottom:5px;
+}
+.mbprintTxt li .A4, .mbprintTxt li .A3, .mbprintTxt li .B4 {
+	text-align: center;
+	padding-top: 120px;
+}
+.mbprintTxt li .A4 {
+	width: 140px;
+}
+.mbprintTxt li .B4 {
+	width: 140px;
+}
+.mbprintTxt li .A3 {
+	width: 155px;
+}
+.mbprintTxt li label span {
+	font-family: "SimSun";
+}
+
+.mbprintTxt li .A4 input {
+	margin-left: 15px;
+}
+
+.mbprintTxt li .B4 input {
+	margin-left: 20px;
+}
+.mbprintTxt li .A3 input {
+	margin-left: 65px;
+}
+
+.mbanswerSheetTxt li .A4 {
+	width: 148px;
+background: url("../images/bank.png") no-repeat 0px 0px;
+}
+.mbanswerSheetTxt li .A4, .mbanswerSheetTxt li .A3, .mbanswerSheetTxt li .B4 {
+	padding-top: 148px;
+}
+.mbanswerSheetTxt li .B4 {
+	margin: 0px 8px;
+	padding: 148px 12px 0px 12px;
+	border-left: 1px solid #eeeeee;
+	border-right: 1px solid #eeeeee;
+	background: url("../images/bank.png") no-repeat  -150px 0px;
+}
+.mbanswerSheetTxt li .A3 {
+	margin: 0px;
+	background: url("../images/bank.png") no-repeat   -320px 0px;
+}
+.mbanswerSheetTxt li .A3 input, .mbanswerSheetTxt li .A4 input {
+	margin-left: 45px;
+}
+.mbprintTxt .fl {
+	width: 570px;
+	padding-left: 10px;
+}
+.mbprintTxt .fl label {
+	line-height: 20px;
+	margin-bottom: 10px;
+}
+.mbprintTxt .fl label span, .mbprintTxt .fl label font {
+	display: block;
+	float: left;
+	font-family: "SimSun";
+	font-size: 14px;
+	text-align: left;
+}
+.mbprintTxt .fl label span {
+	width: 110px;
+}
+.mbprintTxt .fl label font {
+	width: 430px;
+}

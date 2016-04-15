@@ -18,10 +18,12 @@ class Page{
     public $totalPages; // 分页总页面数
     public $rollPage   = 11;// 分页栏每页显示的页数
 	public $lastSuffix = true; // 最后一页是否显示总页数
-
+	public $nextPage;
+	public $prevPage;
+	
     private $p       = 'p'; //分页参数名
     private $url     = ''; //当前链接URL
-    private $nowPage = 1;
+    public $nowPage = 1;
 
 	// 分页显示定制
     private $config  = array(
@@ -146,12 +148,13 @@ class Page{
 	 * 
 	 */
 	public function _show($params) {
+		$this->rollPage = 6;
         if(0 == $this->totalRows) return '';
 		if(!empty($params)) $str='/';
         /* 生成URL */
         $this->parameter[$this->p] = '[PAGE]';
         //$this->url = U(ACTION_NAME, $this->parameter);
-        $this->url = "/".strtolower(CONTROLLER_NAME).$str.$params.'/?p='.urlencode($this->parameter[$this->p]);
+        $this->url = "/".strtolower(CONTROLLER_NAME).'/'.$_GET['course'].'/'.$params.$str.urlencode($this->parameter[$this->p]).'/';
 		//echo  $this->url;exit;
         /* 计算分页信息 */
         $this->totalPages = ceil($this->totalRows / $this->listRows); //总页数
@@ -166,17 +169,17 @@ class Page{
 
         //上一页
         $up_row  = $this->nowPage - 1;
-        $up_page = $up_row > 0 ? '<a class="prev" href="' . $this->url($up_row) . '">' . $this->config['prev'] . '</a>' : '';
-
+        $up_page = $up_row > 0 ? '<a style="width:100px" href="' . $this->url($up_row) . '">' . $this->config['prev'] . '</a>' : '';
+		$this->prevPage = '<a  href="' . $this->url($up_row) . '"> < </a>';
         //下一页
         $down_row  = $this->nowPage + 1;
-        $down_page = ($down_row <= $this->totalPages) ? '<a class="next" href="' . $this->url($down_row) . '">' . $this->config['next'] . '</a>' : '';
-
+        $down_page = ($down_row <= $this->totalPages) ? '<a style="width:100px;" href="' . $this->url($down_row) . '">' . $this->config['next'] . '</a>' : '';
+		$this->nextPage = '<a  href="' . $this->url($down_row) . '"> > </a>';
         //第一页
-        $the_first = '';
-        if($this->totalPages > $this->rollPage && ($this->nowPage - $now_cool_page) >= 1){
-            $the_first = '<a class="first" href="' . $this->url(1) . '">' . $this->config['first'] . '</a>';
-        }
+        // $the_first = '';
+        // if($this->totalPages > $this->rollPage && ($this->nowPage - $now_cool_page) >= 1){
+            // $the_first = '<a class="first" href="' . $this->url(1) . '">' . $this->config['first'] . '</a>';
+        // }
 
         //最后一页
         // $the_end = '';
@@ -197,13 +200,13 @@ class Page{
             if($page > 0 && $page != $this->nowPage){
 
                 if($page <= $this->totalPages){
-                    $link_page .= '<a class="num" href="' . $this->url($page) . '">' . $page . '</a>';
+                    $link_page .= '<a  href="' . $this->url($page) . '">' . $page . '</a>';
                 }else{
                     break;
                 }
             }else{
                 if($page > 0 && $this->totalPages != 1){
-                    $link_page .= '<span class="current">' . $page . '</span>';
+                    $link_page .= '<a class="check">' . $page . '</a>';
                 }
             }
         }
@@ -213,7 +216,7 @@ class Page{
             array('%HEADER%', '%NOW_PAGE%', '%UP_PAGE%', '%DOWN_PAGE%', '%FIRST%', '%LINK_PAGE%', '%END%', '%TOTAL_ROW%', '%TOTAL_PAGE%'),
             array($this->config['header'], $this->nowPage, $up_page, $down_page, $the_first, $link_page, $the_end, $this->totalRows, $this->totalPages),
             $this->config['theme']);
-        return "<div>{$page_str}</div>";
+        return "{$page_str}";
     }
 
 	public function m_show($params) {

@@ -9,8 +9,6 @@ class TikuController extends GlobalController {
 	function _initialize()
 	{
 		parent::_initialize();
-		$course_data = parent::getCourse();
-		$this->assign('course_data',$course_data);
 		$tiku_cart = $this->_getTikuCart();
 		$this->assign('tiku_cart',$tiku_cart);
 		$this->assign('tikus_in_cart',json_encode($_SESSION['cart']));
@@ -18,26 +16,34 @@ class TikuController extends GlobalController {
 	
     public function index(){
     	$course_id = $_SESSION['course_id'];
-		if(!$course_id){//错误跳转
+		$course_pinyin = I('get.course');
+		if(empty($course_id) || empty($course_pinyin)){//错误跳转
 			
+		}else{
+			$this->assign('this_course_type',$_SESSION['course_type']);
+			$this->assign('this_course_id',$_SESSION['course_id']);
+			$this->assign('this_course_name',$_SESSION['course_name']);
+			$this->assign('this_pinyin',$_SESSION['pinyin']);
 		}
 		//$course_id =3;
     	$params = I('get.param');
-		$result1 = preg_split("/[0-9]/", $params,0,PREG_SPLIT_NO_EMPTY);
+		$result1 = preg_split("/[0-9|-]/", $params,0,PREG_SPLIT_NO_EMPTY);
 		$result2 = preg_split("/[a-z]/", $params,0,PREG_SPLIT_NO_EMPTY );
 		$new_params = array_combine($result1, $result2);
 		
 		$feature_id = $new_params['f'];//试卷类型ID
-		$difficulty_id = $new_params['d'];
-		$type_id = $new_params['t'];//题型id
+		$difficulty_ids = $new_params['d'];
+		$type_ids = $new_params['t'];//题型id
 		$point_id = $new_params['p'];//知识点ID
 		$wenli_id = $new_params['w'];//知识点ID
 		$year = $new_params['y'];//年份
 		$province_id = $new_params['a'];//省份
 		$this->parent_id = $point_id;
-		
-		$this->assign('type_id',$type_id);
-		$this->assign('difficulty_id',$difficulty_id);
+		//echo $type_ids;
+		if(!empty($type_ids))$type_id_arr = explode('-',$type_ids);
+		if(!empty($difficulty_ids))$difficulty_id_arr = explode('-',$difficulty_ids);
+		$this->assign('type_ids',$type_id_arr);
+		$this->assign('difficulty_ids',$difficulty_id_arr);
 		$this->assign('feature_id',$feature_id);//试卷类型
 		$this->assign('wenli_id',$wenli_id);
 		$this->assign('year',$year);
@@ -69,16 +75,19 @@ class TikuController extends GlobalController {
 		$where = "tiku_source.course_id=$course_id ";
 		//$where['tiku_source.course_id'] = ':course_id';
 		$bind[':course_id'] = array($course_id,\PDO::PARAM_INT);
-		$join ="tiku_source use index(course_id) on tiku_source.id=tiku.source_id";
-		if($type_id){
-			$where .= " && tiku.type_id=$type_id ";
+		$join ="tiku_source  on tiku_source.id=tiku.source_id";
+		if(!empty($type_id_arr)){
+			$type_in = implode(',',$type_id_arr);
+			$where .= " && tiku.type_id IN(".$type_in.')';
 			//$where['tiku.type_id'] = ':type_id';
-			$bind[':type_id'] = array($type_id,\PDO::PARAM_INT);
+			//$bind[':type_id'] = array($type_id,\PDO::PARAM_INT);
 		}
-		if($difficulty_id){
-			$where .= " && tiku.difficulty_id=$difficulty_id ";
+		
+		if(!empty($difficulty_id_arr)){
+			$difficulty_in = implode(',',$difficulty_id_arr);
+			$where .= " && tiku.difficulty_id IN(".$difficulty_in.')';
 			//$where['tiku.difficulty_id'] = ':difficulty_id';
-			$bind[':difficulty_id'] = array($difficulty_id,\PDO::PARAM_INT);
+			//$bind[':difficulty_id'] = array($difficulty_id,\PDO::PARAM_INT);
 		}
 		if($feature_id){
 			$where .= " && tiku_source.source_type_id=$feature_id";
@@ -105,55 +114,106 @@ class TikuController extends GlobalController {
 			//$where['tiku_source.wen_li'] = ':wenli_id';
 			$bind[':wenli_id'] = array($wenli_id,\PDO::PARAM_INT);
 		}
+		if(!empty($_SESSION['order_by'])){
+			if($_SESSION['order_by']=='new'){
+				$order_by = 'tiku.id desc';
+			}elseif($_SESSION['order_by']=='hot'){
+				$order_by = 'tiku.used_times desc';
+			}
+			$this->assign('order_by',$_SESSION['order_by']);
+		}
 		//echo $join;exit;
 		$Model = M('tiku');
 		//获取年份数据 地区数据
-		$year_data = S('tiku_year_'.$where);
+		$year_data = json_decode($this->redis->GET(md5('tiku_year_'.$where)),true);
 		if(!$year_data){
-			$year_data = $Model->field("distinct tiku_source.year")->join($join)->join($join2)->where($where." AND tiku_source.year <>''")->select();
-			S('tiku_year_'.$where,$year_data,array('type'=>'file','expire'=>C('FILE_CACHE_TIME')));
+			$year_data = $Model->field("tiku_source.year")->join($join)->join($join2)->where($where." AND tiku_source.year <>''")->select();
+			$year_data = $this->_array_unique($year_data);
+			$this->redis->SET(md5('tiku_year_'.$where),json_encode($year_data));
+			$this->redis->EXPIRE(md5('tiku_year_'.$where),C('REDIS_EXPIRE_TIME'));
 		}
 		
 		$this->assign('year_data',$year_data);
 		
-		$province_data = S('province_data_'.$where);
+		$province_data = json_decode($this->redis->GET(md5('province_data_'.$where)),true);
 		if(!$province_data){
-			$province_data = $Model->field("distinct province.id,province.province_name")->join($join)->join($join2)->join("province on tiku_source.province_id=province.id")->where($where)->select();
+			$province_data = $Model->field("province.id,province.province_name")->join($join)->join($join2)->join("province on tiku_source.province_id=province.id")->where($where)->select();
 			//var_dump($province_data);exit;
-			S('province_data_'.$where,$province_data,array('type'=>'file','expire'=>C('FILE_CACHE_TIME')));
+			$province_data = $this->_array_unique($province_data);
+			$this->redis->SET(md5('province_data_'.$where),json_encode($province_data));
+			$this->redis->EXPIRE(md5('province_data_'.$where),C('REDIS_EXPIRE_TIME'));
 		}
 		
 		$this->assign('province_data',$province_data);
+
+		//过滤使用过的题目
+		if(!empty($_SESSION['my_used']) && !empty($_SESSION['user_id'])){
+			$usedModel = M('user_used');
+			$result = $usedModel->where("user_id=".$_SESSION['user_id'])->select();
+			if($result){
+				foreach($result as $val){
+					$used_ids .= $val['id'].',';
+				}
+				$used_ids = trim($used_ids,',');
+				$where .= " && tiku.id NOT IN(".$used_ids.')';
+			}
+			//echo $where;exit;
+			$this->assign('my_used',1);
+		}
+		//只选收藏的题目
+		if(!empty($_SESSION['my_collected']) && !empty($_SESSION['user_id'])){
+			$join3= "user_collected ON user_collected.`tiku_id`=tiku.`id`";
+			$where .= " && user_collected.user_id=".$_SESSION['user_id'];
+			$this->assign('my_collected',1);
+		}
 		//获取题库数据
 		$count = S('tiku_count_'.$where);
+		$count = json_decode($this->redis->GET(md5('tiku_count_'.$where)),true);
 		if(!$count){
-			$result = $Model->field("COUNT(*) AS tp_count")->join($join)->join($join2)->where($where)->find();
+			$result = $Model->field("COUNT(*) AS tp_count")->join($join)->join($join2)->join($join3)->join($join4)->where($where)->find();
 			//echo $Model->getLastSql();
 			$count = $result['tp_count'];
-			S('tiku_count_'.$where,$count,array('type'=>'file','expire'=>C('FILE_CACHE_TIME')));
+			$this->redis->SET(md5('tiku_count_'.$where),json_encode($count));
+			$this->redis->EXPIRE(md5('tiku_count_'.$where),C('REDIS_EXPIRE_TIME'));
 		}
 		
 		//echo $count;
 		//echo $Model->getLastSql();exit;
 		$Page = new \Think\Page($count,10);
-		$Page->setConfig('prev','上一页');
-		$Page->setConfig('next','下一页');
+		$Page->setConfig('prev',' < 上一页');
+		$Page->setConfig('next','下一页  >  ');
 		$Page->setConfig('first','首页');
 		$Page->setConfig('last','末页');
 		$page_show = $Page->_show($params);
 		$this->assign('page_show',$page_show);
+		$this->assign('totalPages',$Page->totalPages);
+		$this->assign('nowPage',$Page->nowPage);
+		$this->assign('prevPage',$Page->prevPage);
+		$this->assign('nextPage',$Page->nextPage);
 		//S(array('type'=>'Memcache','host'=>C('MEMCACHED_HOST'),'port'=>C('MEMCACHED_POST'),'expire'=>C('MEMCACHED_EXPIRE')));
-		//$tiku_data = S(md5($where."limit $Page->firstRow,$Page->listRows"));
-		//if(!$tiku_data){
-			$tiku_data = $Model->field("tiku.`id`,tiku.options,tiku.`content`,tiku.`clicks`,tiku_source.`source_name`,tiku.difficulty_id")
+		$tiku_data = json_decode($this->redis->GET(md5($where."limit $Page->firstRow,$Page->listRows")),true);
+		if(!$tiku_data){
+			$tiku_data = $Model->field("tiku.`id`,tiku.`zan_times`,tiku.`used_times`,tiku_type.`type_name`,tiku.options,tiku.`content`,tiku.`analysis`,tiku.`clicks`,tiku_source.`source_name`,tiku.difficulty_id")
 			->join($join)
 			->join($join2)
-			->where($where)->limit($Page->firstRow.','.$Page->listRows)->select();
-			//S(md5($where."limit $Page->firstRow,$Page->listRows"),$tiku_data);
-		//}
+			->join("tiku_type on tiku.type_id=tiku_type.id")
+			->join($join3)
+			->join($join4)
+			->where($where)->order($order_by)->limit($Page->firstRow.','.$Page->listRows)->select();
+			$this->redis->SET(md5($where."limit $Page->firstRow,$Page->listRows"),json_encode($tiku_data));
+			$this->redis->EXPIRE(md5($where."limit $Page->firstRow,$Page->listRows"),C('REDIS_EXPIRE_TIME'));
+		}
 		//var_dump($tiku_data);
 		//echo $Model->getLastSql();
 		$this->assign('tiku_data',$tiku_data);
+		//SEO
+		$this->setMetaTitle('题库列表页'.C('TITLE_SUFFIX'));
+		$this->setMetaKeyword('登录'.C('TITLE_SUFFIX'));
+		$this->setMetaDescription('登录'.C('TITLE_SUFFIX'));
+		$this->addCss(array('xf.css'));
+		$this->addJs(array('/js/menu.js','/js/xf.js'));
+		$this->assign('jumpto','tiku');
+		$this->assign('controller_name',strtolower(CONTROLLER_NAME));
         $this->display();
 	}
 	/**
@@ -183,38 +243,67 @@ class TikuController extends GlobalController {
 	}
 	public function ajaxSelectCourse(){
 		$course_id = I('get.id');
-		if(isset($_SESSION['course_id']) && $course_id != $_SESSION['course_id']){
-			unset($_SESSION['cart']);
-		}
-		$_SESSION['course_id'] = $course_id;
-		$this->ajaxReturn(array('id'=>$_SESSION['course_id']));
-	}
-	public function _getTikuCart(){
-		if($_SESSION['cart']){
-			foreach ($_SESSION['cart'] as $key => $val) {
-				if(!in_array($val['type_name'],$arr)){
-					$arr[] = $val['type_name'];
-				}
-			
+		$pinyin = I('get.pinyin');
+		$jumpto = I('jumpto');
+		$Model = M('tiku_course');
+		$result = $Model->where("pinyin='".$pinyin."'")->find();
+		if($result){
+			if($_SESSION['course_id'] != $result['id'])unset($_SESSION['cart']);
+			$_SESSION['course_id'] = $result['id'];
+			$_SESSION['course_type'] = $result['course_type'];
+			$_SESSION['course_name'] = $result['course_name'];
+			$_SESSION['pinyin'] = $result['pinyin'];
+			setcookie(session_name(),session_id(),time()+C('SESSION_EXPIRE_TIME'),'/');
+			if($jumpto == 'tiku'){
+				$this->ajaxReturn(array('status'=>'ok','jumpto'=>'/tiku/'.$pinyin.'/'));
+			}else if($jumpto == 'ceping'){
+				$this->ajaxReturn(array('status'=>'ok','jumpto'=>'/ceping/'));
 			}
 			
-			foreach($arr as $k=>$v){
-				$count = 0;
-				foreach($_SESSION['cart'] as $key=>$val){
-					
-					if($v==$val['type_name']){
-						$new_arr[$k]['type_name'] = $val['type_name'];
-						$count ++;
-						$new_arr[$k]['num'] = $count;
-					}
-					
-				}
-			}
-			return $new_arr;
 		}else{
-			return false;
+			$this->ajaxReturn(array('status'=>'error'));
 		}
 	}
+	public function ajaxSelectOrder(){
+		$val = I('get.val');
+		$_SESSION['order_by'] = $val;
+		$this->ajaxReturn(array('status'=>'ok'));
+	}
+	public function ajaxFilter(){
+		$val = I('get.val');
+		if(empty($_SESSION['user_id'])){
+			$this->ajaxReturn(array('status'=>'notlogin'));
+		}
+		if(!empty($_SESSION[$val])){
+			unset($_SESSION[$val]);
+		}else{
+			$_SESSION[$val] = 1;
+		}
+		$this->ajaxReturn(array('status'=>'ok'));
+	}
+	public function ajaxBaocuo(){
+		$id = I('get.id');
+		$msg = I('get.msg');
+		if(empty($_SESSION['user_id'])){
+			$this->ajaxReturn(array('status'=>'notlogin'));
+		}
+		$tikuModel = M('tiku');
+		$result = $tikuModel->where("id=$id")->find();
+		if(!$result){
+			$this->ajaxReturn(array('status'=>'error','msg'=>'该试题不存在'));
+		}
+		$Model = M('tiku_error');
+		$data['tiku_id'] = $id;
+		$data['user_id'] = $_SESSION['user_id'];
+		$data['error_msg'] = $msg;
+		$data['update_time'] = time();
+		if(!$Model->add($data)){
+			$this->ajaxReturn(array('status'=>'error','msg'=>'提交失败，请重试！'));
+		}else{
+			$this->ajaxReturn(array('status'=>'ok'));
+		}
+	}
+	
 	public function ajaxDelCart(){
 		unset($_SESSION['cart']);
 		$this->ajaxReturn(array('status'=>'success'));
@@ -279,23 +368,13 @@ class TikuController extends GlobalController {
 				return false;
 			}
 		$data = $this->getTree($child_data,0);
+		S('tiku_points_'.$course_id,$data,array('type'=>'file','expire'=>C('FILE_CACHE_TIME')));
 		}
 		return $data;
 		
 	}
 	
-	/**
-	 * 获取题库难度数据
-	 */
-	public function getTikuDifficulty(){
-		$data = S('tiku_difficulty');
-		if(!$data){
-			$Model = M('tiku_difficulty');
-			$data = $Model->order('degreen desc')->select();
-			S('tiku_difficulty',$data,array('type'=>'file','expire'=>C('FILE_CACHE_TIME')));
-		}
-		return $data;
-	}
+	
 	/**
 	 * 获取试卷类型
 	 * 历年高考真题、名校模拟题。。。
@@ -364,6 +443,19 @@ class TikuController extends GlobalController {
 			
 		}
 		return $this->parent_id.$GLOBALS['str'];
+	}
+	/**
+	 * 二维数组去重并排序
+	 */
+	protected function _array_unique($arr){
+		$new = array();
+		foreach($arr as $val){
+			if(!in_array($val,$new)){
+				$new[] = $val;
+			}
+		}
+		sort($new);
+		return $new;
 	}
 	/**
 	 * 格式化参数

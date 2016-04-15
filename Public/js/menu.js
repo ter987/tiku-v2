@@ -1,15 +1,24 @@
 $(function(){
     $(".ce > li > a").click(function(){
-	     $(this).addClass("xz").parents().siblings().find("a").removeClass("xz");
-		 $(this).parents().siblings().find(".er").hide(300);
-		 $(this).siblings(".er").toggle(300);
-		 $(this).parents().siblings().find(".er > li > .thr").hide().parents().siblings().find(".thr_nr").hide();
+		if($(this).is('.xz')){
+            $(this).removeClass("xz").children('i').addClass('ce_jia').removeClass('ce_jian');
+			$(this).removeClass("xz").children('span').addClass('active')
+        }else{
+			$(this).children('i').addClass('ce_jian').removeClass('ce_jia').parents().siblings().find(".ce_jian").addClass('ce_jia').removeClass('ce_jian');
+			$(this).addClass("xz").parents().siblings().find("a").removeClass("xz");
+		}
+		$(this).siblings(".er").toggle();
 	})
-	
     $(".er > li > a").click(function(){
-        $(this).addClass("sen_x").parents().siblings().find("a").removeClass("sen_x");
-        $(this).parents().siblings().find(".thr").hide(300);	
-	    $(this).siblings(".thr").toggle(300);	
+		if($(this).is('.sen_x')){
+            $(this).removeClass("sen_x").children('i').addClass('ce_jia').removeClass('ce_jian');
+        }else{
+			$(this).children('i').addClass('ce_jian').removeClass('ce_jia').parents(".e_li").siblings().find(".ce_jian").addClass('ce_jia').removeClass('ce_jian');
+			$(this).addClass("sen_x").parents().siblings().find("a").removeClass("sen_x");
+		}
+        
+        $(this).parents().siblings().find(".thr").hide();	
+	    $(this).siblings(".thr").toggle();	
 	})
 
     $(".thr > li > a").click(function(){
@@ -17,28 +26,32 @@ $(function(){
 		 $(this).parents().siblings().find(".thr_nr").hide();	
 	     $(this).siblings(".thr_nr").toggle();
 	})
-});
-$(function(){
-    var browserWidth = $(window).width();
-    if(browserWidth<800){
-      $(".rightNav").css("bottom","150px");
-    }
-    $(".printNav").addClass("bPrintNav");
-    //$(".rightNav").addClass("bRightNav");
-    $("#lock").click(function(){
-      $("#lock").toggleClass("lock");
-      if($("#lock").hasClass('lock')){
-        $(this).text("点击展开");
-      }else{
-        $(this).text("点击收起");
-      }
-      $(".rightNav").toggleClass("rightNav1");
+	$(".j_c").click(function(){
+		$('.j_c').addClass("na_n_check").removeClass("na_n");
+		$('.zsd').addClass("na_n").removeClass("na_n_check");
+		$('.j_c_list').show();
+		$('.zsd_list').hide();
     });
-  })
-  $(".openLock").mouseover(function(){
-    $(".rightNav").removeClass("rightNav1");
-  });
-  $(".openLock").mouseout(function(){
-    $(".rightNav").addClass("rightNav1");
-  }); 
+    $(".zsd").click(function(){
+		$('.zsd').addClass("na_n_check").removeClass("na_n");
+		$('.j_c').addClass("na_n").removeClass("na_n_check");
+		$('.j_c_list').hide();
+		$('.zsd_list').show();
+    });
+    $("div[id^='kd_']").click(function(){
+		var id = (this.id.toString().match(/\d+/ig)||[])[0];
+		$("#kd").val(id);
+		$(".kedu_"+id).show().parents().siblings("div[id^='kd_']").children().hide();
+		
+	});	
+	//下拉菜单
+	$(".sel_down").click(function(){
+		$(this).siblings(".sel_list").show();
+	});
+	$(".sel_list > div").click(function(){
+		$(this).parent().hide().siblings(".sel_list").removeClass('chc');
+		$(".select_div").html($(this).html());
+	});
+});
 
+  

@@ -1,155 +1,137 @@
 <include file="common:header" />
-<script>
-	/* 选择题型   **/
-	function select_book(c,id){
-	    var href = window.location.href;
-	    var reg = /tongbu\/(\w*)b(\d+)(\w*)(\/)/g;
-		
-		if(href.search(/\?p=\d+|c\d+/)!=-1){
-			href = href.replace(/\?p=\d+|c\d+/,'');
-		}
-	    if(href.search(reg)!=-1){
-	    	if(id==0){
-	    		var loc = href.replace(/b\d+/g,'');
-	    	}else{
-	        	var loc = href.replace(/b\d+/g,c+id);
-	       }
-	    }else{
-	    	var str = '';
-	    	if(href.search(/tongbu\/\w+/g)==-1){
-	    		str = '/';
-	    	}
-	        var loc = href.replace(/tongbu\//g,'tongbu/'+c+id+str);
-	    }
-	    window.location.href = loc;
-	}
-	/* 选择难度   **/
-	function select_version(c,id){
-	    window.location.href = '/tongbu/v'+id+'/';
-	}
-
-
-	
-</script>
-<script src="__PUBLIC__/js/menu.js" type="text/javascript"></script>
-<!--main-->
-<div class="width">
-	<div class="tk_bg">
-		<!--标题-->
-        <div class="tit"><a href="##">题库</a> 〉<a href="">精品试卷</a> </div>
-        
-        <!--小标-->
-        <ul class="sj_ul">
-        	<li style="width:194px;">&nbsp;&nbsp;&nbsp;&nbsp;科目：高中语文<div class="clear"></div>
-                <dl class="sub_ul">
-                      <dt><a href="">高中数学</a></dt>
-                      <dt><a href="">高中数学</a></dt>
-                </dl>
-            </li>
-            <li  ><a href="/tiku/">知识点选题</a></li>
-            <li class="hover"><a href="/tongbu/">章节选题</a></li>
-            <li><a href="/jingpin/">精品试卷</a></li>
-            <!-- <li><a href="">我的题库</a></li> -->
-        </ul>
-        
-        <div class="clear"></div>
-        
-        <!-- <div class="ss"><form><input type="button" class="btn"  value="搜索"/><input type="text" class="text" /></form></div> -->
-        
-        <!--快速搜索-->
-        <div id="quick_goods" class="mt20">
-            <ul>
-                <li class="fixed"><strong id="dsdsd">版本：</strong></li>
-                <li>
-                    <dl> 
-                        <volist name='version_data' id='vo'>
-                        <dt  <eq name="version_id" value="$vo.id">class="hover"</eq>><a href="javascript:select_version('v',{$vo.id})">{$vo.version_name}</a></dt>
-                        </volist>
-               		 </dl>
-                </li>
-            </ul>
-            <div class="clear"></div>
-                           
-            <ul>
-                <li class="fixed"><strong>教材：</strong></li>
-                <li>
-                    <dl>
-                        <volist name='book_data' id='vo'>
-                        <dt <eq name="book_id" value="$vo.id">class="hover"</eq>><a href="javascript:select_book('b',{$vo.id})">{$vo.book_name}</a></dt>
-                        </volist>
-
-                    </dl>
-                </li>
-            </ul>
-            <div class="clear"></div>
-
-        </div>
-        
-    </div>
-</div>
-
-
-<div class="width">
-	<div class="b_4">
-    	<!--left-->
-        <div class="tk_left mr10">
-			<h3>章节</h3>
-            <ul class="zsd_ul ce">
-            	<volist name="chapter_data" id="vo">
-            	<li>
-					<a class="xz" href="##" ><i class="ce_jia">+</i> <l id="{$vo.id}">{$vo.chapter_name}</l></a>
-					<notempty name="vo.childs">
-					<ul class="er">
-						<volist name="vo.childs" id="v">
-						<li class="e_li">
-							<a href="##" "><i class="ce_jia">+</i><l id="{$v.id}">&nbsp;{$v.chapter_name}</l></a>
-						</li>
+<div class="xf_qiehuankmbox">
+			<div class="xf_qiehuankminner">
+				<div class="xf_dqkm"><if condition="this_course_type eq 1">高中<elseif condition="this_course_type eq 2">初中</if>
+					<span class="c_blue xf_dqkmlx">{$this_course_name}</span> 
+					<a href="JavaScript:;"> [切换科目]</a>
+				</div>
+				<!-- 选择科目 -->
+				<div class="xf_xuanzekmbox">
+					<notempty name="gaozhong">
+					<div>
+						<em>&lt;高中&gt;</em>
+						<volist name='gaozhong' id='vo'>
+						<a href="javascript::void(0)" <eq name="this_course_id" value="$vo.id">class="cur"</eq> onclick="select_course({$vo.id},'{$vo.pinyin}','{$jumpto}');">{$vo.course_name}</a>
 						</volist>
-					
-					</ul>
+					</div>
 					</notempty>
-				</li>
-				</volist>	
-                
+					<notempty name="chuzhong">
+					<div>
+						<em>&lt;初中&gt;</em>
+						<volist name='chuzhong' id='vo'>
+						<a href="javascript::void(0)" <eq name="this_course_id" value="$vo.id">class="cur"</eq> onclick="select_course({$vo.id},'{$vo.pinyin}','{$jumpto}');">{$vo.course_name}</a>
+						</volist>
+					</div>
+					</notempty>
+				</div>
+				<!-- 选择科目end -->
+				<div class="xf_righexzfl">
+					<ul>
+						<li <eq name="controller_name" value="tiku">class='cur'</eq>><a href="/tiku/{$this_pinyin}/">知识分类</a></li>
+						<li <eq name="controller_name" value="tongbu">class='cur'</eq>><a href="/tongbu/{$this_pinyin}/">章节分类</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class='xf_shaixuanqybox'>
+			
+			
+			<div class='xf_shaixuanbox'>
+				<div class="tags_line" >
+					<div class="fl">版本：</div>
+					<volist name='version_data' id='vo'>
+					<div id="type_1" onclick="javascript:select_version('v',{$vo.id})" class="tags <eq name="version_id" value="$vo.id">active</eq>">{$vo.version_name}</div>
+                    </volist>
+				</div>
 				<div class="clear"></div>
-            </ul>
-        </div>
-        
-        <!--right-->
-        <div class="tk_right">
-                <div class="mt10 b_4">
-                   <div class="dx left mr10">
-                   	<form>
-                    	<input type="checkbox" />过滤使用过的题目
-                        <input type="checkbox" />收藏的试题
-                    </form>
-                   </div>
-                   
-				   <div class="left">
-                    <ul class="qs_ul">
-                        <li><a href="">排序：</a></li>
-                        <li><a href="">最新<img src="__PUBLIC__/images/ico_down.gif" width="7" height="8"></a></li>
-                        <li><a href="">难度<img src="__PUBLIC__/images/ico_down.gif" width="7" height="8"></a></li>
-                        <li><a href="">使用频率<img src="__PUBLIC__/images/ico_down.gif" width="7" height="8"></a></li>
-                        <li><a href="">好评<img src="__PUBLIC__/images/ico_down.gif" width="7" height="8"></a></li>
-                    </ul>
-                    <div class="clear"></div>
-        	     </div>
-               </div>
-               <style>
-               	.em2 img{
-               		vertical-align: middle;
-               	}
-               </style>
-               <div class="clear"></div>
-               <ul class="tk_tm_ul">
-               	<notempty name="tiku_data">
-               <volist name="tiku_data" id="vo">
-               <li>
-                	<p class="c_z"><b>来源：{$vo.source_name}</b></p>
-                    <p>{$vo.content|htmlspecialchars_decode}</p>
-                    
-                    	<php>
+			</div>
+			<div class='xf_shaixuanbox'>
+				<div class="tags_line">
+					<div class="fl" style="line-height:40px;">教材：</div>
+					 <volist name='book_data' id='vo'>
+					<div onclick="javascript:select_book('b',{$vo.id})" id="area_1" class="tags <eq name="book_id" value="$vo.id">active</eq>">{$vo.book_name}</div>
+                    </volist>
+				</div>
+				<div class="clear"></div>
+			</div>
+			 
+			<div style="clear:both;"></div>
+		</div>
+		<div class='xf_centerbox'>
+			<!--left-->
+			<div class="tk_left j_c_list" style="">
+				<h3>全部教材</h3>
+				<div class="tt_left">
+				<ul class="zsd_ul ce">
+					<volist name="chapter_data" id="vo">
+					<li>
+						<a href="javascript:void(0)" class=""><i class="ce_jia"></i> <span id="{$vo.id}">{$vo.chapter_name}</span></a>
+						<notempty name="vo.childs">
+						<ul class="er" style="display: none;">
+							<volist name="vo.childs" id="v">
+							<li class="e_li">
+								<a href="javascript:void(0)" class=""><i class="ce_jia"></i><span id="{$v.id}">{$v.chapter_name}</span></a>
+								<notempty name="vo.childs">
+								<ul class="thr" style="display: none;">
+									<volist name="vo.childs" id="vs">
+									<li class="er_li"><a ><span  id="{$vs.id}"> {$vs.chapter_name}</span></a></li>
+									</volist>
+									<div class="clear"></div>
+								</ul>
+								</notempty>
+							</li>
+							</volist>
+						</ul>
+						</notempty>
+					</li>	
+					</volist>
+					
+					<div class="clear"></div>
+				</ul>
+				</div>
+			</div>
+			<div class="fr xf_rightcenterbox" style="width:785px;"> 
+				<div class="xf_xuanzetxnd">
+				<div style="border-bottom:1px solid #D9D9D9;border-right:1px solid #D9D9D9;"> 
+					<div class="fl" style="width:648px;">
+						<div class="fl" style="line-height:40px;padding-left:20px;">排序：</div>
+						<div class='xf_paixulb'>
+							<div id="" class="tags <eq name="order_by" value="default"> active"</eq>" onclick="ajax_order('default')">默认</div>
+							<div id="" class="tags <eq name="order_by" value="new"> active"</eq>" onclick="ajax_order('new')">最新</div>
+							<div id="" class="tags <eq name="order_by" value="hot"> active"</eq>" onclick="ajax_order('hot')">最热门</div>
+						</div>
+						<div class="fr xf_shaixuansctm">
+							<a href="JavaScript:;" <eq name="my_used" value="1">class='active'</eq> onclick="filter('my_used')">过滤使用过的题目</a>
+							<a href="JavaScript:;" <eq name="my_collected" value="1">class='active'</eq> onclick="filter('my_collected')">只选收藏的试题</a>
+						</div>
+					</div>
+					<div class="fr" style="width:116px;height:40px;border-left:1px solid #D9D9D9;line-height:40px;">
+						<div class="fl" style="padding:0px 4px;">{$prevPage}</div>
+						<div class="fl" style="width:79px;text-align:center;">
+							<span><i style="color:#1194f3;font-style: normal;">{$nowPage}</i>/{$totalPages}</span>
+						</div>
+						<div class="fl" style="padding:0px 4px;">{$nextPage}</div>
+					</div>
+					<div class="clear"></div>
+				</div>	
+				</div>
+				<div style="height:5px;width:100%;"></div>
+				<volist name="tiku_data" id="vo">
+				<div class='xf_teshuli'>
+
+				<!-- 纠错 -->
+				<div class="xf_jiecuobox">
+					<textarea name="" id="" cols="30" rows="10" placeholder="描述下纠错问题吧，我们会及时改正"></textarea>
+					<div><a href="JavaScript:;" onclick="baocuo($(this),{$vo.id});">确定</a><a href="JavaScript:;">取消</a></div>
+				</div>
+				<!-- 纠错end -->
+					<a href="JavaScript:;" class="xf_jiucuo">纠错</a>
+					<div style="border-bottom:1px solid #D9D9D9;padding:10px;">
+						难度：<span><if condition="$vo.difficulty_id eq 1">1.00-0.86(容易)<elseif condition="$vo.difficulty_id eq 2"/>0.85-0.71(较易)<elseif condition="$vo.difficulty_id eq 3"/> 0.7-0.56(中等) <elseif condition="$vo.difficulty_id eq 4"/>0.55-0.41(较难)<elseif condition="$vo.difficulty_id eq 5"/>0.40-0.26(困难)</if></span> &nbsp;&nbsp;题型：<span>{$vo.type_name}</span>
+					</div>
+					<div style="padding:20px 20px 10px 20px;">
+						<p>{$vo.content|htmlspecialchars_decode}</p>
+						<php>
                     		if($vo['options']){
                     			$options = json_decode($vo['options']);
                     			$options_index = array(0=>'A',1=>'B',2=>'C',3=>'D',4=>'E');
@@ -159,7 +141,7 @@
                     			$k = 0;
                     			foreach($options as $k=>$val){
                     		</php>
-                    			<span style="float:left;line-height:18px;font-size:14px;padding-right:30px;" class="em2"><php>echo $options_index[$k]</php>.<php>echo $val</php></span>
+                    			<p><php>echo $options_index[$k]</php>.<php>echo $val</php></p>
                     		<php>
                     			}
                     		</php>
@@ -167,111 +149,256 @@
                     	<php>
                     	}
                     	</php>
-                    
-                     <div class="jcbtn1">纠错</div>
-                            <div class="jc_list_b">
-                                <div class="left mr10">
-                                    <span class="jc_btn" id="{$vo.id}"  onclick="add_tiku({$vo.id},$(this))" style="cursor: pointer;">加入试卷</span>
-                                    <a target="_blank" href="/tiku/detail/{$vo.id}.html"><span class="jc_btn">查看解析</span></a>
-                                    <span class="jc_btn">下载试题</span>
-                                    <span class="jc_btn collect" id="c_{$vo.id}" name="{$vo.id}"  style="cursor: pointer;">收藏</span>
-                                    <!-- <span class="jc_btn2">点赞</span>
-                                    <span class="jc_btn2">分享</span> -->
-                                </div>
-                                
-                                <div class="right mr10">
-                                	<div class="left mr10">
-                                        <span style="line-height:30px;">
-                                            难度系数:<font class="c_z"><if condition="$vo.difficulty_id eq 1">1.00-0.86<elseif condition="$vo.difficulty_id eq 2"/>0.85-0.71<elseif condition="$vo.difficulty_id eq 3"/> 0.7-0.56 <elseif condition="$vo.difficulty_id eq 4"/>0.55-0.41<elseif condition="$vo.difficulty_id eq 5"/>0.40-0.26</if></font>
-                                        </span>
-                                    </div>
-                                	<div class="left">评分:</div>
-                                    <div class="left"><i class="dis score score3"></i></div>
-                               </div>
-                           </div>
-                           
-               </li>
-               </volist>
-               <else />
-               <li style="background:#fff;">
-                    <div style="padding:30px 0px;">
-						<div class="jc_null">	
+						<div style="margin-top:10px;">
+							<div class="fl"><a href="JavaScript:;" class='xf_bentijx'>本题解析</a></div>
+							<div class="fr"><a href="#" class='xf_layuanspan'>来源:{$vo.source_name}</a></div>
+							<div class="clear"></div>
 						</div>
-					    <div class="jc_n_text">
-							<p>抱歉，暂时没有符合条件的试题，我们将会尽快补充内容。请更换筛选条件进行选题。</p>
+					</div>
+					<div class='xf_jiexida'>
+						<div></div>
+						<div class='xf_jiedainn'>
+							<i></i>
+							<p>{$vo.analysis|htmlspecialchars_decode}</p>
 						</div>
-					</div>					
-				</li>
-               </notempty>
-               </ul>
-               <style>
-               	.current{
-               		background: #f43c5e none repeat scroll 0 0;
-				    border: 1px solid #f28700;
-				    color: #fff;
-				    font-weight: bold;
-				    padding: 6px 10px;
-               	}
-               </style>
-               <div class="page" style="width:768px;">
-					{$page_show}
+					</div>
+					<div style="border-top:1px solid #D9D9D9;">
+						<div class="fl">
+							<div class="zan">{$vo.zan_times}</div>
+							<div class="hot">{$vo.used_times}次</div>
+						</div>
+						<div class="fr">
+							<a href="JavaScript:;" class="down_btn">下载</a>
+							<a href="JavaScript:;" class="sc_btn" id="c_{$vo.id}" name="{$vo.id}">收藏</a>
+							<a href="JavaScript:;" id="{$vo.id}" onclick="add_tiku({$vo.id},$(this))" class="jr_btn">+加入试卷</a>
+						</div>
+						<div class="clear"></div>
+					</div>
 				</div>
-        </div>
-    
-    </div>
-</div>
+				</volist>
 
-<script>
-	$('.tk_left').find('l').click(
-		function(){
-			//alert($(this).attr('id'));
-			var id = $(this).attr('id');
-			var href = window.location.href;
-		    var reg = /tongbu\/(\w*)c(\d+)(\w*)(\/)/g;
-			
-			if(href.search(/\?p=\d+/)!=-1){
-				href = href.replace(/\?p=\d+/,'');
-			}
-			if(href.search(/r\d{1}/)!=-1){
-				href = href.replace(/r\d{1}/,'');
-			}
-		    if(href.search(reg)!=-1){
-		        var loc = href.replace(/c\d+/g,'c'+id);
+				<!-- 分页 -->
+				<!-- 分页 -->
+				<div>
+					<div class="page" style="padding-right:0px;">
+						{$page_show}
+						<div style="clear:both;"></div>
+					</div>	
+				</div>
+				<!-- 分页end -->
+				<!-- 分页end -->
+			</div>
+		</div>
 
-		    }else{
-		    	var str = '';
-		    	if(href.search(/tongbu\/\w+/g)==-1){
-		    		str = '/';
-		    	}
-		        var loc = href.replace(/tongbu\//g,'tongbu/'+'c'+id+str);
-		    }
-		    window.location.href = loc;
-		}
-	);
-	$(
-		function(){
-			$('.tk_left').find("l[id={$chapter_id}]").attr('style','color: rgb(244, 60, 94);');
-			$('.tk_left').find("l[id={$chapter_id}]").parent().parent().parent().show();
-			$('.tk_left').find("l[id={$chapter_id}]").parent().parent().parent().parent().parent().show();
-			var carts = {$tikus_in_cart};;
-			$.each(carts,function(index,dom){
-				$(".tk_tm_ul").find("span[id="+dom.id+"]").html('移出试卷');
-				$(".tk_tm_ul").find("span[id="+dom.id+"]").attr('class','jc_btn_check');
-			});
-			//alert({$tikus_in_collect});
-			<notempty name="user_id">
-			var collect = {$tikus_in_collect};
-			$.each(collect,function(index,dom){
-				$(".tk_tm_ul").find("span[id=c_"+dom.tiku_id+"]").html('取消收藏');
-				$(".tk_tm_ul").find("span[id=c_"+dom.tiku_id+"]").attr('class','jc_btn_check collect');
-			});
+	<div class="xf_fanhuidb"><a href="#"></a></div>
+	<div class="xf_dqxuanzet active">
+		<div class="xf_mysjleft">
+			<p>我</p>
+			<p>的</p>
+			<p><i>《</i></p>
+			<p>试</p>
+			<p>卷</p>
+			<span>10道</span>
+		</div>
+		<div class="xf_showsj">
+			<notempty name="tiku_cart">
+			<em><i>清空</i></em>
+			<volist name="tiku_cart" id="vo">
+			<p>{$vo.type_name}(<span>{$vo.num}</span>/{$vo.num})</p>
+			</volist>
+			<div class='xf_scsjbutton'><a href="JavaScript:;">生成试卷</a></div>
 			</notempty>
+		</div>
+	</div>
+	<script>
+		$(".sc_btn").click(function(){
+		var tag = '';
+		var obj = $(this);
+		$.getJSON(
+			'/member/ajaxCollect',
+			{id:$(this).attr('name')},
+			function(data){
+				if(data.status=='notlogin'){
+					window.location.href = '/member/login';
+				}else if(data.status=='success' && data.action=='add'){
+						obj.addClass('active');
+						obj.html('已收藏');
+					
+				}else if(data.status=='success' && data.action=='delete'){
+					obj.removeClass('active');
+					obj.html('收藏');
+				}
+			}
+		);
+		});
+	$(
+	function(){
+		//alert({$tikus_in_cart});
+		var carts = {$tikus_in_cart};;
+		$.each(carts,function(index,dom){
+			$(".xf_teshuli").find("a[id="+dom.id+"]").html('－移出试卷');
+			$(".xf_teshuli").find("a[id="+dom.id+"]").attr('class','jr_btn active');
+		});
+		//alert({$tikus_in_collect});
+		<notempty name="user_id">
+		var collect = {$tikus_in_collect};
+		$.each(collect,function(index,dom){
+			$(".xf_teshuli").find("a[id=c_"+dom.tiku_id+"]").html('已收藏');
+			$(".xf_teshuli").find("a[id=c_"+dom.tiku_id+"]").attr('class','sc_btn active');
+		});
+		</notempty>
+	}
+);
+
+	$('.tt_left').find('span').click(
+	function(){
+		var id = $(this).attr('id');
+		var href = window.location.href;
+	    var reg = /tiku\/\w+\/(\w*)c(\d+)(\w*)(\/)/g;
+		
+		if(href.search(/\/\d+\//)!=-1){
+			href = href.replace(/\/\d+\//,'/');
+		}
+	    if(href.search(reg)!=-1){
+	    	if(id==0){
+	    		if(href.search(/\w+c\d+/g)==-1 && href.search(/c\d+[a-z]+/g)==-1){
+	    			var loc = href.replace(/c\d+\//g,'');
+	    		}else{
+	    			var loc = href.replace(/c\d+/g,'');
+	    		}
+	    	}else{
+	        	var loc = href.replace(/c\d+/g,'c'+id);
+	       }
+	    }else{
+	    	var _reg = /tongbu\/\w+\/\w+\//g;
+			if(href.search(_reg)!=-1){
+				var loc = href.replace(/(tongbu\/\w+\/\w+)\//g,"$1"+'c'+id+'/');
+			}else{
+				var loc = href+'c'+id+'/';
+			}
+	        
+	    }
+	    window.location.href = loc;
+	}
+);
+function ajax_order(val){
+	$.getJSON(
+		'/index.php/home/tiku/ajaxSelectOrder',
+		{val:val},
+		function(data){
+			if(data.status=='ok'){
+				location.reload();
+			}
+		}
+		
+	);
+}
+function filter(val){
+	$.getJSON(
+		'/index.php/home/tiku/ajaxFilter',
+		{val:val},
+		function(data){
+			if(data.status=='notlogin'){
+				window.location.href = '/member/login';
+			}else if(data.status=='ok'){
+				var reg = /(tiku\/\w+\/[\w|-]*\/{0,1})\/\d+/g;
+				var href = window.location.href;
+				if(href.search(reg)!=-1){
+					var loc = href.replace(reg,"$1");
+					window.location.href = loc;
+				}else{
+					location.reload();
+				}
+			}
+		}
+		
+	);
+}
+function add_tiku(id,obj){
+	$.getJSON(
+		'/index.php/home/tiku/ajaxAddTiku',
+		{id:id},
+		function(data){
+			
+			if(data.status=='success'){
+				var tips = '';
+				if(data.type_data != null){
+					tips = '<em><i>清空</i></em>';
+					$.each(data.type_data,function(index,dom){
+						//alert('s');
+						tips += '<p>'+dom.type_name+'(<span>'+dom.num+'</span>/'+dom.num+')</p>';
+					}
+					
+					);
+					tips += "<div class='xf_scsjbutton'><a href=\"JavaScript:;\">生成试卷</a></div>";
+				}else{
+					tips = '';
+				}
+				if(obj.hasClass('active')){
+					obj.removeClass('active').text("+加入试卷")
+				}else{
+					obj.addClass('active').text("－移出试卷")
+				}
+				$('.xf_showsj').html(tips);
+			}
 		}
 	);
+}
+function baocuo(obj,id){
+	if(obj.parent().prev().val()===''){
+		obj.parent().prev().attr('style','border:1px solid red;');
+	}else{
+		$.getJSON(
+		'/index.php/home/tiku/ajaxBaocuo',
+		{id:id,msg:obj.parent().prev().val()},
+		function(data){
+			if(data.status=='notlogin'){
+				window.location.href = '/member/login';
+			}else if(data.status=='error'){
+				//错误提示弹窗
+			}else if(data.status=='ok'){
+				$(".xf_jiecuobox").hide();
+			}
+		}
+		
+	);
+	}
+}
 
-</script>
-
-<!-- 右侧 试卷选项-->
-<include file="common:right" />
-
+function select_book(c,id){
+    var href = window.location.href;
+    var reg = /tongbu\/\w+\/(\w*)b(\d+)(\w*)(\/)/g;
+	
+	if(href.search(/\/\d+\//)!=-1){
+		href = href.replace(/\/\d+\//,'/');
+	}
+    if(href.search(reg)!=-1){
+    	if(id==0){
+    		if(href.search(/\w+y\d+/g)==-1 && href.search(/b\d+[a-z]+/g)==-1){
+    			var loc = href.replace(/b\d+\//g,'');
+    		}else{
+    			var loc = href.replace(/b\d+/g,'');
+    		}
+    	}else{
+        	var loc = href.replace(/b\d+/g,c+id);
+       }
+    }else{
+    	var _reg = /tongbu\/\w+\/\w+\//g;
+		if(href.search(_reg)!=-1){
+			var loc = href.replace(/(tongbu\/\w+\/\w+)\//g,"$1"+c+id+'/');
+		}else{
+			var loc = href+c+id+'/';
+		}
+        
+    }
+    window.location.href = loc;
+}
+/* 选择难度   **/
+function select_version(c,id){
+	var href = window.location.href;
+	var reg = /(tongbu\/\w+\/)/g;
+	var loc = href.replace(reg,"$1"+'/v'+id+'/');
+    window.location.href = loc;
+}
+	</script>
 <include file="common:footer" />

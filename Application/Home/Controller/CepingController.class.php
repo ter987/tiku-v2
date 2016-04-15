@@ -8,27 +8,41 @@ class CepingController extends GlobalController {
 	function _initialize()
 	{
 		parent::_initialize();
-		$course_data = parent::getCourse();
-		$this->assign('course_data',$course_data);
 	}
 	
     public function index(){
     	unset($_SESSION['shijuan']);
 		unset($_SESSION['cart']);
-		if(!empty($_POST['course_select'])){
-			$_SESSION['course_id'] = I('post.course_select');
-		}else{
-			if(empty($_SESSION['course_id'])){
-				$first = current($this->course_data);
-				$_SESSION['course_id'] = $first['id'];
-			}
+		//后期改成从用户信息中选取course
+		if(empty($_SESSION['course_id'])){
+			$courseModel = M('tiku_course');
+			$courseData = $courseModel->find();
+			$_SESSION['course_id'] = $courseData['id'];
+			$_SESSION['course_type'] = $courseData['course_type'];
+			$_SESSION['course_name'] = $courseData['course_name'];
 		}
+		$this->assign('this_course_type',$_SESSION['course_type']);
+		$this->assign('this_course_id',$_SESSION['course_id']);
+		$this->assign('this_course_name',$_SESSION['course_name']);
 		$courseModel = M('tiku_course');
 		$course_data  = $courseModel->where("id=".$_SESSION['course_id'])->find();
 		$grade = $course_data['course_type']==1?'高中':'初中';
 		$title = $grade.$course_data['course_name'].'在线测评('.date('Ymd').')';
 		$this->assign('title',$title);
 		$this->assign('current_course',$_SESSION['course_id']);
+		//获取难度
+		$diffData = $this->getTikuDifficulty();
+		$this->assign('diff_data',$diffData);
+		
+		$pointData = $this->getFirstAndSecondPoint($_SESSION['course_id']);
+		$this->assign('point_data',$pointData);
+		//var_dump($pointData);
+		$this->setMetaTitle('测评'.C('TITLE_SUFFIX'));
+		$this->setMetaKeyword('登录'.C('TITLE_SUFFIX'));
+		$this->setMetaDescription('登录'.C('TITLE_SUFFIX'));
+		$this->addCss(array('xf.css'));
+		$this->addJs(array('/js/menu.js','/js/xf.js'));
+		$this->assign('jumpto','ceping');
         $this->display();
 	}
 	public function ajaxCheckStudent(){

@@ -6,8 +6,10 @@ class GlobalController extends Controller{
 	 * 初始化
 	 *
 	*/
+	public $redis;
 	function _initialize()
 	{
+		$this->connectRedis();	
 		$this->checkLogin();
 		$this->getCourse();
 	}
@@ -38,6 +40,10 @@ class GlobalController extends Controller{
 			}
 		}
 	}
+	protected function connectRedis(){
+		$this->redis = new \Redis();    
+		$this->redis->connect(C('REDIS_HOSTNAME'),C('REDIS_PORT'));
+	}
 	protected function getCollectIds(){
 		$Model = M('user_collected');
 		$data = $Model->field("tiku_id")->where("user_id=".$_SESSION['user_id'])->select();
@@ -62,8 +68,11 @@ class GlobalController extends Controller{
 	 */
 	public function getCourse(){
 		$Course = M('Tiku_course');
-		$data = $Course->where('status=1')->select();
-		return $data;
+		$gaozhong_data = $Course->where('status=1 AND course_type=1')->select();
+		if($gaozhong_data) $this->assign('gaozhong',$gaozhong_data);
+		
+		$chuzhong_data = $Course->where('status=1 AND course_type=2')->select();
+		if($chuzhong_data) $this->assign('chuzhong_data',$chuzhong_data);
 	}
 	public function findChild(&$data, $parent_id = 0) {
         $rootList = array();
@@ -95,6 +104,21 @@ class GlobalController extends Controller{
 
         return $childs;
     }
+	public function getFirstAndSecondPoint($course_id){
+		$data = json_decode($this->redis->GET(md5('tiku_points_first_second_'.$course_id)),true);
+		if(!$data){
+			$Model = M('tiku_point');
+			$child_data = $Model->where("course_id=$course_id AND (level=1 OR level=2)")->select();
+			if(!$child_data){
+				return false;
+			}
+		$data = $this->getTree($child_data,0);
+		$this->redis->SET(md5('tiku_points_first_second_'.$course_id),json_encode($data));
+		$this->redis->EXPIRE(md5('tiku_points_first_second_'.$course_id),C('REDIS_EXPIRE_TIME'));
+		}
+		return $data;
+		
+	}
 	public function getTopLevelPoint(){
 		$Model = M('tiku_point');
 		$top = $Model->field("id,point_name")->where("parent_id=0 AND course_id=".$_SESSION['course_id'])->select();
@@ -206,6 +230,46 @@ class GlobalController extends Controller{
 
         return $childs;
     }
+	/**
+	 * 获取题库难度数据
+	 */
+	public function getTikuDifficulty(){
+		$data = S('tiku_difficulty');
+		$data = json_decode($this->redis->GET(md5('tiku_difficulty')),true);
+		if(!$data){
+			$Model = M('tiku_difficulty');
+			$data = $Model->order('degreen desc')->select();
+			$this->redis->SET(md5('tiku_difficulty'),json_encode($data));
+			$this->redis->EXPIRE(md5('tiku_difficulty'),C('REDIS_EXPIRE_TIME'));
+		}
+		return $data;
+	}
+	public function _getTikuCart(){
+		if($_SESSION['cart']){
+			foreach ($_SESSION['cart'] as $key => $val) {
+				if(!in_array($val['type_name'],$arr)){
+					$arr[] = $val['type_name'];
+				}
+			
+			}
+			
+			foreach($arr as $k=>$v){
+				$count = 0;
+				foreach($_SESSION['cart'] as $key=>$val){
+					
+					if($v==$val['type_name']){
+						$new_arr[$k]['type_name'] = $val['type_name'];
+						$count ++;
+						$new_arr[$k]['num'] = $count;
+					}
+					
+				}
+			}
+			return $new_arr;
+		}else{
+			return false;
+		}
+	}
 	/**
      * 数据列表
      *
@@ -462,13 +526,13 @@ class GlobalController extends Controller{
 	 	foreach($cssArr as $val){
 	 		$css .= '<link href="'.C('CSS_PATH').$val.'" rel="stylesheet" type="text/css" />'."\n";
 	 	}
-		return $css;
+		$this->assign('my_css',$css);
 	 }
 	 public function addJs($jsArr){
 	 	foreach($jsArr as $val){
 	 		$js .= '<script src="'.C('JS_PATH').$val.'" type="text/javascript"></script>'."\n";
 	 	}
-		return $js;
+		$this->assign('my_js',$js);
 	 }
 }
 ?>

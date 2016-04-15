@@ -15,7 +15,7 @@ class AddtikuController extends Controller {
 		$this->date = date('Ymd');
 		$this->course_id = 8;//数学3   物理1  化学2 历史4 语文5 生物6 地理7 英语8
 		$this->source_name_default = '高中英语（未知）';
-		$this->cookies = 'jsessionid=DFAF12C0C277CFA4FEF001EE3550B42A';
+		$this->cookies = 'jsessionid=45E261B86E68125BF5F2F5669B477F6C';
 		$this->disciplineCode = 03;//物理4  数学2 化学5  历史8 语文1 生物6 地理9 英语03
 		$this->disciplineId = 22;//物理23  数学21  化学24  历史27 语文20 生物25 地理28  英语22
 		$this->disciplineType =2;
@@ -43,8 +43,42 @@ class AddtikuController extends Controller {
 		}
 		echo 'Filter Success!';
 	}
+	/**
+	 * 批量处理科目中按首字母分类的问题
+	 */
 	public function resetPoint(){
+		$id = 4002;
+		$course_id = 8;
+		$new  = htmlspecialchars('词组/短语');
 		
+		$Model = M('tiku_point');
+		$pModel = M('tiku_to_point');
+		$data['course_id'] = $course_id;
+		$data['parent_id'] = $id;
+		$data['point_name'] = $new;
+		$data['level'] = 2;
+		if($rs = $Model->where("point_name='".$new."' AND parent_id=$id")->find()){
+			$new_id = $rs['id'];
+		}else{
+			$new_id = $Model->add($data);
+		}
+//echo $new_id;exit;
+		$result = $Model->where("parent_id=$id AND id<>$new_id")->select();
+		$ids = '';
+		foreach($result as $val){
+			$ids .= $val['id'].',';
+			$_result = $Model->where("parent_id=".$val['id'])->select();
+			foreach($_result as $v){
+				$ids .= $v['id'].',';
+				if($Model->table('tiku_to_point')->where("point_id=".$v['id'])->select()){
+					$pModel->where("point_id=".$v['id'])->save(array('point_id'=>$new_id));
+				}
+			}
+		}
+		$ids = trim($ids,',');
+		
+		if(!empty($ids))$Model->where("id in ($ids) ")->delete();
+		echo 'OK!';
 	}
 	/*
 	 * 过滤答案中的非法字符
@@ -79,7 +113,7 @@ class AddtikuController extends Controller {
 	}
 	public function pipei_tiku(){
 		$Model = M('tiku');
-		for($id=1;$id<=5000;$id++){//974901
+		for($id=300249;$id<=1120249;$id++){//974901
 			//$id = 258910;
 			$options = '';
 			$spider_error = 0;
@@ -246,7 +280,7 @@ class AddtikuController extends Controller {
 			$Model->where("id=$id")->save($data);
 			unset($data);
 			unset($result);
-			usleep(1000);
+			usleep(2000);
 		}
 		echo 'Success';
 	}
@@ -258,12 +292,18 @@ class AddtikuController extends Controller {
 	public function spider_tiku(){
 		$pointModel = M('tiku_point');
 		$tikuModel = M('tiku');
-		$point_data = $pointModel->field("knowledgeId,id")->where("course_id=$this->course_id  AND level=3")->select();
+		
+		$fs = $pointModel->where("parent_id=3977")->select();
+		foreach($fs as $vf){
+			$ids .= $vf['id'].',';
+		}
+		$ids = trim($ids,',');
+		$point_data = $pointModel->field("knowledgeId,id")->where("course_id=$this->course_id AND parent_id IN($ids) AND level=3")->select();
 		//var_dump($point_data);exit;
 		foreach($point_data as $pv){
-			$queTypeIds = 13613;//采集源题型ID
+			$queTypeIds = 18170;//采集源题型ID
 			$point_id = $pv['knowledgeid'];
-			$type_id = 27;//本地题型ID
+			$type_id = 24;//本地题型ID
 			$is_xuanzheti = false;//如果是选择题，设置为true
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array("Cookie:$this->cookies"));
@@ -294,7 +334,7 @@ class AddtikuController extends Controller {
 				$tikus = $data['data']['questionList']['rows'];
 				foreach($tikus as $val){
 					$tiku['type_id'] = $type_id;
-					$spider_error = false;
+					$spider_error = 0;
 					$tiku['difficulty_id'] = $val['difficult'];
 					$source_name = empty($val['queSource'])?$this->source_name_default:trim($val['queSource']);
 					$result = $sourceModel->where("source_name='$source_name' AND course_id=$this->course_id")->find();
@@ -424,7 +464,7 @@ class AddtikuController extends Controller {
 						}
 						
 						if(empty($a) || empty($b) || empty($c) || empty($d)){
-						 $spider_error = true;
+						 $spider_error = 1;
 						}
 						preg_match_all('/<p[\s|\S]*<\/p>/U',$content,$matchs);
 						$count = count($matchs[0]);
@@ -434,12 +474,12 @@ class AddtikuController extends Controller {
 								if(preg_match('/[ABCD](．|\.){1}/',strip_tags($matchs[0][$i]),$m) || preg_match('/（[ABCD]）/',strip_tags($matchs[0][$i]),$m)){
 									$content = str_replace($matchs[0][$i],'',$content);
 								}else{
-									$spider_error = true;
+									$spider_error = 1;
 								}
 								$i--;
 							}
 						}else{
-							$spider_error = true;
+							$spider_error = 1;
 						}
 					}
 					// else{
@@ -477,6 +517,7 @@ class AddtikuController extends Controller {
 					$tiku['content'] = htmlspecialchars($content);
 					$tiku['analysis'] = htmlspecialchars($analysis);
 					$tiku['update_time'] = time();
+					$tiku['course_id'] = $this->course_id;
 					$tiku['create_time'] = time();
 					$tiku['spider_error'] = $spider_error;
 
@@ -508,14 +549,16 @@ class AddtikuController extends Controller {
 				$_result = $matchingModel->where("spider_code=".$result['spider_code'])->select();
 				//echo $matchingModel->getLastSql();exit;
 				foreach($_result as $val){
-					if(!$matchingModel->table("tiku_to_chapter")->where("tiku_id=".$result['id']." AND chapter_id=".$val['chapter_id'])->find()){
+					if(!$tikutochapterModel->where("tiku_id=".$result['id']." AND chapter_id=".$val['chapter_id'])->find()){
 						//echo $matchingModel->getLastSql();exit;
 						$data['chapter_id'] = $val['chapter_id'];
 						$data['tiku_id'] = $result['id'];
 						$tikutochapterModel->add($data);
 					}
+					usleep(1000);
 				}
 			}
+			usleep(2000);
 		}
 		echo 'Check Chapter Success!';
 	}

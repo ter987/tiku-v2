@@ -34,4 +34,10 @@ return array(
 	'MEMCACHED_EXPIRE'		=> '0',
 	//cookie配置
 	'COOKIE_EXPIRE'			=> 604800,//7天
+	//Redis设置
+	'REDIS_EXPIRE_TIME' => 2592000,//文件形式缓存时间,30天
+	'REDIS_PORT' => 6379,
+	'REDIS_HOSTNAME' => '127.0.0.1',
+	//SESSION 设置
+	'SESSION_EXPIRE_TIME' => 2592000,
 );

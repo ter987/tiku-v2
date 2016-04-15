@@ -43,11 +43,11 @@ class TikuController extends GlobalController {
 			$jump_url .= 'type_id='.$type_id.'&';
 		}
 		
-		if($status !== ''){
+		if($status != ''){
 			$where .= " && tiku.status=$status ";
 			$jump_url .= 'status='.$status.'&';
 		}
-		if($spider_error !== ''){
+		if($spider_error != ''){
 			$where .= " && tiku.spider_error=$spider_error ";
 			$jump_url .= 'spider_error='.$spider_error.'&';
 		}
@@ -84,7 +84,7 @@ class TikuController extends GlobalController {
 		$tiku_data = $Model->field(" tiku.`id`,tiku.`content`,tiku.`clicks`,tiku.`status`,tiku.`spider_error`,tiku.`create_time`,tiku_source.`source_name`")
 		->join("left join tiku_source on tiku.`source_id`=tiku_source.id")
 		->where($where)->limit($Page->firstRow.','.$Page->listRows)->select();
-		echo $Model->getLastSql();
+		//echo $Model->getLastSql();
 		//var_dump($tiku_data);
 		$this->assign('tiku_data',$tiku_data);
 		$this->assign('count',$count);
@@ -139,9 +139,7 @@ class TikuController extends GlobalController {
 				if(isset($_COOKIE['spider_error'])){
 					$where .= ' AND spider_error='.$_COOKIE['spider_error'];
 				}
-				if(isset($_COOKIE['status'])){
-					$where .= ' AND status='.$_COOKIE['status'];
-				}
+				$where .= ' AND status=0';
 				$next = $Model->where($where)->find();
 				if($next){
 					$nextId = $next['id'];
@@ -190,9 +188,7 @@ class TikuController extends GlobalController {
 		if(isset($_COOKIE['spider_error'])){
 			$where .= ' AND spider_error='.$_COOKIE['spider_error'];
 		}
-		if(isset($_COOKIE['status'])){
-			$where .= ' AND status='.$_COOKIE['status'];
-		}
+		$where .= ' AND status=0';
 		if($status==1){
 			$next = $Model->where($where)->find();
 			if($next){
@@ -276,9 +272,13 @@ class TikuController extends GlobalController {
 	 * 获取子节点ID
 	 */
 	public function getAllChildrenPointId($parent_id,$course_id,$current_id){
-		$Model = M('tiku_point');
-		$child_data = $Model->where("course_id=$course_id")->select();
-		$data = $this->getTree($child_data,$parent_id);
+		$data = S('tiku_points_s_'.$parent_id.'_'.$course_id);
+		if(!$data){
+			$Model = M('tiku_point');
+			$child_data = $Model->where("course_id=$course_id")->select();
+			$data = $this->getTree($child_data,$parent_id);
+			S('tiku_points_s_'.$parent_id.'_'.$course_id,$data,array('type'=>'file','expire'=>FILE_CACHE_TIME));
+		}
 		//var_dump($data);exit;
 		$html = '';
 		$select = '';
@@ -340,7 +340,18 @@ class TikuController extends GlobalController {
 			$Model->commit();
 			$System = A('System');
 			$System->logWrite($_SESSION['admin_id'],"删除题库成功(ID:$result)");
-			$next = $Model->where("course_id=".$course_id." AND status=0")->find();
+			$where = '1=1';
+			if(isset($_COOKIE['course_id']) and $_COOKIE['course_id'] != 0){
+				$where = 'course_id='.$_COOKIE['course_id'];
+			}
+			if(isset($_COOKIE['type_id']) and $_COOKIE['type_id'] != 0){
+				$where .= ' AND type_id='.$_COOKIE['type_id'];
+			}
+			if(isset($_COOKIE['spider_error'])){
+				$where .= ' AND spider_error='.$_COOKIE['spider_error'];
+			}
+			$where .= ' AND status=0';
+			$next = $Model->where($where)->find();
 			if($next){
 				$nextId = $next['id'];
 			}else{

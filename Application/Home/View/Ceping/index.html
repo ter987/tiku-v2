@@ -1,154 +1,422 @@
 <include file="common:header" />
-<!--main-->
-<div class="width">
-    	
-        <div class="p10"> <h2>测评试卷名称</h2><div class="line"></div></div>
-        <div class="clear"></div>
-        
-        <div class="mt20">
-        	<div class="p10">
-            	<div class="left mr10">
-            		<form method="post" action="" id="course_form">
-	        		<select class="sel" id="course_select" name="course_select">
-	        		<volist name="course_data" id="vo">
-	        		<option value="{$vo.id}" <eq name="current_course" value="$vo.id">selected=""</eq> >高中{$vo.course_name}</option>
-	        		</volist>
-	        		</select>
-	        		</form>
-            	</div>
-            	<form method="post" action="/ceping/xuanti" id="ceping_form" name="">
-                <div class="left mr10">
-					<input id="" class="wh1" type="text" name="title" value="{$title}">
+<div id="main"style="margin-top:2px;min-height:500px;">
+		<div class="xf_qiehuankmbox">
+			<div class="xf_qiehuankminner">
+				<div class="xf_dqkm"><if condition="this_course_type eq 1">高中<elseif condition="this_course_type eq 2">初中</if>
+					<span class="c_blue xf_dqkmlx">{$this_course_name}</span> 
+					<a href="JavaScript:;"> [切换科目]</a>
 				</div>
-            </div>
-        </div>
-        
-        <div class="clear"></div>
-        <div class="mt20">
-        <div class="p10">
-         <h2>选择测评学生</h2><div class="line"></div></div>
-        <div class="clear"></div>
-        </div>
-        
-         <div class="mt20">
-        	<div class="p10" style="height:35px;line-height: 35px;">
-            	<input id="" class="wh1" type="text" name="student" value="" datatype="*" ajaxurl="/ceping/ajaxCheckStudent" nullmsg="不能为空！">
-            </div>
-        </div>
-        
-        <div class="clear"></div>
-        <div class="mt20">
-        	<div class="p10">
-            	<div class="left mr10"><span class="button_3">添加新学生</span></div>
-                <div class="left"><span class="button_3">从我的学生中选择</span></div>
-            </div>
-        </div>
-        
-        <div class="clear"></div>
-        
-        <div class="mt20">
-        	<div class="p10"> <h2>测评试卷信息</h2><div class="line"></div></div>	
-        </div>
-
-		<div class="clear"></div>
-         
-        <div class="mt20">
-        	<div class="p10">
-            	<div class="left"><span class="button_2">试题数量</span></div>
-                <div class="left"><span class="button_4">—</span></div>
-                <div class="left"><input type="text" value="0" name="shiti_num" id="shiti_num" style="line-height:30px;border:none; width:30px;height:30px;" class="ipt"></div>
-                <div class="left"><span class="button_3">+</span></div>
-            </div>
-        </div>
-        
-        <div class="clear"></div>
-        
-        <div class="mt20">
-        	<div class="p10">
-            	<div class="left"><span class="button_2">测评总分</span></div>
-                <div class="left"><span class="button_4">—</span></div>
-                <div class="left"><input type="text" value="0" name="ceshi_score" id="ceshi_score" style="line-height:30px;border:none; width:30px;height:30px;" class="ipt"></div>
-                <div class="left"><span class="button_3">+</span></div>
-            </div>
-        </div>
-        
-        <div class="clear"></div>
-        
-        <div class="mt20">
-        	<div class="p10">
-            	<div class="left"><span class="button_2">测评时间</span></div>
-                <div class="left"><span class="button_4">—</span></div>
-                <div class="left"><input type="text" value="0" name="ceshi_time" id="ceshi_time" style="line-height:30px;border:none; width:30px;height:30px;" class="ipt"></div>
-                <div class="left"><span class="button_3">+</span></div>
-            </div>
-        </div>
-        
-        <div class="clear"></div>
-        
-        
-        <div class="mt10">
-        	<div class="p10"> <h2>选择选题方式</h2><div class="line"></div></div>	
-        </div>
-        
-        <div class="clear"></div>
-        <div class="mt10">
-        	<div class="p10"> 
-            	<select class="left sel mr10"><option>手工选题</option></select>                
-            </div>	
-        </div>
-        
-        <div class="clear"></div>
-        
-                 <div class="zj_tit" style="cursor: pointer;">开始选题</div>
-</form>
-</div>
-<script type="text/javascript" src="__PUBLIC__/lib/Validform/5.3.2/Validform.min.js"></script>
-<link href="/Public/css/validform.css" rel="stylesheet" type="text/css" />
-<script>
-$(
-	function(){
-   	$("#ceping_form").Validform(
-   		{tiptype:3}
-   	);
-});
-$('#course_select').change(function() {
-	$('#course_form').submit();
-});
-$('.button_3').click(function(){
-	var obj = $(this).parent().parent().find('input[type=text]');
-	var num = parseInt(obj.val())+1;
-	obj.val(num);
-	
-	
-});
-$('.button_4').click(function(){
-	var obj = $(this).parent().parent().find('input[type=text]');
-	if(parseInt(obj.val())>0){
-		var num = parseInt(obj.val())-1;
-		obj.val(num);
+				<!-- 选择科目 -->
+				<div class="xf_xuanzekmbox">
+					<notempty name="gaozhong">
+					<div>
+						<em>&lt;高中&gt;</em>
+						<volist name='gaozhong' id='vo'>
+						<a href="javascript::void(0)" <eq name="this_course_id" value="$vo.id">class="cur"</eq> onclick="select_course({$vo.id},'{$vo.pinyin}','{$jumpto}');">{$vo.course_name}</a>
+						</volist>
+					</div>
+					</notempty>
+					<notempty name="chuzhong">
+					<div>
+						<em>&lt;初中&gt;</em>
+						<volist name='chuzhong' id='vo'>
+						<a href="javascript::void(0)" <eq name="this_course_id" value="$vo.id">class="cur"</eq> onclick="select_course({$vo.id},'{$vo.pinyin}','{$jumpto}');">{$vo.course_name}</a>
+						</volist>
+					</div>
+					</notempty>
+				</div>
+				<!-- 选择科目end -->
+				<div class='xf_zaixuanzj'>在线组卷</div>
+				
+			</div>
+		</div>
 		
-	}
-});
-$('.ipt:input').blur(function() {
-	if(isNaN($(this).val())){
-		alert('请输入数字');
-	}
-});	
-$('.zj_tit').click(function(){
-	if(parseInt($('#ceshi_score').val())<1){
-		alert('请输入测试总分');
-		return false;
-	}
-	if(parseInt($('#shiti_num').val())<1){
-		alert('请输入试题数量');
-		return false;
-	}
-	if(parseInt($('#ceshi_time').val())<1){
-		alert('请输入测试时间');
-		return false;
-	}
-	$('#ceping_form').submit();
-});
-</script>
+		<div>
+			<div class="na">
+				<div class="fl j_c na_n">
+					教材选题
+				</div>
+				<div class="fl zsd na_n_check">
+					知识点选题
+				</div>
+			</div>
+		</div>
+		<div style="width:1000px;margin-top:10px;">
+			<!--left-->
+			<div class="tk_left zsd_list xf_xzleffxf" >
+				<h3>全部知识点</h3>
+				<div class="tt_left">
+				
+				<ul class="zsd_ul ce">
+					<volist name="point_data" id="vo" key="k">
+					<li>
+						<a href="##"><i class="ce_jia"></i> <span>{$vo.point_name}</span></a>
+						<ul class="er">
+							<volist name="vo.childs" id="v">
+							<li class="er_li">{$v.point_name}</li>
+							</volist>
+						</ul>
+					</li>	
+					</volist>
+					<div class="clear"></div>
+				</ul>
+				</div>
+			</div>
+			<div class="tk_left j_c_list xf_xzleffxf" style="display:none;">
+				<h3>全部教材</h3>
+				<div class="tt_left">
+				<ul class="zsd_ul ce">
+					<li>
+						<a href="##"><i class="ce_jia"></i> <span>基础知识及语言表达</span></a>
+						<ul class="er">
+							<li class="e_li">
+								<a href="##"><i class="ce_jia"></i>文综</a>
+								<ul class="thr">
+									<li class="er_li">文综</li>
+									<li class="er_li">文综</li>
+									<li class="er_li">文综</li>
+									<div class="clear"></div>
+								</ul>
+							</li>
+							<li class="e_li">
+								<a href="##"><i class="ce_jia"></i>&nbsp;理综</a>
+								<ul class="thr">
+									<li class="er_li">文综</li>
+									<li class="er_li">文综</li>
+									<li class="er_li">文综</li>
+									<div class="clear"></div>
+								</ul>
+							</li>
+						</ul>
+					</li>	
+					<li>
+						<a href="##"><i class="ce_jia"></i> 诗歌鉴赏</a>
+						<ul class="er">
+							<li class="e_li">
+								<a href="##"><i class="ce_jia"></i>&nbsp;文综</a>
+								<ul class="thr">
+									<li class="er_li">文综</li>
+									<li class="er_li">文综</li>
+									<li class="er_li">文综</li>
+									<div class="clear"></div>
+								</ul>
+							</li>
+							<li class="e_li">
+								<a href="##"><i class="ce_jia"></i>&nbsp;理综</a>
+								<ul class="thr">
+									<li class="er_li">文综</li>
+									<li class="er_li">文综</li>
+									<li class="er_li">文综</li>
+									<div class="clear"></div>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="##"><i class="ce_jia"></i> <span>诗歌鉴赏</span></a></li>
+					<li><a href="##"><i class="ce_jia"></i> <span>文言文阅读</span></a></li>
+					<li><a href="##"><i class="ce_jia"></i> <span>现代文阅读</span></a></li>
+					<li><a href="##"><i class="ce_jia"></i> <span>作文及写作</span></a></li>
+					<li><a href="##"><i class="ce_jia"></i> <span>名句默写</span></a></li>
+					<li><a href="##"><i class="ce_jia"></i> <span>其他</span></a></li>
+					<div class="clear"></div>
+				</ul>
+				</div>
+			</div>
+			
+			<div class="fr" style="width:780px;">
+				 <div style="margin-bottom:10px;">
+					<div style="width:100%;height:30px;margin-bottom:10px;">
+						<div class="fl" style="width:100px;height:30px;line-height:15px;margin-right:70px;">
+							<div class="text_c">容易</div>
+							<div class="text_c">1.00-0.86</div>	
+						</div>
+						<div class="fl" style="width:100px;height:30px;line-height:15px;margin-right:70px;">
+							<div class="text_c">较易</div>
+							<div class="text_c">0.85-0.71</div>	
+						</div>
+						<div class="fl" style="width:100px;height:30px;line-height:15px;margin-right:70px;">
+							<div class="text_c">中等</div>
+							<div class="text_c">0.70-0.56</div>	
+						</div>
+						<div class="fl" style="width:100px;height:30px;line-height:15px;margin-right:70px;">
+							<div class="text_c">较难</div>
+							<div class="text_c">0.55-0.41</div>	
+						</div>
+						<div class="fl" style="width:100px;height:30px;line-height:15px;">
+							<div class="text_c">困难</div>
+							<div class="text_c">1.00-0.86</div>	
+						</div>
+					</div>
+					<div style="border:1px solid #D9D9D9;width:100%;height:45px;">
+						<div style="height:10px;">
+							<div class="fl" style="border-right:2px solid #D9D9D9;width:45px;height:10px;"></div>
+							<div class="fl" style="border-right:2px solid #D9D9D9;width:170px;height:10px;"></div>
+							<div class="fl" style="border-right:2px solid #D9D9D9;width:170px;height:10px;"></div>
+							<div class="fl" style="border-right:2px solid #D9D9D9;width:170px;height:10px;"></div>
+							<div class="fl" style="border-right:2px solid #D9D9D9;width:170px;height:10px;"></div>
+						</div>
+						<input type="hidden" id="kd" value="3">
+						<div style="margin: 11px 13px 0;background:#0190F2;height:13px;">
+							<div style="width: 688px;margin-left: 23px;;">
+								<div class="kedu kedu_3"></div>
+							</div>
+						</div>
+					</div>
+				</div> 
+				<div class="main">
+					<table id="maintable" border="1" cellpadding="0" cellspacing="0">
+						<thead>
+						<tr class="table_title">
+							<th rowspan="2">
+								已选知识点（<span id="num_title" class="num_title">6</span>）
+							</th>
+							<th>
+								<p>
+									题目数
+								</p>
+							</th>
+							<th>
+								<p>
+									单选
+								</p>
+							</th>
+							<th>
+								<p>
+									多选
+								</p>
+							</th>
+							<th>
+								<p>
+									填空
+								</p>
+							</th>
+							<th>
+								<p>
+									解答
+								</p>
+							</th>
+							<th>
+								<p>
+									解答
+								</p>
+							</th>
+						</tr>
+						<tr class="table_title">
+							<th>
+								<p id="sum">
+									0
+								</p>
+							</th>
+							<th>
+								<p id="sn">
+									0
+								</p>
+							</th>
+							<th>
+								<p id="mn">
+									0
+								</p>
+							</th>
+							<th>
+								<p id="fn">
+									0
+								</p>
+							</th>
+							<th>
+								<p id="an">
+									0
+								</p>
+							</th>
+							<th>
+								<p id="an">
+									0
+								</p>
+							</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr class="param_tr">
+							<td>
+								<span></span>概述故事情节
+							</td>
+							<td class="sum_tr">
+								0
+							</td>
+							<td class="sn">
+								<p>
+									<input value="0" type="text"><b><i class="up"></i><em class="down"></em></b>/<sapn class="max">262</sapn>
+								</p>
+							</td>
+							<td class="mn">
+								<p>
+									<input value="0" type="text"><b><i class="up"></i><em class="down"></em></b>/<sapn class="max">307</sapn>
+								</p>
+							</td>
+							<td class="fn">
+								<p>
+									<input value="0" type="text"><b><i class="up"></i><em class="down"></em></b>/<sapn class="max">20</sapn>
+								</p>
+							</td>
+							<td class="an">
+								<p>
+									<input value="0" type="text"><b><i class="up"></i><em class="down"></em></b>/<sapn class="max">564</sapn>
+								</p>
+							</td>
+						</tr>
+						<tr class="param_tr">
+							<td>
+								<span></span>概述故事情节
+							</td>
+							<td class="sum_tr">
+								0
+							</td>
+							<td class="sn">
+								<p>
+									<input value="0" type="text"><b><i class="up"></i><em class="down"></em></b>/<sapn class="max">262</sapn>
+								</p>
+							</td>
+							<td class="mn">
+								<p>
+									<input value="0" type="text"><b><i class="up"></i><em class="down"></em></b>/<sapn class="max">307</sapn>
+								</p>
+							</td>
+							<td class="fn">
+								<p>
+									<input value="0" type="text"><b><i class="up"></i><em class="down"></em></b>/<sapn class="max">20</sapn>
+								</p>
+							</td>
+							<td class="an">
+								<p>
+									<input value="0" type="text"><b><i class="up"></i><em class="down"></em></b>/<sapn class="max">564</sapn>
+								</p>
+							</td>
+						</tr>
+						<tr class="param_tr">
+							<td>
+								<span></span>概述故事情节
+							</td>
+							<td class="sum_tr">
+								0
+							</td>
+							<td class="sn">
+								<p>
+									<input value="0" type="text"><b><i class="up"></i><em class="down"></em></b>/<sapn class="max">262</sapn>
+								</p>
+							</td>
+							<td class="mn">
+								<p>
+									<input value="0" type="text"><b><i class="up"></i><em class="down"></em></b>/<sapn class="max">307</sapn>
+								</p>
+							</td>
+							<td class="fn">
+								<p>
+									<input value="0" type="text"><b><i class="up"></i><em class="down"></em></b>/<sapn class="max">20</sapn>
+								</p>
+							</td>
+							<td class="an">
+								<p>
+									<input value="0" type="text"><b><i class="up"></i><em class="down"></em></b>/<sapn class="max">564</sapn>
+								</p>
+							</td>
+						</tr>
+						<tr class="param_tr">
+							<td>
+								<span></span>概述故事情节
+							</td>
+							<td class="sum_tr">
+								0
+							</td>
+							<td class="sn">
+								<p>
+									<input value="0" type="text"><b><i class="up"></i><em class="down"></em></b>/<sapn class="max">262</sapn>
+								</p>
+							</td>
+							<td class="mn">
+								<p>
+									<input value="0" type="text"><b><i class="up"></i><em class="down"></em></b>/<sapn class="max">307</sapn>
+								</p>
+							</td>
+							<td class="fn">
+								<p>
+									<input value="0" type="text"><b><i class="up"></i><em class="down"></em></b>/<sapn class="max">20</sapn>
+								</p>
+							</td>
+							<td class="an">
+								<p>
+									<input value="0" type="text"><b><i class="up"></i><em class="down"></em></b>/<sapn class="max">564</sapn>
+								</p>
+							</td>
+						</tr>
+						<tr class="param_tr">
+							<td>
+								<span></span>概述故事情节
+							</td>
+							<td class="sum_tr">
+								0
+							</td>
+							<td class="sn">
+								<p>
+									<input value="0" type="text"><b><i class="up"></i><em class="down"></em></b>/<sapn class="max">262</sapn>
+								</p>
+							</td>
+							<td class="mn">
+								<p>
+									<input value="0" type="text"><b><i class="up"></i><em class="down"></em></b>/<sapn class="max">307</sapn>
+								</p>
+							</td>
+							<td class="fn">
+								<p>
+									<input value="0" type="text"><b><i class="up"></i><em class="down"></em></b>/<sapn class="max">20</sapn>
+								</p>
+							</td>
+							<td class="an">
+								<p>
+									<input value="0" type="text"><b><i class="up"></i><em class="down"></em></b>/<sapn class="max">564</sapn>
+								</p>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+					<div class="f_tbtn">
+						<a id="goPaperEdit">组卷成功</a>
+					</div>
+					<div class="f_tips">
+						<span>请先从左侧选择要考察的知识点</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="alert">
+		最多可添加100道题！
+	</div>
+	<div class="xf_fanhuidb"><a href="#"></a></div>
+<script type="text/javascript" src="__PUBLIC__/js/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
+<script>
+		$(window).scroll(function() {
+			var xf_scroll = $(window).scrollTop();
+			if(xf_scroll>360){
+				$(".xf_xzleffxf").addClass('xf_scroll');
+			}else{
+				$(".xf_xzleffxf").removeClass('xf_scroll');
+			}
+		});
+		$(function() {
+			$( ".kedu.kedu_3" ).slider({
+				min: 0,
+				max: 683,
+				step: 137,
+				slide: function( event, ui ) {
+					// $( "#amount" ).val( "$" + ui.value );
+					$( ".kedu.kedu_3" ).addClass('hover');
+				},
+				stop:function(){
+					$( ".kedu.kedu_3" ).removeClass('hover');
+
+				}
+			});
+			// $( "#amount" ).val( "$" + $( "#slider" ).slider( "value" ) );
+		});
+	</script>
 <!--footer-->
 <include file="common:footer" />

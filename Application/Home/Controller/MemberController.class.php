@@ -423,8 +423,7 @@ INNER JOIN tiku ON a.tiku_id=tiku.`id`");
 			}
 			
 		}else{
-			$css = $this->addCss(array('login.css'));
-			$this->assign('loginCss',$css);
+			$this->addCss(array('login.css'));
 			$this->setMetaTitle('登录'.C('TITLE_SUFFIX'));
 			setcookie('pre_page',$_SERVER['HTTP_REFERER']);
 			$this->display();
@@ -450,8 +449,7 @@ INNER JOIN tiku ON a.tiku_id=tiku.`id`");
 			}
 		}else{
 			$this->assign('nickname',$user['nick_name']);
-			$css = $this->addCss(array('login.css'));
-			$this->assign('loginCss',$css);
+			$this->addCss(array('login.css'));
 			$this->setMetaTitle('选择登录类型'.C('TITLE_SUFFIX'));
 			$this->display('Member/seltype');
 		}

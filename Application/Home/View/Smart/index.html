@@ -1,276 +1,311 @@
 <include file="common:header" />
-
-<!--main-->
-<div class="width">
-    	
-        <div class="p10"> <h2>选择科目</h2><div class="line"></div></div>
-        <div class="clear"></div>
-        
-        <div class="mt20">
-        	<div class="p10">
-        		<form method="post" action="" id="course_form">
-        		<select class="sel" id="course_select" name="course_select">
-        		<volist name="course_data" id="vo">
-        		<option value="{$vo.id}" <eq name="current_course" value="$vo.id">selected=""</eq> >高中{$vo.course_name}</option>
-        		</volist>
-        		</select>
-        		</form>
-        	</div>
-        </div>
-        
-        <div class="clear"></div>
-        <div class="p10"> <h2>设置试题数量</h2><div class="line"></div></div>
-        <div class="clear"></div>
-        
-        <div class="mt20">
-        	<div class="p10">
-            	
-                <ul class="ch_ul quesTypes" >
-                	<volist name="tiku_type" id="vo">
-                	<li>
-						<div>{$vo.type_name}</div>
-						<div style="height:30px;margin-left:15px;" id="{$vo.id}">
-							<div style="padding:4px 0;float:left;">
-								<button type="button" value="-" class="minus1" ></button>
-							</div>
-							<div style="float:left;">	
-								<input value="0"  maxlength="3"  class="countInput" name="tx[{$vo.id}]" type="text">
-							</div>
-							<div style="padding:4px 0;float:left;">	
-								<button type="button" value="+" class="add" ></button>
-							</div>
-							<div class="clear"></div>
-						</div>
-                    </li>
-                    </volist>
-                    
-                 </ul>
-                 
-            </div>
-        </div>
-        
-        <div class="clear"></div>
-        <div class="mt10">
-        	<div class="p10"> <h2>设置考卷难度</h2><div class="line"></div></div>	
-        </div>
-
-		<div class="clear"></div>
-         
-        <div class="mt20" id="difficulty">
-        	<h3 class="p10"><a href="javascript:;" class="c_z mr10" reg="1">容易</a>  丨  
-            <a href="javascript:;" class="mr10" reg="2">较易</a>   丨 
-            <a href="javascript:;" class="mr10" reg="3">一般</a>   丨  
-            <a href="javascript:;" class="mr10" reg="4">较难</a>   丨  
-            <a href="javascript:;" class="mr10" reg="5">困难</a>
-            
-            </h3>	
-        </div>
-        
-        <div class="clear"></div>
-        <div class="mt10">
-        	<div class="p10"> <h2>选择考查范围</h2><div class="line"></div></div>	
-        </div>
-        
-        <div class="clear"></div>
-        <div class="mt10">
-        	<div class="p10"> 
-        		<form method="post" action="" id="zsd_form">
-            	<select class="left sel mr10" id="zsd_select" name="zsd_select">
-            		<option value="zsd" <eq name="current_zsd" value="zsd">selected=""</eq>>综合知识点</option>
-            		<volist name="version_data" id="vo">
-            			<option value="{$vo.id}" <eq name="current_zsd" value="$vo.id">selected=""</eq>>{$vo.version_name}</option>
-            		</volist>
-            	</select>
-            	</form>
-            	<!-- <select class="left sel mr10"><option>人教版</option></select>
-                <input type="submit" value="搜索" class="mr10 button_2" style="border:none;" />
-                <input type="checkbox" class="mr10" />全选 -->
-                
-            </div>	
-        </div>
-        
-        <div class="clear"></div>
-		
-		<div class="mt10">
-        	<div class="p10"> <h2>请选择要考查的知识点</h2><div class="line"></div></div>	
-        </div>
-			<div class="knowledgeMenu guideStep">
-				<!--      <div class="hasNav">-->
-				<eq name="zsd_select" value="1">
-				<volist name="top_point" id="vo" key="k">
-				<div class="js_nav use <eq name="k" value="1">onHover</eq>" id="253">
-					<h3 id="{$vo.id}" class="js_h3">{$vo.point_name}</h3>
+<div id="main"style="margin-top:2px;min-height:500px;">
+		<div class="xf_qiehuankmbox">
+			<div class="xf_qiehuankminner">
+				<div class="xf_dqkm"><if condition="this_course_type eq 1">高中<elseif condition="this_course_type eq 2">初中</if>
+					<span class="c_blue xf_dqkmlx">{$this_course_name}</span> 
+					<a href="JavaScript:;"> [切换科目]</a>
 				</div>
-				</volist>
-				<else />
-				<volist name="top_point" id="vo" key="k">
-				<div class="js_nav use <eq name="k" value="1">onHover</eq>" id="253">
-					<h3 id="{$vo.id}" class="js_h3">{$vo.book_name}</h3>
-				</div>
-				</volist>
-				</eq>
-			</div>
-			<div style="height: auto; padding: 0px;" class="knowledgeTxtBox">
-				<div class="knowledgeTxt guideStep">
-					<h3><font>您已经选择了<b class="zs_num">0</b>个知识点。</font><a style="display: block;" href="javascript:;" class="btn btn9" id="all_">选择全部知识点</a><a href="javascript:;" class="btn btn10" id="no_all_" style="display: none;">取消全部知识点</a></h3>
-					<eq name="zsd_select" value="1">
-					<volist name="second_point" id="vo" key="k">
-					<div class="checkboxBox" id="div_{$vo.top_id}" <neq name="k" value="1">style="display:none;"</neq> >
-						<h4><label id="js_zs_top"><input  name="items_all[]" id="CheckedAll" value="{$vo.top_name}" class="js_1"  type="checkbox"><span id="top_point">{$vo.top_name}</span></label></h4>
-						
-						<ul class="js_zhishidian3">
-							<volist name="vo.childs" id="v">
-							<li class=""><label><input name="items[]" value="{$v.id}"  id="{$v.id}"  class="js_2" type="checkbox"><span>{$v.point_name}</span></label></li>
-							</volist>
-						</ul>
-						
-					</div>
-					</volist>
-					<else />
-					<volist name="second_point" id="vo" key="k">
-					<div class="checkboxBox" id="div_{$vo.top_id}" <neq name="k" value="1">style="display:none;"</neq> >
-						<h4><label id="js_zs_top"><input  name="items_all[]" id="CheckedAll" value="{$vo.top_name}" class="js_1"  type="checkbox"><span id="top_point">{$vo.top_name}</span></label></h4>
-						<volist name="vo.top_chapter" id="vs">
-						<h5>{$vs.chapter_name}</h5>
-						<ul class="js_zhishidian3">
-							<volist name="vs.childs" id="v">
-							<li class=""><label><input name="items[]" value="{$v.id}"  id="{$v.id}"  class="js_2" type="checkbox"><span>{$v.chapter_name}</span></label></li>
-							</volist>
-						</ul>
+				<!-- 选择科目 -->
+				<div class="xf_xuanzekmbox">
+					<notempty name="gaozhong">
+					<div>
+						<em>&lt;高中&gt;</em>
+						<volist name='gaozhong' id='vo'>
+						<a href="javascript::void(0)" <eq name="this_course_id" value="$vo.id">class="cur"</eq> onclick="select_course({$vo.id},'{$vo.pinyin}','{$jumpto}');">{$vo.course_name}</a>
 						</volist>
 					</div>
-					</volist>
-					</eq>
-					<form method="post" action="/smart/start" id="start">
-					<eq name="zsd_select" value="1">
-						<input type="hidden" name="zsd_select" value="1" />
-					<else />
-						<input type="hidden"  name="zsd_select" value="0" />
-					</eq>
-					<div class="hasKnowledge">
-						<h4>已选知识点（共<span class="zs_num">0</span>个）：</h4>
-						<ul id="tag_box">
-							
-						</ul>
+					</notempty>
+					<notempty name="chuzhong">
+					<div>
+						<em>&lt;初中&gt;</em>
+						<volist name='chuzhong' id='vo'>
+						<a href="javascript::void(0)" <eq name="this_course_id" value="$vo.id">class="cur"</eq> onclick="select_course({$vo.id},'{$vo.pinyin}','{$jumpto}');">{$vo.course_name}</a>
+						</volist>
 					</div>
-					<div class="clear"></div>
-					<div class="guideStep">
-						
-						<div class="clearBoth fl mb">
-							<volist name="tiku_type" id="vo">
-								<input type="hidden" name="tixing[{$vo.id}]" value="" class="tixing" id="tixing_{$vo.id}" />
-							</volist>
-							<input type="hidden" name="point_num" value="0" id="point_num" />
-							<input type="hidden" id="difficulty_id" name="difficulty_id" value="1" />
-							<a  id="submit_ajax" class="btn btn5" style="margin-left:270px;" >生成试卷</a>
-						</div>
-						
-					</div>
-					</form>
+					</notempty>
+				</div>
+				<!-- 选择科目end -->
+				<div class='xf_zaixuanzj'>在线组卷</div>
+				
+			</div>
+		</div>
+		
+		<div>
+			<div class="na">
+				<div class="fl j_c na_n">
+					教材选题
+				</div>
+				<div class="fl zsd na_n_check">
+					知识点选题
 				</div>
 			</div>
-			<div class="clear">
+		</div>
+		<div style="width:1000px;margin-top:10px;">
+			<!--left-->
+			<div class="tk_left zsd_list xf_xzleffxf" >
+				<h3>全部知识点</h3>
+				<div class="tt_left">
+				
+				<ul class="zsd_ul ce">
+					<volist name="point_data" id="vo" key="k">
+					<li>
+						<a href="##"><i class="ce_jia"></i> <span>{$vo.point_name}</span></a>
+						<ul class="er">
+							<volist name="vo.childs" id="v">
+							<li class="er_li"><t id="{$v.id}">{$v.point_name}</t></li>
+							</volist>
+						</ul>
+					</li>	
+					</volist>
+					<div class="clear"></div>
+				</ul>
+				</div>
 			</div>
-		
-		
-
-</div>
-<script>
-	$('#course_select').change(function() {
-		$('#course_form').submit();
-	});
-	$('#zsd_select').change(function() {
-		$('#zsd_form').submit();
-	});
-	$('#difficulty').find('a').click(function(){
-		$('.c_z').removeClass('c_z');
-		$(this).addClass('c_z mr10');
-		
-		$('#difficulty_id').val($(this).attr('reg'));
-	});
-	$('.js_h3').click(function(){
-		$('.onHover').removeClass('onHover');
-		$(this).parent().addClass('onHover');
-		$('#div_'+$(this).attr('id')).show();
-		$('#div_'+$(this).attr('id')).siblings('.checkboxBox').hide();
-	});
-	$('.js_zhishidian3').find(':input').click(function(){
-		if($(this).attr('checked')!='checked'){
-			$(this).attr('checked',true);
-			var add = '<li class="" id="'+$(this).val()+'"><a href="javascript:;" onclick="del_point($(this),'+$(this).val()+');">'+$(this).next().html()+'</a><input name="items_submit[]" value="'+$(this).val()+'" type="hidden"></li>';
-			$('#tag_box').append(add);
-			$('.zs_num').html($('#tag_box').find('li').length);
-			$('#point_num').val($('#tag_box').find('li').length);
-		}else{
-			$(this).removeAttr('checked');
-			$('#tag_box').find('li[id='+$(this).val()+']').remove();
-			$('.zs_num').html($('#tag_box').find('li').length);
-			$('#point_num').val($('#tag_box').find('li').length);
-		}
-	});
-	$('div #CheckedAll').click(function(){
-		if($(this).attr('checked')!='checked'){
-			$(this).attr('checked',true);
-			$(this).parent().parent().parent().find('li input').attr('checked',' ');
-			//alert($(this).parent().parent().parent().find('li input:checked'));
-			$(this).parent().parent().parent().find('li input:checked').each(function(dom){
-				if($('#tag_box').find('li[id='+$(this).val()+']').length==0){
-					var add = '<li class="" id="'+$(this).val()+'"><a href="javascript:;" onclick="del_point($(this),'+$(this).val()+');">'+$(this).next().html()+'</a><input name="items_submit[]" value="'+$(this).val()+'" type="hidden"></li>';
-					$('#tag_box').append(add);
-				}
-			});
-			$('.zs_num').html($('#tag_box').find('li').length);
-			$('#point_num').val($('#tag_box').find('li').length);
-		}else{
-			$(this).removeAttr('checked');
-			$(this).parent().parent().parent().find('li input').removeAttr('checked');
+			<div class="tk_left j_c_list xf_xzleffxf" style="display:none;">
+				<h3>全部教材</h3>
+				<div class="tt_left">
+				<ul class="zsd_ul ce">
+					<li>
+						<a href="##"><i class="ce_jia"></i> <span>基础知识及语言表达</span></a>
+						<ul class="er">
+							<li class="e_li">
+								<a href="##"><i class="ce_jia"></i>文综</a>
+								<ul class="thr">
+									<li class="er_li">文综</li>
+									<li class="er_li">文综</li>
+									<li class="er_li">文综</li>
+									<div class="clear"></div>
+								</ul>
+							</li>
+							<li class="e_li">
+								<a href="##"><i class="ce_jia"></i>&nbsp;理综</a>
+								<ul class="thr">
+									<li class="er_li">文综</li>
+									<li class="er_li">文综</li>
+									<li class="er_li">文综</li>
+									<div class="clear"></div>
+								</ul>
+							</li>
+						</ul>
+					</li>	
+					<li>
+						<a href="##"><i class="ce_jia"></i> 诗歌鉴赏</a>
+						<ul class="er">
+							<li class="e_li">
+								<a href="##"><i class="ce_jia"></i>&nbsp;文综</a>
+								<ul class="thr">
+									<li class="er_li">文综</li>
+									<li class="er_li">文综</li>
+									<li class="er_li">文综</li>
+									<div class="clear"></div>
+								</ul>
+							</li>
+							<li class="e_li">
+								<a href="##"><i class="ce_jia"></i>&nbsp;理综</a>
+								<ul class="thr">
+									<li class="er_li">文综</li>
+									<li class="er_li">文综</li>
+									<li class="er_li">文综</li>
+									<div class="clear"></div>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="##"><i class="ce_jia"></i> <span>诗歌鉴赏</span></a></li>
+					<li><a href="##"><i class="ce_jia"></i> <span>文言文阅读</span></a></li>
+					<li><a href="##"><i class="ce_jia"></i> <span>现代文阅读</span></a></li>
+					<li><a href="##"><i class="ce_jia"></i> <span>作文及写作</span></a></li>
+					<li><a href="##"><i class="ce_jia"></i> <span>名句默写</span></a></li>
+					<li><a href="##"><i class="ce_jia"></i> <span>其他</span></a></li>
+					<div class="clear"></div>
+				</ul>
+				</div>
+			</div>
 			
-			$(this).parent().parent().parent().find('li input').each(function(dom){
-				if($('#tag_box').find('li[id='+$(this).val()+']').length>0){
-					$('#tag_box').find('li[id='+$(this).val()+']').remove();
+			<div class="fr" style="width:780px;">
+				 <div style="margin-bottom:10px;">
+					<div style="width:100%;height:30px;margin-bottom:10px;">
+						<div class="fl" style="width:100px;height:30px;line-height:15px;margin-right:70px;">
+							<div class="text_c">容易</div>
+							<div class="text_c">1.00-0.86</div>	
+						</div>
+						<div class="fl" style="width:100px;height:30px;line-height:15px;margin-right:70px;">
+							<div class="text_c">较易</div>
+							<div class="text_c">0.85-0.71</div>	
+						</div>
+						<div class="fl" style="width:100px;height:30px;line-height:15px;margin-right:70px;">
+							<div class="text_c">中等</div>
+							<div class="text_c">0.70-0.56</div>	
+						</div>
+						<div class="fl" style="width:100px;height:30px;line-height:15px;margin-right:70px;">
+							<div class="text_c">较难</div>
+							<div class="text_c">0.55-0.41</div>	
+						</div>
+						<div class="fl" style="width:100px;height:30px;line-height:15px;">
+							<div class="text_c">困难</div>
+							<div class="text_c">1.00-0.86</div>	
+						</div>
+					</div>
+					<div style="border:1px solid #D9D9D9;width:100%;height:45px;">
+						<div style="height:10px;">
+							<div class="fl" style="border-right:2px solid #D9D9D9;width:45px;height:10px;"></div>
+							<div class="fl" style="border-right:2px solid #D9D9D9;width:170px;height:10px;"></div>
+							<div class="fl" style="border-right:2px solid #D9D9D9;width:170px;height:10px;"></div>
+							<div class="fl" style="border-right:2px solid #D9D9D9;width:170px;height:10px;"></div>
+							<div class="fl" style="border-right:2px solid #D9D9D9;width:170px;height:10px;"></div>
+						</div>
+						<input type="hidden" id="kd" value="3">
+						<div style="margin: 11px 13px 0;background:#0190F2;height:13px;">
+							<div style="width: 688px;margin-left: 23px;;">
+								<div class="kedu kedu_3"></div>
+							</div>
+						</div>
+					</div>
+				</div> 
+				<div class="main">
+					<table id="maintable" border="1" cellpadding="0" cellspacing="0">
+						<thead>
+						<tr class="table_title">
+							<th rowspan="2">
+								已选知识点（<span id="num_title" class="num_title">0</span>）
+							</th>
+							<th>
+								<p>
+									题目数
+								</p>
+							</th>
+							<volist name="tiku_type" id="vo">
+							<th>
+								<p>
+									{$vo.type_name}
+								</p>
+							</th>
+							</volist>
+							
+						</tr>
+						<tr class="table_title">
+							<th>
+								<p id="sum">
+									0
+								</p>
+							</th>
+							<volist name="tiku_type" id="vo">
+							<th>
+								<p id="sn">
+									0
+								</p>
+							</th>
+							</volist>
+							
+						</tr>
+						</thead>
+						<tbody id="point_seled">
+						
+						
+						</tbody>
+					</table>
+					<div class="f_tbtn">
+						<a id="goPaperEdit">组卷成功</a>
+					</div>
+					<div class="f_tips">
+						<span>请先从左侧选择要考察的知识点</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="alert">
+		最多可添加100道题！
+	</div>
+	<div class="xf_fanhuidb"><a href="#"></a></div>
+<script type="text/javascript" src="__PUBLIC__/js/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
+<script>
+		$(window).scroll(function() {
+			var xf_scroll = $(window).scrollTop();
+			if(xf_scroll>360){
+				$(".xf_xzleffxf").addClass('xf_scroll');
+			}else{
+				$(".xf_xzleffxf").removeClass('xf_scroll');
+			}
+		});
+		$(function() {
+			$( ".kedu.kedu_3" ).slider({
+				min: 0,
+				max: 683,
+				step: 137,
+				slide: function( event, ui ) {
+					//alert($( "#amount" ).val( "$" + ui.value ));
+					$( ".kedu.kedu_3" ).addClass('hover');
+				},
+				stop:function(){
+					$( ".kedu.kedu_3" ).removeClass('hover');
+
 				}
 			});
-			$('.zs_num').html($('#tag_box').find('li').length);
-			$('#point_num').val($('#tag_box').find('li').length);
-		}
-	});
-	function del_point(obj,id){
-		obj.parent().remove();
-		$('input[id='+id+']').removeAttr('checked');
-		$('.zs_num').html($('#tag_box').find('li').length);
-		$('#point_num').val($('#tag_box').find('li').length);
-	}
-	$('.add').click(function(){
-		var obj = $(this).parent().parent().find('input[type=text]');
-		var num = parseInt(obj.val())+1;
-		obj.val(num);
-		$('#tixing_'+$(this).parent().parent().attr('id')).val(num);
-	});
-	$('.minus1').click(function(){
-		var obj = $(this).parent().parent().find('input[type=text]');
-		if(parseInt(obj.val())>0){
-			var num = parseInt(obj.val())-1;
-			obj.val(num);
-			$('#tixing_'+$(this).parent().parent().attr('id')).val(num);
-		}
-	});
-	$('.countInput').blur(function() {
-		if(parseInt($(this).val())=='NaN'){
-			$(this).val(0);
-		}else{
-			$('#tixing_'+$(this).parent().parent().attr('id')).val(parseInt($(this).val()));
-		}
-	});
-	$('#submit_ajax').click(function(){
-		var rs = 0;
-		$('.tixing').each(function(dom){
-			if(parseInt($(this).val())>0) rs=1;
+			// $( "#amount" ).val( "$" + $( "#slider" ).slider( "value" ) );
 		});
-		if(rs==0) return false; 
-		if(parseInt($('#point_num').val())<1) return false;
-		$('#start').submit();
+$('.tt_left').find('t').click(function(){
+	$.getJSON(
+		'/index.php/home/smart/ajaxSelectPoint',
+		{id:$(this).attr('id')},
+		function(data){
+			if(data.status=='ok'){
+				$('#point_seled').html(data.data.html);
+				$('#num_title').html(data.data.p_count);
+			}
+		}
 		
-	});
-</script>
+	);
+});
+function jian(obj,point_id,type_id){
+	var val = parseInt(obj.parent().prev().val());
+	if(val>0){
+		val = val - 1;
+		obj.parent().prev().val(val);
+	}else{
+		return false;
+	}
+	$.getJSON(
+		'/index.php/home/smart/ajaxChangeNums',
+		{point_id:point_id,type_id:type_id,num:val},
+		function(data){
+			if(data.status=='ok'){
+				
+			}
+		}
+		
+	);
+}
+function jia(obj,point_id,type_id){
+	var val = parseInt(obj.parent().prev().val());
+	val = val +1;
+	obj.parent().prev().val(val);
+	$.getJSON(
+		'/index.php/home/smart/ajaxChangeNums',
+		{point_id:point_id,type_id:type_id,num:val},
+		function(data){
+			if(data.status=='ok'){
+				
+			}
+		}
+		
+	);
+}
+//开始组卷
+$('#goPaperEdit').click(function(){
+	$.getJSON(
+		'/index.php/home/smart/start',
+		function(data){
+			if(data.status=='ok'){
+				window.location.href = "/shijuan/";
+			}else{
+				alert(data.msg);
+			}
+		}
+		
+	);
+});
+	</script>
 <!--footer-->
 <include file="common:footer" />
