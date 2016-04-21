@@ -97,18 +97,14 @@ $(function(){
 	});
 	// 答题卡
 	$(".xf_datika em span").html("<i>0</i>/"+$(".xf_xuanzetibox ul li").length)
-	// 选择题目
-	$(".xf_xuanzetibox ul li p").click(function(){
+	$(".xf_shaixuansctm a,.is_zd a,.down_btn").click(function(){
 		if($(this).hasClass('active')){
-			$(this).removeClass('active').siblings("em").find("span").text($(this).parent().find(".active").find("span").text());
+			$('#auto_login').val(0);
+			$(this).removeClass('active');
 		}else{
-			if($(this).parent().hasClass('xf_morex')){
-				$(this).addClass('active').siblings("em").find("span").text($(this).parent().find(".active").find("span").text());
-			}else{
-				$(this).addClass('active').siblings().removeClass('active').siblings("em").find("span").text($(this).find("span").text());
-			}
+			$('#auto_login').val(1);
+			$(this).addClass('active');
 		}
-		$(".xf_datika em span i").text($(".xf_xuanzetibox ul li p.active").parent().length)
 	});
 	// 切换科目
 	$(".xf_dqkm a").click(function(){
@@ -146,14 +142,7 @@ $(function(){
 			$(this).addClass('cur').parents(".xf_teshuli").find(".xf_jiexida").slideDown(300);
 		}
 	});
-	$(".xf_xueshenglb ul li").click(function(){
-		if($(this).hasClass('active')){
-			$(".xf_quanbfs a").removeClass('active');
-			$(this).removeClass('active');
-		}else{
-			$(this).addClass('active');
-		}
-	});
+	
 	$(".xf_quanbfs a").click(function(){
 		if($(this).hasClass('active')){
 			$(this).removeClass('active');
@@ -163,10 +152,8 @@ $(function(){
 			$(".xf_xueshenglb ul li").addClass('active');
 		}
 	});
-	$(".xf_xffsxs").click(function(){
-		$(".xf_fasongxspop,.xf_popbg").show();
-	});
-	$(".xf_fasongbutton a,.xf_fasongxspop .xf_biaoti a").click(function(){
+	
+	$(".xf_fasongxspop .xf_biaoti a").click(function(){
 		$(".xf_fasongxspop,.xf_popbg").hide();
 	});
 
@@ -192,7 +179,4 @@ $(function(){
 		$(this).parents(".param_tr").remove();
 	});
 
-	$(".editpart").click(function(){
-		$('.xf_bjpoplx1').show();
-	});
 })

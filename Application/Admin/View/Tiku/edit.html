@@ -134,7 +134,7 @@
 				</span> </div>
 			<label class="form-label col-2">难度：</label>
 			<div class="formControls col-2">
-				<select name="difficulty" class="select">
+				<select name="difficulty_id" class="select">
 					<volist name="difficulty_data" id="vo">
 					<option value="{$vo.id}" <eq name="tiku_data.difficulty_id" value="$vo.id">selected</eq> >({$vo.section}){$vo.description}</option>
 					</volist>

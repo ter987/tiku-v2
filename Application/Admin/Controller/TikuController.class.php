@@ -5,6 +5,7 @@ class TikuController extends GlobalController {
 	var $parent_id;
 	var $points ;
 	var $i;
+	var $cache_nums;
 	/**
 	 * 初始化
 	 */
@@ -15,6 +16,7 @@ class TikuController extends GlobalController {
 		$course_data = parent::getCourse();
 		$this->getAllTypes();
 		$this->assign('course_data',$course_data);
+		$this->cache_nums = 500;
 	}
 	
     public function index(){
@@ -120,15 +122,19 @@ class TikuController extends GlobalController {
 			}
 			
 			$Model = M('tiku');
+			$Model->startTrans();
 			$result = $Model->save($data);
 			//echo $Model->getLastSql();exit;
 			//var_dump($_SERVER);exit;
+			
+			$pointModel = M('tiku_to_point');
+			$point_data['point_id'] = $_POST['point_id'];
+			$result2 = $pointModel->data($point_data)->where("tiku_id=".$data['id'])->save();
+			$System = A('System');
+			$result3 = $System->logWrite($_SESSION['admin_id'],"编辑题库成功(ID:".$data['id'].")");
+
 			if($result){
-				$pointModel = M('tiku_to_point');
-				$point_data['point_id'] = $_POST['point_id'];
-				$pointModel->data($point_data)->where("tiku_id=".$data['id'])->save();
-				$System = A('System');
-				$System->logWrite($_SESSION['admin_id'],"编辑题库成功(ID:".$data['id'].")");
+				$Model->commit();
 				$where = '1=1';
 				if(isset($_COOKIE['course_id']) and $_COOKIE['course_id'] != 0){
 					$where = 'course_id='.$_COOKIE['course_id'];
@@ -140,7 +146,22 @@ class TikuController extends GlobalController {
 					$where .= ' AND spider_error='.$_COOKIE['spider_error'];
 				}
 				$where .= ' AND status=0';
-				$next = $Model->where($where)->find();
+
+				$data = S('next_data_'.$where);
+				if(!$data){
+					$data = $Model->field("id")->where($where)->limit($this->cache_nums)->select();
+					if(!$data){
+						$nextId = 0;
+					}else{
+						$next = array_pop($data);
+						S('next_data_'.$where,$data,array('type'=>'file','expire'=>C('FILE_CACHE_TIME')));
+					}
+					
+				}else{
+					//var_dump($data);exit();
+					$next = array_pop($data);
+					S('next_data_'.$where,$data,array('type'=>'file','expire'=>C('FILE_CACHE_TIME')));
+				}
 				if($next){
 					$nextId = $next['id'];
 				}else{
@@ -148,6 +169,7 @@ class TikuController extends GlobalController {
 				}
 				$this->ajaxReturn(array('status'=>'success','nextId'=>$nextId,'backTo'=>$_SESSION['jump_url']));
 			}else{
+				$Model->rollback();
 				$this->ajaxReturn(array('status'=>'error','msg'=>'更新失败！'));
 			}
 		}else{
@@ -190,7 +212,21 @@ class TikuController extends GlobalController {
 		}
 		$where .= ' AND status=0';
 		if($status==1){
-			$next = $Model->where($where)->find();
+			$data = S('next_data_'.$where);
+			if(!$data){
+				$data = $Model->field("id")->where($where)->limit($this->cache_nums)->select();
+				if(!$data){
+					$nextId = 0;
+				}else{
+					$next = array_pop($data);
+					S('next_data_'.$where,$data,array('type'=>'file','expire'=>C('FILE_CACHE_TIME')));
+				}
+				
+			}else{
+				//var_dump($data);exit();
+				$next = array_pop($data);
+				S('next_data_'.$where,$data,array('type'=>'file','expire'=>C('FILE_CACHE_TIME')));
+			}
 			if($next){
 				$nextId = $next['id'];
 			}else{
@@ -200,8 +236,21 @@ class TikuController extends GlobalController {
 		}else{
 			$result = $Model->where("id=$id")->save(array('status'=>2,'update_time'=>time()));
 			if($result){
-				$next = $Model->where($where)->find();
-				//echo $Model->getLastSql();exit;
+				$data = S('next_data_'.$where);
+				if(!$data){
+					$data = $Model->field("id")->where($where)->limit($this->cache_nums)->select();
+					if(!$data){
+						$nextId = 0;
+					}else{
+						$next = array_pop($data);
+						S('next_data_'.$where,$data,array('type'=>'file','expire'=>C('FILE_CACHE_TIME')));
+					}
+					
+				}else{
+					//var_dump($data);exit();
+					$next = array_pop($data);
+					S('next_data_'.$where,$data,array('type'=>'file','expire'=>C('FILE_CACHE_TIME')));
+				}
 				if($next){
 					$nextId = $next['id'];
 				}else{
@@ -351,7 +400,21 @@ class TikuController extends GlobalController {
 				$where .= ' AND spider_error='.$_COOKIE['spider_error'];
 			}
 			$where .= ' AND status=0';
-			$next = $Model->where($where)->find();
+			$data = S('next_data_'.$where);
+			if(!$data){
+				$data = $Model->field("id")->where($where)->limit($this->cache_nums)->select();
+				if(!$data){
+					$nextId = 0;
+				}else{
+					$next = array_pop($data);
+					S('next_data_'.$where,$data,array('type'=>'file','expire'=>C('FILE_CACHE_TIME')));
+				}
+				
+			}else{
+				//var_dump($data);exit();
+				$next = array_pop($data);
+				S('next_data_'.$where,$data,array('type'=>'file','expire'=>C('FILE_CACHE_TIME')));
+			}
 			if($next){
 				$nextId = $next['id'];
 			}else{

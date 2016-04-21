@@ -1,252 +1,189 @@
 <include file="common:header" />
-<script type="text/javascript" src="__PUBLIC__/js/jquery.SuperSlide.2.1.1.js"></script>
 
-<!--main-->
-<div class="index_banner">
-  <div class="bd">
-    <ul>
-      <li style="background: transparent url(__PUBLIC__/images/index_bg.gif) no-repeat scroll center 0px; display: none;"><a href="#" target="_blank"></a></li>
-      <li style="background: transparent url(__PUBLIC__/images/index_bg.gif) no-repeat scroll center 0px; display: none;"><a href="#" target="_blank"></a></li>
-      <li style="background: rgb(196, 207, 235) url(__PUBLIC__/images/3.jpg) no-repeat scroll center 0px; display: list-item; opacity: 0.943356;"><a href="#" target="_blank"></a></li>
-      <li style="background: rgb(197, 237, 253) url(__PUBLIC__/images/4.jpg) no-repeat scroll center 0px; display: none;"><a href="#" target="_blank"></a></li>
-    </ul>
-  </div>
-  <div class="hd">
-    <ul><li class="">1</li><li class="">2</li><li class="on">3</li><li class="">4</li></ul>
-  </div>
-  <div class="width">
-    <!--第一屏-->
-    <div class="login">
-	<!-- 登录 -->
-	<empty name="user_id">
-      <div class="login_wz">
-        <form method="post" action="/member/login">
-          <input type="text" size="40" value="账号：" onblur="if(this.value=='')this.value=defaultValue" onfocus="if(this.value==defaultValue)this.value=''" class="ip" name="username" datatype="*" ajaxurl="/member/ajaxCheckUser" nullmsg="账号不能为空！" errormsg="请输入合法的账号！">
-          <br>
-          <input type="password" size="40" value="密码：" onblur="if(this.value=='')this.value=defaultValue" onfocus="if(this.value==defaultValue)this.value=''" class="ip" name="password" datatype="*6-20" nullmsg="密码不能为空！" errormsg="密码请输入6-16个字符">
-          <br>
-          <input type="checkbox" name="checkbox">
-          下次自动登录
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/member/resetpass">忘记密码</a><br>
-                    <input type="submit" size="40" value="登录" class="btn" name="submit">
-                    <br>
-                    <input type="button" size="40" value="注册" class="btn" onclick="window.location.href='/member/register'">
-                    <br>
-        </form>
-      </div>
-      <else />
-	  <!-- 登录结束 -->
-	  <!-- 登陆后状态 -->
-	  <div style="background:#c7dff6;margin-top:30px;padding:30px;">
-		<div style="border-bottom:1px solid #999;line-height:50px;height:50px;">
-			 欢迎您，<span style="color:#F43C5E;font-size:20px;">{$nick_name}</span><eq name="user_type" value="2">老师<else />学生</eq> <!-- 学生 -->
-		</div>
-		<div onclick="window.location.href='/member/'" style="cursor:pointer;width:200px;height:30px;line-height:30px;background:#F43C5E;text-align:center;color:#fff;font-size:18px;padding:5px 20px;margin-top:20px;">
-			进入我的主页
-		</div>
-		<div>
-			<div style="height:30px;line-height:30px;">
-				<span style="float:left;"><a href="/member/info">修改密码</a></span>
-				<!-- <span style="float:right;"><a style="color:#5487E3;" href="">激活学习卡</a></span> -->
-				<div style="clear:both;"></div>
+	<div>
+		<div class="banner">
+			<ul class="banList">
+				<li class="active"><a href=""><img src="__PUBLIC__/images/banner_1.jpg"></a></li>
+				<li class=""><a href=""><img src="__PUBLIC__/images/banner_1.jpg"></a></li>
+			</ul>
+			<div class="fomW">
+				<div class="jsNav">
+					<a href="javascript:;" class="trigger current"></a>
+					<a href="javascript:;" class="trigger"></a>
+				</div>
 			</div>
-			<!-- <div style="height:30px;line-height:30px;">
-				<a href="">使用帮助</a>
-			</div> -->
-		</div> 
-	  </div>
-	 </empty>
-	   <!-- 登陆后状态结束 -->
-    </div>
-  </div>
-</div>
-
-	<script type="text/javascript">
-		jQuery(".index_banner").slide({ titCell:".hd ul", mainCell:".bd ul", effect:"fade",  autoPlay:true, autoPage:true, trigger:"click" });
-	</script>
-
-
-<div class="width">
-    
-    <!--第二屏-->
-    <div class="mt20">
-    	<div class="w440 left">
-        	<div class="subject"><span><a href=""></a></span>高中试卷汇总<i>Self Q&A </i> </div>
-            
-         <div class="notice" style="margin:0 auto">
-		<div class="tab-hd">
-				<ul class="tab-nav">
-				  <li><a href="#" target="_blank">语文 </a></li>
-				  <li><a href="#" target="_blank">数学</a></li>
-				  <li><a href="#" target="_blank">英语</a></li>
-				  <li><a href="#" target="_blank">化学</a></li>
-				  <li><a href="#" target="_blank">物理</a></li>
-                  <li><a href="#" target="_blank">生物</a></li>
-                  <li><a href="#" target="_blank">物理</a></li>
-                  <li><a href="#" target="_blank">历史</a></li>
-                  <li><a href="#" target="_blank">地理</a></li>
-                  <li><a href="#" target="_blank">政治</a></li>
-				</ul>
-		</div>
-		<div class="tab-bd">
-			<div class="tab-pal">
-					<ul>
-						<li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-						<li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-						<li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-						<li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-                        <li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-                        <li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-					</ul>
-			</div>
-			
-            <div class="tab-pal">
-					<ul>
-						<li><span>2015-07-22</span><a href="#">·[真5454题]2015年高考上海市语文（带分析）</a></li>
-						<li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-						<li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-						<li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-                        <li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-                        <li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-					</ul>
-			</div>
-            
-			<div class="tab-pal">
-					<ul>
-						<li><span>2015-07-22</span><a href="#">·[真545题]2015年高考上海市语文（带分析）</a></li>
-						<li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-						<li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-						<li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-                        <li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-                        <li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-					</ul>
-			</div>
- 
 		</div>
 	</div>
-          <script type="text/javascript">jQuery(".notice").slide({ titCell:".tab-hd li", mainCell:".tab-bd",delayTime:0 });</script>                  
-        </div>
-        
-        <div class="w500 left">
-
-        	<div class="subject"><span><a href=""></a></span>初中试卷汇总<i>Self Q&A </i> </div>
-            
-         <div class="notice" style="margin:0 auto">
-		<div class="tab-hd">
-				<ul class="tab-nav">
-				  <li><a href="#" target="_blank">语文 </a></li>
-				  <li><a href="#" target="_blank">数学</a></li>
-				  <li><a href="#" target="_blank">英语</a></li>
-				  <li><a href="#" target="_blank">化学</a></li>
-				  <li><a href="#" target="_blank">物理</a></li>
-                  <li><a href="#" target="_blank">生物</a></li>
-                  <li><a href="#" target="_blank">物理</a></li>
-                  <li><a href="#" target="_blank">历史</a></li>
-                  <li><a href="#" target="_blank">地理</a></li>
-                  <li><a href="#" target="_blank">政治</a></li>
-				</ul>
+	<div class="h_logo">
+		<div class="h_bg"></div>
+		<empty name="user_id">
+		<!-- 未登录状态 -->
+		<div class="fr" style="padding:20px;width:280px;">
+			<form method="post" action="/member/ajaxlogin">
+			<div>
+				<div class="fl"><input name="username"  type="text"  placeholder="输入账号" onfocus="this.placeholder=''" onblur="this.placeholder='输入账号'" /></div>
+				<div class="icon_user fl"></div>
+				<div class="clear"></div>
+			</div>
+			<div>
+				<div class="fl"><input name="password" id="password" type="password" placeholder="输入密码" onfocus="this.placeholder=''" onblur="this.placeholder='输入密码'"/></div>
+				<div class="icon_pass fl"></div>
+				<div class="clear"></div>
+			</div>
+			<div>
+				<div class="fl"><a href="/member/resetpass">忘记密码？</a></div>
+				<div class="fr is_zd" style="color:#4D4D4D;"><a href="JavaScript:;">下次自动登录</a></div>
+				<div class="clear"></div>
+			</div>
+			<div class="login_in cp" onclick="$('form').submit()">
+				登录哈学库
+			</div>
+			<input type="hidden" value="0" name="auto_login" id="auto_login">
+			</form>
+			<a href="/member/register"><div style="margin:10px;font-size:18px;text-align:center;color:#FF9118;font-weight:bold;text-decoration:underline;cursor:pointer;">
+				没有账号？快速登录
+			</div></a>
+			<div class="bai_san"></div>
+			<div class="login_bottom">
+				<a href="/sinaconnect/login"><div class="icon_wb"></div></a>
+				<a href="/weixinconnect/login"><div class="icon_wx"></div></a>
+				<a href="/qqconnect/login"><div class="icon_qq"></div></a>
+			</div>
 		</div>
-		<div class="tab-bd">
-			<div class="tab-pal">
-					<ul>
-						<li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-						<li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-						<li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-						<li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-                        <li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-                        <li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-					</ul>
+		<else />
+		<!-- 登录状态 -->
+		<div class="fr" style="padding:20px;width:280px;">
+			<div style="width:82px;">
+				<img src="{$user_data.photo}" style="width:82px;border-radius:50px;">
 			</div>
-			
-            <div class="tab-pal">
-					<ul>
-						<li><span>2015-07-22</span><a href="#">·[真5454题]2015年高考上海市语文（带分析）</a></li>
-						<li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-						<li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-						<li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-                        <li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-                        <li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-					</ul>
+			<div style="width:280px;height:30px;line-height:30px;text-align:center;">
+				<div style="width:100px;">
+					<div class="icon_girl fl" style="font-size:18px;color:#1a1a1a;">{$nick_name}</div>
+					<div class="clear"></div>
+				</div>
 			</div>
-            
-			<div class="tab-pal">
-					<ul>
-						<li><span>2015-07-22</span><a href="#">·[真545题]2015年高考上海市语文（带分析）</a></li>
-						<li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-						<li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-						<li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-                        <li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-                        <li><span>2015-07-22</span><a href="#">·[真题]2015年高考上海市语文（带分析）</a></li>
-					</ul>
+			<div style="width:280px;text-align:center;font-size:18px;color:#4c4c4c;">
+				欢迎您回到哈学库
 			</div>
-            
-
+			<a href="">
+				<div class="login_btn_c cp">
+					进入题库
+				</div>
+			</a>
+			<a href="/member/">
+				<div class="login_btn cp">
+					我的主页
+				</div>
+			</a>
+			<div class="h_line" style="">
+			</div>
+			<div style="line-height:48px;">
+				<a href=""><div class="fl h_help" style="color:#0190f2;">使用帮助</div></a>
+				<div class="fr"><a href="" style="color:#0190f2;">修改密码</a></div>
+			</div>
+		</div>
+		</empty>
+	</div>
+	<div class="clear"></div>
+	<div style="width:1000px;margin:30px auto;">
+		<div class="fl" style="width:650px;height:320px;">
+			<div>
+				<div class="fl" style="font-size:20px;font-weight:bold;margin:4px;">最新试卷</div>
+				<div class="fl" style="margin:0px 20px;">
+					<div class="fl h_tag_c"><span>高三</span></div>
+					<div class="fl h_tag"><span>高二</span></div>
+					<div class="fl h_tag"><span>高一</span></div>
+				</div>
+				<div class="fl" style="margin:0px 20px;">
+					<div class="fl h_tag"><span>九年级</span></div>
+					<div class="fl h_tag"><span>八年级</span></div>
+					<div class="fl h_tag"><span>七年级</span></div>
+				</div>
+				<div class="fl" style="margin-left:20px;">
+					<a href=""style="font-size:16px;color:#0190f2;line-height:30px;">更多+</a>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div style="border:1px solid #CCCCCC;border-radius:50px;margin-top:-4px;">
+				<div style="width:480px;">
+					<volist name="gaozhong" id="vo">
+					<div class="fl h_xk">{$vo.course_name}</div>
+					</volist>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<volist name="gz_shijuan" id="vo" key="kk">
+				<volist name="vo" id="v" key="k">
+			<div style="margin-top:20px;<if condition="$k neq 1 OR $kk neq 1">display: none;</if>">
+				<volist name="v" id="vv">
+					<a href="/shijuan/{$vv.id}.html">
+				<div class="fl h_li">
+					<div class="fl">{$vv.source_name}</div> 
+					<div class="fr">{$vv.update_time|date="Y-m-d",###}</div>
+				</div></a>
+				</volist>
+			</div>
+			</volist>
+			</volist>
+		</div>
+		<div class="fr" style="">
+			<img src="__PUBLIC__/images/pic_1.jpg" />
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div style="background:#F5F5F5;width:100%"> 
+		<div style="width:1000px;padding:45px 0px;">
+		<a href="">
+			<div class="fl p_all" style="width:180px;">
+				<div class="plate_1"></div>
+				<div class="plate_title">海量题库</div>
+				<div>初中、高中各学科经典题库<br />妈妈再也不要用担心你不会</div>
+			</div>
+		</a>
+		<a href="">
+			<div class="fl p_all" style="width:180px;margin-left:93px;">
+				<div class="plate_2"></div>
+				<div class="plate_title">海量题库</div>
+				<div>初中、高中各学科经典题库<br />妈妈再也不要用担心你不会</div>
+			</div>
+		</a>
+		<a href="">
+			<div class="fl p_all" style="width:180px;margin-left:93px;">
+				<div class="plate_3"></div>
+				<div class="plate_title">海量题库</div>
+				<div>初中、高中各学科经典题库<br />妈妈再也不要用担心你不会</div>
+			</div>
+		</a>
+		<a href="">
+			<div class="fl p_all" style="width:180px;margin-left:93px;">
+				<div class="plate_4"></div>
+				<div class="plate_title">海量题库</div>
+				<div>初中、高中各学科经典题库<br />妈妈再也不要用担心你不会</div>
+			</div>
+		</a>
+			<div class="clear"></div>
 		</div>
 	</div>
-          <script type="text/javascript">jQuery(".notice").slide({ titCell:".tab-hd li", mainCell:".tab-bd",delayTime:0 });</script>
-            
-        </div>
-    </div>
-    
-</div>
-
-<div class="width">
-	<div class="mt20">
-    <div class="subject"><span><a href=""></a></span>最新资讯<i>Self Q&A </i> </div>
-    <ul class="n_news">
-    	<li> <div class="pic"><a href=""><img src="images/add.gif" /></a></div>
-        	<div class="text">
-            	<div class="tt"><a href="">让历史说话   用史实发言</a></div>
-            	<div class="inf">初中女生休学一年写23万字谍战小说</div>
-            </div>
-        </li>
-        
-        <li> <div class="pic"><a href=""><img src="images/add.gif" /></a></div>
-        	<div class="text">
-            	<div class="tt"><a href="">让历史说话   用史实发言</a></div>
-            	<div class="inf">初中女生休学一年写23万字谍战小说</div>
-            </div>
-        </li>
-        
-         <li> <div class="pic"><a href=""><img src="images/add.gif" /></a></div>
-        	<div class="text">
-            	<div class="tt"><a href="">让历史说话   用史实发言</a></div>
-            	<div class="inf">初中女生休学一年写23万字谍战小说</div>
-            </div>
-        </li>
-        
-         <li> <div class="pic"><a href=""><img src="__PUBLIC__/images/add.gif" /></a></div>
-        	<div class="text">
-            	<div class="tt"><a href="">让历史说话   用史实发言</a></div>
-            	<div class="inf">初中女生休学一年写23万字谍战小说</div>
-            </div>
-        </li>
-        
-         <li> <div class="pic"><a href=""><img src="images/add.gif" /></a></div>
-        	<div class="text">
-            	<div class="tt"><a href="">让历史说话   用史实发言</a></div>
-            	<div class="inf">初中女生休学一年写23万字谍战小说</div>
-            </div>
-        </li>
-        
-         <li> <div class="pic"><a href=""><img src="images/add.gif" /></a></div>
-        	<div class="text">
-            	<div class="tt"><a href="">让历史说话   用史实发言</a></div>
-            	<div class="inf">初中女生休学一年写23万字谍战小说</div>
-            </div>
-        </li>
-     </ul>
-        
-    </div>
-</div>
+<script type="text/javascript"> 
+	$(function(){
+		$(".banner").swBanner();
+	});
+</script>
 <script type="text/javascript" src="__PUBLIC__/lib/Validform/5.3.2/Validform.min.js"></script>
 <link href="/Public/css/validform.css" rel="stylesheet" type="text/css" />
 <script>
 	$(
 		function(){
    		$("form").Validform(
-   			{tiptype:3}
+   			{
+   				tiptype:4,
+   				ajaxPost:true,
+   				callback:function(data){
+   					if(data.status=='ok'){
+   						window.location.href='/';
+   					}
+   				}
+   			}
    		);
     });
 </script>

@@ -7,27 +7,46 @@
 <meta name="description" content="{$meta_description}" />
 <link href="__PUBLIC__/css/public.css" rel="stylesheet" type="text/css" />
 {$my_css}
-<link href="__PUBLIC__/js/jquery-ui-1.11.2.custom/jquery-ui.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.1.min.js"></script>
-<script src="__PUBLIC__/js/jquery-ui-1.11.2.custom/jquery-ui.js" type="text/javascript"></script>
-{$my_js}
 </head>
 <body>
 	<!--header-->
 	<div id="header">
 		<div id="top">
 			<div style="width:1000px;height:40px;">
-				<div class="fl"><a href="" class="c_blue">valiant</a> 欢迎回来哦!</div>
+				<notempty name="user_id">
+				<div class="fl top_a">
+					<div>
+						<div class="fl c_blue mb10">{$nick_name}</div>
+						<div class="top_b fl">欢迎回来哦!</div>
+						<div class="clear"></div>
+					</div>				
+					<div class="top_gr">
+						<div class="top_c"></div>
+						<div class="top_nav">
+							<a href=""><div class="top_user_li" style="background:#fff;">
+								<div class="fl">消息</div>
+								<div class="fr r_bg" style="">3</div>
+								<div class="clear"></div>
+							</div></a>
+							<a href="/member/"><div class="top_user_li" style="">个人中心</div></a>
+							<a href="/member/logout"><div class="top_user_li" style="">退出登录</div></a>
+						</div>
+					</div>
+				</div>
+				</notempty>
 				<div class="fr">
-					<div class="fl font_b mr20"><a href="">登陆 </a>|<a href=""> 注册</a></div>
+					<empty name="user_id"><div class="fl font_b mr20"><a href="/member/login">登陆 </a>|<a href="/member/register"> 注册</a></div></empty>
 					<div class="fl font_b c_cheng site_home">设为首页</div>
 					<div class="fl collect">收藏</div>
-					<div class="fl top_right"><a href="" class="weibo"></a> <a href="" class="weixin"></a></div>
+					<empty name="user_id">
+					<div class="fl top_right"><a href="/sinaconnect/login" class="weibo"></a> <a href="/weixinconnect/login" class="weixin"></a></div>
+					</empty>
 				</div>
 			</div>
 		</div>
 		<div class="logo_sea">
-			<a href="#"><div class="fl logo"></div></a>
+			<a href="/"><div class="fl logo"></div></a>
 			<div class="fl top_line" style="margin-left:100px;">
 				<div class="search">
 					<div class="fl sea_left cp">
@@ -76,7 +95,7 @@
 					<li><a href="/smart/">组卷</a></li>
 					<li><a href="#">试卷</a></li>
 					<li><a href="/ceping/">测评</a></li>
-					<li><a href="#">咨询</a></li>
+					<li><a href="/studycenter/index/">学习中心</a></li>
 				</ul>
 			</div>
 		</div>

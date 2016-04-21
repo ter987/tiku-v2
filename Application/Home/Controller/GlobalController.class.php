@@ -84,7 +84,11 @@ class GlobalController extends Controller{
         }
         return $rootList;
     }
-
+	public function getUserInfo(){
+		$Model = M('user');
+		$data = $Model->where("id=".$_SESSION['user_id'])->find();
+		return $data;
+	}
     public function getTree(&$data, $parent_id = 0) {
         $Model = M('tiku_point');
         $childs = $this->findChild($data, $parent_id);

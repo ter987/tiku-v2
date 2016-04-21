@@ -63,51 +63,50 @@
 										<div id="pui_main">
 											<div id="pui_head">
 												<div class="partm">
-													<div class="editpart"></div>
+													<div class="editpart" id="btn1"></div>
 												</div>
-												<div id="pui_title">
+												<div id="pui_title" >
 													<div id="pui_maintitle" title="试卷主标题">
-														xxx学校2015-2016学年度3月同步练习语文试卷
+														{$shijuan.title}
 													</div>
 												</div>
 												<div class="z_y" style="display: none;" id="pui_studentinput" title="考生信息填写栏">
 													学校:___________姓名：___________班级：___________考号：___________
 												</div>
 												<div class="b_z" id="pui_testinfo" title="试卷信息栏">
-													考试范围：xxx；考试时间：100分钟；命题人：xxx
+													
 												</div>
 												<div class="b_z" id="pui_notice" title="考生注意事项栏">
-													<div id="pui_noticetip">
-														注意事项：
-													</div>
+													
 													<div id="pui_noticetext">
-														1.答题前请填写好自己的班级、姓名、考号等信息<br />
-														2.请将答案正确填写在答题卡上
+														{$shijuan_attention}
 													</div>
 												</div>
 											</div>
 											
 											<div id="pui_body">
+												<notempty name="first_juan">
 												<div class="paperpart" id="paperpart1">
 													<div class="parthead b_z" id="parthead1" style="display:;">
 														<div class="partmenu">
-															<div class="editpart"></div>
+															<div class="editpart" id="btn2"></div>
 														</div>
 														<div class="partheadbox" id="partheadbox1">
 															<div class="partname" id="partname1">
-																第I卷（选择题）
+																{$first_juan.t_title}
 															</div>
 															<div class="partnote" id="partnote1">
-																请点击修改第I卷的文字说明
+																{$first_juan.note}
 															</div>
 														</div>
 													</div>
+													<volist name="first_juan.shiti" key="k" id="vo">
 													<div class="partbody">
 														<div class="questype" id="questype1_1">
 															<div class="questypehead" id="questypehead1_1" style="border: 1px solid rgb(255, 255, 255); background: rgb(255, 255, 255) none repeat scroll 0% 0%; color: rgb(0, 0, 0);">
 																<div class="questypemenu">
 																	<div class="check_class">换一组</div>
-																	<div class="editpart"></div>
+																	<div class="editpart btn3" shiti_no="{$k}" juan_no="1"></div>
 																</div>
 																<div class="questypeheadbox" id="questypeheadbox1_1">
 																	<table border="0" cellpadding="0" cellspacing="0" width="100%" height="60px;">
@@ -139,7 +138,7 @@
 																		</td>
 																		<td>
 																			<div class="questypetitle">
-																				<span class="questypeindex"><b>一、</b></span><span class="questypename" id="questypename1_1">基础知识</span><span class="questypenote" id="questypenote1_1">（本题共5道小题，每小题0分，共0分）</span>
+																				<span class="questypeindex"><b>{$vo.order_char}、</b></span><span class="questypename" id="juan_1_{$k}">{$vo.t_title}</span><!-- <span class="questypenote" id="questypenote1_1">（本题共5道小题，每小题0分，共0分）</span> -->
 																			</div>
 																		</td>
 																	</tr>
@@ -148,6 +147,7 @@
 																</div>
 															</div>
 															<div class="questypebody">
+																<volist name="vo.childs" id="v">
 																<div class="quesbox" id="quesbox1579176" data-score="">
 																	<div class="quesopmenu">
 																		<a class="ico_zjgn1">自动选题</a>
@@ -170,38 +170,29 @@
 																		<tbody>
 																		<tr>
 																			<td valign="top">
-																				<span class="quesindex"><b>1．</b></span><span class="tips"></span>
+																				<span class="quesindex"><b>{$v.order_char}．</b></span><span class="tips"></span>
 																			</td>
 																			<td>
 																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">在文中</span><span style="font-family:Wingdings; font-size:10.5pt"></span><span style="font-family:Wingdings; font-size:10.5pt"></span><span style="font-family:宋体; font-size:10.5pt">处横线上填入下列语句，衔接最恰当的一项是</span><span style="font-family:宋体; font-size:10.5pt">（</span><span style="font-family:宋体; font-size:10.5pt">3分</span><span style="font-family:宋体; font-size:10.5pt">）</span><span style="font-family:宋体; font-size:10.5pt">（&nbsp;&nbsp;&nbsp; ）</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">一条石阶小路折转而上，</span><span style="font-family:宋体; font-size:10.5pt; text-decoration:underline"></span><span style="font-family:Wingdings; font-size:10.5pt; text-decoration:underline"></span><span style="font-family:宋体; font-size:10.5pt; text-decoration:underline"></span><span style="font-family:宋体; font-size:10.5pt"></span><span style="font-family:宋体; font-size:10.5pt">。树根并不很粗，却坚劲挺拔，都生长在石上。</span><span style="font-family:Wingdings; font-size:10.5pt; text-decoration:underline"></span><span style="font-family:宋体; font-size:10.5pt; text-decoration:underline"></span><span style="font-family:宋体; font-size:10.5pt; text-decoration:underline"></span><span style="font-family:宋体; font-size:10.5pt"> ；树冠顶部挑着的几株青青的疏枝，在风中摇曳着。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">A.</span><span style="font-family:Wingdings; font-size:10.5pt"></span><span style="font-family:宋体; font-size:10.5pt">两边一色翠柏，铺满沟沟壑壑，枝枝蔓蔓</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">&nbsp; </span><span style="font-family:Wingdings; font-size:10.5pt"></span><span style="font-family:宋体; font-size:10.5pt">树干破石而出，如迎风的大旗；树根缘石壁而行，如闪电裂空</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">B.</span><span style="font-family:Wingdings; font-size:10.5pt"></span><span style="font-family:宋体; font-size:10.5pt">两边一色翠柏，枝枝蔓蔓，铺满沟沟壑壑</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">&nbsp; </span><span style="font-family:Wingdings; font-size:10.5pt"></span><span style="font-family:宋体; font-size:10.5pt">树干破石而出，如迎风的大旗；树根缘石壁而行，如闪电裂空</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">C.</span><span style="font-family:Wingdings; font-size:10.5pt"></span><span style="font-family:宋体; font-size:10.5pt">两边一色翠柏，枝枝蔓蔓，铺满沟沟壑壑</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">&nbsp; </span><span style="font-family:Wingdings; font-size:10.5pt"></span><span style="font-family:宋体; font-size:10.5pt">树根缘石壁而行，如闪电裂空；树干破石而出，如迎风的大旗</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">D.</span><span style="font-family:Wingdings; font-size:10.5pt"></span><span style="font-family:宋体; font-size:10.5pt">两边一色翠柏，铺满沟沟壑壑，枝枝蔓蔓</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">&nbsp; </span><span style="font-family:Wingdings; font-size:10.5pt"></span><span style="font-family:宋体; font-size:10.5pt">树根缘石壁而行，如闪电裂空；树干破石而出，如迎风的大旗</span>
+																					{$v.content|htmlspecialchars_decode}
+																					<php>
+															                    		if($v['options']){
+															                    			$options = json_decode($v['options']);
+															                    			$options_index = array(0=>'A',1=>'B',2=>'C',3=>'D',4=>'E');
+															                    	</php>
+															                    	<p>
+															                    		<php>
+															                    			$k = 0;
+															                    			foreach($options as $k=>$val){
+															                    		</php>
+															                    			<span style="float:left;line-height:18px;font-size:14px;padding-right:30px;" class="em2"><php>echo $options_index[$k]</php>.<php>echo $val</php></span>
+															                    		<php>
+															                    			}
+															                    		</php>
+															                    	</p>
+															                    	<php>
+															                    	}
+															                    	</php>
 																				</p>
 																			</td>
 																		</tr>
@@ -209,352 +200,22 @@
 																		</table>
 																		<br>
 																		<div class="xf_jiexibox">
-																			<p>答案：C</p>
+																			<p>答案：{$v.answer|htmlspecialchars_decode}</p>
 																			<p>试题解析：</p>
-																			<p>赤壁之战是曹操与东吴的较量。当时刘备还没有入川，尚无蜀国。 </p>
+																			<p>{$v.analysis|htmlspecialchars_decode} </p>
 																		</div>
 																	</div>
 																</div>
-																<div class="quesbox" id="quesbox1579175" data-score="">
-																	<div class="quesopmenu">
-																		<a class="ico_zjgn0">设置分值</a>
-																		<a class="ico_zjgn1">自动选题</a>
-																		<a class="ico_zjgn2">手动选题</a>
-																		<a class="ico_zjgn3">上移</a>
-																		<a class="ico_zjgn4">下移</a>
-																		<a class="ico_zjgn5">解析</a>
-																		<a class="ico_zjgn6">删除</a>
-																		<a class="ico_zjgn7">纠错</a>
-																	</div>
+															</volist>
 
-	<!-- 纠错 -->
-	<div class="xf_jiecuobox">
-		<textarea name="" id="" cols="30" rows="10" placeholder="描述下纠错问题吧，我们会及时改正"></textarea>
-		<div><a href="JavaScript:;">确定</a><a href="JavaScript:;">取消</a></div>
-	</div>
-	<!-- 纠错end -->
-																	<div class="quesdiv" id="quesdiv1579175">
-																		<table>
-																		<tbody>
-																		<tr>
-																			<td valign="top">
-																				<span class="quesindex"><b>2．</b></span><span class="tips"></span>
-																			</td>
-																			<td>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">下列各句中，没有语病的一句是</span><span style="font-family:宋体; font-size:10.5pt">（3分）（&nbsp;&nbsp;&nbsp; ）</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">A.外交部亚洲司副司长黄溪连回应外媒称:中印援助尼泊尔并非是为“争影响力”，作为友好邻国，中印有共同的责任帮助尼泊尔渡过难关，重建家园。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">B.</span><span style="background-color:#ffffff; font-family:宋体; font-size:10.5pt">据法新社</span>
-																					<a href="http://www.ks5u.com/" target="http://www.gzywtk.com/tmshow/_blank"><span style="background-color:#ffffff; color:#000000; font-family:宋体; font-size:10.5pt">布里斯班</span></a><span style="background-color:#ffffff; font-family:宋体; font-size:10.5pt">11月16日</span><span style="background-color:#ffffff; font-family:宋体; font-size:10.5pt">电，对于南中国海的岛礁领属争端问题，奥巴马始终不认可美国没有有意遏制中国的崛起，但强调中国应当成为世界舞台上负责任的大国。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">C.河南一教师写的“世界那么大，我想去看看”的辞职信在网上引起热议，短短十个字被网友称为“最具情怀辞职理由”，但“裸辞”应慎重，勿跟风。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">D.环境保护和污染治理不可能一蹴而就，我们要牢固树立保护自然、尊重自然、顺应自然的理念，增强全民环保的意识，打好生态文明建设这场攻坚战。</span>
-																				</p>
-																			</td>
-																		</tr>
-																		</tbody>
-																		</table>
-																		<br>
-																		<div class="xf_jiexibox">
-																			<p>答案：C</p>
-																			<p>试题解析：</p>
-																			<p>赤壁之战是曹操与东吴的较量。当时刘备还没有入川，尚无蜀国。 </p>
-																		</div>
-																	</div>
-																</div>
-																<div class="quesbox" id="quesbox1579174" data-score="">
-																	<div class="quesopmenu">
-																		<a class="ico_zjgn1">自动选题</a>
-																		<a class="ico_zjgn2">手动选题</a>
-																		<a class="ico_zjgn3">上移</a>
-																		<a class="ico_zjgn4">下移</a>
-																		<a class="ico_zjgn5">解析</a>
-																		<a class="ico_zjgn6">删除</a>
-																		<a class="ico_zjgn7">纠错</a>
-																	</div>
-	<!-- 纠错 -->
-	<div class="xf_jiecuobox">
-		<textarea name="" id="" cols="30" rows="10" placeholder="描述下纠错问题吧，我们会及时改正"></textarea>
-		<div><a href="JavaScript:;">确定</a><a href="JavaScript:;">取消</a></div>
-	</div>
-	<!-- 纠错end -->
-																	<div class="quesdiv" id="quesdiv1579174">
-																		<table>
-																		<tbody>
-																		<tr>
-																			<td valign="top">
-																				<span class="quesindex"><b>3．</b></span><span class="tips"></span>
-																			</td>
-																			<td>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">依次填入下列各句横线处的成语，最恰当的一组是（3分）（&nbsp;&nbsp;&nbsp; ）</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:Wingdings; font-size:10.5pt"></span><span style="font-family:宋体; font-size:10.5pt">对于正在创业和梦想创业的人来说，马云是当之无愧的创业“教父”，可是谁又能想到他充满波折、</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt; text-decoration:underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-family:宋体; font-size:10.5pt">的创业过程。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:Wingdings; font-size:10.5pt"></span><span style="font-family:宋体; font-size:10.5pt">老杨作为厂里的推销员，为了完成任务，长年累月、</span><span style="font-family:宋体; font-size:10.5pt; text-decoration:underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-family:宋体; font-size:10.5pt">地在外工作。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:Wingdings; font-size:10.5pt"></span><span style="font-family:宋体; font-size:10.5pt">南昌拾荒老人熊建国和捡来的女儿艳艳</span><span style="font-family:宋体; font-size:10.5pt; text-decoration:underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-family:宋体; font-size:10.5pt"> ，过着虽然窘迫却很温馨的生活。&nbsp; </span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">&nbsp; A.栉风沐雨&nbsp; 筚路蓝缕&nbsp; 褐衣蔬食&nbsp;&nbsp;&nbsp;&nbsp; B.筚路蓝缕&nbsp; 褐衣蔬食&nbsp; 栉风沐雨</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">&nbsp; C.栉风沐雨&nbsp; 褐衣蔬食&nbsp; 筚路蓝缕&nbsp;&nbsp;&nbsp;&nbsp; D.筚路蓝缕&nbsp; 栉风沐雨&nbsp; 褐衣蔬食</span>
-																				</p>
-																			</td>
-																		</tr>
-																		</tbody>
-																		</table>
-																		<br>
-																		<div class="xf_jiexibox">
-																			<p>答案：C</p>
-																			<p>试题解析：</p>
-																			<p>赤壁之战是曹操与东吴的较量。当时刘备还没有入川，尚无蜀国。 </p>
-																		</div>
-																	</div>
-																</div>
-																<div class="quesbox" id="quesbox1579174" data-score="">
-																	<div class="quesopmenu">
-																		<a class="ico_zjgn1">自动选题</a>
-																		<a class="ico_zjgn2">手动选题</a>
-																		<a class="ico_zjgn3">上移</a>
-																		<a class="ico_zjgn4">下移</a>
-																		<a class="ico_zjgn5">解析</a>
-																		<a class="ico_zjgn6">删除</a>
-																		<a class="ico_zjgn7">纠错</a>
-																	</div>
-
-	<!-- 纠错 -->
-	<div class="xf_jiecuobox">
-		<textarea name="" id="" cols="30" rows="10" placeholder="描述下纠错问题吧，我们会及时改正"></textarea>
-		<div><a href="JavaScript:;">确定</a><a href="JavaScript:;">取消</a></div>
-	</div>
-	<!-- 纠错end -->
-																	<div class="quesdiv" id="quesdiv1579174">
-																		<table>
-																		<tbody>
-																		<tr>
-																			<td valign="top">
-																				<span class="quesindex"><b>3．</b></span><span class="tips"></span>
-																			</td>
-																			<td>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">依次填入下列各句横线处的成语，最恰当的一组是（3分）（&nbsp;&nbsp;&nbsp; ）</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:Wingdings; font-size:10.5pt"></span><span style="font-family:宋体; font-size:10.5pt">对于正在创业和梦想创业的人来说，马云是当之无愧的创业“教父”，可是谁又能想到他充满波折、</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt; text-decoration:underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-family:宋体; font-size:10.5pt">的创业过程。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:Wingdings; font-size:10.5pt"></span><span style="font-family:宋体; font-size:10.5pt">老杨作为厂里的推销员，为了完成任务，长年累月、</span><span style="font-family:宋体; font-size:10.5pt; text-decoration:underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-family:宋体; font-size:10.5pt">地在外工作。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:Wingdings; font-size:10.5pt"></span><span style="font-family:宋体; font-size:10.5pt">南昌拾荒老人熊建国和捡来的女儿艳艳</span><span style="font-family:宋体; font-size:10.5pt; text-decoration:underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-family:宋体; font-size:10.5pt"> ，过着虽然窘迫却很温馨的生活。&nbsp; </span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">&nbsp; 
-																						A.栉风沐雨褐衣蔬食&nbsp;
-																						B.褐衣蔬食栉风沐雨&nbsp;
-																						C.栉风沐雨筚路蓝缕&nbsp;
-																						D.筚路褐衣蔬食蓝缕&nbsp;
-																					</span>
-																				</p>
-																			</td>
-																		</tr>
-																		</tbody>
-																		</table>
-																		<br>
-																		<div class="xf_jiexibox">
-																			<p>答案：C</p>
-																			<p>试题解析：</p>
-																			<p>赤壁之战是曹操与东吴的较量。当时刘备还没有入川，尚无蜀国。 </p>
-																		</div>
-																	</div>
-																</div>
-																<div class="quesbox" id="quesbox1579174" data-score="">
-																	<div class="quesopmenu">
-																		<a class="ico_zjgn1">自动选题</a>
-																		<a class="ico_zjgn2">手动选题</a>
-																		<a class="ico_zjgn3">上移</a>
-																		<a class="ico_zjgn4">下移</a>
-																		<a class="ico_zjgn5">解析</a>
-																		<a class="ico_zjgn6">删除</a>
-																		<a class="ico_zjgn7">纠错</a>
-																	</div>
-
-	<!-- 纠错 -->
-	<div class="xf_jiecuobox">
-		<textarea name="" id="" cols="30" rows="10" placeholder="描述下纠错问题吧，我们会及时改正"></textarea>
-		<div><a href="JavaScript:;">确定</a><a href="JavaScript:;">取消</a></div>
-	</div>
-	<!-- 纠错end -->
-																	<div class="quesdiv" id="quesdiv1579174">
-																		<table>
-																		<tbody>
-																		<tr>
-																			<td valign="top">
-																				<span class="quesindex"><b>3．</b></span><span class="tips"></span>
-																			</td>
-																			<td>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">依次填入下列各句横线处的成语，最恰当的一组是（3分）（&nbsp;&nbsp;&nbsp; ）</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:Wingdings; font-size:10.5pt"></span><span style="font-family:宋体; font-size:10.5pt">对于正在创业和梦想创业的人来说，马云是当之无愧的创业“教父”，可是谁又能想到他充满波折、</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt; text-decoration:underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-family:宋体; font-size:10.5pt">的创业过程。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:Wingdings; font-size:10.5pt"></span><span style="font-family:宋体; font-size:10.5pt">老杨作为厂里的推销员，为了完成任务，长年累月、</span><span style="font-family:宋体; font-size:10.5pt; text-decoration:underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-family:宋体; font-size:10.5pt">地在外工作。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:Wingdings; font-size:10.5pt"></span><span style="font-family:宋体; font-size:10.5pt">南昌拾荒老人熊建国和捡来的女儿艳艳</span><span style="font-family:宋体; font-size:10.5pt; text-decoration:underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-family:宋体; font-size:10.5pt"> ，过着虽然窘迫却很温馨的生活。&nbsp; </span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">&nbsp; 
-																						A.栉风沐雨褐衣蔬食&nbsp;
-																						B.褐衣蔬食栉风沐雨&nbsp;
-																						C.栉风沐雨筚路蓝缕&nbsp;
-																						D.筚路褐衣蔬食蓝缕&nbsp;
-																					</span>
-																				</p>
-																			</td>
-																		</tr>
-																		</tbody>
-																		</table>
-																		<br>
-																		<div class="xf_jiexibox">
-																			<p>答案：C</p>
-																			<p>试题解析：</p>
-																			<p>赤壁之战是曹操与东吴的较量。当时刘备还没有入川，尚无蜀国。 </p>
-																		</div>
-																	</div>
-																</div>
-
-																<div class="quesbox" id="quesbox1579161" data-score="">
-																	<div class="quesopmenu">
-																		<a class="ico_zjgn1">自动选题</a>
-																		<a class="ico_zjgn2">手动选题</a>
-																		<a class="ico_zjgn3">上移</a>
-																		<a class="ico_zjgn4">下移</a>
-																		<a class="ico_zjgn5">解析</a>
-																		<a class="ico_zjgn6">删除</a>
-																		<a class="ico_zjgn7">纠错</a>
-																	</div>
-
-	<!-- 纠错 -->
-	<div class="xf_jiecuobox">
-		<textarea name="" id="" cols="30" rows="10" placeholder="描述下纠错问题吧，我们会及时改正"></textarea>
-		<div><a href="JavaScript:;">确定</a><a href="JavaScript:;">取消</a></div>
-	</div>
-	<!-- 纠错end -->
-																	<div class="quesdiv" id="quesdiv1579161">
-																		<table>
-																		<tbody>
-																		<tr>
-																			<td valign="top">
-																				<span class="quesindex"><b>4．</b></span><span class="tips"></span>
-																			</td>
-																			<td>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">下列诗句中，</span><span style="font-family:宋体; font-size:10.5pt">没有</span><span style="font-family:宋体; font-size:10.5pt">使用比拟手法的一项是</span><span style="font-family:宋体; font-size:10.5pt">（</span><span style="font-family:宋体; font-size:10.5pt">3</span><span style="font-family:宋体; font-size:10.5pt">分</span><span style="font-family:宋体; font-size:10.5pt">）</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt 0pt 0pt 15.75pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">A</span><span style="font-family:宋体; font-size:10.5pt">．</span><span style="font-family:宋体; font-size:10.5pt">沙上并禽池上暝，云破月来花弄影。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt 0pt 0pt 15.75pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">B</span><span style="font-family:宋体; font-size:10.5pt">．</span><span style="font-family:宋体; font-size:10.5pt">昆山玉碎凤凰叫，芙蓉泣露香兰笑。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt 0pt 0pt 15.75pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">C</span><span style="font-family:宋体; font-size:10.5pt">．月落乌啼霜满天，江枫渔火对愁眠。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt 0pt 0pt 15.75pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">D</span><span style="font-family:宋体; font-size:10.5pt">．</span><span style="font-family:宋体; font-size:10.5pt">残雪暗随冰笋滴，新春偷向柳梢归。</span>
-																				</p>
-																			</td>
-																		</tr>
-																		</tbody>
-																		</table>
-																		<br>
-																		<div class="xf_jiexibox">
-																			<p>答案：C</p>
-																			<p>试题解析：</p>
-																			<p>赤壁之战是曹操与东吴的较量。当时刘备还没有入川，尚无蜀国。 </p>
-																		</div>
-																	</div>
-																</div>
-																<div class="quesbox" id="quesbox1579159" data-score="">
-																	<div class="quesopmenu">
-																		<a class="ico_zjgn1">自动选题</a>
-																		<a class="ico_zjgn2">手动选题</a>
-																		<a class="ico_zjgn3">上移</a>
-																		<a class="ico_zjgn4">下移</a>
-																		<a class="ico_zjgn5">解析</a>
-																		<a class="ico_zjgn6">删除</a>
-																		<a class="ico_zjgn7">纠错</a>
-																	</div>
-
-	<!-- 纠错 -->
-	<div class="xf_jiecuobox">
-		<textarea name="" id="" cols="30" rows="10" placeholder="描述下纠错问题吧，我们会及时改正"></textarea>
-		<div><a href="JavaScript:;">确定</a><a href="JavaScript:;">取消</a></div>
-	</div>
-	<!-- 纠错end -->
-																	<div class="quesdiv" id="quesdiv1579159">
-																		<table>
-																		<tbody>
-																		<tr>
-																			<td valign="top">
-																				<span class="quesindex"><b>5．</b></span><span class="tips"></span>
-																			</td>
-																			<td>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">下列各句中，</span><span style="font-family:宋体; font-size:10.5pt">没有语病</span><span style="font-family:宋体; font-size:10.5pt">的一句是</span><span style="font-family:宋体; font-size:10.5pt">（</span><span style="font-family:宋体; font-size:10.5pt">3</span><span style="font-family:宋体; font-size:10.5pt">分</span><span style="font-family:宋体; font-size:10.5pt">）</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt 0pt 0pt 31.5pt; orphans:0; text-align:justify; text-indent:-15.75pt; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">A</span><span style="font-family:宋体; font-size:10.5pt">．</span><span style="font-family:宋体; font-size:10.5pt">大气污染物的排放是产生雾霾的主要原因，静稳天气多、相对湿度大、吸湿作用明显等不利因素又扩大了雾霾的严重程度。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt 0pt 0pt 31.5pt; orphans:0; text-align:justify; text-indent:-15.75pt; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">B</span><span style="font-family:宋体; font-size:10.5pt">．古人在写诗过程中常常倾注颇多心力在一两个字上，这一两个字常常使诗歌有一种言有尽而意无穷的艺术效果产生出来。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt 0pt 0pt 31.5pt; orphans:0; text-align:justify; text-indent:-15.75pt; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">C</span><span style="font-family:宋体; font-size:10.5pt">．好电影生命力很强，其故事情节具有可延展创新的空间，这就是《蜘蛛侠》《蝙蝠侠》等侠类电影可以续拍的原因。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt 0pt 0pt 31.5pt; orphans:0; text-align:justify; text-indent:-15.75pt; widows:0">
-																					<span style="font-family:宋体; font-size:10.5pt">D</span><span style="font-family:宋体; font-size:10.5pt">．</span><span style="font-family:宋体; font-size:10.5pt">科研工作者用水缸作为青蒿素的提取容器，在操作过程中不可避免地接触到大量有机溶剂，导致他们的健康受到影响。</span>
-																				</p>
-																			</td>
-																		</tr>
-																		</tbody>
-																		</table>
-																		<br>
-																		<div class="xf_jiexibox">
-																			<p>答案：C</p>
-																			<p>试题解析：</p>
-																			<p>赤壁之战是曹操与东吴的较量。当时刘备还没有入川，尚无蜀国。 </p>
-																		</div>
-																	</div>
-																</div>
 															</div>
 														</div>
 													</div>
+												</volist>
 												</div>
+												</notempty>
+												
+												<notempty name="second_juan">
 												<div class="paperpart" id="paperpart2">
 													<div class="parthead b_z" id="parthead2" style="display:;">
 														<div class="partmenu">
@@ -562,14 +223,15 @@
 														</div>
 														<div class="partheadbox" id="partheadbox2">
 															<div class="partname" id="partname2">
-																第II卷（非选择题）
+																{$second_juan.t_title}
 															</div>
 															<div class="partnote" id="partnote2">
-																请点击修改第II卷的文字说明
+																{$second_juan.note}
 															</div>
 														</div>
 													</div>
 													<div class="partbody">
+														<volist name="second_juan.shiti" key="k" id="vo">
 														<div class="questype" id="questype2_0">
 															<div class="questypehead" id="questypehead2_5" style="border: 1px solid rgb(255, 255, 255); background: rgb(255, 255, 255) none repeat scroll 0% 0%; color: rgb(0, 0, 0);">
 																<div class="questypemenu">
@@ -606,7 +268,7 @@
 																		</td>
 																		<td>
 																			<div class="questypetitle">
-																				<span class="questypeindex"><b>一、</b></span><span class="questypename" id="questypename2_5">写作题</span><span class="questypenote" id="questypenote2_5">（本题共1道小题,第1题0分,共0分）</span>
+																				<span class="questypeindex"><b>{$vo.order_char}、</b></span><span class="questypename" id="juan_2_{$k}">{$vo.t_title}</span><!-- <span class="questypenote" id="questypenote2_5">（本题共1道小题,第1题0分,共0分）</span> -->
 																			</div>
 																		</td>
 																	</tr>
@@ -614,6 +276,7 @@
 																	</table>
 																</div>
 															</div>
+															<volist name="vo.childs" id="v">
 															<div class="questypebody">
 																<div class="quesbox" id="quesbox1579226" data-score="">
 																	<div class="quesopmenu">
@@ -637,20 +300,11 @@
 																		<tbody>
 																		<tr>
 																			<td valign="top">
-																				<span class="quesindex"><b>1．</b></span><span class="tips"></span>
+																				<span class="quesindex"><b>{$v.order_char}．</b></span><span class="tips"></span>
 																			</td>
 																			<td>
 																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
-																					<span style="color:#000000; font-family:宋体; font-size:10.5pt">作文（</span><span style="color:#000000; font-family:宋体; font-size:10.5pt">50</span><span style="color:#000000; font-family:宋体; font-size:10.5pt">分）</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
-																					<span style="color:#000000; font-family:宋体; font-size:10.5pt">从下面两个题目中任选一题，按要求作文。不少于</span><span style="color:#000000; font-family:宋体; font-size:10.5pt">700</span><span style="color:#000000; font-family:宋体; font-size:10.5pt">字。自定文体（诗歌除外）。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
-																					<span style="color:#000000; font-family:宋体; font-size:10.5pt">①《细雨探花瑶》引发了人们对非物质文化遗产保护的思考，对此你有怎样的见闻和看法。写一篇文章。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
-																					<span style="color:#000000; font-family:宋体; font-size:10.5pt">②请以“悔”为题目，写一篇文章。</span>
+																					{$v.content|htmlspecialchars_decode}
 																				</p>
 																			</td>
 																		</tr>
@@ -658,116 +312,21 @@
 																		</table>
 																		<br>
 																		<div class="xf_jiexibox">
-																			<p>答案：C</p>
+																			<p>答案：{$v.answer|htmlspecialchars_decode}</p>
 																			<p>试题解析：</p>
-																			<p>赤壁之战是曹操与东吴的较量。当时刘备还没有入川，尚无蜀国。 </p>
+																			<p>{$v.analysis|htmlspecialchars_decode} </p>
 																		</div>
 																	</div>
+																	
 																</div>
 															</div>
+														</volist>
 														</div>
-														
-														<div class="questype" id="questype2_7">
-															<div class="questypehead" id="questypehead2_7" style="display:;">
-																<div class="questypemenu">
-																	<div class="check_class">换一组</div>
-																	<div class="editpart"></div>
-																</div>
-																<div class="questypeheadbox" id="questypeheadbox2_7">
-																	<table border="0" cellpadding="0" cellspacing="0" width="100%" height="60px">
-																	<tbody>
-																	<tr>
-																		<td width="1">
-																			<div class="questypescore" id="questypescore2_7" style="width:120px;display:;">
-																				<table title="评分栏" style="border:1px solid #666;" border="1" bordercolor="#666666" cellpadding="0" cellspacing="0">
-																				<tbody>
-																				<tr>
-																					<td align="center" height="20" width="55">
-																						&nbsp;评卷人&nbsp;
-																					</td>
-																					<td align="center" width="55">
-																						&nbsp;得&nbsp;&nbsp;分&nbsp;
-																					</td>
-																				</tr>
-																				<tr>
-																					<td align="center" height="30">
-																						&nbsp;
-																					</td>
-																					<td>
-																						&nbsp;
-																					</td>
-																				</tr>
-																				</tbody>
-																				</table>
-																			</div>
-																		</td>
-																		<td>
-																			<div class="questypetitle">
-																				<span class="questypeindex"><b>八、</b></span><span class="questypename" id="questypename2_7">语文文字运用</span><span class="questypenote" id="questypenote2_7">（本题共1道小题,第1题0分,共0分）</span>
-																			</div>
-																		</td>
-																	</tr>
-																	</tbody>
-																	</table>
-																</div>
-															</div>
-															<div class="questypebody">
-																<div class="quesbox" id="quesbox1579225" data-score="">
-																	<div class="quesopmenu">
-																		<a class="ico_zjgn1">自动选题</a>
-																		<a class="ico_zjgn2">手动选题</a>
-																		<a class="ico_zjgn3">上移</a>
-																		<a class="ico_zjgn4">下移</a>
-																		<a class="ico_zjgn5">解析</a>
-																		<a class="ico_zjgn6">删除</a>
-																		<a class="ico_zjgn7">纠错</a>
-																	</div>
-
-	<!-- 纠错 -->
-	<div class="xf_jiecuobox">
-		<textarea name="" id="" cols="30" rows="10" placeholder="描述下纠错问题吧，我们会及时改正"></textarea>
-		<div><a href="JavaScript:;">确定</a><a href="JavaScript:;">取消</a></div>
-	</div>
-	<!-- 纠错end -->
-																	<div class="quesdiv" id="quesdiv1579225">
-																		<table>
-																		<tbody>
-																		<tr>
-																			<td valign="top">
-																				<span class="quesindex"><b>7．</b></span><span class="tips"></span>
-																			</td>
-																			<td>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
-																					<span style="color:#000000; font-family:宋体; font-size:10.5pt">微写作（</span><span style="color:#000000; font-family:宋体; font-size:10.5pt">10</span><span style="color:#000000; font-family:宋体; font-size:10.5pt">分）</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
-																					<span style="color:#000000; font-family:宋体; font-size:10.5pt">从下面三个题目中任选一题，按要求作答。</span><span style="color:#000000; font-family:宋体; font-size:10.5pt">150</span><span style="color:#000000; font-family:宋体; font-size:10.5pt">字左右。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; text-indent:21pt; widows:0">
-																					<span style="color:#000000; font-family:宋体; font-size:10.5pt">①为将昌平区建成绿色模范城市，请写一段话，向区政府献计献策。要求条理清楚，可操作性强。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
-																					<span style="color:#000000; font-family:宋体; font-size:10.5pt">②高三某班将召开“为青春喝彩”主题班会，请你写一个发言。要求感情真挚，可写诗歌。</span>
-																				</p>
-																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-indent:21pt; widows:0">
-																					<span style="color:#000000; font-family:宋体; font-size:10.5pt">③</span><span style="color:#000000; font-family:宋体; font-size:10.5pt">北京市中学生戏剧节将上演《茶馆》《哈姆雷特》《窦娥冤》《鸿门宴》，请任选一个剧目写剧情简介。</span>
-																				</p>
-																			</td>
-																		</tr>
-																		</tbody>
-																		</table>
-																		<br>
-																		<div class="xf_jiexibox">
-																			<p>答案：C</p>
-																			<p>试题解析：</p>
-																			<p>赤壁之战是曹操与东吴的较量。当时刘备还没有入川，尚无蜀国。 </p>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
+													</volist>
 													</div>
 												</div>
+											</notempty>
+											
 											</div>
 										</div>
 									</div>
@@ -928,13 +487,10 @@
 	<!-- 发生给学生 -->
 	<div class="xf_fasongxspop">
 		<div class="xf_biaoti">选择学生<a href="JavaScript:;"></a></div>
-		<div class="xf_tianjiaxs"><input type="text"  placeholder="请输入正确的账号" /><a href="JavaScript:;">添加新学生</a></div>
+		<div class="xf_tianjiaxs"><input id="student_text" type="text"  placeholder="请输入正确的账号" /><a href="JavaScript:;" onclick="add_student()">添加新学生</a></div>
 		<div class="xf_xueshenglb">
-			<ul>
-				<li>张三（账号：152786935）</li>
-				<li>张三（账号：152786935）</li>
-				<li>张三（账号：152786935）</li>
-				<li>张三（账号：152786935）</li>
+			<ul id="my_students">
+
 			</ul>
 		</div>
 		<div class="xf_quanbfs"><a href="JavaScript:;">全部选择</a></div>
@@ -963,49 +519,47 @@
 		<div class="xf_biaoti">头部编辑<a href="JavaScript:;"></a></div>
 		<div class="xf_bianjinner">
 			<ul>
-				<li><span>标题：</span><input type="text" /></li>
-				<li><span>副标题：</span><textarea name="" id="" cols="30" rows="10"></textarea></li>
-				<li><span>注意事项：</span><textarea name="" id="" cols="30" rows="10"></textarea></li>
+				<li><span>标题：</span><input type="text" name="ShijuanTitle" id="ShijuanTitle" value="{$shijuan_title}"/></li>
+				
+				<li><span>副标题：</span><textarea name="ShijuanSubTitle" id="ShijuanSubTitle" cols="30" rows="10">{$shijuan_subtitle}</textarea></li>
+				<li><span>时间：</span><input type="text" name="ShijuanTitle" id="ShijuanLimitTime" value="{$shijuan_limittime}" style="width:50px"/>分钟</li>
+				<!-- <li><span>注意事项：</span><textarea name="ShijuanAttention" id="ShijuanAttention" cols="30" rows="10">{$shijuan_attention}</textarea></li> -->
 			</ul>
 		</div>
 		<div class="xf_tybutton">
 			<a href="JavaScript:;">取消</a>
-			<a href="JavaScript:;" class='cur'>确定</a>
+			<a href="JavaScript:;" class='cur' id="EditShijuanTitle">确定</a>
 		</div>
 	</div>
 
 	<div class="xf_bianjipop xf_bjpoplx3">
 		<div class="xf_biaoti">卷头编辑<a href="JavaScript:;"></a></div>
 		<div class="xf_bianjinner">
-			<em>分卷2头部</em>
 			<ul>
-				<li><span>卷标：</span><input type="text" /></li>
-				<li><span>卷标：</span><input type="text" /></li>
-			</ul>
-			<em>分卷1头部</em>
-			<ul>
-				<li><span>卷标：</span><input type="text" /></li>
-				<li><span>卷标：</span><input type="text" /></li>
+				<li><span>卷标：</span><input type="text" id="FirstjuanTitle" value="{$first_juan.t_title}"/></li>
+				<li><span>卷标：</span><input type="text" id="FirstjuanNote" value="{$first_juan.note}"/></li>
 			</ul>
 		</div>
 		<div class="xf_tybutton">
 			<a href="JavaScript:;">取消</a>
-			<a href="JavaScript:;" class='cur'>确定</a>
+			<a href="JavaScript:;" class='cur' id="EditFirstjuanTitle">确定</a>
 		</div>
 	</div>
 
 	<div class="xf_bianjipop xf_bjpoplx4">
+		<input type="hidden" id="juan_no" value="" />
+		<input type="hidden" id="shiti_no" value="" />
 		<div class="xf_biaoti">题型编辑<a href="JavaScript:;"></a></div>
 		<div class="xf_bianjinner">
 			<ul>
-				<li><span>题型名称：</span><input type="text" /></li>
-				<li><span>题型注释：</span><input type="text" /></li>
-				<li><span>小题分值：</span><input type="text" /></li>
+				<li><span>题型名称：</span><input type="text" name="tixing_name" id="tixing_name" /></li>
+				<!-- <li><span>题型注释：</span><input type="text" /></li> -->
+				<li><span>小题分值：</span><input type="text" id="xiaoti_score" name="fenzhi_xuanze"/></li>
 			</ul>
 		</div>
 		<div class="xf_tybutton">
 			<a href="JavaScript:;">取消</a>
-			<a href="JavaScript:;" class='cur'>确定</a>
+			<a href="JavaScript:;" class='cur' id="EditXiaotiScore">确定</a>
 		</div>
 	</div>
 
@@ -1023,219 +577,107 @@
 	</div>
 
 <script>
-$(function(){
-	//subnav
-	$(".menu li").hover(function(){
-		$(".subnav",this).css("display","block");
-		$(this).addClass("hover");
-	},function(){
-		$(".subnav",this).css("display","none");
-		$(this).removeClass("hover");
+	$(".check_class").click(function(){
+		$(".alert").show();
+		window.setTimeout(function(){
+			$(".alert").hide();
+		},1000);
 	});
-	//
-	
-		//subnav
-	$(".sj_ul li").hover(function(){
-		$("dl",this).css("display","block");
-		$(this).addClass("hover");
-	},function(){
-		$("dl",this).css("display","none");
-		$(this).removeClass("hover");
+	$(window).scroll(function() {
+		var xf_scroll = $(window).scrollTop();
+		if(xf_scroll>305){
+			$(".ks_top_title,.preview-box").addClass('xf_cur');
+		}else{
+			$(".ks_top_title,.preview-box").removeClass('xf_cur');
+		}
 	});
-	//
-	
-})
-$('#save_shijuan').click(function(){
-	$.getJSON(
-		'/shijuan/ajaxSave',
-		'',
-		function(data){
-			if(data.status=='success'){
-				
-			}
-		}
-	);
-	
-	$('#save_sj').dialog("close");
-});
-$("#mbsaveQues").click(function(){
-	$.getJSON(
-		'/shijuan/ajacCheckIsSaved',
-		'',
-		function(data){
-			if(data.status=='yes'){
-				$.getJSON(
-					'/shijuan/ajaxSave',
-					'',
-					function(data){
-						if(data.status=='success'){
-							$("#is_save2").dialog({
-							title:"保存试卷",
-							width:"430",
-							height:"auto",
-							modal:true,
-							create: function(){
-							},
-							});
-						}
-					}
-				);
-			}else{
-				$("#save_sj").dialog({
-				title:"保存试卷",
-				width:"430",
-				height:"auto",
-				modal:true,
-				create: function(){
-				},
-				beforeClose: function() {
-					$('#save_sj').dialog("destroy");
-				}
-				});
-			}
-		}
-	);
-	
-});
-$('#download_shijuan').click(function(){
-	$.getJSON(
-		'/shijuan/ajaxSave',
-		'',
-		function(data){
-			if(data.status=='success'){
-				$('#down_sj').dialog("destroy");
-				$("#down_sj2").dialog({
-					title:"下载试卷",
-					width:"660",
-					height:"auto",
-					modal:true,
-					create: function(){
-					},
-					beforeClose: function() {
-						$('#down_sj2').dialog("destroy");
-					}
-				});
-			}
-		}
-	);
-	
-
-});
-$('#xiazaishijuan').click(function(){
-	var doctype = $('#doc_type').find("input:checked").val();
-	var shijuan_model = $('#shijuan_model').find("input:checked").val();
-	var answer_order = $('#answer_order').find("input:checked").val();
-	$.getJSON(
-		'/shijuan/ajaxDownload',
-		{doctype:doctype,shijuan_model:shijuan_model,answer_order:answer_order},
-		function(data){
-			if(data.status=='success'){
-				$('#down_iframe').attr('src','/shijuan/createtoword');
-			}
-		}
-	);
-	
-	$('#down_sj2').dialog("close");
-});
-$("#mbdownQues").click(function(){
-	$.getJSON(
-		'/shijuan/ajacCheckIsSaved',
-		'',
-		function(data){
-			if(data.status=='yes'){
-				$("#down_sj2").dialog({
-					title:"下载试卷",
-					width:"660",
-					height:"auto",
-					modal:true,
-					create: function(){
-					},
-					beforeClose: function() {
-						$('#down_sj2').dialog("destroy");
-					}
-				});
-			}else{
-				$("#down_sj").dialog({
-					title:"下载试卷",
-					width:"430",
-					height:"auto",
-					modal:true,
-					create: function(){
-					},
-					beforeClose: function() {
-						$('#down_sj').dialog("destroy");
-					}
-				});
-			}
-			}
-		);
-	
-});
-</script>
-<script>
-$(".icon3").click(function(){
-	var tag = '';
-		var obj = $(this);
+	$(".xf_xffsxs").click(function(){
 		$.getJSON(
-			'/member/ajaxCollect',
-			{id:$(this).attr('name')},
+			'/index.php/home/member/ajaxGetMyStudents',
 			function(data){
-				if(data.status=='notlogin'){
-					window.location.href = '/member/login';
-				}else if(data.status=='success' && data.action=='add'){
-						obj.removeClass('icon3');
-						obj.addClass('overicon3');
-						obj.html('取消收藏');
-						$('.wh6').val(data.tag);
-						$('#tiku_id').val(data.tiku_id);
-						$("#sc_sj").dialog({
-						title:"收藏试卷",
-						width:"540",
-						height:"auto",
-						modal:true,
-						create: function(){
-							
-						},
-						beforeClose: function() {
-							$('#datike').dialog("destroy");
-						}
+				//alert(data.id);
+				if(data.status=='ok'){
+					var html = '';
+					$.each(data.data, function(index,vo) {
+					  html += '<li id="'+vo.id+'" onclick="student_sel($(this))">'+vo.nick_name+'</li>';
+				
 					});
-				}else if(data.status=='success' && data.action=='delete'){
-					obj.removeClass('overicon3');
-					obj.addClass('icon3');
-					obj.html('收藏');
+					$('#my_students').html(html);
 				}
 			}
+			
 		);
-});
-</script>
-<script>
-$('#addtag').click(function() {
+		$(".xf_fasongxspop,.xf_popbg").show();
+	});
+function add_student(){
+	var val = $('#student_text').val();
+	if(val=='') return false;
 	$.getJSON(
-			'/member/ajaxAddTag',
-			{id:$('#tiku_id').val(),tag:$('.wh6').val()},
-			function(data){
-				$( "#sc_sj" ).dialog( "close" );
+		'/index.php/home/member/ajaxAddStudent',
+		{student:val},
+		function(data){
+			//alert(data.id);
+			if(data.status=='ok'){
+				var html = '<li id="'+data.data.id+'" onclick="student_sel($(this))">'+data.data.nick_name+'</li>';
+				$('#my_students').append(html);
+			}else{
+				alert(data.msg);
 			}
+		}
+		
 	);
+}
+//选择学生
+function student_sel(obj){
+	if(obj.hasClass('active')){
+		obj.removeClass('active');
+	}else{
+		obj.addClass('active');
+	}
+}
+//发给学生
+$('.xf_fasongbutton a').click(function(){
+	var obj = $('#my_students li[class=active]');
+	var ids = '';
+	if(obj.length>0){
+		obj.each(function(){
+			ids += $(this).attr('id')+',';
+		});
+		$.getJSON(
+		'/index.php/home/shijuan/ajaxSendStudent',
+		{ids:ids},
+		function(data){
+			//alert(data.id);
+			if(data.status=='success'){
+				$(".xf_fasongxspop,.xf_popbg").hide();
+			}else{
+				alert(data.msg);
+			}
+		}
+		
+	);
+	}else{
+		alert('请选择学生');
+	}
 });
-</script>
-<script>
-//修改试卷标题
+$('#btn1').click(function(){
+	$('.xf_bjpoplx2').show();
+});
 $('#EditShijuanTitle').click(function(){
 	$.getJSON(
 			'/shijuan/ajaxEditShijuanTitle',
-			{title:$('#ShijuanTitle').val()},
+			{title:$('#ShijuanTitle').val(),subtitle:$('#ShijuanSubTitle').val(),limittime:$('#ShijuanLimitTime').val()},
 			function(data){
 				if(data.status=='success'){
-					$('#pui_maintitle').html(data.title);
-					$( "#modify1" ).dialog( "close" );
+					$('#pui_maintitle').html(data.data.title);
+					$( "#pui_testinfo" ).html(data.data.subtitle);
 				}
 			}
 	);
 });
-</script>
-<script>
+$('#btn2').click(function(){
+	$('.xf_bjpoplx3').show();
+});
 $('#EditFirstjuanTitle').click(function(){
 	$.getJSON(
 			'/shijuan/ajaxFirstjuanTitle',
@@ -1244,58 +686,44 @@ $('#EditFirstjuanTitle').click(function(){
 				if(data.status=='success'){
 					$('#partname1').html(data.title);
 					$('#partnote1').html(data.note);
-					$( "#modify3" ).dialog( "close" );
 				}
 			}
 	);
 });
-	$(".mbquesBtn4").click(function(){
-		$('#tixing_name').val($(this).parent().parent().find('.questypename').html());
-		$('#xiaoti_score').val('');
-		$('#juan_no').val($(this).prev().attr('juanNo'));
-		$('#shiti_no').val($(this).prev().attr('shitiId'));
-		$("#modify4").dialog({
-			title:"试卷设置",
-			width:"400",
-			height:"auto",
-			modal:true,
-			create: function(){
-			},
-			beforeClose: function() {
-				$('#modify4').dialog("destroy");
-			}
-		});
-	});
-	$('#EditXiaotiScore').click(function(){
-		$.getJSON(
-			'/shijuan/ajaxEditXiaotiScore',
-			{juan_no:$('#juan_no').val(),shiti_no:$('#shiti_no').val(),xiaoti_score:$('#xiaoti_score').val()},
+$('.btn3').click(function(){
+	var juan_no = $(this).attr('juan_no');
+	var shiti_no = $(this).attr('shiti_no');
+	$('#juan_no').val(juan_no);
+	$('#shiti_no').val(shiti_no);
+	$.getJSON(
+			'/shijuan/ajaxGetXiaotiScore',
+			{juan_no:juan_no,shiti_no:shiti_no},
 			function(data){
 				if(data.status=='success'){
-					var id = 'juan_'+data.juan_no+'_'+data.shiti_no;
-					$('#'+id).html(data.title);
-					$('#zongfen_1').html(data.score);
-					$('#modify4').dialog("destroy");
+					$('#tixing_name').val(data.data.title);
+					$('#xiaoti_score').val(data.data.xiaoti_score);
+				}else{
+					return false;
 				}
 			}
 	);
-	});
+	$('.xf_bjpoplx4').show();
+});
+$('#EditXiaotiScore').click(function(){
+	var juan_no = $('#juan_no').val();
+	var shiti_no = $('#shiti_no').val();;
+	$.getJSON(
+		'/shijuan/ajaxEditXiaotiScore',
+		{juan_no:juan_no,shiti_no:shiti_no,xiaoti_score:$('#xiaoti_score').val()},
+		function(data){
+			if(data.status=='success'){
+				var id = 'juan_'+data.juan_no+'_'+data.shiti_no;
+				$('#'+id).html(data.title);
+				$('#pui_testinfo').html(data.subtitle);
+			}
+		}
+);
+});
 </script>
-<script>
-$(function(){
-	//subnav1
-	$(".menu li").hover(function(){
-		$(".subnav1",this).css("display","block");
-		$(this).addClass("hover");
-	},function(){
-		$(".subnav1",this).css("display","none");
-		$(this).removeClass("hover");
-	});
-	//
-	$.each({$tikus_in_collect},function(index,dom){
-		$("#neirong").find("a[id=c_"+dom.tiku_id+"]").html('取消收藏');
-		$("#neirong").find("a[id=c_"+dom.tiku_id+"]").attr('class','overicon3');
-	});
-})
-</script>
+<link href="__PUBLIC__/js/jquery-ui-1.11.2.custom/jquery-ui.css" rel="stylesheet" type="text/css" />
 <include file="common:footer" />

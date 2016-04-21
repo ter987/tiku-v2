@@ -256,8 +256,8 @@ class TikuController extends GlobalController {
 			setcookie(session_name(),session_id(),time()+C('SESSION_EXPIRE_TIME'),'/');
 			if($jumpto == 'tiku'){
 				$this->ajaxReturn(array('status'=>'ok','jumpto'=>'/tiku/'.$pinyin.'/'));
-			}else if($jumpto == 'ceping'){
-				$this->ajaxReturn(array('status'=>'ok','jumpto'=>'/ceping/'));
+			}else if($jumpto == 'smart'){
+				$this->ajaxReturn(array('status'=>'ok','jumpto'=>'/smart/'));
 			}
 			
 		}else{
@@ -315,9 +315,9 @@ class TikuController extends GlobalController {
 			//$this->ajaxReturn(array('status'=>'success','data'=>$_SESSION['cart']));
 		}else{
 			$Model = M('tiku');
-			$data = $Model->field("tiku.id,tiku_type.type_name")->join("tiku_type ON tiku_type.id=tiku.type_id")->where("tiku.id=$id")->find();
+			$data = $Model->field("tiku.id,tiku_type.type_name,tiku.type_id")->join("tiku_type ON tiku_type.id=tiku.type_id")->where("tiku.id=$id")->find();
 			if($data){
-				$_SESSION['cart'][$data['id']] = array('id'=>$data['id'],'type_name'=>$data['type_name']);
+				$_SESSION['cart'][$data['id']] = array('id'=>$data['id'],'type_name'=>$data['type_name'],'type_id'=>$data['type_id']);
 				
 			}else{
 				$this->ajaxReturn(array('status'=>'error'));

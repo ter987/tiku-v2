@@ -16,8 +16,8 @@
   RewriteRule ^jingpin/detail/(\d+).html$ index.php/home/jingpin/detail/id/$1/
   RewriteRule ^tongbu/(\w+)\/(\d*)\/{0,1}$ index.php/home/tongbu/index/course/$1/p/$2/
   RewriteRule ^tongbu/(\w+)\/([\w|-]+)\/(\d*)\/{0,1}$ index.php/home/tongbu/index/course/$1/param/$2/p/$3/
-  RewriteRule ^ceping/(\w*)$ index.php/home/ceping/$1/
-  RewriteRule ^onlinetest/(\w*)$ index.php/home/onlinetest/$1/
+  RewriteRule ^studycenter/(\w+)\/$ index.php/home/studycenter/$1/
+  RewriteRule ^exam/(\w+)\/(\d+)\/$ index.php/home/exam/$1/id/$2/
   RewriteRule ^qqconnect/(\w*)$ index.php/home/qqconnect/$1/
   RewriteRule ^sinaconnect/(\w*)$ index.php/home/sinaconnect/$1/
   RewriteRule ^weixinconnect/(\w*)$ index.php/home/weixinconnect/$1/

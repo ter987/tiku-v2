@@ -1,0 +1,158 @@
+<include file="common:header" />
+	<!--main-->
+
+		<div class="xf_qiehuankmbox">
+			<div class="xf_qiehuankminner">
+				<div class="xf_dqkm"><eq name="data.course_type" value="1">高中<else/>初中</eq>
+					<span class="c_blue xf_dqkmlx">{$data.course_name}</span> 
+				</div>
+				<!-- 选择科目end -->
+				<div class='xf_zaixuanzj'>在线测评</div>
+				
+			</div>
+		</div>
+
+		
+		<!-- 真题训练 -->
+		<div class="xf_zhentixlbox">
+			<div class="xf_zhentxlbt">
+				<h3>{$data.title}</h3>
+				<p><notempty name="data.limit_time">时间：{$data.limit_time}分钟&nbsp;&nbsp;</notempty><notempty name="data.score">满分：{$data.score}分&nbsp;&nbsp;</notempty></p>
+			</div>
+			<div class="xf_datibox">
+				<div class="xf_datiinner xf_topxuanfu">
+					<div class="xf_zhuyisx">注意事项：· 本卷共有 7大题 10小题    · 答题时间为 150分钟    · 总分 150 分，90 分及格    · 本卷含有非选择题，非选择题· 请参考答案及解析自行评分 </div>
+					<div class="xf_dajuanlx">
+						<!-- <i class='xf_kszjt'><</i> -->
+						<ul>
+							<volist name="type_arr" id="vo">
+							<li><a href="#">{$vo.type_name}</a></li>
+							</volist>
+						</ul>
+						<!-- <i class='xf_ksrjt'>></i> -->
+					</div>
+				</div>
+			</div>
+			<volist name="shiti" id="vo">
+			<div class="xf_datibox">
+				<div class="xf_datilx">
+					<em>{$vo.order_char}、{$vo.t_title}</em>
+					<!-- <div>
+						<h3>阅读下面的文字，完成8—9题</h3>
+						<p>宋代的农业、手工业，商业在唐代的基础上又有了新的发展，特别是商品经济出现了空前的繁荣。在此情景下，宋代的货币流通和信用进入迅速发展时期，开创了古代金融的新篇章。宋代在信用形式和信用工具方面都呈现出新的特点。信用形式有借贷、质、押、典、赊买赊卖等多种形式，借贷分为政府借贷和私人借贷。政府借贷主要表现为赈贷的形式，在紧急情况下通过贷给百姓粮食或种子的方式，帮助他们度过困境。私人借贷多为高利贷，它可以解决社会分化和“钱荒”带来的平民百姓资金严重不足的问题，满足特殊支付和燃眉之急的需要，质、押是借贷担保的形式,由质库、解库、普惠库、长生库等机构经营。质属于动产担保，它必须转移动产的有，抵押物，不动产担保，通常将抵押物的契约交付债权人即可。债务人违约时，债权人可用变卖价款优先受偿。典作为不动产转移的一种形式是在宋代形成和发展起来的。其特点是典权人支付典价后，在典期内就占有了出典人典产的使用权和收益支配权，出典人也不必向典权人支付利息。宋代的商业贸易非常发达，但存在着通货紧缩现象，故赊买赊卖行为也很普遍，几乎生产、流通、消费领域的所有物品都能进行赊买赊卖。从实际效果看，它解决了军需、加强了流通，更重要的一点，它对束缚生产流通扩大和发展的高利贷构成了冲击。</p>
+						<p>随着社会经济的发展，宋代商业贸易的发展对货币发展的要求越来越高，但是社会中货币供给和流通状况不尽理想，表现为货币流通区域的割据性、货币供给数量的有限性、货币币材的复杂性以及大量流通的铜铁钱细碎和不便携带的特性，其结果是抑制了经济发展。为了解决这类问题，在高度发达的造纸和印刷技术保障下，通过民间自发力量的作用或官府的强制推行，宋代社会陆续涌现出诸如茶引、盐引、香药引、矾引、便钱、交子、钱引、见钱公据、关子和会子等大量新型纸质信用工具。茶引、盐引、矾引、香药引等信用工具</p>
+						<p>榷专卖品领域能够共利发展，既有利于商人从政府专营的禁榷物品中分得一份利益，又有利于政府实现补给军需、增加收入的目标。便钱、见钱公据和早期的交子、关子、会子等信用工具要求相关人员先交纳现钱作为取得的条件，然后再根据需要持这些代表入纳现钱价值的信用票据到指定的地区和入纳地兑取现钱。这类信用工具携带方便且具有汇票性质，可以保障大宗交易、跨地区交易货款的顺利清结。早期的交子、关子、会子后来在信用票据基础上逐步发展为纸币，它们的行用，弥补了货币不足，节省了货币流通需求量，使商品经济得到了扩张。可见，宋代新型信用工具的大量行用，是社会经济发展史中最具标志性意义的新生事物，它缓解或解决了交换过程中的诸多不便与矛盾，从而在很大程度上促进了经济发展。</p>
+						<p>（摘编自王芳《宋代信用的特点与影响》）</p>
+					</div> -->
+				</div>
+				<div class="xf_xuanzetibox">
+					<ul>
+						<volist name="vo.childs" id="v">
+						<li id="{$v.id}">
+							<em><i>{$v.order_char}.</i>{$v.content|htmlspecialchars_decode}</em>
+							<php>
+                    		if($vo['type_name']=='单选题'){
+                    			$options = json_decode($v['options']);
+                    			if(empty($options)) break;
+                    			$options_index = array(0=>'A',1=>'B',2=>'C',3=>'D',4=>'E');
+	                    	</php>
+	                    	<p>
+	                    		<php>
+	                    			$k = 0;
+	                    			foreach($options as $k=>$val){
+	                    		</php>
+	                    			<p><span><php>echo $options_index[$k]</php></span>.<php>echo $val</php></p>
+	                    		<php>
+	                    			}
+	                    		</php>
+	                    	</p>
+	                    	<php>
+	                    	}
+	                    	</php>
+						</li>
+						</volist>
+					</ul>
+				</div>
+			</div>
+			</volist>
+			
+		</div>
+		<!-- 真题训练end -->
+	<div class="xf_fanhuidb"><a href="#"></a></div>
+	<!-- 提交试卷浮窗 -->
+	<div class="xf_shijuanfuc">
+		<div class="xf_shengyutime">
+			<p><i></i><u></u></p>
+			<em>02:00:00</em>
+		</div>
+		<div class="xf_datika">
+			<em>答题卡 <span><i>5</i>/24</span><u></u></em>
+			<ul>
+				<li>
+					<p><i>·</i>现代文阅读 <span>5分/题</span></p>
+					<div><i class='cur'>1</i><i class='cur'>2</i><i class='cur'>3</i><i class='cur'>4</i><i>5</i></div>
+				</li>
+				<li>
+					<p><i>·</i>现代文阅读 <span>5分/题</span></p>
+					<div><i class='cur'>1</i><i class='cur'>2</i><i class='cur'>3</i><i>4</i><i>5</i></div>
+				</li>
+				<li>
+					<p><i>·</i>现代文阅读 <span>5分/题</span></p>
+					<div><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i></div>
+				</li>
+			</ul>
+			<div class="xf_jiaojuana"><a href="JavaScript:;">我做完了，交卷</a></div>
+		</div>
+	</div>
+	<!-- 提交试卷浮窗end -->
+	<!-- 提示弹窗 -->
+	<div class="xf_tishijjpop xf_jiaojuanpop">
+		<p>
+			<img src="images/ico_tsjj.png" alt="" />
+			<span>您还有题目没有完成，确定要现在交卷吗？</span>
+		</p>
+		<div><a href="JavaScript:;">确认交卷</a><a href="JavaScript:;">检查一下</a></div>
+	</div>
+	<!-- 提示弹窗end -->
+	<!-- 全部完成提示弹窗 -->
+	<div class="xf_tishijjpop xf_wancjjpop">
+		<p>
+			<img src="images/ico_wcjj.png" alt="" />
+			<span>太棒了，题目全部都做完了哦，要不要再检查一下呢？</span>
+		</p>
+		<div><a href="JavaScript:;">检查一下</a><a href="JavaScript:;">确认交卷</a></div>
+	</div>
+	<!-- 全部完成提示弹窗end -->
+	<!-- 时间到提示 -->
+	<div class="xf_tishijjpop xf_timenonepop">
+		<p>
+			<img src="images/ico_timenone.png" alt="" />
+			<span>考试时间已经到了哦，下次要继续加油哈！</span>
+		</p>
+		<div><a href="JavaScript:;">我的主页</a><a href="JavaScript:;">重新做题</a></div>
+	</div>
+
+
+	<script>
+		$(window).scroll(function() {
+			var xf_scroll = $(window).scrollTop();
+			if(xf_scroll>420){
+				$(".xf_topxuanfu").addClass('cur');
+			}else{
+				$(".xf_topxuanfu").removeClass('cur');
+			}
+		});
+		var time = 10; //设置倒计时
+		var i =0;
+		the_timeout = setInterval(function(){
+			i++;
+			if(i<time||i==time){
+				$(".xf_shengyutime p i").css("left",(time+i)/time*100-100+"%")
+				$(".xf_shengyutime p u").css("width",(time-i)/time*100+"%")
+			}else{
+				$(".xf_timenonepop").show();
+				clearTimeout(the_timeout);
+			}
+		},1000)
+	</script>
+<include file="common:footer" />

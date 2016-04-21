@@ -47,7 +47,7 @@ class SmartController extends GlobalController {
 		$this->setMetaDescription('登录'.C('TITLE_SUFFIX'));
 		$this->addCss(array('xf.css'));
 		$this->addJs(array('/js/menu.js','/js/xf.js'));
-		$this->assign('jumpto','ceping');
+		$this->assign('jumpto','smart');
         $this->display();
 	}
 	public function start(){
@@ -67,7 +67,7 @@ class SmartController extends GlobalController {
 						}
 					}
 					$pids .= $key;
-					$data = $Model->field("tiku.id,tiku_type.type_name")
+					$data = $Model->field("tiku.id,tiku_type.type_name,tiku.type_id")
 					->join("tiku_type on tiku.type_id=tiku_type.id")
 					->join("tiku_to_point on tiku_to_point.tiku_id=tiku.id")
 					->where("tiku_to_point.point_id IN($pids) AND tiku.difficulty_id=".$_SESSION['difficulty']." AND type_id=$k")->select();

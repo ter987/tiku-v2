@@ -35,13 +35,14 @@ class ShijuanController extends GlobalController {
 				}
 			
 			}
-			
+			//var_dump($_SESSION['cart']);
 			foreach($arr as $k=>$v){
 				$count = 0;
 				foreach($_SESSION['cart'] as $key=>$val){
 					if(empty($new_arr[$k]['childs'])) $new_arr[$k]['childs']=array();
 					if($v==$val['type_name']){
 						$new_arr[$k]['type_name'] = $val['type_name'];
+						$new_arr[$k]['type_id'] = $val['type_id'];
 						$new_arr[$k]['childs'] = array_merge($new_arr[$k]['childs'],array($val['id']));
 					}
 					
@@ -79,6 +80,8 @@ class ShijuanController extends GlobalController {
 						$shiti_count = count($v['childs']);
 						$_SESSION['shijuan'][$key]['shiti'][$count]['t_title'] = $v['type_name'].'(共'.$shiti_count.'小题)';
 						$_SESSION['shijuan'][$key]['shiti'][$count]['childs'] = $v['childs'];
+						$_SESSION['shijuan'][$key]['shiti'][$count]['type_id'] = $v['type_id'];
+						$_SESSION['shijuan'][$key]['shiti'][$count]['type_name'] = $v['type_name'];
 						$_SESSION['shijuan'][$key]['shiti'][$count]['count'] = $shiti_count;
 						$shiti_count_per_juan += $shiti_count;
 					}
@@ -97,7 +100,7 @@ class ShijuanController extends GlobalController {
 				$first_juan['shiti'][$k]['childs'] = $this->_getTikuInfo($v['childs'],$o);
 				$first_juan['shiti'][$k]['order_char']  = $oa[$k];
 				$last = $k;
-				
+				$_SESSION['shijuan'][1]['shiti'][$k]['order_char'] = $oa[$k];
 			}
 		}
 		if($_SESSION['shijuan'][2]){
@@ -107,13 +110,20 @@ class ShijuanController extends GlobalController {
 				$second_juan['shiti'][$k]['t_title'] = $v['t_title'];
 				$second_juan['shiti'][$k]['childs'] = $this->_getTikuInfo($v['childs'],$o);
 				$second_juan['shiti'][$k]['order_char'] = $oa[$k+$last];
+				$_SESSION['shijuan'][2]['shiti'][$k]['order_char'] = $oa[$k+$last];
 			}
 		}
-		//var_dump($_SESSION['shijuan'][2]);
+		// $_SESSION['shijuan']['attention'] = "
+// 注意事项：</br>
+// 1.答题前请填写好自己的班级、姓名、考号等信息</br>
+// 2.请将答案正确填写在答题卡上
+		// ";
+		var_dump($_SESSION['shijuan']);
 		$shijuan['title'] = $_SESSION['shijuan']['title'];
 		$this->assign('first_juan',$first_juan);
 		$this->assign('shijuan_title',$_SESSION['shijuan']['title']);
 		$this->assign('shijuan_subtitle',$_SESSION['shijuan']['subtitle']);
+		$this->assign('shijuan_attention',$_SESSION['shijuan']['attention']);
 		$this->assign('second_juan',$second_juan);
 		$this->assign('shijuan',$shijuan);
 		$this->assign('score',$_SESSION['shijuan']['score']);
@@ -121,9 +131,109 @@ class ShijuanController extends GlobalController {
 		$this->setMetaTitle('组卷'.C('TITLE_SUFFIX'));
 		$this->setMetaKeyword('登录'.C('TITLE_SUFFIX'));
 		$this->setMetaDescription('登录'.C('TITLE_SUFFIX'));
-		$this->addCss(array('xf.css','style_content.css','preview.css',''));
-		$this->addJs(array('/js/menu.js','/js/xf.js'));
+		$this->addCss(array('xf.css','style_content.css','preview.css'));
+		$this->addJs(array('js/menu.js','js/xf.js','js/jquery-ui-1.11.2.custom/jquery-ui.js','js/dialog.js'));
         $this->display();
+	}
+	public function ajaxSendStudent(){
+		$ids = trim(I('get.ids'),',');
+		if(empty($ids)){
+			$this->ajaxReturn(array('status'=>'error','msg'=>'请选择学生'));
+		}
+		//先保存试卷
+		if(!$this->saveShijuan()){
+			$this->ajaxReturn(array('status'=>'error'));
+		}
+		
+		$userModel = M('user');
+		$result = $userModel->where("id IN($ids) AND type=1")->select();
+		$cepingModel = M('ceping');
+		$cepingModel->startTrans();
+		$cpData['title'] = $_SESSION['shijuan']['title'];
+		$cpData['teacher'] = $_SESSION['user_id'];
+		$cpData['content'] = json_encode($_SESSION['shijuan']);
+		$cpData['course_id'] = $_SESSION['course_id'];
+		$cpData['limit_time'] = $_SESSION['shijuan']['limittime'];
+		$cpData['type'] = 1;
+		$cpData['score'] = $_SESSION['shijuan']['score'];
+		$cpData['join_num'] = count($result);
+		$cpData['unjoined_num'] = count($result);
+		$cpData['create_time'] = time();
+		$data = array();
+		if(!empty($_SESSION['shijuan'][1])){
+			foreach($_SESSION['shijuan'][1]['shiti'] as $val){
+				$data = array_merge($data,array($val));
+			}
+		}
+		if(!empty($_SESSION['shijuan'][2])){
+			foreach($_SESSION['shijuan'][2]['shiti'] as $val){
+				$data = array_merge($data,array($val));
+			}
+		}
+		$cpData['shiti'] = json_encode($data);
+		//var_dump($data);exit;
+		$ce_id = $cepingModel->add($cpData);
+		
+		$extendModel = M('ceping_extend');
+		$order_char = 1;
+		$_result = true;
+		if(!empty($_SESSION['shijuan'][1])){
+			foreach($_SESSION['shijuan'][1]['shiti'] as $val){
+				foreach($val['childs'] as $v){
+					$extendData['tiku_id'] = $v;
+					$extendData['ceping_id'] = $ce_id;
+					$extendData['order_char'] = $order_char;
+					if(!$extendModel->add($extendData)){
+						$_result = false;
+					}
+					$order_char++;
+				}
+			}
+		}
+		if(!empty($_SESSION['shijuan'][2])){
+			foreach($_SESSION['shijuan'][2]['shiti'] as $val){
+				foreach($val['childs'] as $v){
+					$extendData['tiku_id'] = $v;
+					$extendData['ceping_id'] = $ce_id;
+					$extendData['order_char'] = $order_char;
+					if(!$extendModel->add($extendData)){
+						$_result = false;
+					}
+					$order_char++;
+				}
+			}
+		}
+		$joinModel = M('ceping_jon');
+		foreach($result as $val){
+			$joinData['student'] = $val['id'];
+			$joinData['ceping_id'] = $ce_id;
+			if(!$joinModel->add($joinData)){
+				$_result = false;
+			}
+		}
+		if($ce_id && $_result){
+			$cepingModel->commit();
+			$this->ajaxReturn(array('status'=>'success'));
+		}else{
+			$cepingModel->rollback();
+			$this->ajaxReturn(array('status'=>'error'));
+		}
+	}
+	public function ajaxGetXiaotiScore(){
+		$juan_no = I('get.juan_no');
+		$shiti_no = I('get.shiti_no');
+		if(empty($juan_no) || empty($shiti_no)){
+			$this->ajaxReturn(array('status'=>'error'));
+		}else{
+			$xiaoti_score = $_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['xiaoti_score'];
+			$title = $_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['t_title'];
+			if(empty($title)){
+				$this->ajaxReturn(array('status'=>'error'));
+			}else{
+				$this->ajaxReturn(array('status'=>'success','data'=>array('title'=>$title,'xiaoti_score'=>$xiaoti_score)));
+			}
+			
+		}
 	}
 	public function ajaxEditXiaotiScore(){
 		$juan_no = I('get.juan_no');
@@ -136,6 +246,7 @@ class ShijuanController extends GlobalController {
 		$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['t_title'] = $new;
 		$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['scole'] = $total;
 		$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['xiaoti_score'] = $xiaoti_score;
+		
 		if(!empty($_SESSION['shijuan'][1])){
 			foreach($_SESSION['shijuan'][1]['shiti'] as $v){
 				$first_score += $v['scole'];
@@ -147,12 +258,31 @@ class ShijuanController extends GlobalController {
 			}
 		}
 		$_SESSION['shijuan']['score'] = $first_score+$second_score;
-		$this->ajaxReturn(array('status'=>'success','title'=>$new,'juan_no'=>$juan_no,'shiti_no'=>$shiti_no,'score'=>$_SESSION['shijuan']['score']));
+		if(preg_match('/满分：\d+分/',$_SESSION['shijuan']['subtitle'])){
+			$_SESSION['shijuan']['subtitle'] = preg_replace('/满分：\d+分/','满分：'.$_SESSION['shijuan']['score'].'分',$_SESSION['shijuan']['subtitle']);
+		}else{
+			$_SESSION['shijuan']['subtitle'] .= ' 满分：'.$_SESSION['shijuan']['score'].'分';
+		}
+		$this->ajaxReturn(array('status'=>'success','title'=>$new,'juan_no'=>$juan_no,'shiti_no'=>$shiti_no,'subtitle'=>$_SESSION['shijuan']['subtitle']));
 	}
 	public function ajaxEditShijuanTitle(){
 		$title = I('get.title');
+		$subtitle = I('get.subtitle');
+		$limittime = I('get.limittime');
 		$_SESSION['shijuan']['title'] = $title;
-		$this->ajaxReturn(array('status'=>'success','title'=>$title));
+		$_SESSION['shijuan']['subtitle'] = $subtitle.' 时间：'.$limittime.'分钟';
+		if(!empty($limittime)){
+			$_SESSION['shijuan']['limittime'] = $limittime;
+			if(preg_match('/时间：\d+分钟/',$_SESSION['shijuan']['subtitle'])){
+				$_SESSION['shijuan']['subtitle'] = preg_replace('/时间：\d+分钟/','时间：'.$_SESSION['shijuan']['limittime'].'分',$_SESSION['shijuan']['subtitle']);
+			}else{
+				$_SESSION['shijuan']['subtitle'] .= ' 时间：'.$_SESSION['shijuan']['limittime'].'分钟';
+			}
+		}else{
+			unset($_SESSION['shijuan']['limittime']);
+			$_SESSION['shijuan']['subtitle'] = preg_replace('/时间：\d+分钟/',‘’,$_SESSION['shijuan']['subtitle']);
+		}
+		$this->ajaxReturn(array('status'=>'success','data'=>array('title'=>$_SESSION['shijuan']['title'],'subtitle'=>$_SESSION['shijuan']['subtitle'])));
 	}
 	public function ajaxFirstjuanTitle(){
 		$title = I('get.title');
@@ -801,7 +931,33 @@ class ShijuanController extends GlobalController {
         header('Expires: 0');
         $objWriter->save("php://output");
 	}
-	
+	public function saveShijuan(){
+		$Model = M('user_shijuan');
+		if(isset($_SESSION['shijuan']['id'])&&$Model->where("id=".$_SESSION['shijuan']['id'].' AND user_id='.$_SESSION['user_id'])->find()){//更新数据库
+			$data['id'] = $_SESSION['shijuan']['id'];
+			$data['update_time'] = time();
+			$data['content'] = json_encode($_SESSION['shijuan']);
+			$data['cart'] = json_encode($_SESSION['cart']);
+			if($Model->data($data)->save()){
+				return true;
+			}else{
+				return false;
+			}
+		}else{//添加到数据库
+			$data['title'] = $_SESSION['shijuan']['title'];
+			$data['user_id'] = $_SESSION['user_id'];
+			$data['create_time'] = $data['update_time'] = time();
+			$data['content'] = json_encode($_SESSION['shijuan']);
+			$data['cart'] = json_encode($_SESSION['cart']);
+			$data['course_id'] = $_SESSION['course_id'];
+			if($id = $Model->add($data)){
+				$_SESSION['shijuan']['id'] = $id;
+				return true;
+			}else{
+				return false;
+			}
+		}
+	}
 	public function ajaxSave(){
 		$Model = M('user_shijuan');
 		if(isset($_SESSION['shijuan']['id'])&&$Model->where("id=".$_SESSION['shijuan']['id'].' AND user_id='.$_SESSION['user_id'])->find()){//更新数据库
@@ -848,7 +1004,7 @@ class ShijuanController extends GlobalController {
 			$this->ajaxSave();
 		}
 	}
-	protected function _getTikuInfo($id_arr,&$o){
+	public function _getTikuInfo($id_arr,&$o){
 		$Model = M('tiku');
 		foreach($id_arr as $key=>$val){
 			$rs = $Model->field("id,content,options,answer,analysis")->where("id=$val")->find();

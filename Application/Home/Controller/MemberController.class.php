@@ -430,6 +430,42 @@ INNER JOIN tiku ON a.tiku_id=tiku.`id`");
 		}
 		
 	}
+	public function ajaxLogin(){
+		$error_msg = '';
+		$user = I('post.username');
+		if(preg_match('/1\d{10}/',$user)){
+			$tel = $user;
+		}elseif(preg_match('/\S+@\w+\.\w+/i',$user)){
+			$email = $user;
+		}else{
+			$error_msg = "非法邮箱或手机号码!";
+			$this->ajaxReturn(array('status'=>'error','msg'=>$error_msg));
+		}
+		$password = I('post.password');
+		$Model = M('User');
+		$result = $Model->where("email='$email' OR telphone='$tel'")->find();
+		//echo $Model->getLastSql();exit;
+		//var_dump($result);exit;
+		if(!$result){
+			$error_msg = "用户名不存！";
+			$this->ajaxReturn(array('status'=>'error','msg'=>$error_msg));
+		}
+		if(md5(md5($password.$result['salt']))!=$result['password']){
+			$error_msg = "密码不对!";
+			$this->ajaxReturn(array('status'=>'error','msg'=>$error_msg));
+		}
+		//echo $Model->getLastSql();exit;
+		if($error_msg==''){
+			$_SESSION['nick_name'] = $result['nick_name'];
+			$_SESSION['user_id'] = $result['id'];
+			$_SESSION['user_type'] = $result['type'];
+			if(I('post.auto_login')){
+				setcookie('user_name',$user,time()+C('COOKIE_EXPIRE'),'/');
+				setcookie('password',$password,time()+C('COOKIE_EXPIRE'),'/');
+			}
+			$this->ajaxReturn(array('status'=>'ok'));
+		}
+	}
 	public function selType(){
 		if(!isset($_SESSION['_user_id'])){
 			redirect('/');
@@ -683,6 +719,57 @@ INNER JOIN tiku ON a.tiku_id=tiku.`id`");
 			$this->ajaxReturn(array('status'=>'y','info'=>'通过验证'));
 		}else{
 			$this->ajaxReturn(array('status'=>'n','info'=>'该昵称已存在！'));
+		}
+	}
+	public function ajaxGetMyStudents(){
+		$userModel = M('user');
+		$userData = $userModel->where("id=".$_SESSION['user_id'])->find();
+		if($userData){
+			if($userData['type']!=2){
+				$this->ajaxReturn(array('status'=>'error','msg'=>'账号无权限'));
+			}else{
+				$students = $userModel->field("user.id,user.nick_name")->join("teacher_to_student on user.id=teacher_to_student.student_id")->where("teacher_to_student.teacher_id=".$_SESSION['user_id'])->select();
+				if($students){
+					$this->ajaxReturn(array('status'=>'ok','data'=>$students));
+				}else{
+					$this->ajaxReturn(array('status'=>'error','msg'=>'没有学生'));
+				}
+			}
+		}else{
+			$this->ajaxReturn(array('status'=>'error','msg'=>'服务器出错！'));
+		}
+	}
+	public function ajaxAddStudent(){
+		$userModel = M('user');
+		$sdutent = I('get.student');
+		if(empty($sdutent)){
+			$this->ajaxReturn(array('status'=>'error','msg'=>'输入有误'));
+		}
+		$userData = $userModel->where("id=".$_SESSION['user_id'])->find();
+		if($userData){
+			if($userData['type']!=2){
+				$this->ajaxReturn(array('status'=>'error','msg'=>'账号无权限'));
+			}else{
+				$result = $userModel->field("user.id,user.nick_name")->where("user.nick_name='".$sdutent."' OR user.email='".$sdutent."' OR user.telphone='".$sdutent."'")->find();
+				if($result){
+					$tModel = M('teacher_to_student');
+					if($tModel->where("teacher_id=".$_SESSION['user_id']." AND student_id=".$result['id'])->find()){
+						$this->ajaxReturn(array('status'=>'error','msg'=>'该学生已存在'));
+					}
+					$data['teacher_id'] = $_SESSION['user_id'];
+					$data['student_id'] = $result['id'];
+					$data['update_time'] = time();
+					if($tModel->add($data)){
+						$this->ajaxReturn(array('status'=>'ok','data'=>$result));
+					}else{
+						$this->ajaxReturn(array('status'=>'error','msg'=>'服务器出错！'));
+					}
+				}else{
+					$this->ajaxReturn(array('status'=>'error','msg'=>'没有学生'));
+				}
+			}
+		}else{
+			$this->ajaxReturn(array('status'=>'error','msg'=>'服务器出错！'));
 		}
 	}
 }
