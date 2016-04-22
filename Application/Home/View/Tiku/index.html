@@ -280,11 +280,13 @@
 			$('.tt_left').find("span[id={$point_id}]").parent().parent().parent().parent().parent().prev().find('i').attr('class','ce_jian');
 		}
 		//alert({$tikus_in_cart});
-		var carts = {$tikus_in_cart};;
-		$.each(carts,function(index,dom){
-			$(".xf_teshuli").find("a[id="+dom.id+"]").html('－移出试卷');
-			$(".xf_teshuli").find("a[id="+dom.id+"]").attr('class','jr_btn active');
-		});
+		var carts = {$tikus_in_cart};
+		if(carts != null){
+			$.each(carts,function(index,dom){
+				$(".xf_teshuli").find("a[id="+dom.id+"]").html('－移出试卷');
+				$(".xf_teshuli").find("a[id="+dom.id+"]").attr('class','jr_btn active');
+			});
+		}
 		//alert({$tikus_in_collect});
 		<notempty name="user_id">
 		var collect = {$tikus_in_collect};

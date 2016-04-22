@@ -15,15 +15,26 @@ class TikuController extends GlobalController {
 	}
 	
     public function index(){
-    	$course_id = $_SESSION['course_id'];
 		$course_pinyin = I('get.course');
-		if(empty($course_id) || empty($course_pinyin)){//错误跳转
-			
+		if(empty($course_pinyin)){//错误跳转
+			redirect('/');
 		}else{
-			$this->assign('this_course_type',$_SESSION['course_type']);
-			$this->assign('this_course_id',$_SESSION['course_id']);
-			$this->assign('this_course_name',$_SESSION['course_name']);
-			$this->assign('this_pinyin',$_SESSION['pinyin']);
+			$courseModel = M('tiku_course');
+			$course = $courseModel->where("pinyin='".$course_pinyin."'")->find();
+			if($course){
+				$_SESSION['course_type'] = $course['course_type'];
+				$_SESSION['course_id'] = $course['id'];
+				$_SESSION['course_name'] = $course['course_name'];
+				$_SESSION['pinyin'] = $course['pinyin'];
+				$course_id = $course['id'];
+				$this->assign('this_course_type',$_SESSION['course_type']);
+				$this->assign('this_course_id',$_SESSION['course_id']);
+				$this->assign('this_course_name',$_SESSION['course_name']);
+				$this->assign('this_pinyin',$_SESSION['pinyin']);
+			}else{
+				redirect('/');
+			}
+			
 		}
 		//$course_id =3;
     	$params = I('get.param');
@@ -211,7 +222,7 @@ class TikuController extends GlobalController {
 		$this->setMetaKeyword('登录'.C('TITLE_SUFFIX'));
 		$this->setMetaDescription('登录'.C('TITLE_SUFFIX'));
 		$this->addCss(array('xf.css'));
-		$this->addJs(array('/js/menu.js','/js/xf.js'));
+		$this->addJs(array('js/menu.js','js/xf.js'));
 		$this->assign('jumpto','tiku');
 		$this->assign('controller_name',strtolower(CONTROLLER_NAME));
         $this->display();
@@ -258,6 +269,8 @@ class TikuController extends GlobalController {
 				$this->ajaxReturn(array('status'=>'ok','jumpto'=>'/tiku/'.$pinyin.'/'));
 			}else if($jumpto == 'smart'){
 				$this->ajaxReturn(array('status'=>'ok','jumpto'=>'/smart/'));
+			}else if($jumpto == 'jingpin'){
+				$this->ajaxReturn(array('status'=>'ok','jumpto'=>'/jingpin/'.$pinyin.'/'));
 			}
 			
 		}else{

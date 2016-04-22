@@ -42,7 +42,7 @@ class GlobalController extends Controller{
 	}
 	protected function connectRedis(){
 		$this->redis = new \Redis();    
-		$this->redis->connect(C('REDIS_HOSTNAME'),C('REDIS_PORT'));
+		$this->redis->pconnect(C('REDIS_HOSTNAME'),C('REDIS_PORT'));
 	}
 	protected function getCollectIds(){
 		$Model = M('user_collected');

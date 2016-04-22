@@ -9,7 +9,6 @@ class JingpinController extends GlobalController {
 	{
 		parent::_initialize();
 		$course_data = parent::getCourse();
-		$this->assign('course_data',$course_data);
 		$tikuModel = A('Tiku');
 		$tiku_cart = $tikuModel->_getTikuCart();
 		$this->assign('tiku_cart',$tiku_cart);
@@ -17,6 +16,26 @@ class JingpinController extends GlobalController {
 	}
 	
     public function index(){
+		$course_pinyin = I('get.course');
+		if(empty($course_pinyin)){//错误跳转
+			redirect('/');
+		}else{
+			$courseModel = M('tiku_course');
+			$course = $courseModel->where("pinyin='".$course_pinyin."'")->find();
+			if($course){
+				$_SESSION['course_type'] = $course['course_type'];
+				$_SESSION['course_id'] = $course['id'];
+				$_SESSION['course_name'] = $course['course_name'];
+				$_SESSION['pinyin'] = $course['pinyin'];
+				$this->assign('this_course_type',$_SESSION['course_type']);
+				$this->assign('this_course_id',$_SESSION['course_id']);
+				$this->assign('this_course_name',$_SESSION['course_name']);
+				$this->assign('this_pinyin',$_SESSION['pinyin']);
+			}else{
+				redirect('/');
+			}
+			
+		}
     	$params = I('get.param');
 		$result1 = preg_split("/[0-9]/", $params,0,PREG_SPLIT_NO_EMPTY);
 		$result2 = preg_split("/[a-z]/", $params,0,PREG_SPLIT_NO_EMPTY );
@@ -24,7 +43,7 @@ class JingpinController extends GlobalController {
 		
 		$course_id = $_SESSION['course_id'];
 		if(!$course_id){//错误跳转
-			
+			redirect('/');
 		}
 		$feature_id = $new_params['f'];//试卷类型ID
 		$year = $new_params['y'];//年份
@@ -38,7 +57,6 @@ class JingpinController extends GlobalController {
 		$this->assign('grade',$grade);
 		//var_dump($feature_id);exit;
 
-		
     	//获取题库类型
 		$this->assign('course_id',$course_id);
 		//获取科目类型，高中或初中
@@ -56,7 +74,7 @@ class JingpinController extends GlobalController {
 		$province_data = $this->getProvinces($course_id);
 		$this->assign('province_data',$province_data);
 		
-		$where = "tiku_source.course_id=$course_id && tiku_source.source_name<>''";
+		$where = "tiku_source.course_id=$course_id && tiku_source.source_name<>'' ";//&& tiku_source.shiti_num>10 && tiku_source.shiti_num<100
 		if($feature_id){
 			$where .= " && tiku_source.source_type_id=$feature_id";
 		}
@@ -85,7 +103,15 @@ class JingpinController extends GlobalController {
 		->where($where)->limit($Page->firstRow.','.$Page->listRows)->order("tiku_source.id DESC")->select();
 		//echo $Model->getLastSql();
 		//var_dump($tiku_data);
+
 		$this->assign('source_data',$source_data);
+		//SEO
+		$this->setMetaTitle('试卷列表页'.C('TITLE_SUFFIX'));
+		$this->setMetaKeyword(''.C('TITLE_SUFFIX'));
+		$this->setMetaDescription(''.C('TITLE_SUFFIX'));
+		$this->addCss(array('xf.css','examlist.css'));
+		$this->addJs(array('/js/menu.js','/js/xf.js'));
+		$this->assign('jumpto','jingpin');
         $this->display();
 	}
 	/**
@@ -94,14 +120,24 @@ class JingpinController extends GlobalController {
 	public function detail(){
 		$id = I('get.id');
 		if(!id){//错误提示页面
-			
+			redirect('/');
 		}
 		$Modle = M('tiku_source');
-		$source_data = $Modle->field("tiku_source.*,province.province_name,source_type.type_name")->join("province on tiku_source.province_id = province.id")->join("source_type on source_type.id=tiku_source.source_type_id")->where("tiku_source.id=$id")->find();
+		$source_data = $Modle->field("tiku_source.*,tiku_course.course_name,tiku_course.course_type,province.province_name,source_type.type_name")
+		->join("province on tiku_source.province_id = province.id")
+		->join("tiku_course on tiku_source.course_id=tiku_course.id")
+		->join("source_type on source_type.id=tiku_source.source_type_id")
+		->where("tiku_source.id=$id")->find();
 		//echo $Modle->getLastSql();
 		$this->updateClicks($id);
 		$this->assign('source_data',$source_data);
 		$tiku_datas  = $this->getTikus($id);
+		//SEO
+		$this->setMetaTitle($source_data['source_name'].C('TITLE_SUFFIX'));
+		$this->setMetaKeyword(''.C('TITLE_SUFFIX'));
+		$this->setMetaDescription(''.C('TITLE_SUFFIX'));
+		$this->addCss(array('xf.css','exam_info.css'));
+		$this->addJs(array('js/menu.js','js/xf.js'));
 		$this->display();
 	}
 	/**
@@ -109,89 +145,29 @@ class JingpinController extends GlobalController {
 	 */
 	protected function getTikus($id){
 		$Model = M('tiku');
-		$_data = $Model->field("tiku.id,tiku_type.type_name")->join("tiku_type on tiku_type.id=tiku.type_id")->where("tiku.source_id=$id")->order("tiku_type.weight DESC")->select();
+		$_data = $Model->field("tiku.id,tiku_type.type_name,tiku_type.id  type_id")->join("tiku_type on tiku_type.id=tiku.type_id")->where("tiku.source_id=$id")->order("tiku_type.weight DESC")->select();
+		//var_dump($_data);
 		foreach ($_data as $key => $val) {
-			if(!in_array($val['type_name'],$arr)){
-				$arr[] = $val['type_name'];
-			}
-		
-		}
-		//var_dump($arr);exit;
-		foreach($arr as $k=>$v){
-			$count = 0;
-			foreach($_data as $key=>$val){
-				if(empty($new_arr[$k]['childs'])) $new_arr[$k]['childs']=array();
-				if($v==$val['type_name']){
-					$new_arr[$k]['type_name'] = $val['type_name'];
-					$new_arr[$k]['childs'] = array_merge($new_arr[$k]['childs'],array($val['id']));
-				}
-				
-			}
-		}
-		
-		//var_dump($new_arr);exit;
-		//区分第一卷和第二卷
-		foreach($new_arr as $k=>$v){
-			if($v['type_name']=='单选题' || $v['type_name']=='多选题'){
-				$data[1][] = $new_arr[$k];
-			}else{
-				$data[2][] = $new_arr[$k];
-			}
+			$data[$val['type_id']]['type_name'] = $val['type_name'];
+			$data[$val['type_id']]['childs'][] = $val['id'];
+			
 		}
 		//var_dump($data);exit;
-		foreach($data as $key=>$val){
-			$oc = array(1=>'一',2=>'二');
-			$shijuan[$key]['t_title'] = '';//第N卷标题
-			if($key==1){
-				$shijuan[$key]['t_title'] = '第一部分 选择题';//第1卷标题
-			}else{
-				$shijuan[$key]['t_title'] = '第二部分 非选择题';//第2卷标题
-			}
-			
-			$count = 0;
-			$shiti_count_per_juan = 0;
-			foreach($val as $k=>$v){
-				$count ++;
-				$shiti_count = count($v['childs']);
-				$shijuan[$key]['shiti'][$count]['t_title'] = $v['type_name'];
-				$shijuan[$key]['shiti'][$count]['childs'] = $v['childs'];
-				$shiti_count_per_juan += $shiti_count;
-			}
-		}
-		$oa = array(1=>'一',2=>'二',3=>'三',4=>'四',5=>'五',6=>'六',7=>'七');
-		$last = 0;
 		$o = 1;
-		if($shijuan[1]){
-			$first_juan['t_title'] = '第一部分 选择题';//第1卷标题
-			$first_juan['t_title'] = $shijuan[1]['t_title'];
-			$first_juan['note'] = $shijuan[1]['note'];
-			foreach($shijuan[1]['shiti'] as $k=>$v){
-				$first_juan['shiti'][$k]['t_title'] = $v['t_title'];
-				$first_juan['shiti'][$k]['childs'] = $this->_getTikuInfo($v['childs'],$o);
-				$first_juan['shiti'][$k]['order_char']  = $oa[$k];
-				$last = $k;
-				
-			}
+		$i = 1;
+		$index = array(1=>'一',2=>'二',3=>'三',4=>'四',5=>'五',6=>'六',7=>'七',8=>'八',9=>'九',10=>'十',11=>'十一',12=>'十二',13=>'十三',14=>'十四');
+		foreach($data as $k=>$v){
+			$data[$k]['order_char'] = $index[$i];
+			$data[$k]['childs'] = $this->_getTikuInfo($v['childs'],$o);
+			$i++;
 		}
-		if($shijuan[2]){
-			$second_juan['t_title'] = '第二部分 非选择题';//第2卷标题
-			$second_juan['t_title'] = $shijuan[2]['t_title'];
-			$second_juan['note'] = $shijuan[2]['note'];
-			foreach($shijuan[2]['shiti'] as $k=>$v){
-				$second_juan['shiti'][$k]['t_title'] = $v['t_title'];
-				$second_juan['shiti'][$k]['childs'] = $this->_getTikuInfo($v['childs'],$o);
-				$second_juan['shiti'][$k]['order_char'] = $oa[$k+$last];
-			}
-		}
-		//var_dump($first_juan);
-		$this->assign('first_juan',$first_juan);
-		$this->assign('second_juan',$second_juan);
-		$this->assign('shijuan',$shijuan);
+		//var_dump($data);exit;
+		$this->assign('shiti',$data);
 	}
 	protected function _getTikuInfo($id_arr,&$o){
 		$Model = M('tiku');
 		foreach($id_arr as $key=>$val){
-			$rs = $Model->field("id,content,options,answer,analysis")->where("id=$val")->find();
+			$rs = $Model->field("id,content,options,answer,analysis,type_id")->where("id=$val")->find();
 			$rs['order_char'] = $o;
 			$tiku[] = $rs;
 			$o++;
@@ -222,7 +198,7 @@ class JingpinController extends GlobalController {
 		$year_data = S('source_year_'.$course_id);
 		if(!$year_data){
 			$Model = M('tiku_source');
-			$year_data = $Model->field("distinct year")->where("course_id=$course_id")->order("year desc")->select();
+			$year_data = $Model->field("distinct year")->where("course_id=$course_id AND year <> ''")->order("year desc")->select();
 			S('source_year_'.$course_id,$year_data,array('type'=>'file','expire'=>FILE_CACHE_TIME));
 		}
 		return $year_data;
@@ -318,6 +294,18 @@ class JingpinController extends GlobalController {
 	public function selectCourse(){
 		$this->display();
 	}
-	
+	public function ajaxSelCourse(){
+		$Model = M('tiku_course');
+		if($_SESSION['course_id']){
+			$data = $Model->where("id=".$_SESSION['course_id'])->find();
+		}else{
+			$data = $Model->order("id asc")->find();
+			$_SESSION['course_id'] = $data['id'];
+			$_SESSION['course_type'] = $data['course_type'];
+			$_SESSION['course_name'] = $data['course_name'];
+			$_SESSION['pinyin'] = $data['pinyin'];
+		}
+		$this->ajaxReturn(array('status'=>'ok','jumpto'=>'/jingpin/'.$data['pinyin'].'/'));
+	}
 }
 ?>

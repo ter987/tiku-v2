@@ -3,23 +3,28 @@
 	/* 选择题型   **/
 	function select_grade(c,id){
 	    var href = window.location.href;
-	    var reg = /jingpin\/(\w*)g(\d+)(\w*)(\/)/g;
+	    var reg = /jingpin\/\w+\/(\w*)g(\d+)(\w*)(\/)/g;
 		
-		if(href.search(/\?p=\d+/)!=-1){
-			href = href.replace(/\?p=\d+/,'');
+		if(href.search(/\/\d+\//)!=-1){
+			href = href.replace(/\/\d+\//,'/');
 		}
 	    if(href.search(reg)!=-1){
 	    	if(id==0){
-	    		var loc = href.replace(/g\d+/g,'');
+	    		if(href.search(/\w+g\d+/g)==-1 && href.search(/g\d+[a-z]+/g)==-1){
+	    			var loc = href.replace(/g\d+\//g,'');
+	    		}else{
+	    			var loc = href.replace(/g\d+/g,'');
+	    		}
 	    	}else{
 	        	var loc = href.replace(/g\d+/g,c+id);
 	       }
 	    }else{
-	    	var str = '';
-	    	if(href.search(/jingpin\/\w+/g)==-1){
-	    		str = '/';
-	    	}
-	        var loc = href.replace(/jingpin\//g,'jingpin/'+c+id+str);
+	        var _reg = /jingpin\/\w+\/\w+\//g;
+			if(href.search(_reg)!=-1){
+				var loc = href.replace(/(jingpin\/\w+\/\w+)\//g,"$1"+c+id+'/');
+			}else{
+				var loc = href+c+id+'/';
+			}
 	    }
 	    window.location.href = loc;
 	}
@@ -27,31 +32,28 @@
 	/* 选择题目特点 **/
 	function select_feature(c,id){
 	    var href = window.location.href;
-	    var reg = /jingpin\/(\w*)f(\d+)(\w*)(\/)/g;
+	    var reg = /jingpin\/\w+\/(\w*)f(\d+)(\w*)(\/)/g;
 		
-		if(href.search(/\?p=\d+/)!=-1){
-			href = href.replace(/\?p=\d+/,'');
-		}
-		if(href.search(/r\d{1}/)!=-1){
-			href = href.replace(/r\d{1}/,'');
-		}
-		if(id==0){
-			href = href.replace(/a\d{1}/,'');
-			href = href.replace(/w\d{1}/,'');
-			href = href.replace(/y\d{4}/,'');
+		if(href.search(/\/\d+\//)!=-1){
+			href = href.replace(/\/\d+\//,'/');
 		}
 	    if(href.search(reg)!=-1){
 	    	if(id==0){
-	    		var loc = href.replace(/f\d+/g,'');
+	    		if(href.search(/\w+f\d+/g)==-1 && href.search(/f\d+[a-z]+/g)==-1){
+	    			var loc = href.replace(/f\d+\//g,'');
+	    		}else{
+	    			var loc = href.replace(/f\d+/g,'');
+	    		}
 	    	}else{
 	        	var loc = href.replace(/f\d+/g,c+id);
 	       }
 	    }else{
-	    	var str = '';
-	    	if(href.search(/jingpin\/\w+/g)==-1){
-	    		str = '/';
-	    	}
-	        var loc = href.replace(/jingpin\//g,'jingpin/'+c+id+str);
+	        var _reg = /jingpin\/\w+\/\w+\//g;
+			if(href.search(_reg)!=-1){
+				var loc = href.replace(/(jingpin\/\w+\/\w+)\//g,"$1"+c+id+'/');
+			}else{
+				var loc = href+c+id+'/';
+			}
 	    }
 	    window.location.href = loc;
 	}
@@ -59,187 +61,195 @@
 	/* 选择试卷类型 **/
 	function select_year(c,id){
 	    var href = window.location.href;
-	    var reg = /jingpin\/(\w*)y(\d+)(\w*)(\/)/g;
+	    var reg = /jingpin\/\w+\/(\w*)y(\d+)(\w*)(\/)/g;
 		
-		if(href.search(/\?p=\d+/)!=-1){
-			href = href.replace(/\?p=\d+/,'');
+		if(href.search(/\/\d+\//)!=-1){
+			href = href.replace(/\/\d+\//,'/');
 		}
 	    if(href.search(reg)!=-1){
 	    	if(id==0){
-	    		var loc = href.replace(/y\d+/g,'');
+	    		if(href.search(/\w+y\d+/g)==-1 && href.search(/y\d+[a-z]+/g)==-1){
+	    			var loc = href.replace(/y\d+\//g,'');
+	    		}else{
+	    			var loc = href.replace(/y\d+/g,'');
+	    		}
 	    	}else{
 	        	var loc = href.replace(/y\d+/g,c+id);
 	       }
 	    }else{
-	    	var str = '';
-	    	if(href.search(/jingpin\/\w+/g)==-1){
-	    		str = '/';
-	    	}
-	        var loc = href.replace(/jingpin\//g,'jingpin/'+c+id+str);
+	        var _reg = /jingpin\/\w+\/\w+\//g;
+			if(href.search(_reg)!=-1){
+				var loc = href.replace(/(jingpin\/\w+\/\w+)\//g,"$1"+c+id+'/');
+			}else{
+				var loc = href+c+id+'/';
+			}
 	    }
 	    window.location.href = loc;
 	}
 	/* 选择地区 **/
 	function select_province(c,id){
 	    var href = window.location.href;
-	    var reg = /jingpin\/(\w*)a(\d+)(\w*)(\/)/g;
+	    var reg = /jingpin\/\w+\/(\w*)a(\d+)(\w*)(\/)/g;
 		
-		if(href.search(/\?p=\d+/)!=-1){
-			href = href.replace(/\?p=\d+/,'');
+		if(href.search(/\/\d+\//)!=-1){
+			href = href.replace(/\/\d+\//,'/');
 		}
 	    if(href.search(reg)!=-1){
 	    	if(id==0){
-	    		var loc = href.replace(/a\d+/g,'');
+	    		if(href.search(/\w+a\d+/g)==-1 && href.search(/a\d+[a-z]+/g)==-1){
+	    			var loc = href.replace(/a\d+\//g,'');
+	    		}else{
+	    			var loc = href.replace(/a\d+/g,'');
+	    		}
 	    	}else{
 	        	var loc = href.replace(/a\d+/g,c+id);
 	       }
 	    }else{
-	    	var str = '';
-	    	if(href.search(/jingpin\/\w+/g)==-1){
-	    		str = '/';
-	    	}
-	        var loc = href.replace(/jingpin\//g,'jingpin/'+c+id+str);
+	        var _reg = /jingpin\/\w+\/\w+\//g;
+			if(href.search(_reg)!=-1){
+				var loc = href.replace(/(jingpin\/\w+\/\w+)\//g,"$1"+c+id+'/');
+			}else{
+				var loc = href+c+id+'/';
+			}
 	    }
 	    window.location.href = loc;
 	}
 	
 </script>
 <!--main-->
-<div class="width">
-	<div class="tk_bg">
-		<!--标题-->
-        <div class="tit"><span> <a href="">题库</a> 〉<a href="">精品试卷</a></span>精品试卷</div>
-        
-        <!--小标-->
-        <ul class="sj_ul">
-        	<li style="width:194px;">&nbsp;&nbsp;&nbsp;&nbsp;科目：高中语文<div class="clear"></div>
-                <dl class="sub_ul">
-                      <dt><a href="">高中数学</a></dt>
-                      <dt><a href="">高中数学</a></dt>
-                </dl>
-            </li>
-            <li><a href="/tiku/">知识点选题</a></li>
-            <li><a href="/tongbu/">章节选题</a></li>
-            <li class="hover"><a href="/jingpin/">精品试卷</a></li>
-            <!-- <li><a href="">我的题库</a></li> -->
-        </ul>
-        
-        <div class="clear"></div>
-        
-        <!-- <div class="ss"><form><input type="button" class="btn"  value="搜索"/><input type="text" class="text" /></form></div> -->
-        
-        <!--快速搜索-->
-        <div id="quick_goods" class="mt20">
-            <ul>
-                <li class="fixed"><strong>年级：</strong></li>
-                <li>
-                    <dl>
-                       <dt <eq name="grade" value="">class="hover"</eq>><a href="javascript:select_grade('g',0)">全部</a></dt>
-                        <volist name='grade_data' id='vo'>
-                        <dt <eq name="grade" value="$vo.id">class="hover"</eq>><a href="javascript:select_grade('g',{$vo.id})">{$vo.name}</a></dt>
-                        </volist>
-               		 </dl>
-                </li>
-            </ul>
-            <div class="clear"></div>
-
-            <ul>
-                <li class="fixed"><strong>类型：</strong></li>
-                <li>
-                    <dl>
-                        <dt <eq name="feature_id" value="">class="hover"</eq>><a href="javascript:select_feature('f',0)">全部</a></dt>
-                        <volist name='source_type' id='vo'>
-                        <dt <eq name="feature_id" value="$vo.id">class="hover"</eq>><a href="javascript:select_feature('f',{$vo.id})">{$vo.type_name}</a></dt>
-                        </volist>
-                    </dl>
-                </li>
-            </ul>
-            <div class="clear"></div>
-            
-            <ul>
-                <li class="fixed"><strong>年份：</strong></li>
-                <li>
-                    <dl>
-                       <dt <eq name="year" value="">class="hover"</eq>><a href="javascript:select_year('y',0)">全部</a></dt>
-                        <volist name='year_data' id='vo'>
-                        <dt <eq name="year" value="$vo.year">class="hover"</eq>><a href="javascript:select_year('y',{$vo.year})">{$vo.year}</a></dt>
-                        </volist>
-               		 </dl>
-                </li>
-            </ul>
-            <div class="clear"></div>
-                                                                                         
-            <ul>
-                <li class="fixed"><strong>地区：</strong></li>
-                <li>
-                    <dl>
-                        <dt <eq name="province_id" value="">class="hover"</eq>><a href="javascript:select_province('a',0)">全部</a></dt>
-                        <volist name='province_data' id='vo'>
-                        <dt <eq name="province_id" value="$vo.id">class="hover"</eq>><a href="javascript:select_province('a',{$vo.id})">{$vo.province_name}</a></dt>
-                        </volist>
-                    </dl>
-                </li>
-            </ul>
-            <div class="clear"></div>
-        </div>
-        
-        <div id="quick_order">
-            <ul>
-                <li><a href="">排序：</a></li>
-                <li><a href="">最新<img src="__PUBLIC__/images/ico_down.gif" width="7" height="8"></a></li>
-                <li><a href="">难度<img src="__PUBLIC__/images/ico_down.gif" width="7" height="8"></a></li>
-                <li><a href="">使用频率<img src="__PUBLIC__/images/ico_down.gif" width="7" height="8"></a></li>
-                <li><a href="">好评<img src="__PUBLIC__/images/ico_down.gif" width="7" height="8"></a></li>
-            </ul>
-            <div class="clear"></div>
-        </div>
-        
-        <!--题库列表-->
-        <div class="clear"></div>
-        <ul class="tk_ul">
-        <notempty name="source_data">
-           <volist name="source_data" id="vo">
-           <li>
-            	<div class="pic"><a href="/jingpin/detail/{$vo.id}.html" target="_blank"><img src="__PUBLIC__/images/tk.gif" /></a></div>
-        		<div class="text">
-                	<p><a href="/jingpin/detail/{$vo.id}.html" target="_blank" class="t_d">{$vo.source_name}</a></p>
-					<p></p>
-                    <p class="f14 c9 mt10">贡献者：109138518&nbsp;&nbsp;
-                    上传时间：{$vo.update_time|date='Y-m-d',###}&nbsp;&nbsp;14：22：55&nbsp;&nbsp;浏览{$vo.clicks}次</p>
-               </div>
-               <div class="pf">
-               		<div class="left mr10">评分：</div>
-                    <div class="left score5 dis mr10"></div>
-                    <div class="left">4.6分</div>
-               </div>
-           </li>
-           </volist>
-        <else />
-        	<li style="background:#fff;">
-                    <div style="padding:30px 0px;">
-						<div class="jc_null">	
+	<div id="main"style="margin-top:2px;min-height:1000px;">
+		<div class="xf_qiehuankmbox">
+			<div class="xf_qiehuankminner">
+				<div class="xf_dqkm"><if condition="this_course_type eq 1">高中<elseif condition="this_course_type eq 2">初中</if>
+					<span class="c_blue xf_dqkmlx">{$this_course_name}</span> 
+					<a href="JavaScript:;"> [切换科目]</a>
+				</div>
+				<!-- 选择科目 -->
+				<div class="xf_xuanzekmbox">
+					<notempty name="gaozhong">
+					<div>
+						<em>&lt;高中&gt;</em>
+						<volist name='gaozhong' id='vo'>
+						<a href="javascript::void(0)" <eq name="this_course_id" value="$vo.id">class="cur"</eq> onclick="select_course({$vo.id},'{$vo.pinyin}','{$jumpto}');">{$vo.course_name}</a>
+						</volist>
+					</div>
+					</notempty>
+					<notempty name="chuzhong">
+					<div>
+						<em>&lt;初中&gt;</em>
+						<volist name='chuzhong' id='vo'>
+						<a href="javascript::void(0)" <eq name="this_course_id" value="$vo.id">class="cur"</eq> onclick="select_course({$vo.id},'{$vo.pinyin}','{$jumpto}');">{$vo.course_name}</a>
+						</volist>
+					</div>
+					</notempty>
+				</div>
+				<!-- 选择科目end -->
+				<div class='xf_zaixuanzj'>精品试卷</div>
+				
+			</div>
+		</div>
+		
+<div style="width:1000px;margin-top:10px;"> 
+		<div class="selectList">
+			<div class='xf_shaixuanbox'>
+				<div class="fl"style="line-height:40px;">年份：</div>
+				<div class="tags_line">
+					<div id="year_0" onclick="javascript:select_year('y',0)" class="tags <eq name="year" value="">active</eq>">不限</div>
+					<volist name='year_data' id='vo' key="k">
+                    <div id="year_0" onclick="javascript:select_year('y',{$vo.year})" class="tags <eq name="year" value="$vo.year">active</eq>">{$vo.year}</div>
+                    </volist>
+				</div>
+				<if condition="$k gt 15"><div  class="more_tags button btn_b">更多</div></if>
+				<div class="clear"></div>
+			</div>
+			<div class='xf_shaixuanbox'>
+				<div class="tags_line" >
+					<div class="fl">年级：</div>
+					<div id="type_0" onclick="javascript:select_grade('g',0)" class="tags <eq name="grade" value="">active</eq>">不限</div>
+					<volist name='grade_data' id='vo'>
+                    <div id="type_1" onclick="javascript:select_grade('g',{$vo.id})" class="tags <eq name="grade" value="$vo.id">active</eq>">{$vo.name}</div>
+                    </volist>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class='xf_shaixuanbox'>
+				<div class="tags_line">
+					<div class="fl" style="line-height:40px;">地区：</div>
+					<div id="area_0" onclick="javascript:select_province('a',0)" class="tags <eq name="province_id" value="">active</eq>">不限</div>
+					<volist name='province_data' id='vo' key="k">
+                    <div id="area_1" onclick="javascript:select_province('a',{$vo.id})" class="tags <eq name="province_id" value="$vo.id">active</eq>">{$vo.province_name}</div>
+                    </volist>
+				</div>
+				<if condition="$k gt 15"><div class="more_tags" id="area_more">更多</div></if>
+				<div class="clear"></div>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+	</div>	
+      
+	<div style="width:1000px;margin-top:10px;">
+			<!-- left -->
+			<div class="left_list">
+				<div class="left_lists">
+				<ul class="zsd_ul ce">
+					<volist name='source_type' id='vo'>
+                    <li><a href="javascript:select_feature('f',{$vo.id})"><span class="<eq name="feature_id" value="$vo.id">month_exam<else />exam_li</eq>">{$vo.type_name}</span></a></li>
+                   </volist>
+					<div class="clear"></div>
+				</ul>
+				</div>
+			</div>
+			
+			<div class="fr" style="width:810px;">
+				 <div style="margin-bottom:3px;">
+					<div style="border:1px solid #D9D9D9;width:100%;height:40px;font-size:16px">
+						<div class="nav_bold"><b>排序&nbsp;:</b></div>
+						<div class='xf_paixulb'>
+							<div id="" class="tags active">最新</div>
+							<div id="" class="tags">下载</div>
+							<div id="" class="tags">浏览量</div>
 						</div>
-					    <div class="jc_n_text">
-							<p>抱歉，暂时没有符合条件的试卷，我们将会尽快补充内容。请更换筛选条件。</p>
+						<div style="width:auto;height:25px;float:right;margin-top:8px;">
+							<div class="nav_tag1" ><</div>
+							<div class="nav_tag2" >></div>
+							<div class="nav_num" ><font style="color:#55B3F6">1</font>/38</div>
 						</div>
-					</div>					
-				</li>
-        </notempty>
-        </ul>
-        <style>
-       	.current{
-       		background: #f43c5e none repeat scroll 0 0;
-		    border: 1px solid #f28700;
-		    color: #fff;
-		    font-weight: bold;
-		    padding: 6px 10px;
-       	}
-       </style>
-        <div class="page">
-			{$page_show}
-		</div>     
-    </div>
-</div>
-<include file="common:right" />
+					</div>
+				</div> 
+	
+				  
+			<div class="main">
+				<div class="exam_list">
+					<volist name="source_data" id="vo">
+                    <div class="nav_3">
+						<div div="exam_nav" style="width:700px;height:70px;float:left" >
+							<div class="exam_link"><a href="/jingpin/{$vo.id}.html" target="_blank"><span>{$vo.source_name}</span></a></div>
+							<div class="exam_mag">
+							<div class="test-num"><span>总题数：{$vo.shiti_num}</span> </div>
+							<div class="test-find"><span>浏览量：{$vo.clicks}</span></div> 
+							<div class="test-people"><span>考试人次：63</span></div>
+						</div>
+						</div>
+						<div class="load_exam" style="width:100;height:60px;float:none">
+							<a href=""><div class="load_img"></div></a>
+							<a href=""><div class="exam_img"></div></a>
+						</div>
+                    </div> 
+                    </volist>     
+                    			
+					<div class="clear"></div>
+                </div>   
+                    
+				<div style="margin-top:10px">
+                    <div style="padding-right:0px;" class="page">
+                    	{$page_show}
+						   	<div style="clear:both;"></div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+ </div>
 <!--footer-->
 <include file="common:footer" />

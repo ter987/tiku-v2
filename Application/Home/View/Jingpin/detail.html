@@ -1,153 +1,142 @@
 <include file="common:header" />
 
 <!--main-->
-<div class="width">
-	<div class="tk_bg">
-		<!--标题-->
-        <div class="tit"><a href="">题库</a> 〉<a href="">精品试卷</a></div>
+
+	<div id="main" style="margin-top:2px;min-height:1000px;">
+		<div style="background:#DBF0FF;border-bottom:4px solid #0190F2;">
+			<div style="width:1000px;height:68px;">
+				<div style="float:left;line-height:68px;color:#4c4c4c;font-size:24px;"><eq name="source_data.course_type" value="1">高中<else />初中</eq><span class="c_blue">{$source_data.course_name}</span></div>
+				<div style="float:right;color:#fff;font-size:20px;background:#0190F2;padding:10px 20px;margin-top:22px;border-top-left-radius:5px;border-top-right-radius:5px;">精品组卷</div>
+			</div>
+		</div>
         
-        <!--小标-->
-        <ul class="sj_ul">
-        	<li style="width:194px;">&nbsp;&nbsp;&nbsp;&nbsp;科目：高中语文<div class="clear"></div>
-                <dl class="sub_ul">
-                      <dt><a href="">高中数学</a></dt>
-                      <dt><a href="">高中数学</a></dt>
-                </dl>
-            </li>
-            <li><a href="">知识点选题</a></li>
-            <li><a href="">章节选题</a></li>
-            <li class="hover"><a href="">精品试卷</a></li>
-            <li><a href="">我的题库</a></li>
-        </ul>
-        
-        <div class="clear"></div>
-        <div class="mt20">
-        	<div class="b_4">
-            	<div class="jpjs_tit">{$source_data.source_name}</div>
-                <div class="jpjs_info">
-                	<span>类型：{$source_data.type_name}</span>
-                    <span>省份：{$source_data.province_name}</span>
-                    <span>年级：<if condition="$source_data.grade eq 1">高一<elseif condition="$source_data.grade eq 2" />高二<elseif condition="$source_data.grade eq 3" />高三<elseif condition="$source_data.grade eq 4" />初一<elseif condition="$source_data.grade eq 5" />初二<elseif condition="$source_data.grade eq 6" />初三</if></span>
-                    <span>年份：{$source_data.year}</span>
-                    <span>浏览次数：{$source_data.clicks}</span>
+		<div class="xf_centerbox">
+		<!-- left_main-->
+        <div class="left_main">
+            <div id="header-wrap" class="header-wrap" style="width:1000px;float:left">
+                <div class="title_info">
+                	<div id="pui_title">
+						
+							<h1>{$source_data.source_name}</h1>
+						
+				    </div>
+                    <div class="b_z" id="pui_testinfo" title="试卷信息栏">
+							<notempty name="source_data.year">年份：{$source_data.year}&nbsp;</notempty> 类型：{$source_data.type_name} &nbsp; <notempty name="source_data.grade">年级：<if condition="$source_data.grade eq 1">高一<elseif condition="$source_data.grade eq 2"/>高二<elseif condition="$source_data.grade eq 3"/>高三</if>&nbsp;</notempty>
+					</div>
                 </div>
-            </div>
-        </div>
-        <notempty name="first_juan">
-        <div class="tibiao"><div class="lft"><h2>{$first_juan.t_title}</h2></div></div>
-        <volist name="first_juan.shiti" id="vo">
-        <h2>{$vo.order_char}、{$vo.t_title}</h2>
-        <!--题库列表-->
-        <div class="clear"></div>
-        <ul class="jc_list">
-        				<volist name="vo.childs" id="v">
-                    	<li>
-                        	<p>{$v.order_char}.
-                        		{$v.content|htmlspecialchars_decode}
-								<php>
-		                    		if($v['options']){
-		                    			$options = json_decode($v['options']);
-		                    			$options_index = array(0=>'A',1=>'B',2=>'C',3=>'D',4=>'E');
-		                    	</php>
-		                    	<p>
-		                    		<php>
-		                    			$k = 0;
-		                    			foreach($options as $k=>$val){
-		                    		</php>
-		                    			<span style="float:left;line-height:18px;font-size:14px;padding-right:30px;" class="em2"><php>echo $options_index[$k]</php>.<php>echo $val</php></span>
-		                    		<php>
-		                    			}
-		                    		</php>
-		                    	</p>
-		                    	<php>
-		                    	}
-		                    	</php>	
-                        	</p>
-                            <div class="jcbtn3">纠错</div>
-                            <div class="jc_list_b">
-                                <div class="left mr10">
-                                    <span class="jc_btn" id="{$v.id}" onclick="add_tiku({$v.id},$(this))" style="cursor: pointer;">加入试卷</span>
-                                    <a target="_blank" href="/tiku/detail/{$v.id}.html"><span class="jc_btn">查看解析</span></a>
-                                    <span class="jc_btn">下载试题</span>
-                                    <span class="jc_btn">收藏</span>
-                                    <span class="jc_btn2">点赞</span>
-                                    <span class="jc_btn2">分享</span>
-                                    
-                                    
-                                </div>
-                                
-                                <div class="right mr10">
-                                	<div class="left mr10">
-                                        <span style="line-height:30px;">
-                                            难度:<font class="c_z">0.76-0.85</font>
-                                        </span>
-                                    </div>
-                                    
-                                	<div class="left">评分:</div>
-                                    <div class="left"><i class="dis score score3"></i></div>
-                               </div>
-                           </div>
-                        </li>
-                       </volist>
-                	</ul>
-               </volist>
-                </notempty>
-                
-                	<notempty name="second_juan">
-                	<div class="tibiao"><div class="lft"><h2>{$second_juan.t_title}</h2></div></div>
-                	<volist name="second_juan.shiti" id="vo">
-			        <h2>{$vo.order_char}、{$vo.t_title}</h2>
-			        <!--题库列表-->
-			        <div class="clear"></div>
-			        <ul class="jc_list">
-			        	<volist name="vo.childs" id="v">
-                    	<li>
-                        	<p>{$v.order_char}.{$v.content|htmlspecialchars_decode}</p>
-                            <div class="jcbtn3">纠错</div>
-                            <div class="jc_list_b">
-                                <div class="left mr10">
-                                    <span class="jc_btn" onclick="add_tiku({$v.id},$(this))" id="{$v.id}" style="cursor: pointer;">加入试卷</span>
-                                    <a target="_blank" href="/tiku/detail/{$v.id}.html"><span class="jc_btn">查看解析</span></a>
-                                    <span class="jc_btn">下载试题</span>
-                                    <span class="jc_btn">收藏</span>
-                                    <span class="jc_btn2">点赞</span>
-                                    <span class="jc_btn2">分享</span>
-                                    
-                                    
-                                </div>
-                                
-                                <div class="right mr10">
-                                	<div class="left mr10">
-                                        <span style="line-height:30px;">
-                                            难度:<font class="c_z">0.76-0.85</font>
-                                        </span>
-                                    </div>
-                                    
-                                	<div class="left">评分:</div>
-                                    <div class="left"><i class="dis score score3"></i></div>
-                               </div>
-                           </div>
-                        </li>
-                       </volist>
-                       
+                    
+                <div class="sp" style="width:1000px;margin-top:10px;border:1px solid #D4D5D5;float:left;background:#FFF;">
+                   <div id="select_part" class="select_part" >
+                    	<!-- <div onclick="upMove(this);return false" class="part_back"><</div> -->
+                        <div class="ul-list" style="float:left;overflow: hidden;position: relative;width: 600px;height:45px">
+                    	<ul class="ul-list-content" style="left:0;top:0">  	
+                            <volist name="shiti" id="vo" key="k">
+                            <li class="part"><a href="" id="{$k}">{$vo.type_name}</a></li>
+                            </volist>
+                            
+                        </ul> 
+                        </div> 
                         
-                	</ul>
-                	</volist>
-					</notempty>
+                        <!-- <div onclick="downMove(this);return false" class="part_back1">></div> -->
+                        <div class="all_part"><a href="">全部加入我的试卷</a></div>
+                    </div>
+                </div>
+                    
+                    
+          
+                    </div>              
+             <volist name="shiti" id="vo">
+                   <div class="ont_part"  id="op-1" >
+                   
+                  <!-- 大题目-->
+              	
+                   <div class="op_title" >
+                   <span>{$vo.order_char}、{$vo.type_name}</span>
+                   </div>
+                   <div class="big-test" style="width:1000px;height:auto;float:left;">
+                    <a href="" class="error_check"></a>
+                   <div style="width:960px;height:auto;float:left;margin-left:20px">  
+                   <div class="content">
+                   
+                   </div>
+                    <!-- 问题1-->
+                    <volist name="vo.childs" id="v">
+                   	<table style="margin-top:10px">
+					<tbody>
+					 <tr>
+					   <td valign="top">
+						<span class="quesindex">{$v.order_char}．</span><span class="tips"></span>
+					   </td>
+					  <td>
+						<p class="quest_p">
+						<span class="quest_span">{$v.content|htmlspecialchars_decode}</span>
+						</p>
+						<php>
+                    		if($v['options'] && ($v['type_id']==1 || $v['type_id']==6)){
+                    			$options = json_decode($v['options']);
+                    			$options_index = array(0=>'A',1=>'B',2=>'C',3=>'D',4=>'E');
+                    	
+                    			$k = 0;
+                    			foreach($options as $k=>$val){
+                    		</php>
+                    			<p class="quest_p"><span class="quest_span"><php>echo $options_index[$k]</php>.<php>echo $val</php></span></p>
+                    		<php>
+                    			}
+                    		
+                    	}
+                    	</php>
+					</td>
+					</tr>
+					</tbody>
+					</table>
+                     </volist>
+    
+                   
+                  
+                   </div>
+                     <!-- 解析按钮-->
+                  <div class="analys"><span>本题解析</span></div>
+                    <div class="hidde-div">
+                    <div class="poptip">
+                    	<span class="poptip-arrow poptip-arrow-top"><em>◆</em><i>◆</i></span>
+                        	{$v.analysis|htmlspecialchars_decode}
+                    </div>
+                    </div>
+                          
+                    <!-- 点赞使用情况-->
+                     <div class="oparate">
+                    	<div class="zan"><span>3050</span></div>
+                        <div class="hot"><span>使用：11100次</span></div>
+                        <div class="add_exam"><span>+加入试卷</span></div>
+                        <div class="sc1_btn"><span>收藏</span></div>
+                        <div class="down_btn"><span>下载</span></div>   
+                     </div>  
+                </div>
+                </div>
+     		</volist>
+         
+                <div class="space"></div>
+        </div>   
     </div>
-</div>
-<script>
-		$(
-		function(){
-			//alert({$tikus_in_cart});
-			$.each({$tikus_in_cart},function(index,dom){
-				//alert(dom.id);
-				$(".tk_bg").find("span[id="+dom.id+"]").html('移出试卷');
-			});
-		}
-	);
-</script>
-<!-- 右侧 试卷选项-->
-<include file="common:right" />
+    <div class="xf_fanhuidb"><a href="#"></a></div>
+	<div class="xf_dqxuanzet">
+		<div class="xf_mysjleft">
+			<p>我</p>
+			<p>的</p>
+			<p><i>《</i></p>
+			<p>试</p>
+			<p>卷</p>
+			<span>10道</span>
+		</div>
+		<div class="xf_showsj">
+			<em><i>清空</i></em>
+			<p>一、综合题(<span>3</span>/5)</p>
+			<p>二、单选题(<span>3</span>/5)</p>
+			<p>三、多选题(<span>3</span>/5)</p>
+			<p>四、计算题(<span>3</span>/5)</p>
+			<p>五、基础知识题（<span>3</span>/5)</p>
+			<div class='xf_scsjbutton'><a href="JavaScript:;">生成试卷</a></div>
+		</div>
+	</div>
 <!--footer-->
 <include file="common:footer" />

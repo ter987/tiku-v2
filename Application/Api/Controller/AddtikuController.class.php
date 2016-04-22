@@ -43,6 +43,25 @@ class AddtikuController extends Controller {
 		}
 		echo 'Filter Success!';
 	}
+	/*
+	 * 计算试卷的试题数量
+	 */ 
+	public function shitiNum(){
+		$tikuModel = M('tiku');
+		$sourceModel = M('tiku_source');
+		$max = $tikuModel->field("MAX(id) as id")->find();
+		//echo $tikuModel->getLastSql();exit;
+		//echo $max['id'];exit;
+		for($i=1;$i<=$max['id'];$i++){
+			$result = $tikuModel->where("id=$i")->find();
+			if($result){
+				$sourceModel->where("id=".$result['source_id'])->setInc('shiti_num',1);
+
+			}
+			
+		}
+		echo ' Success!';
+	}
 	/**
 	 * 批量处理科目中按首字母分类的问题
 	 */
