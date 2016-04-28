@@ -40,4 +40,6 @@ return array(
 	'REDIS_HOSTNAME' => '127.0.0.1',
 	//SESSION 设置
 	'SESSION_EXPIRE_TIME' => 2592000,
+	//上传设置
+	'MAX_FILE_LIMIT' => 2097152,//单位字节，=2M
 );

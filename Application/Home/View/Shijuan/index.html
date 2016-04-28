@@ -100,13 +100,13 @@
 															</div>
 														</div>
 													</div>
-													<volist name="first_juan.shiti" key="k" id="vo">
-													<div class="partbody">
+													<volist name="first_juan.shiti" key="kk" id="vo">
+													<div class="partbody" >
 														<div class="questype" id="questype1_1">
 															<div class="questypehead" id="questypehead1_1" style="border: 1px solid rgb(255, 255, 255); background: rgb(255, 255, 255) none repeat scroll 0% 0%; color: rgb(0, 0, 0);">
 																<div class="questypemenu">
-																	<div class="check_class">换一组</div>
-																	<div class="editpart btn3" shiti_no="{$k}" juan_no="1"></div>
+																	<div class="check_class" juan_no="1" shiti_no="{$kk}">换一组</div>
+																	<div class="editpart btn3" shiti_no="{$kk}" juan_no="1"></div>
 																</div>
 																<div class="questypeheadbox" id="questypeheadbox1_1">
 																	<table border="0" cellpadding="0" cellspacing="0" width="100%" height="60px;">
@@ -138,7 +138,7 @@
 																		</td>
 																		<td>
 																			<div class="questypetitle">
-																				<span class="questypeindex"><b>{$vo.order_char}、</b></span><span class="questypename" id="juan_1_{$k}">{$vo.t_title}</span><!-- <span class="questypenote" id="questypenote1_1">（本题共5道小题，每小题0分，共0分）</span> -->
+																				<span class="questypeindex"><b>{$vo.order_char}、</b></span><span class="questypename" id="juan_1_{$kk}">{$vo.t_title}</span><!-- <span class="questypenote" id="questypenote1_1">（本题共5道小题，每小题0分，共0分）</span> -->
 																			</div>
 																		</td>
 																	</tr>
@@ -147,15 +147,15 @@
 																</div>
 															</div>
 															<div class="questypebody">
-																<volist name="vo.childs" id="v">
+																<volist name="vo.childs" id="v" key="ks">
 																<div class="quesbox" id="quesbox1579176" data-score="">
-																	<div class="quesopmenu">
-																		<a class="ico_zjgn1">自动选题</a>
+																	<div class="quesopmenu" shiti_id="{$v.id}" juan_no="1" shiti_no="{$kk}" key="{$ks-1}">
+																		<a class="ico_zjgn1" onclick="autoXuanti($(this))">自动选题</a>
 																		<a class="ico_zjgn2">手动选题</a>
 																		<a class="ico_zjgn3">上移</a>
-																		<a class="ico_zjgn4">下移</a>
-																		<a class="ico_zjgn5">解析</a>
-																		<a class="ico_zjgn6">删除</a>
+																		<a class="ico_zjgn4" onclick="moveDown($(this))">下移</a>
+																		<a class="ico_zjgn5" onclick="jiexi($(this))">解析</a>
+																		<a class="ico_zjgn6" onclick="deleteMe($(this))">删除</a>
 																		<a class="ico_zjgn7">纠错</a>
 																	</div>
 
@@ -170,7 +170,7 @@
 																		<tbody>
 																		<tr>
 																			<td valign="top">
-																				<span class="quesindex"><b>{$v.order_char}．</b></span><span class="tips"></span>
+																				<span class="quesindex"><b>{$v.order_char}</b>.</span><span class="tips"></span>
 																			</td>
 																			<td>
 																				<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
@@ -231,7 +231,7 @@
 														</div>
 													</div>
 													<div class="partbody">
-														<volist name="second_juan.shiti" key="k" id="vo">
+														<volist name="second_juan.shiti" key="kk" id="vo">
 														<div class="questype" id="questype2_0">
 															<div class="questypehead" id="questypehead2_5" style="border: 1px solid rgb(255, 255, 255); background: rgb(255, 255, 255) none repeat scroll 0% 0%; color: rgb(0, 0, 0);">
 																<div class="questypemenu">
@@ -268,7 +268,7 @@
 																		</td>
 																		<td>
 																			<div class="questypetitle">
-																				<span class="questypeindex"><b>{$vo.order_char}、</b></span><span class="questypename" id="juan_2_{$k}">{$vo.t_title}</span><!-- <span class="questypenote" id="questypenote2_5">（本题共1道小题,第1题0分,共0分）</span> -->
+																				<span class="questypeindex"><b>{$vo.order_char}、</b></span><span class="questypename" id="juan_2_{$kk}">{$vo.t_title}</span><!-- <span class="questypenote" id="questypenote2_5">（本题共1道小题,第1题0分,共0分）</span> -->
 																			</div>
 																		</td>
 																	</tr>
@@ -276,16 +276,17 @@
 																	</table>
 																</div>
 															</div>
-															<volist name="vo.childs" id="v">
+															
 															<div class="questypebody">
+																<volist name="vo.childs" id="v" key="ks">
 																<div class="quesbox" id="quesbox1579226" data-score="">
-																	<div class="quesopmenu">
-																		<a class="ico_zjgn1">自动选题</a>
+																	<div class="quesopmenu" shiti_id="{$v.id}" juan_no="2" shiti_no="{$kk}" key="{$ks-1}">
+																		<a class="ico_zjgn1" onclick="autoXuanti($(this))">自动选题</a>
 																		<a class="ico_zjgn2">手动选题</a>
 																		<a class="ico_zjgn3">上移</a>
-																		<a class="ico_zjgn4">下移</a>
-																		<a class="ico_zjgn5">解析</a>
-																		<a class="ico_zjgn6">删除</a>
+																		<a class="ico_zjgn4" onclick="moveDown($(this))">下移</a>
+																		<a class="ico_zjgn5" onclick="jiexi($(this))">解析</a>
+																		<a class="ico_zjgn6" onclick="deleteMe($(this))">删除</a>
 																		<a class="ico_zjgn7">纠错</a>
 																	</div>
 
@@ -319,8 +320,9 @@
 																	</div>
 																	
 																</div>
+																</volist>
 															</div>
-														</volist>
+														
 														</div>
 													</volist>
 													</div>
@@ -578,10 +580,24 @@
 
 <script>
 	$(".check_class").click(function(){
-		$(".alert").show();
-		window.setTimeout(function(){
-			$(".alert").hide();
-		},1000);
+		var juan_no = $(this).attr('juan_no');
+		var shiti_no = $(this).attr('shiti_no');
+		$.getJSON(
+			'/index.php/home/shijuan/ajaxChangeOneTeam',
+			{juan_no:juan_no,shiti_no:shiti_no},
+			function(data){
+				//alert(data.id);
+				if(data.status=='ok'){
+					var html = '';
+					$.each(data.data, function(index,vo) {
+					  html += '<li id="'+vo.id+'" onclick="student_sel($(this))">'+vo.nick_name+'</li>';
+				
+					});
+					$('#my_students').html(html);
+				}
+			}
+			
+		);
 	});
 	$(window).scroll(function() {
 		var xf_scroll = $(window).scrollTop();
@@ -722,8 +738,102 @@ $('#EditXiaotiScore').click(function(){
 				$('#pui_testinfo').html(data.subtitle);
 			}
 		}
-);
+	);
 });
+
+function autoXuanti(obj){
+	var shiti_id = obj.parent().attr('shiti_id');
+	var juan_no = obj.parent().attr('juan_no');
+	var shiti_no = obj.parent().attr('shiti_no');
+	var key = obj.parent().attr('key');
+	$.getJSON(
+		'/shijuan/ajaxChangeOne',
+		{shiti_id:shiti_id,juan_no:juan_no,shiti_no:shiti_no,key:key},
+		function(data){
+			if(data.status=='ok'){
+				obj.parent().parent().html(data.data);
+			}
+		}
+	);
+}
+
+function jiexi(obj){
+	if(obj.hasClass('active')){
+		obj.removeClass('active');
+		obj.parents(".quesbox").find(".xf_jiexibox").hide();
+	}else{
+		obj.addClass('active');
+		obj.parents(".quesbox").find(".xf_jiexibox").show();
+	}
+}
+function moveUp(){
+	
+}
+function moveDown(obj){
+	var shiti_id = obj.parent().attr('shiti_id');
+	var juan_no = obj.parent().attr('juan_no');
+	var shiti_no = obj.parent().attr('shiti_no');
+	var key = obj.parent().attr('key');
+	$.getJSON(
+		'/shijuan/ajaxMoveDown',
+		{shiti_id:shiti_id,juan_no:juan_no,shiti_no:shiti_no,key:key},
+		function(data){
+			if(data.status=='ok'){
+				
+				//alert(obj.parent().parent().find("b").html());
+				var me_order = parseInt(obj.parent().parent().find("b").html())+1;
+				var down_order = parseInt(obj.parent().parent().next().find("b").html())-1;
+				obj.parent().parent().find("b").html(me_order);
+				obj.parent().parent().next().find("b").html(down_order);
+				
+				var me_k = parseInt(obj.parent().attr("key"))+1;
+				var down_k = parseInt(obj.parent().parent().next().find(".quesopmenu").attr("key"))-1;
+				obj.parent().attr("key",me_k);
+				obj.parent().parent().next().find(".quesopmenu").attr("key",down_k);
+				
+				var me = obj.parent().parent().html();
+				var down = obj.parent().parent().next().html();
+				obj.parent().parent().next().html(me);
+				obj.parent().parent().html(down);
+			}
+		}
+	);
+}
+function deleteMe(obj){
+	var shiti_id = obj.parent().attr('shiti_id');
+	var juan_no = obj.parent().attr('juan_no');
+	var shiti_no = obj.parent().attr('shiti_no');
+	var key = obj.parent().attr('key');
+	$.getJSON(
+		'/shijuan/ajaxdelete',
+		{shiti_id:shiti_id,juan_no:juan_no,shiti_no:shiti_no,key:key},
+		function(data){
+			if(data.status=='ok'){
+				$.each($(".partbody .quesbox"),function(){
+					var ojuan_no = $(this).children('.quesopmenu').attr('juan_no');
+					var oshiti_no = $(this).children('.quesopmenu').attr('shiti_no');
+					var okey = $(this).children('.quesopmenu').attr('key');
+					if(ojuan_no>juan_no){
+						var val = parseInt($(this).find('b').html())-1;
+						$(this).find('b').html(val);
+					}else{
+						if(oshiti_no>shiti_no){
+							var val = parseInt($(this).find('b').html())-1;
+							$(this).find('b').html(val);
+						}else if(oshiti_no==shiti_no){
+							if(okey>key){
+								var val = parseInt($(this).find('b').html())-1;
+								$(this).find('b').html(val);
+							}	
+						}
+					}
+					
+				});
+				obj.parent().parent().remove();
+			}
+		}
+	);
+}
 </script>
 <link href="__PUBLIC__/js/jquery-ui-1.11.2.custom/jquery-ui.css" rel="stylesheet" type="text/css" />
 <include file="common:footer" />

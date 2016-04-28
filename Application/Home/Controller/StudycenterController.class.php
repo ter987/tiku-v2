@@ -26,16 +26,16 @@ class StudycenterController extends GlobalController {
 		$joinModel = M('ceping_jon');
 		$total = $joinModel->where("student=".$_SESSION['user_id'])->count();
 		$this->assign('total',$total);
-		$untotal = $joinModel->where("student=".$_SESSION['user_id']." AND complete_time IS NULL")->count();
+		$untotal = $joinModel->where("student=".$_SESSION['user_id']." AND end_time IS NULL")->count();
 		$this->assign('untotal',$untotal);
 		$complete = I('get.com');
 		$complete = empty($complete)?'yes':$complete;
 		if($complete == 'yes'){
 			$this->assign('com','yes');
-			$where = " AND complete_time IS NOT NULL";
+			$where = " AND end_time IS NOT NULL";
 		}else{
 			$this->assign('com','no');
-			$where = " AND complete_time IS NULL";
+			$where = " AND end_time IS NULL";
 		}
 		$count = $joinModel->where("student=".$_SESSION['user_id'].$where)->count();
 		$Page = new \Think\Page($count,10);

@@ -21,15 +21,7 @@ $(function(){
 			$(".xf_bjpoplx5").show();
 		});
 		
-		$(".ico_zjgn5").click(function(){
-			if($(this).hasClass('active')){
-				$(this).removeClass('active');
-				$(this).parents(".quesbox").find(".xf_jiexibox").hide();
-			}else{
-				$(this).addClass('active');
-				$(this).parents(".quesbox").find(".xf_jiexibox").show();
-			}
-		});
+		
 		$(".xf_qksjpop div a:eq(0)").click(function(){
 			$(".xf_showsj p").remove();
 			$(".xf_showsj .xf_scsjbutton a").addClass('noneac');
@@ -162,9 +154,7 @@ $(function(){
 		$(".xf_bianjipop,.xf_popbg").hide();
 	});
 
-	$(".xf_jiaojuana a").click(function(){
-		$(".xf_jiaojuanpop").show();
-	});
+	
 	$(".xf_tishijjpop div a").click(function(){
 		$(".xf_tishijjpop").hide();
 	});

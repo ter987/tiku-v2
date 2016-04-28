@@ -51,12 +51,12 @@ class AddtikuController extends Controller {
 		$sourceModel = M('tiku_source');
 		$max = $tikuModel->field("MAX(id) as id")->find();
 		//echo $tikuModel->getLastSql();exit;
-		//echo $max['id'];exit;
+		//$sourceModel->save(array('shiti_num'=>0));
 		for($i=1;$i<=$max['id'];$i++){
 			$result = $tikuModel->where("id=$i")->find();
 			if($result){
 				$sourceModel->where("id=".$result['source_id'])->setInc('shiti_num',1);
-
+				usleep(2000);
 			}
 			
 		}

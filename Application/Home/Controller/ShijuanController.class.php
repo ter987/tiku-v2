@@ -19,6 +19,8 @@ class ShijuanController extends GlobalController {
     	if(empty($_SESSION['cart'])){
     		redirect('/');
     	}
+		unset($_SESSION['shijuan']);
+		//var_dump($_SESSION['cart']);exit;
 		//if(empty($_SESSION['shijuan']['title'])){
 	    	$shijuan_type = !empty($_SESSION['shijuan']['shijuan_banshi'])?$_SESSION['shijuan']['shijuan_banshi']:1;//默认的试卷类型：随堂练习
 	    	$shijuantypeModel = M('shijuan_banshi');
@@ -92,12 +94,14 @@ class ShijuanController extends GlobalController {
 		$oa = array(1=>'一',2=>'二',3=>'三',4=>'四',5=>'五',6=>'六',7=>'七');
 		$last = 0;
 		$o = 1;
+		//var_dump($_SESSION['shijuan'][1]);
 		if($_SESSION['shijuan'][1]){
 			$first_juan['t_title'] = $_SESSION['shijuan'][1]['t_title'];
 			$first_juan['note'] = $_SESSION['shijuan'][1]['note'];
 			foreach($_SESSION['shijuan'][1]['shiti'] as $k=>$v){
 				$first_juan['shiti'][$k]['t_title'] = $v['t_title'];
-				$first_juan['shiti'][$k]['childs'] = $this->_getTikuInfo($v['childs'],$o);
+				//var_dump($v['childs']);exit;
+				$first_juan['shiti'][$k]['childs'] = $this->_getTikuInfo($v['childs'],$o,1,$k);
 				$first_juan['shiti'][$k]['order_char']  = $oa[$k];
 				$last = $k;
 				$_SESSION['shijuan'][1]['shiti'][$k]['order_char'] = $oa[$k];
@@ -108,7 +112,7 @@ class ShijuanController extends GlobalController {
 			$second_juan['note'] = $_SESSION['shijuan'][2]['note'];
 			foreach($_SESSION['shijuan'][2]['shiti'] as $k=>$v){
 				$second_juan['shiti'][$k]['t_title'] = $v['t_title'];
-				$second_juan['shiti'][$k]['childs'] = $this->_getTikuInfo($v['childs'],$o);
+				$second_juan['shiti'][$k]['childs'] = $this->_getTikuInfo($v['childs'],$o,2,$k);
 				$second_juan['shiti'][$k]['order_char'] = $oa[$k+$last];
 				$_SESSION['shijuan'][2]['shiti'][$k]['order_char'] = $oa[$k+$last];
 			}
@@ -118,7 +122,7 @@ class ShijuanController extends GlobalController {
 // 1.答题前请填写好自己的班级、姓名、考号等信息</br>
 // 2.请将答案正确填写在答题卡上
 		// ";
-		var_dump($_SESSION['shijuan']);
+		//var_dump($_SESSION['shijuan']);
 		$shijuan['title'] = $_SESSION['shijuan']['title'];
 		$this->assign('first_juan',$first_juan);
 		$this->assign('shijuan_title',$_SESSION['shijuan']['title']);
@@ -233,6 +237,155 @@ class ShijuanController extends GlobalController {
 				$this->ajaxReturn(array('status'=>'success','data'=>array('title'=>$title,'xiaoti_score'=>$xiaoti_score)));
 			}
 			
+		}
+	}
+	public function ajaxChangeOneTeam(){
+		$juan_no = I('get.juan_no');
+		$shiti_no = I('get.shiti_no');
+		$childs = $_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'];
+		$Model = M('tiku');
+		foreach($childs as $val){
+			$geted = true;
+			while($geted){
+				$result = $Model->field("tiku.type_id,tiku_to_point.point_id")
+				->join("tiku_to_point on tiku.id=tiku_to_point.tiku_id")
+				->where("tiku.id=$val")->find();
+				$data = $Model->field("tiku.id")->join("tiku_to_point on tiku.id=tiku_to_point.tiku_id")->where("tiku.type_id=".$result['type_id']." AND tiku_to_point.point_id=".$result['point_id'])->select();
+				if($data){
+					shuffle($data);
+					$data = array_slice($data,0,1);
+					if(in_array($new,$data[0]['id'])){
+						continue;
+					}else{
+						$new[] = $data[0]['id'];
+						$geted = false;
+					}
+					
+				}
+			}
+		}
+		var_dump($new);
+	}
+	//替换数组的键和值
+	public function ajaxChangeOne(){
+		$juan_no = I('get.juan_no');
+		$shiti_no = I('get.shiti_no');
+		$shiti_id = I('get.shiti_id');
+		$key = I('get.key');
+		//$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$shiti_id] = array('id'=>);
+		$order_char = $_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key]['order_char'];
+		unset($_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key]);
+		$Model = M('tiku');
+		$result = $Model->field("tiku.type_id,tiku_to_point.point_id")
+		->join("tiku_to_point on tiku.id=tiku_to_point.tiku_id")
+		->where("tiku.id=$shiti_id")->find();
+		$data = $Model->field("tiku.id")->join("tiku_to_point on tiku.id=tiku_to_point.tiku_id")->where("tiku.type_id=".$result['type_id']." AND tiku_to_point.point_id=".$result['point_id'])->select();
+		shuffle($data);
+		$data = array_slice($data,0,1);
+		$new = $Model->field("id,content,options,answer,analysis")->where("id=".$data[0]['id'])->find();
+		//$id = new['id'];
+		$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key] = array('order_char'=>$order_char,'id'=>$new['id']);
+		ksort($_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs']);
+
+		$html = '<div class="quesopmenu" shiti_id="'.$new['id'].'" juan_no="'.$juan_no.'" shiti_no="'.$shiti_no.'" key="'.$key.'">
+	<a class="ico_zjgn1" onclick="autoXuanti($(this))">自动选题</a>
+	<a class="ico_zjgn2">手动选题</a>
+	<a class="ico_zjgn3">上移</a>
+	<a class="ico_zjgn4">下移</a>
+	<a class="ico_zjgn5" onclick="jiexi($(this))">解析</a>
+	<a class="ico_zjgn6" onclick="deleteMe($(this))">删除</a>
+	<a class="ico_zjgn7">纠错</a>
+</div>
+
+<!-- 纠错 -->
+<div class="xf_jiecuobox">
+	<textarea name="" id="" cols="30" rows="10" placeholder="描述下纠错问题吧，我们会及时改正"></textarea>
+	<div><a href="JavaScript:;">确定</a><a href="JavaScript:;">取消</a></div>
+</div>
+<!-- 纠错end -->
+<div class="quesdiv" id="quesdiv1579176">
+	<table>
+	<tbody>
+	<tr>
+		<td valign="top">
+			<span class="quesindex"><b>'.$order_char.'．</b></span><span class="tips"></span>
+		</td>
+		<td>
+			<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
+				'.htmlspecialchars_decode($new['content']);
+		if($result['type_id'] == 1 || $result['type_id']==6){
+				$options = json_decode($new['options']);
+				$options_index = array(0=>'A',1=>'B',2=>'C',3=>'D',4=>'E');
+				$k = 0;
+				foreach($options as $k=>$val){
+	            	$html .= '<p>
+	            		
+	            			<span style="float:left;line-height:18px;font-size:14px;padding-right:30px;" class="em2">';
+	            	$html .= $options_index[$k].'.'.$val;		
+	            	$html .=		'</span>
+	            		
+	            	</p>';
+            	}
+         }   	
+		$html .=	'</p>
+		</td>
+	</tr>
+	</tbody>
+	</table>
+	<br>
+	<div class="xf_jiexibox">
+		<p>答案：'.htmlspecialchars_decode($new['answer']).'</p>
+		<p>试题解析：</p>
+		<p>'.htmlspecialchars_decode($new['analysis']).'</p>
+	</div>
+</div>';
+		$this->ajaxReturn(array('status'=>'ok','data'=>$html));
+	}
+	public function ajaxDelete(){
+		$key = I('get.key');
+		$juan_no = I('get.juan_no');
+		$shiti_no = I('get.shiti_no');
+		$shiti_id = I('get.shiti_id');
+		unset($_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key]);
+		foreach($_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'] as $k=>$val){
+			if($k>$key){
+				$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$k]['order_char'] -= 1;
+			}
+		}
+		for($i=$shiti_no+1;$i<15;$i++){
+			if(!empty($_SESSION['shijuan'][$juan_no]['shiti'][$i])){
+				foreach($_SESSION['shijuan'][$juan_no]['shiti'][$i]['childs'] as $k=>$val){
+					$_SESSION['shijuan'][$juan_no]['shiti'][$i]['childs'][$k]['order_char'] -= 1;
+				}
+			}
+		}
+		sort($_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs']);
+		if($juan_no==1 && !empty($_SESSION['shijuan'][2])){
+			for($i=1;$i<15;$i++){
+				if(!empty($_SESSION['shijuan'][2]['shiti'][$i])){
+					foreach($_SESSION['shijuan'][2]['shiti'][$i]['childs'] as $k=>$val){
+						$_SESSION['shijuan'][2]['shiti'][$i]['childs'][$k]['order_char'] -= 1;
+					}
+				}
+			}
+		}
+		$this->ajaxReturn(array('status'=>'ok'));
+	}
+	public function ajaxMoveDown(){
+		$key = I('get.key');
+		$juan_no = I('get.juan_no');
+		$shiti_no = I('get.shiti_no');
+		$shiti_id = I('get.shiti_id');
+		//$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$shiti_id] = array('id'=>);
+		$childs = $_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'];
+		if($key+1!=count($childs)){
+			$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key+1]['order_char'] -= 1;
+			$down = $_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key+1];
+			$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key]['order_char'] += 1;
+			$me = $_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key];
+			$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key+1] = $me;
+			$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key] = $down;
+			$this->ajaxReturn(array('status'=>'ok'));
 		}
 	}
 	public function ajaxEditXiaotiScore(){
@@ -1004,14 +1157,16 @@ class ShijuanController extends GlobalController {
 			$this->ajaxSave();
 		}
 	}
-	public function _getTikuInfo($id_arr,&$o){
+	public function _getTikuInfo($id_arr,&$o,$juan_no,$shiti_no){
 		$Model = M('tiku');
 		foreach($id_arr as $key=>$val){
-			$rs = $Model->field("id,content,options,answer,analysis")->where("id=$val")->find();
+			$rs = $Model->field("id,content,options,answer,analysis")->where("id=".$val)->find();
 			$rs['order_char'] = $o;
 			$tiku[] = $rs;
+			$child[] = array('order_char'=>$o,'id'=>$val);
 			$o++;
 		}
+		$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'] = $child;
 		return $tiku;
 	}
 	public function deleteShijuan(){
