@@ -19,6 +19,9 @@ class ShijuanController extends GlobalController {
     	if(empty($_SESSION['cart'])){
     		redirect('/');
     	}
+		if(!$this->getCourseById($_SESSION['course_id'])){
+			redirect('/');
+		}
 		unset($_SESSION['shijuan']);
 		//var_dump($_SESSION['cart']);exit;
 		//if(empty($_SESSION['shijuan']['title'])){
@@ -244,12 +247,12 @@ class ShijuanController extends GlobalController {
 		$shiti_no = I('get.shiti_no');
 		$childs = $_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'];
 		$Model = M('tiku');
-		foreach($childs as $val){
+		foreach($childs as $key=>$val){
 			$geted = true;
 			while($geted){
 				$result = $Model->field("tiku.type_id,tiku_to_point.point_id")
 				->join("tiku_to_point on tiku.id=tiku_to_point.tiku_id")
-				->where("tiku.id=$val")->find();
+				->where("tiku.id=".$val['id'])->find();
 				$data = $Model->field("tiku.id")->join("tiku_to_point on tiku.id=tiku_to_point.tiku_id")->where("tiku.type_id=".$result['type_id']." AND tiku_to_point.point_id=".$result['point_id'])->select();
 				if($data){
 					shuffle($data);
@@ -257,14 +260,69 @@ class ShijuanController extends GlobalController {
 					if(in_array($new,$data[0]['id'])){
 						continue;
 					}else{
-						$new[] = $data[0]['id'];
+						$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key]['id'] = $data[0]['id'];
 						$geted = false;
 					}
 					
 				}
 			}
 		}
-		var_dump($new);
+		foreach($_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'] as $kk=> $v){
+			$new = $Model->where("id=".$v['id'])->find();
+			$html .= '<div data-score="" id="quesbox1579176" class="quesbox"><div class="quesopmenu" shiti_id="'.$new['id'].'" juan_no="'.$juan_no.'" shiti_no="'.$shiti_no.'" key="'.$kk.'">
+	<a class="ico_zjgn1" onclick="autoXuanti($(this))">自动选题</a>
+	<a class="ico_zjgn2">手动选题</a>
+	<a class="ico_zjgn3" onclick="moveUp($(this))">上移</a>
+	<a class="ico_zjgn4" onclick="moveDown($(this))">下移</a>
+	<a class="ico_zjgn5" onclick="jiexi($(this))">解析</a>
+	<a class="ico_zjgn6" onclick="deleteMe($(this))">删除</a>
+	<a class="ico_zjgn7" onclick="toBaocuo($(this))">纠错</a>
+</div>
+
+<!-- 纠错 -->
+<div class="xf_jiecuobox">
+	<textarea name="" id="" cols="30" rows="10" placeholder="描述下纠错问题吧，我们会及时改正"></textarea>
+	<div><a href="JavaScript:;" onclick="baocuo($(this),'.$new['id'].');">确定</a><a href="JavaScript:;" onclick="quxiao($(this));">取消</a></div>
+</div>
+<!-- 纠错end -->
+<div class="quesdiv" id="quesdiv1579176">
+	<table>
+	<tbody>
+	<tr>
+		<td valign="top">
+			<span class="quesindex"><b>'.$v['order_char'].'</b>.</span><span class="tips"></span>
+		</td>
+		<td>
+			<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
+				'.htmlspecialchars_decode($new['content']);
+		if($new['type_id'] == 1 || $new['type_id']==6){
+				$options = json_decode($new['options']);
+				$options_index = array(0=>'A',1=>'B',2=>'C',3=>'D',4=>'E');
+				$k = 0;
+				foreach($options as $k=>$val){
+	            	$html .= '<p>
+	            		
+	            			<span style="float:left;line-height:18px;font-size:14px;padding-right:30px;" class="em2">';
+	            	$html .= $options_index[$k].'.'.$val;		
+	            	$html .=		'</span>
+	            		
+	            	</p>';
+            	}
+         }   	
+		$html .=	'</p>
+		</td>
+	</tr>
+	</tbody>
+	</table>
+	<br>
+	<div class="xf_jiexibox">
+		<p>答案：'.htmlspecialchars_decode($new['answer']).'</p>
+		<p>试题解析：</p>
+		<p>'.htmlspecialchars_decode($new['analysis']).'</p>
+	</div>
+</div></div>';
+		}
+		$this->ajaxReturn(array('status'=>'ok','data'=>$html));
 	}
 	//替换数组的键和值
 	public function ajaxChangeOne(){
@@ -290,17 +348,17 @@ class ShijuanController extends GlobalController {
 		$html = '<div class="quesopmenu" shiti_id="'.$new['id'].'" juan_no="'.$juan_no.'" shiti_no="'.$shiti_no.'" key="'.$key.'">
 	<a class="ico_zjgn1" onclick="autoXuanti($(this))">自动选题</a>
 	<a class="ico_zjgn2">手动选题</a>
-	<a class="ico_zjgn3">上移</a>
-	<a class="ico_zjgn4">下移</a>
+	<a class="ico_zjgn3" onclick="moveUp($(this))">上移</a>
+	<a class="ico_zjgn4" onclick="moveDown($(this))">下移</a>
 	<a class="ico_zjgn5" onclick="jiexi($(this))">解析</a>
 	<a class="ico_zjgn6" onclick="deleteMe($(this))">删除</a>
-	<a class="ico_zjgn7">纠错</a>
+	<a class="ico_zjgn7" onclick="toBaocuo($(this))">纠错</a>
 </div>
 
 <!-- 纠错 -->
 <div class="xf_jiecuobox">
 	<textarea name="" id="" cols="30" rows="10" placeholder="描述下纠错问题吧，我们会及时改正"></textarea>
-	<div><a href="JavaScript:;">确定</a><a href="JavaScript:;">取消</a></div>
+	<div><a href="JavaScript:;" onclick="baocuo($(this),'.$new['id'].');">确定</a><a href="JavaScript:;" onclick="quxiao($(this));">取消</a></div>
 </div>
 <!-- 纠错end -->
 <div class="quesdiv" id="quesdiv1579176">
@@ -308,7 +366,7 @@ class ShijuanController extends GlobalController {
 	<tbody>
 	<tr>
 		<td valign="top">
-			<span class="quesindex"><b>'.$order_char.'．</b></span><span class="tips"></span>
+			<span class="quesindex"><b>'.$order_char.'</b>.</span><span class="tips"></span>
 		</td>
 		<td>
 			<p style="font-size:10.5pt; line-height:150%; margin:0pt; orphans:0; text-align:justify; widows:0">
@@ -385,6 +443,23 @@ class ShijuanController extends GlobalController {
 			$me = $_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key];
 			$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key+1] = $me;
 			$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key] = $down;
+			$this->ajaxReturn(array('status'=>'ok'));
+		}
+	}
+	public function ajaxMoveUp(){
+		$key = I('get.key');
+		$juan_no = I('get.juan_no');
+		$shiti_no = I('get.shiti_no');
+		$shiti_id = I('get.shiti_id');
+		//$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$shiti_id] = array('id'=>);
+		$childs = $_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'];
+		if($key!=0){
+			$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key-1]['order_char'] += 1;
+			$up = $_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key-1];
+			$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key]['order_char'] -= 1;
+			$me = $_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key];
+			$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key-1] = $me;
+			$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key] = $up;
 			$this->ajaxReturn(array('status'=>'ok'));
 		}
 	}
@@ -718,12 +793,12 @@ class ShijuanController extends GlobalController {
 		$last = 0;
 		$o = 1;
 		$answer_part = array();
-		if($_SESSION['shijuan'][1]){
+		if($_SESSION['shijuan'][1]==9){exit;
 			$option_index = array(0=>'A',1=>'B',2=>'C',3=>'D',4=>'E');
 			$section->addText($_SESSION['shijuan'][1]['t_title'],array('size'=>13,'bold'=>true),array('align' => 'center'));
 			$section->addText($_SESSION['shijuan'][1]['note'],array('size'=>13));
 			foreach($_SESSION['shijuan'][1]['shiti'] as $k=>$v){
-				$childs = $this->_getTikuInfo($v['childs'],$o);
+				$childs = $this->getTikuInfo($v['childs']);
 				$answer_part = array_merge($answer_part,$childs);
 				//var_dump($answer_part);exit;
 				$last = $k;
@@ -905,12 +980,24 @@ class ShijuanController extends GlobalController {
 				}
 			}
 		}
+$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+		//$objWriter->save('helloWorld.doc');exit;
+		
+		//$objWriter->save(Yii::app()->params['exportToDir'].$filename.".docx");
+        header("Content-Description: File Transfer");
+        header('Content-Disposition: attachment; filename="'.$_SESSION['shijuan']['title'].'.docx"');
+        //header("Content-Type: application/docx");
+        header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+        header('Content-Transfer-Encoding: binary');
+        header("Cache-Control: public");
+        header('Expires: 0');
+        $objWriter->save("php://output");
 		$section->addTextBreak();
 		if($_SESSION['shijuan'][2]){
 			$section->addText($_SESSION['shijuan'][2]['t_title'],array('size'=>13,'bold'=>true),array('align' => 'center'));
 			$section->addText($_SESSION['shijuan'][2]['note'],array('size'=>13));
 			foreach($_SESSION['shijuan'][2]['shiti'] as $k=>$v){
-				$childs = $this->_getTikuInfo($v['childs'],$o);
+				$childs = $this->getTikuInfo($v['childs']);
 				$answer_part = array_merge($answer_part,$childs);
 				$last = $k;
 				$section->addText($oa[$k].'、'.$v['t_title'],array('size'=>13,'bold'=>true));
@@ -1167,6 +1254,15 @@ class ShijuanController extends GlobalController {
 			$o++;
 		}
 		$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'] = $child;
+		return $tiku;
+	}
+	public function getTikuInfo($id_arr){
+		$Model = M('tiku');
+		foreach($id_arr as $key=>$val){
+			$rs = $Model->field("id,content,options,answer,analysis")->where("id=".$val['id'])->find();
+			$rs['order_char'] = $val['order_char'];
+			$tiku[] = $rs;
+		}
 		return $tiku;
 	}
 	public function deleteShijuan(){

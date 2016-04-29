@@ -161,9 +161,7 @@ $(function(){
 	$(".xf_jiucuo").click(function(){
 		$(this).siblings(".xf_jiecuobox").show();
 	});
-	$(".ico_zjgn7").click(function(){
-		$(this).parent().siblings(".xf_jiecuobox").show();
-	});
+	
 	
 	$(".param_tr td span").click(function(){
 		$(this).parents(".param_tr").remove();

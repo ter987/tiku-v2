@@ -25,7 +25,7 @@ dia_log.prototype.check = function(){
 	$("#paperdownload").click(function(){
 		$("#sj_div").dialog({
 			title:"生成试卷",
-			width:"760",
+			width:"560",
 			height:"auto",
 			modal:true,
 			create: function(){
@@ -36,6 +36,18 @@ dia_log.prototype.check = function(){
 					$(":button").slice(2,3).css({"background":"#fff","color":"#000","border":"1px solid #e5e5e5"});
 				},
 				click:function(){
+					var doctype = $('#doc_type').find("input:checked").val();
+					var shijuan_model = $('#shijuan_model').find("input:checked").val();
+					var answer_order = $('#answer_order').find("input:checked").val();
+					$.getJSON(
+						'/shijuan/ajaxDownload',
+					{doctype:doctype,shijuan_model:shijuan_model,answer_order:answer_order},
+					function(data){
+						if(data.status=='success'){
+							$('#down_iframe').attr('src','/shijuan/createtoword');
+							}
+						}
+					);
 					dialog = this;		
 					$('#sj_div').dialog("destroy");
 				}
@@ -115,7 +127,32 @@ dia_log.prototype.check = function(){
 			}
 		});
 	});
-	
+	$(".jx_zzt").click(function(){
+		$(".jx_xslist").dialog({
+			title:"第1题--A选项学生名单(23人 占比35.3%)",
+			width:"580",
+			height:"auto",
+			modal:true,
+			create: function(){
+			},
+			beforeClose: function() {
+				$('.jx_xslist').dialog("destroy");
+			}
+		});
+	});
+	$(".jx_fx").click(function(){
+		$(".jx_xslist").dialog({
+			title:"第1题--0-3分 学生名单(23人 占比35.3%)",
+			width:"580",
+			height:"auto",
+			modal:true,
+			create: function(){
+			},
+			beforeClose: function() {
+				$('.jx_xslist').dialog("destroy");
+			}
+		});
+	});
 };
 $(function(){
 	new dia_log();

@@ -74,6 +74,22 @@ class GlobalController extends Controller{
 		$chuzhong_data = $Course->where('status=1 AND course_type=2')->select();
 		if($chuzhong_data) $this->assign('chuzhong_data',$chuzhong_data);
 	}
+	public function getCourseById($id){
+		if(!$id){
+			return false;
+		}
+		$Model = M('tiku_course');
+		$result = $Model->where("id=$id")->find();
+		if($result){
+			$this->assign('this_course_type',$result['course_type']);
+			$this->assign('this_course_id',$result['course_id']);
+			$this->assign('this_course_name',$result['course_name']);
+			$this->assign('this_pinyin',$result['pinyin']);
+			return true;
+		}else{
+			return false;
+		}
+	}
 	public function findChild(&$data, $parent_id = 0) {
         $rootList = array();
         foreach ($data as $key => $val) {

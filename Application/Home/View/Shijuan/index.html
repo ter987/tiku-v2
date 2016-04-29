@@ -4,7 +4,7 @@
 	<div style="margin-top:2px;min-height:500px;">
 		<div style="background:#DBF0FF;border-bottom:4px solid #0190F2;">
 			<div style="width:1000px;height:64px;">
-				<div style="float:left;line-height:68px;color:#4c4c4c;font-size:24px;">高中<span class="c_blue">语文</span></div>
+				<div style="float:left;line-height:68px;color:#4c4c4c;font-size:24px;"><eq name="this_course_type" value="1"> 高中 <else /> 初中 </eq><span class="c_blue">{$this_course_name}</span></div>
 				<div style="float:right;color:#fff;font-size:20px;background:#0190F2;padding:10px 20px;margin-top:20px;border-top-left-radius:5px;border-top-right-radius:5px;">在线组卷</div>
 			</div>
 		</div>
@@ -152,17 +152,17 @@
 																	<div class="quesopmenu" shiti_id="{$v.id}" juan_no="1" shiti_no="{$kk}" key="{$ks-1}">
 																		<a class="ico_zjgn1" onclick="autoXuanti($(this))">自动选题</a>
 																		<a class="ico_zjgn2">手动选题</a>
-																		<a class="ico_zjgn3">上移</a>
+																		<a class="ico_zjgn3" onclick="moveUp($(this))">上移</a>
 																		<a class="ico_zjgn4" onclick="moveDown($(this))">下移</a>
 																		<a class="ico_zjgn5" onclick="jiexi($(this))">解析</a>
 																		<a class="ico_zjgn6" onclick="deleteMe($(this))">删除</a>
-																		<a class="ico_zjgn7">纠错</a>
+																		<a class="ico_zjgn7" onclick="toBaocuo($(this))">纠错</a>
 																	</div>
 
 	<!-- 纠错 -->
 	<div class="xf_jiecuobox">
 		<textarea name="" id="" cols="30" rows="10" placeholder="描述下纠错问题吧，我们会及时改正"></textarea>
-		<div><a href="JavaScript:;">确定</a><a href="JavaScript:;">取消</a></div>
+		<div><a href="JavaScript:;" onclick="baocuo($(this),{$v.id});">确定</a><a href="javascript:;" onclick="quxiao($(this));">取消</a></div>
 	</div>
 	<!-- 纠错end -->
 																	<div class="quesdiv" id="quesdiv1579176">
@@ -235,8 +235,8 @@
 														<div class="questype" id="questype2_0">
 															<div class="questypehead" id="questypehead2_5" style="border: 1px solid rgb(255, 255, 255); background: rgb(255, 255, 255) none repeat scroll 0% 0%; color: rgb(0, 0, 0);">
 																<div class="questypemenu">
-																	<div class="check_class">换一组</div>
-																	<div class="editpart"></div>
+																	<div class="check_class" juan_no="2" shiti_no="{$kk}">换一组</div>
+																	<div class="editpart" juan_no="2" shiti_no="{$kk}"></div>
 																</div>
 																<div class="questypeheadbox" id="questypeheadbox2_5">
 																	<table border="0" cellpadding="0" cellspacing="0" width="100%" height="60px">
@@ -283,17 +283,17 @@
 																	<div class="quesopmenu" shiti_id="{$v.id}" juan_no="2" shiti_no="{$kk}" key="{$ks-1}">
 																		<a class="ico_zjgn1" onclick="autoXuanti($(this))">自动选题</a>
 																		<a class="ico_zjgn2">手动选题</a>
-																		<a class="ico_zjgn3">上移</a>
+																		<a class="ico_zjgn3" onclick="moveUp($(this))">上移</a>
 																		<a class="ico_zjgn4" onclick="moveDown($(this))">下移</a>
 																		<a class="ico_zjgn5" onclick="jiexi($(this))">解析</a>
 																		<a class="ico_zjgn6" onclick="deleteMe($(this))">删除</a>
-																		<a class="ico_zjgn7">纠错</a>
+																		<a class="ico_zjgn7" onclick="toBaocuo($(this))">纠错</a>
 																	</div>
 
 	<!-- 纠错 -->
 	<div class="xf_jiecuobox">
 		<textarea name="" id="" cols="30" rows="10" placeholder="描述下纠错问题吧，我们会及时改正"></textarea>
-		<div><a href="JavaScript:;">确定</a><a href="JavaScript:;">取消</a></div>
+		<div><a href="JavaScript:;" onclick="baocuo($(this),{$v.id});">确定</a><a href="JavaScript:;" onclick="quxiao($(this));">取消</a></div>
 	</div>
 	<!-- 纠错end -->
 																	<div class="quesdiv" id="quesdiv1579226">
@@ -369,8 +369,8 @@
 						<span>格式</span>
 					</div>
 					<div class="fl">
-						<label><input name="docversion" value="docx" type="radio"><span>Word 2007/2010</span><font class="datika_doc">，文件扩展名为docx</font></label>
-						<label><input name="docversion" checked="checked" value="doc" type="radio"><span>Word 2000/2003</span><font class="datika_doc">，文件扩展名为doc</font></label>
+						<label><input name="doctype" value="docx" type="radio" checked=""><span>Word 2007/2010</span><font class="datika_doc">，文件扩展名为docx</font></label>
+						<!-- <label><input name="docversion" checked="checked" value="doc" type="radio"><span>Word 2000/2003</span><font class="datika_doc">，文件扩展名为doc</font></label> -->
 					</div>
 					</li>
 					<li>
@@ -397,9 +397,9 @@
 				</td>
 			</tr>
 			<tr>
-				<td >
-					<input name="docversion" value="docx" style="vertical-align:middle;" id="docx" type="radio"><label for="docx">&nbsp;Word 2007/2010，文件扩展名为<span class="red">docx</span></label><br>
-					<input name="docversion" checked="checked" value="doc" style="vertical-align:middle;" id="doc" type="radio"><label for="doc">&nbsp;Word 2000/2003，文件扩展名为<span class="red">doc</span></label><br>
+				<td id="doc_type">
+					<input name="doctype" value="docx" checked="" style="vertical-align:middle;" id="docx" type="radio"><label for="docx">&nbsp;Word 2007/2010，文件扩展名为<span class="red">docx</span></label><br>
+					<!-- <input name="docversion" checked="checked" value="doc" style="vertical-align:middle;" id="doc" type="radio"><label for="doc">&nbsp;Word 2000/2003，文件扩展名为<span class="red">doc</span></label><br> -->
 				</td>
 			</tr>
 			<tr>
@@ -421,34 +421,23 @@
 						<div valign="bottom" style="margin-right:50px;float:Left;">
 							&nbsp;<a id="p_A3"></a>
 						</div>
-						<div valign="bottom" style="margin-right:50px;float:Left;">
-							&nbsp;<a id="p_16K"></a>
-						</div>
-						<div valign="bottom" style="margin-right:50px;float:Left;">
-							&nbsp;&nbsp;<a id="p_8KH"></a>
-						</div>
 						<div valign="bottom" style="float:Left;">
 							&nbsp;<a id="p_A3H"></a>
 						</div>
 					</div>
-					<div> 
-						<div style="float:left;margin-right:70px">
-							<input name="papersize" checked="checked" value="A4" id="A4" type="radio"><label for="16K">A4</label>
+					<div class="clear"></div>
+					<div id="shijuan_model"> 
+						<div style="float:left;margin-right:35px">
+							<input name="model" checked="checked" value="A4" id="A4" type="radio"><label for="A4">A4纸竖版</label>
+						</div>
+						<div style="float:left;margin-right:40px">
+							<input name="model" value="A3" id="A3" type="radio"><label for="A3">A3纸横版</label>
 						</div>
 						<div style="float:left;margin-right:60px">
-							<input name="papersize" value="A4H" id="A4H" type="radio"><label for="A4H">A4横(双栏)</label>
-						</div>
-						<div style="float:left;margin-right:70px">
-							<input name="papersize" value="A3" id="A3" type="radio"><label for="A3">A3</label>
-						</div>
-						<div style="float:left;margin-right:60px">
-							<input name="papersize" value="16K" id="16K" type="radio"><label for="16K">16K</label>
-						</div>
-						<div style="float:left;margin-right:60px">
-							<input name="papersize" value="8KH" id="8KH" type="radio"><label for="8KH">8K横(双栏)</label>
+							<input name="model" value="B5" id="B5" type="radio"><label for="B5">B5纸竖版</label>
 						</div>
 						<div style="float:left;">
-							<input name="papersize" value="A3H" id="A3H" type="radio"><label for="A3H">A3横(双栏)</label>
+							<input name="model" value="B4" id="B4" type="radio"><label for="B4">B4纸横版</label>
 						</div>
 					</div>
 					</tbody>
@@ -461,14 +450,15 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
-					<input name="papertype" checked="checked" value="normal" style="vertical-align:middle;" id="papertype_normal" type="radio"><label for="papertype_normal">&nbsp;普通用卷（答案集中在卷尾）<br>
-					<input name="papertype" value="teacher" style="vertical-align:middle;" id="papertype_teacher" type="radio"><label for="papertype_teacher">&nbsp;教师用卷（每题后面跟答案）<br>
-					<input name="papertype" value="student" style="vertical-align:middle;" id="papertype_student" type="radio"><label for="papertype_student">&nbsp;学生用卷（无答案）<br>
+				<td id="answer_order">
+					<input name="answer_order" value="2" checked="checked"  style="vertical-align:middle;" id="papertype_normal" type="radio"><label for="papertype_normal">&nbsp;普通用卷（答案集中在卷尾）<br>
+					<input name="answer_order" value="1" style="vertical-align:middle;" id="papertype_teacher" type="radio"><label for="papertype_teacher">&nbsp;教师用卷（每题后面跟答案）<br>
+					<input name="answer_order" value="3" style="vertical-align:middle;" id="papertype_student" type="radio"><label for="papertype_student">&nbsp;学生用卷（无答案）<br>
 					</label></label></label>
 				</td>
 			</tr>
-			<tr>
+			<iframe src="" id="down_iframe" style="display:none;"></iframe>
+			<!-- <tr>
 				<td >
 					<b>其他属性</b>
 				</td>
@@ -477,7 +467,7 @@
 				<td >
 					<input name="showsoure" value="normal" style="vertical-align:middle;" id="showsoure" type="checkbox"><label for="showsoure">&nbsp;是否标记每道试题来源。</label><br>
 				</td>
-			</tr>
+			</tr> -->
 			</tbody>
 			</table>
 		</form>
@@ -582,18 +572,14 @@
 	$(".check_class").click(function(){
 		var juan_no = $(this).attr('juan_no');
 		var shiti_no = $(this).attr('shiti_no');
+		var obj = $(this);
 		$.getJSON(
 			'/index.php/home/shijuan/ajaxChangeOneTeam',
 			{juan_no:juan_no,shiti_no:shiti_no},
 			function(data){
 				//alert(data.id);
 				if(data.status=='ok'){
-					var html = '';
-					$.each(data.data, function(index,vo) {
-					  html += '<li id="'+vo.id+'" onclick="student_sel($(this))">'+vo.nick_name+'</li>';
-				
-					});
-					$('#my_students').html(html);
+					obj.parent().parent().next().html(data.data);
 				}
 			}
 			
@@ -799,6 +785,36 @@ function moveDown(obj){
 		}
 	);
 }
+function moveUp(obj){
+	var shiti_id = obj.parent().attr('shiti_id');
+	var juan_no = obj.parent().attr('juan_no');
+	var shiti_no = obj.parent().attr('shiti_no');
+	var key = obj.parent().attr('key');
+	$.getJSON(
+		'/shijuan/ajaxMoveup',
+		{shiti_id:shiti_id,juan_no:juan_no,shiti_no:shiti_no,key:key},
+		function(data){
+			if(data.status=='ok'){
+				
+				//alert(obj.parent().parent().find("b").html());
+				var me_order = parseInt(obj.parent().parent().find("b").html())-1;
+				var down_order = parseInt(obj.parent().parent().prev().find("b").html())+1;
+				obj.parent().parent().find("b").html(me_order);
+				obj.parent().parent().prev().find("b").html(down_order);
+				
+				var me_k = parseInt(obj.parent().attr("key"))-1;
+				var down_k = parseInt(obj.parent().parent().prev().find(".quesopmenu").attr("key"))+1;
+				obj.parent().attr("key",me_k);
+				obj.parent().parent().prev().find(".quesopmenu").attr("key",down_k);
+				
+				var me = obj.parent().parent().html();
+				var down = obj.parent().parent().prev().html();
+				obj.parent().parent().prev().html(me);
+				obj.parent().parent().html(down);
+			}
+		}
+	);
+}
 function deleteMe(obj){
 	var shiti_id = obj.parent().attr('shiti_id');
 	var juan_no = obj.parent().attr('juan_no');
@@ -833,6 +849,9 @@ function deleteMe(obj){
 			}
 		}
 	);
+}
+function toBaocuo(obj){
+	obj.parent().siblings(".xf_jiecuobox").show();
 }
 </script>
 <link href="__PUBLIC__/js/jquery-ui-1.11.2.custom/jquery-ui.css" rel="stylesheet" type="text/css" />

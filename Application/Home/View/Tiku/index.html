@@ -160,7 +160,7 @@
 				<!-- 纠错 -->
 				<div class="xf_jiecuobox">
 					<textarea name="" id="" cols="30" rows="10" placeholder="描述下纠错问题吧，我们会及时改正"></textarea>
-					<div><a href="JavaScript:;" onclick="baocuo($(this),{$vo.id});">确定</a><a href="JavaScript:;">取消</a></div>
+					<div><a href="JavaScript:;" onclick="baocuo($(this),{$vo.id});">确定</a><a href="JavaScript:;" onclick="quxiao($(this));">取消</a></div>
 				</div>
 				<!-- 纠错end -->
 					<a href="JavaScript:;" class="xf_jiucuo">纠错</a>
@@ -588,26 +588,7 @@ function add_tiku(id,obj){
 		}
 	);
 }
-function baocuo(obj,id){
-	if(obj.parent().prev().val()===''){
-		obj.parent().prev().attr('style','border:1px solid red;');
-	}else{
-		$.getJSON(
-		'/index.php/home/tiku/ajaxBaocuo',
-		{id:id,msg:obj.parent().prev().val()},
-		function(data){
-			if(data.status=='notlogin'){
-				window.location.href = '/member/login';
-			}else if(data.status=='error'){
-				//错误提示弹窗
-			}else if(data.status=='ok'){
-				$(".xf_jiecuobox").hide();
-			}
-		}
-		
-	);
-	}
-}
+
 
 	</script>
 <include file="common:footer" />

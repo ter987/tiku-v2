@@ -28,6 +28,29 @@
 				$(".xf_centerbox").removeClass('xf_scroll');
 			}
 		});
+		function baocuo(obj,id){
+			if(obj.parent().prev().val()===''){
+				obj.parent().prev().attr('style','border:1px solid red;');
+			}else{
+				$.getJSON(
+				'/index.php/home/tiku/ajaxBaocuo',
+				{id:id,msg:obj.parent().prev().val()},
+				function(data){
+					if(data.status=='notlogin'){
+						window.location.href = '/member/login';
+					}else if(data.status=='error'){
+						//错误提示弹窗
+					}else if(data.status=='ok'){
+						$(".xf_jiecuobox").hide();
+					}
+				}
+				
+			);
+			}
+		}
+		function quxiao(obj){
+			obj.parent().parent().hide();
+		}
 	</script>
 </body>
 </html>
