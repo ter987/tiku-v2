@@ -758,6 +758,7 @@ class ShijuanController extends GlobalController {
 		// if(empty($_SESSION['shijuan'])){
     		// redirect('/');
     	// }
+    	//var_dump($_SESSION['shijuan']);exit;
 		Vendor('PhpWord.src.PhpWord.Autoloader');
 		\PhpOffice\PhpWord\Autoloader::register();
 		Vendor('PhpOffice.PhpWord.Shared.Font');
@@ -771,16 +772,16 @@ class ShijuanController extends GlobalController {
 			'B5'=>array('width'=>'18.1','height'=>'25.6','colsnum'=>'1','orientation'=>'portrait'),
 			'B4'=>array('width'=>'24.9','height'=>'35.2','colsnum'=>'2','orientation'=>'landscape'),
 		);
-		$sectionStyle = array(
-		    'pageSizeW' => $PHPWord_Shared_Font->centimeterSizeToTwips($model_array[$_SESSION['shijuan_model']]['width']),
-		    'pageSizeH' => $PHPWord_Shared_Font->centimeterSizeToTwips($model_array[$_SESSION['shijuan_model']]['height']),
-		    'colsNum'	=> $model_array[$_SESSION['shijuan_model']]['colsnum'],
-		    'orientation'	=> $model_array[$_SESSION['shijuan_model']]['orientation']
-		);
-		$section = $phpWord->addSection($sectionStyle);
+		// $sectionStyle = array(
+		    // 'pageSizeW' => $PHPWord_Shared_Font->centimeterSizeToTwips($model_array[$_SESSION['shijuan_model']]['width']),
+		    // 'pageSizeH' => $PHPWord_Shared_Font->centimeterSizeToTwips($model_array[$_SESSION['shijuan_model']]['height']),
+		    // 'colsNum'	=> $model_array[$_SESSION['shijuan_model']]['colsnum'],
+		    // 'orientation'	=> $model_array[$_SESSION['shijuan_model']]['orientation']
+		// );
+		$section = $phpWord->addSection();
 		//$section->getStyle()->setPageNumberingStart(1);
-		$footer = $section->addFooter();
-		$footer->addTextboxes();
+		//$footer = $section->addFooter();
+		//$footer->addTextboxes();
 		//$footer->addPreserveText('第{PAGE}页(共{NUMPAGES}页).');
 		//$header = $section->addHeader();
 		//$header->addText('头部');
