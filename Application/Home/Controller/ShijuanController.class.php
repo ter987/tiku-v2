@@ -787,14 +787,18 @@ class ShijuanController extends GlobalController {
 		//$header->addText('头部');
 		// You can directly style your text by giving the addText function an array:
 		$section->addText($_SESSION['shijuan']['title'], array( 'size'=>'15','bold'=>true),array('align' => 'center'));
+		$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+		//$objWriter->save(Yii::app()->params['exportToDir'].$filename.".docx");
+        
 		$section->addText('满分：'.$_SESSION['shijuan']['score'], array( 'size'=>'13'),array('align' => 'center'));
 		$section->addText('班级：_________  姓名：_________  考号：_________', array( 'size'=>'13'),array('align' => 'center'));
 		$section->addTextBreak();//换行
+		
 		$oa = array(1=>'一',2=>'二',3=>'三',4=>'四',5=>'五',6=>'六',7=>'七');
 		$last = 0;
 		$o = 1;
 		$answer_part = array();
-		if($_SESSION['shijuan'][1]==9){exit;
+		if($_SESSION['shijuan'][1]){
 			$option_index = array(0=>'A',1=>'B',2=>'C',3=>'D',4=>'E');
 			$section->addText($_SESSION['shijuan'][1]['t_title'],array('size'=>13,'bold'=>true),array('align' => 'center'));
 			$section->addText($_SESSION['shijuan'][1]['note'],array('size'=>13));
@@ -981,18 +985,7 @@ class ShijuanController extends GlobalController {
 				}
 			}
 		}
-$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-		//$objWriter->save('helloWorld.doc');exit;
 		
-		//$objWriter->save(Yii::app()->params['exportToDir'].$filename.".docx");
-        header("Content-Description: File Transfer");
-        header('Content-Disposition: attachment; filename="'.$_SESSION['shijuan']['title'].'.docx"');
-        //header("Content-Type: application/docx");
-        header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-        header('Content-Transfer-Encoding: binary');
-        header("Cache-Control: public");
-        header('Expires: 0');
-        $objWriter->save("php://output");
 		$section->addTextBreak();
 		if($_SESSION['shijuan'][2]){
 			$section->addText($_SESSION['shijuan'][2]['t_title'],array('size'=>13,'bold'=>true),array('align' => 'center'));
@@ -1233,6 +1226,15 @@ $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 			$this->ajaxReturn(array('status'=>'yes'));
 		}else{
 			$this->ajaxReturn(array('status'=>'no'));
+		}
+	}
+	public function ajaxGoTiku(){
+		if(!empty($_SESSION['course_id'])){
+			$data = $this->getCourseById($_SESSION['course_id']);
+			
+			$this->ajaxReturn(array('status'=>'ok','pinyin'=>$data['pinyin']));
+		}else{
+			$this->ajaxReturn(array('status'=>'error'));
 		}
 	}
 	public function ajaxDownload(){

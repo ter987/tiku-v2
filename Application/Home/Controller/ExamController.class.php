@@ -143,7 +143,7 @@ class ExamController extends GlobalController {
 		$Model = M('tiku');
 		$answerModel = M('ceping_answer');
 		foreach($id_arr as $key=>$val){
-			$rs = $Model->field("id,content,options,answer,analysis")->where("id=$val")->find();
+			$rs = $Model->field("id,content,options,answer,analysis")->where("id=".$val['id'])->find();
 			$result = $answerModel->where("ceping_id=".$_SESSION['my_ceping']." AND tiku_id=".$rs['id']." AND student=".$_SESSION['user_id'])->find();
 			
 			if($result){

@@ -71,7 +71,7 @@
 			<div class='xf_topnavinner'>
 				<ul>
 					<li><a href="/">首页</a></li>
-					<li class='xf_topnavtk  cur'>
+					<li class='xf_topnavtk <eq name="this_module" value="tiku">cur</eq> '>
 						<a href="#">题库</a>
 						<div class="xf_tikml">
 							<notempty name="gaozhong">
@@ -92,22 +92,27 @@
 							</notempty>
 						</div>
 					</li>
-					<li><a href="/smart/">组卷</a></li>
-					<li><a href="javascript:void(0)" onclick="jingpin()">试卷</a></li>
-					<li><a href="/ceping/">测评</a></li>
-					<li><a href="/studycenter/index/">学习中心</a></li>
+					<li <eq name="this_module" value="smart">class='cur'</eq>><a href="/smart/">组卷</a></li>
+					<li <eq name="this_module" value="jingpin">class='cur'</eq>><a href="javascript:void(0)" onclick="jingpin()">试卷</a></li>
+					<li <eq name="this_module" value="lianxi">class='cur'</eq>><a href="/lianxi/">在线练习</a></li>
+					<li <eq name="this_module" value="studycenter">class='cur'</eq>><a href="/studycenter/index/">学习中心</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 <script>
-function select_course(id,pinyin,jumpto){
+function select_course(id,pinyin,jumpto,f='<php>echo $_GET['for'];</php>'){
 	$.getJSON(
 		'/index.php/home/tiku/ajaxSelectCourse',
 		{id:id,pinyin:pinyin,jumpto:jumpto},
 		function(data){
 			if(data.status=='ok'){
-				window.location.href = data.jumpto;
+				if(f!=''){
+					window.location.href = data.jumpto+'?for='+f;
+				}else{
+					window.location.href = data.jumpto;
+				}
+				
 			}
 		}
 		

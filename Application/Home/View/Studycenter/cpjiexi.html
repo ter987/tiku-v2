@@ -1,0 +1,156 @@
+<include file="common:header" />
+	<!--main-->
+
+		<div class="xf_qiehuankmbox">
+			<div class="xf_qiehuankminner">
+				<div class="xf_dqkm"><eq name="course.course_type" value="1">高中<else/>初中</eq>
+					<span class="c_blue xf_dqkmlx">{$course.course_name}</span> 
+				</div>
+				<div class='xf_zaixuanzj'>试卷解析</div>
+			</div>
+		</div>	
+		<!-- 试题解析 -->
+		<div class="xf_zhentixlbox" style="position:relative;">
+			<div class="xf_zhentxlbt">
+				<h3>{$ceping.title}</h3>
+				<p><notempty name="ceping.limit_time">时间：{$ceping.limit_time}分钟&nbsp;&nbsp;</notempty><notempty name="ceping.score">满分：{$ceping.score}分&nbsp;&nbsp;</notempty></p>
+			</div>
+			<div style="width:980px;background:#fff;padding:10px;padding-bottom:50px">
+				<div style="border-bottom:1px solid #0190F2;width:100%;height:26px;">
+					<div class="jx_style1 fl">答题情况</div>
+					<div class="fr" style="margin-right:10px;">	
+						<div class="fl">对错：</div>
+						<div class="fl">
+							<div class="nd_tag bg_lv fl"></div>
+							<div class="fl" style="margin-left:10px;">对</div>
+						</div>
+						<div class="fl">
+							<div class="nd_tag bg_hong fl"></div>
+							<div class="fl" style="margin-left:10px;">错</div>
+						</div>
+						<div class="fl">
+							<div class="nd_tag bg_hui fl"></div>
+							<div class="fl" style="margin-left:10px;">未知</div>
+						</div>
+					</div>
+				</div>
+				<div style="margin:15px 40px;">
+					<div class="jx_tag bg_lv">1</div>
+					<div class="jx_tag bg_lv">2</div>
+					<div class="jx_tag bg_lv">3</div>
+					<div class="jx_tag bg_lv">4</div>
+					<div class="jx_tag bg_lv">5</div>
+					<div class="jx_tag bg_lv">6</div>
+					<div class="jx_tag bg_lv">7</div>
+					<div class="jx_tag bg_hui">8</div>
+					<div class="jx_tag bg_lv">9</div>
+					<div class="jx_tag bg_lv">10</div>
+					<div class="jx_tag bg_lv">11</div>
+					<div class="jx_tag bg_lv">12</div>
+					<div class="jx_tag bg_hong">13</div>
+					<div class="jx_tag bg_lv">14</div>
+					<div class="jx_tag bg_lv">15</div>
+					<div class="jx_tag bg_lv">16</div>
+					<div class="jx_tag bg_hong">17</div>
+					<div class="jx_tag bg_hong">18</div>
+					<div class="jx_tag bg_hong">19</div>
+					<div class="jx_tag bg_hui">20</div>
+					<div class="clear"></div>
+				</div>
+				<div style="border-bottom:1px solid #0190F2;width:100%;height:26px;">
+					<div class="jx_style1 fl">试卷讲评 </div>
+				</div>
+				<volist name="data" id="vo">
+                <div id="num1" class="b_test xf_teshuli" style="width:980px;height:auto;float:left;margin-top:20px;">
+                    <!-- 纠错 -->
+					<div class="xf_jiecuobox">
+						<textarea name="" id="" cols="30" rows="10" placeholder="描述下纠错问题吧，我们会及时改正"></textarea>
+						<div><a href="JavaScript:;">确定</a><a href="JavaScript:;">取消</a></div>
+					</div>
+					<!-- 纠错end -->
+					<a href="JavaScript:;" class="xf_jiucuo" style="text-align:center;line-height:27px;">纠错</a>
+					<div style="width:960px;height:auto;float:left;margin:10px">  
+						<div class="content">
+							<div style="font-size:18px;color:#ff8100;">
+								{$vo.order_char}.
+							</div>
+							<div style="line-height:30px;">
+								{$vo.content|htmlspecialchars_decode}
+							</div>
+							<div style="width:960px;">
+								<div class="fl" style="width:50%;line-height:30px;">
+									A. 细胞壁作为边界能将细胞与外界环境分隔开
+								</div>
+								<div class="fl" style="width:50%;line-height:30px;">
+									B. 胞间连丝能实现细胞间信息物质的运输
+								</div>
+								<div class="fl" style="width:50%;line-height:30px;">
+									C. 线粒体中的酶能催化葡萄糖分解为CO 2	
+								</div>
+								<div class="fl" style="width:50%;line-height:30px;">
+									D. 溶酶体中的酶能催化修复损伤的细胞器
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div style="width:100%;height:35px;background:#F5F5F5;border-top:1px solid #CCCCCC;">
+						<div class="fl jx_zq">
+							回答正确
+						</div>
+						<div class="fr cp jx_stjx cur">隐藏解析 ∧</div>	
+					</div>
+					<div class="jx_xq">
+						<div style="margin:10px;border-bottom:1px dashed #D9D9D9;">
+							<div style="margin:10px;">
+								<div class="right_sj">【我的答案】</div>
+								<div style="margin-left:15px;">B</div>
+							</div>
+						</div>
+						<div style="margin:10px;border-bottom:1px dashed #D9D9D9;">
+							<div style="margin:10px;">
+								<div class="right_sj">【正确答案】</div>
+								<div style="margin-left:15px;">{$vo.answer|htmlspecialchars_decode}</div>
+							</div>
+						</div>
+						<div style="margin:10px;border-bottom:1px dashed #D9D9D9;">
+							<div style="margin:10px;">
+								<div class="right_sj">【解析】</div>
+								<div style="margin-left:15px;">
+									<p style="line-height:30px;">	
+										{$vo.analysis|htmlspecialchars_decode}
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>	
+                </div>
+               </volist>
+				
+				
+				<div class="clear"></div>
+			</div>
+			<div style="width:80px;position:absolute;top:50px;left:-100px;">
+				<div class="jx_l_t">
+				</div>
+				<a href="#num1"><div class="jx_l_c">
+					题目1
+				</div></a>
+				<a href="#num2"><div class="jx_l_check">
+					题目2	
+				</div></a>
+				<a href="#num3"><div class="jx_l_c">
+					题目3
+				</div></a>
+				<a href="#num4"><div class="jx_l_c">
+					题目4
+				</div></a>
+				<div class="jx_l_t">
+				</div>
+			</div>
+		</div>
+		<!-- 试题解析end -->
+		
+	
+<include file="common:footer" />
+</html>

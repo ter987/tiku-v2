@@ -136,27 +136,8 @@ class TongbuController extends GlobalController {
 		$this->assign('controller_name',strtolower(CONTROLLER_NAME));
         $this->display();
 	}
-	/**
-	 * 
-	 */
-	protected function getVersions($course_id){
-		$data = S('versions_'.$course_id);
-		if(!$data){
-			$Model = M('version');
-			$data = $Model->where("course_id=$course_id")->order("id asc")->select();
-			S('versions_'.$course_id,$data,array('type'=>'file','expire'=>FILE_CACHE_TIME));
-		}
-		return $data;
-	}
-	protected function getBooks($version_id){
-		$data = S('books_'.$version_id);
-		if(!$data){
-			$Model = M('books');
-			$data = $Model->where("version_id=$version_id")->order("id asc")->select();
-			S('books_'.$course_id,$data,array('type'=>'file','expire'=>FILE_CACHE_TIME));
-		}
-		return $data;
-	}
+	
+	
 	protected function _getTikuInfo($id_arr,&$o){
 		$Model = M('tiku');
 		foreach($id_arr as $key=>$val){
@@ -168,20 +149,7 @@ class TongbuController extends GlobalController {
 		return $tiku;
 	}
 
-	public function getChapters($book_id){
-		$data = S('chapter_'.$book_id);
-		if(!$data){
-			$Model = M('chapter');
-			$child_data = $Model->where("book_id=$book_id")->select();
-			if(!$child_data){
-				return false;
-			}
-		$data = $this->_getTree($child_data,0);
-		}
-		//var_dump($data);
-		return $data;
-		
-	}
+	
 	/**
 	 * 更新点击次数
 	 */

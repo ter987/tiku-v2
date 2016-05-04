@@ -74,6 +74,41 @@ class GlobalController extends Controller{
 		$chuzhong_data = $Course->where('status=1 AND course_type=2')->select();
 		if($chuzhong_data) $this->assign('chuzhong_data',$chuzhong_data);
 	}
+	/**
+	 * 
+	 */
+	protected function getVersions($course_id){
+		$data = S('versions_'.$course_id);
+		if(!$data){
+			$Model = M('version');
+			$data = $Model->where("course_id=$course_id")->order("id asc")->select();
+			S('versions_'.$course_id,$data,array('type'=>'file','expire'=>FILE_CACHE_TIME));
+		}
+		return $data;
+	}
+	protected function getBooks($version_id){
+		$data = S('books_'.$version_id);
+		if(!$data){
+			$Model = M('books');
+			$data = $Model->where("version_id=$version_id")->order("id asc")->select();
+			S('books_'.$course_id,$data,array('type'=>'file','expire'=>FILE_CACHE_TIME));
+		}
+		return $data;
+	}
+	public function getChapters($book_id){
+		$data = S('chapter_'.$book_id);
+		if(!$data){
+			$Model = M('chapter');
+			$child_data = $Model->where("book_id=$book_id")->select();
+			if(!$child_data){
+				return false;
+			}
+		$data = $this->_getTree($child_data,0);
+		}
+		//var_dump($data);
+		return $data;
+		
+	}
 	public function getCourseById($id){
 		if(!$id){
 			return false;
@@ -85,7 +120,7 @@ class GlobalController extends Controller{
 			$this->assign('this_course_id',$result['course_id']);
 			$this->assign('this_course_name',$result['course_name']);
 			$this->assign('this_pinyin',$result['pinyin']);
-			return true;
+			return $result;
 		}else{
 			return false;
 		}

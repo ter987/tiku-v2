@@ -20,8 +20,8 @@
 					</div>
 					<div class="topcy" id="ecTools">
 						<ul>
-							<li><a class="goon" href="javascript:;" id="filterReturn">继续选题</a></li>
-							<li><a class="goon_1" href="javascript:;">训练</a></li>
+							<li><a class="goon" href="javascript:;" id="filterReturn" onclick="jixuxuanti()">继续选题</a></li>
+							<li><a class="goon_1" href="javascript:;">在线练习</a></li>
 							<li><a class="goon_1 xf_xffsxs" href="javascript:;" id="filterReturn">发送学生</a></li>
 							<li><a id="paperdownload" class="goon_1" href="javascript:;">生成试卷</a></li>
 							<li><a id="answercar" class="goon_1" href="javascript:;">生成答题卡</a></li>
@@ -852,6 +852,16 @@ function deleteMe(obj){
 }
 function toBaocuo(obj){
 	obj.parent().siblings(".xf_jiecuobox").show();
+}
+function jixuxuanti(){
+	$.getJSON(
+		'/shijuan/ajaxGoTiku',
+		function(data){
+			if(data.status=='ok'){
+				window.location.href = "/tiku/"+data.pinyin+'/';
+			}
+		}
+	);
 }
 </script>
 <link href="__PUBLIC__/js/jquery-ui-1.11.2.custom/jquery-ui.css" rel="stylesheet" type="text/css" />

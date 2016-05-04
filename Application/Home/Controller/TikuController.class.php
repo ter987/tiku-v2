@@ -225,6 +225,7 @@ class TikuController extends GlobalController {
 		$this->addJs(array('js/menu.js','js/xf.js'));
 		$this->assign('jumpto','tiku');
 		$this->assign('controller_name',strtolower(CONTROLLER_NAME));
+		$this->assign('this_module','tiku');
         $this->display();
 	}
 	/**

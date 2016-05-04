@@ -112,6 +112,7 @@ class JingpinController extends GlobalController {
 		$this->addCss(array('xf.css','examlist.css'));
 		$this->addJs(array('/js/menu.js','/js/xf.js'));
 		$this->assign('jumpto','jingpin');
+		$this->assign('this_module','jingpin');
         $this->display();
 	}
 	/**

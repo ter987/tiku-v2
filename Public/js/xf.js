@@ -84,9 +84,7 @@ $(function(){
 	$(".xf_righexzfl ul li").click(function(){
 		$(this).addClass('cur').siblings().removeClass('cur')
 	});
-	$(".er_li").click(function(){
-		$(this).addClass('active').siblings().removeClass('active');
-	});
+	
 	// 答题卡
 	$(".xf_datika em span").html("<i>0</i>/"+$(".xf_xuanzetibox ul li").length)
 	$(".xf_shaixuansctm a,.is_zd a,.down_btn").click(function(){

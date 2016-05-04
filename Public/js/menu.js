@@ -26,18 +26,7 @@ $(function(){
 		 $(this).parents().siblings().find(".thr_nr").hide();	
 	     $(this).siblings(".thr_nr").toggle();
 	})
-	$(".j_c").click(function(){
-		$('.j_c').addClass("na_n_check").removeClass("na_n");
-		$('.zsd').addClass("na_n").removeClass("na_n_check");
-		$('.j_c_list').show();
-		$('.zsd_list').hide();
-    });
-    $(".zsd").click(function(){
-		$('.zsd').addClass("na_n_check").removeClass("na_n");
-		$('.j_c').addClass("na_n").removeClass("na_n_check");
-		$('.j_c_list').hide();
-		$('.zsd_list').show();
-    });
+	
     $("div[id^='kd_']").click(function(){
 		var id = (this.id.toString().match(/\d+/ig)||[])[0];
 		$("#kd").val(id);

@@ -11,6 +11,7 @@
   RewriteRule ^shijuan/(\w*)$ index.php/home/shijuan/$1/
   RewriteRule ^hand/(\w*)$ index.php/home/hand/$1/
   RewriteRule ^smart/(\w*)$ index.php/home/smart/$1/
+  RewriteRule ^lianxi/(\w*)$ index.php/home/lianxi/$1/
   RewriteRule ^jingpin/(\w+)\/(\d*)\/{0,1}$ index.php/home/jingpin/index/course/$1/p/$2/
   RewriteRule ^jingpin/(\w+)\/([\w|-]+)\/(\d*)\/{0,1}$ index.php/home/jingpin/index/course/$1/param/$2/p/$3/
   RewriteRule ^jingpin/(\d+).html$ index.php/home/jingpin/detail/id/$1/
@@ -18,6 +19,8 @@
   RewriteRule ^tongbu/(\w+)\/([\w|-]+)\/(\d*)\/{0,1}$ index.php/home/tongbu/index/course/$1/param/$2/p/$3/
   RewriteRule ^studycenter/(\w+)\/$ index.php/home/studycenter/$1/
   RewriteRule ^exam/(\w+)\/(\d+)\/$ index.php/home/exam/$1/id/$2/
+  RewriteRule ^lianxi/(\w+)$ index.php/home/lianxi/$1/
+  RewriteRule ^lianxi/(\d+)\/$ index.php/home/lianxi/start/id/$1/
   RewriteRule ^qqconnect/(\w*)$ index.php/home/qqconnect/$1/
   RewriteRule ^sinaconnect/(\w*)$ index.php/home/sinaconnect/$1/
   RewriteRule ^weixinconnect/(\w*)$ index.php/home/weixinconnect/$1/

@@ -33,16 +33,17 @@
 		
 		<div>
 			<div class="na">
-				<div class="fl j_c na_n">
+				<div class="fl j_c na_n<eq name="smart_type" value="jc">_check</eq>" id="jc">
 					教材选题
 				</div>
-				<div class="fl zsd na_n_check">
+				<div class="fl zsd na_n<eq name="smart_type" value="zsd">_check</eq>" id="zsd">
 					知识点选题
 				</div>
 			</div>
 		</div>
 		<div style="width:1000px;margin-top:10px;">
 			<!--left-->
+			<eq name="smart_type" value="zsd">
 			<div class="tk_left zsd_list xf_xzleffxf" >
 				<h3>全部知识点</h3>
 				<div class="tt_left">
@@ -62,67 +63,27 @@
 				</ul>
 				</div>
 			</div>
-			<div class="tk_left j_c_list xf_xzleffxf" style="display:none;">
+			<else />
+			<div class="tk_left zsd_list xf_xzleffxf" >
 				<h3>全部教材</h3>
 				<div class="tt_left">
+				
 				<ul class="zsd_ul ce">
+					<volist name="chapter_data" id="vo" key="k">
 					<li>
-						<a href="##"><i class="ce_jia"></i> <span>基础知识及语言表达</span></a>
+						<a href="##"><i class="ce_jia"></i> <span>{$vo.chapter_name}</span></a>
 						<ul class="er">
-							<li class="e_li">
-								<a href="##"><i class="ce_jia"></i>文综</a>
-								<ul class="thr">
-									<li class="er_li">文综</li>
-									<li class="er_li">文综</li>
-									<li class="er_li">文综</li>
-									<div class="clear"></div>
-								</ul>
-							</li>
-							<li class="e_li">
-								<a href="##"><i class="ce_jia"></i>&nbsp;理综</a>
-								<ul class="thr">
-									<li class="er_li">文综</li>
-									<li class="er_li">文综</li>
-									<li class="er_li">文综</li>
-									<div class="clear"></div>
-								</ul>
-							</li>
+							<volist name="vo.childs" id="v">
+							<li class="er_li"><t id="{$v.id}">{$v.chapter_name}</t></li>
+							</volist>
 						</ul>
 					</li>	
-					<li>
-						<a href="##"><i class="ce_jia"></i> 诗歌鉴赏</a>
-						<ul class="er">
-							<li class="e_li">
-								<a href="##"><i class="ce_jia"></i>&nbsp;文综</a>
-								<ul class="thr">
-									<li class="er_li">文综</li>
-									<li class="er_li">文综</li>
-									<li class="er_li">文综</li>
-									<div class="clear"></div>
-								</ul>
-							</li>
-							<li class="e_li">
-								<a href="##"><i class="ce_jia"></i>&nbsp;理综</a>
-								<ul class="thr">
-									<li class="er_li">文综</li>
-									<li class="er_li">文综</li>
-									<li class="er_li">文综</li>
-									<div class="clear"></div>
-								</ul>
-							</li>
-						</ul>
-					</li>
-					<li><a href="##"><i class="ce_jia"></i> <span>诗歌鉴赏</span></a></li>
-					<li><a href="##"><i class="ce_jia"></i> <span>文言文阅读</span></a></li>
-					<li><a href="##"><i class="ce_jia"></i> <span>现代文阅读</span></a></li>
-					<li><a href="##"><i class="ce_jia"></i> <span>作文及写作</span></a></li>
-					<li><a href="##"><i class="ce_jia"></i> <span>名句默写</span></a></li>
-					<li><a href="##"><i class="ce_jia"></i> <span>其他</span></a></li>
+					</volist>
 					<div class="clear"></div>
 				</ul>
 				</div>
 			</div>
-			
+			</eq>
 			<div class="fr" style="width:780px;">
 				 <div style="margin-bottom:10px;">
 					<div style="width:100%;height:30px;margin-bottom:10px;">
@@ -206,7 +167,7 @@
 						</tbody>
 					</table>
 					<div class="f_tbtn">
-						<a id="goPaperEdit">组卷成功</a>
+						<a id="goPaperEdit">{$this_name}</a>
 					</div>
 					<div class="f_tips">
 						<span>请先从左侧选择要考察的知识点</span>
@@ -246,11 +207,17 @@
 			// $( "#amount" ).val( "$" + $( "#slider" ).slider( "value" ) );
 		});
 $('.tt_left').find('t').click(function(){
+	var obj = $(this);
 	$.getJSON(
 		'/index.php/home/smart/ajaxSelectPoint',
 		{id:$(this).attr('id')},
 		function(data){
 			if(data.status=='ok'){
+				if(obj.parent().hasClass('active')){
+					obj.parent().removeClass('active');
+				}else{
+					obj.parent().addClass('active');
+				}
 				$('#point_seled').html(data.data.html);
 				$('#num_title').html(data.data.p_count);
 			}
@@ -298,7 +265,13 @@ $('#goPaperEdit').click(function(){
 		'/index.php/home/smart/start',
 		function(data){
 			if(data.status=='ok'){
-				window.location.href = "/shijuan/";
+				var f = '<php>echo $_GET['for'];</php>';
+				if(f==''){
+					window.location.href = "/shijuan/";
+				}else{
+					window.location.href = "/lianxi/add";
+				}
+				
 			}else{
 				alert(data.msg);
 			}
@@ -306,6 +279,31 @@ $('#goPaperEdit').click(function(){
 		
 	);
 });
+$(".na").children("div").click(function(){
+	var type = $(this).attr('id');
+	$.getJSON(
+		'/index.php/home/smart/ajaxchange',
+		{type:type},
+		function(data){
+			if(data.status=='ok'){
+				location.reload();
+			}
+		}
+	);
+});
+function del_p(id){
+	$.getJSON(
+		'/index.php/home/smart/ajaxRemove',
+		{id:id},
+		function(data){
+			if(data.status=='ok'){
+				$('#point_seled').html(data.data.html);
+				$('#num_title').html(data.data.p_count);
+			}
+		}
+		
+	);
+}
 	</script>
 <!--footer-->
 <include file="common:footer" />
