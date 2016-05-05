@@ -30,31 +30,21 @@
 						</div>
 						<div class="fl">
 							<div class="nd_tag bg_hui fl"></div>
-							<div class="fl" style="margin-left:10px;">未知</div>
+							<div class="fl" style="margin-left:10px;">未批改</div>
 						</div>
 					</div>
 				</div>
 				<div style="margin:15px 40px;">
-					<div class="jx_tag bg_lv">1</div>
-					<div class="jx_tag bg_lv">2</div>
-					<div class="jx_tag bg_lv">3</div>
-					<div class="jx_tag bg_lv">4</div>
-					<div class="jx_tag bg_lv">5</div>
-					<div class="jx_tag bg_lv">6</div>
-					<div class="jx_tag bg_lv">7</div>
-					<div class="jx_tag bg_hui">8</div>
-					<div class="jx_tag bg_lv">9</div>
-					<div class="jx_tag bg_lv">10</div>
-					<div class="jx_tag bg_lv">11</div>
-					<div class="jx_tag bg_lv">12</div>
-					<div class="jx_tag bg_hong">13</div>
-					<div class="jx_tag bg_lv">14</div>
-					<div class="jx_tag bg_lv">15</div>
-					<div class="jx_tag bg_lv">16</div>
-					<div class="jx_tag bg_hong">17</div>
-					<div class="jx_tag bg_hong">18</div>
-					<div class="jx_tag bg_hong">19</div>
-					<div class="jx_tag bg_hui">20</div>
+					<volist name="data" id="vo">
+					<if condition="$vo.is_right eq 1">
+					<div class="jx_tag bg_lv">{$vo.order_char}</div>
+					<elseif condition="$vo.is_right eq -1"/>
+					<div class="jx_tag bg_hong">{$vo.order_char}</div>
+					<elseif condition="$vo.is_right eq 0"/>
+					<div class="jx_tag bg_hui">{$vo.order_char}</div>
+					</if>
+					</volist>
+					
 					<div class="clear"></div>
 				</div>
 				<div style="border-bottom:1px solid #0190F2;width:100%;height:26px;">
@@ -65,7 +55,7 @@
                     <!-- 纠错 -->
 					<div class="xf_jiecuobox">
 						<textarea name="" id="" cols="30" rows="10" placeholder="描述下纠错问题吧，我们会及时改正"></textarea>
-						<div><a href="JavaScript:;">确定</a><a href="JavaScript:;">取消</a></div>
+						<div><a href="JavaScript:;" onclick="baocuo($(this),{$vo.id})">确定</a><a href="JavaScript:;" onclick="quxiao($(this))">取消</a></div>
 					</div>
 					<!-- 纠错end -->
 					<a href="JavaScript:;" class="xf_jiucuo" style="text-align:center;line-height:27px;">纠错</a>
@@ -77,34 +67,48 @@
 							<div style="line-height:30px;">
 								{$vo.content|htmlspecialchars_decode}
 							</div>
+							<php>
+	                		if($vo['type_id']==2||$vo['type_id']==6){
+	                			$options = json_decode($vo['options']);
+	                			if(empty($options)) break;
+	                			$options_index = array(0=>'A',1=>'B',2=>'C',3=>'D',4=>'E');
+	                    	</php>
 							<div style="width:960px;">
+								<php>
+	                    			$k = 0;
+	                    			foreach($options as $k=>$val){
+	                    		</php>
 								<div class="fl" style="width:50%;line-height:30px;">
-									A. 细胞壁作为边界能将细胞与外界环境分隔开
+									<php>echo $options_index[$k]</php>. <php>echo $val</php>
 								</div>
-								<div class="fl" style="width:50%;line-height:30px;">
-									B. 胞间连丝能实现细胞间信息物质的运输
-								</div>
-								<div class="fl" style="width:50%;line-height:30px;">
-									C. 线粒体中的酶能催化葡萄糖分解为CO 2	
-								</div>
-								<div class="fl" style="width:50%;line-height:30px;">
-									D. 溶酶体中的酶能催化修复损伤的细胞器
-								</div>
+								<php>}</php>
 							</div>
+							<php>}</php>
 						</div>
 					</div>
 					<div class="clear"></div>
 					<div style="width:100%;height:35px;background:#F5F5F5;border-top:1px solid #CCCCCC;">
+						<eq name="vo.is_right" value="-1">
+						<if condition="$vo.is_right eq -1">
+						<div class="fl jx_cw">
+							回答错误
+						</div>
+						<elseif condition="$vo.is_right eq 1"/>
 						<div class="fl jx_zq">
 							回答正确
 						</div>
+						<elseif condition="$vo.is_right eq 0"/>
+						<div class="fl js_wpg">
+							未批改
+						</div>
+						</if>
 						<div class="fr cp jx_stjx cur">隐藏解析 ∧</div>	
 					</div>
 					<div class="jx_xq">
 						<div style="margin:10px;border-bottom:1px dashed #D9D9D9;">
 							<div style="margin:10px;">
 								<div class="right_sj">【我的答案】</div>
-								<div style="margin-left:15px;">B</div>
+								<div style="margin-left:15px;">{$vo.s_answer}</div>
 							</div>
 						</div>
 						<div style="margin:10px;border-bottom:1px dashed #D9D9D9;">
@@ -151,6 +155,14 @@
 		</div>
 		<!-- 试题解析end -->
 		
-	
+<script>
+	$(".jx_stjx").click(function(){
+		if($(this).hasClass('cur')){
+			$(this).removeClass('cur').html("本题解析 ∨").parents(".xf_teshuli").find(".jx_xq").slideUp(300);
+		}else{
+			$(this).addClass('cur').html("隐藏解析 ∧").parents(".xf_teshuli").find(".jx_xq").slideDown(300);
+		}
+	});
+</script>
 <include file="common:footer" />
 </html>

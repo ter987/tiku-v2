@@ -36,23 +36,21 @@
 						</div>
 						<div class="table_a" style="width:800px;border-right:0px;">
 							<div class="table_bg">
-								<div class="xm" style="width:25%;">作业</div>
-								<div class="xm" style="width:10%;">学科</div>
+								<div class="xm" style="width:35%;">作业</div>
+								<div class="xm" style="width:15%;">学科</div>
 								<div class="xm" style="width:15%;">创建时间</div>
-								<div class="xm" style="width:15%;">完成时间</div>
 								<div class="xm" style="width:15%;">试题数量</div>
 								<div class="xm" style="width:20%;margin-left:-6px;">操作</div>
 								<div class="clear"></div>
 							</div>
 							<volist name="data" id="vo">
 							<div>
-								<div class="xm" style="width:25%;">{$vo.title}</div>
-								<div class="xm" style="width:10%;"><eq name="vo.course_type" value="1">高中<else/>初中</eq>{$vo.course_name}</div>
+								<div class="xm" style="width:35%;">{$vo.title}</div>
+								<div class="xm" style="width:15%;"><eq name="vo.course_type" value="1">高中<else/>初中</eq>{$vo.course_name}</div>
 								<div class="xm" style="width:15%;">{$vo.create_time|date="Y-m-d",###}</div>
-								<div class="xm" style="width:15%;">{$vo.commit_time|date="Y-m-d",###}</div>
 								<div class="xm" style="width:15%;">{$vo.shiti_num}</div>
 								<div class="xm" style="width:20%;margin-left:-6px;">
-									<empty name="vo.end_time"><a target="_blank" href="/exam/ceping/{$vo.id}/">继续完成</a><else /><a href="">查看</a></empty>
+									<empty name="vo.commit_time"><a  href="/lianxi/{$vo.id}/">继续完成</a><else /><a href="/studycenter/lxjiexi/?id={$vo.id}" target="_blank">查看</a></empty>
 								</div>
 								<div class="clear"></div>
 							</div>

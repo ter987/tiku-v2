@@ -53,7 +53,20 @@ class LianxiController extends GlobalController {
 						$this->ajaxReturn(array('status'=>'error','msg'=>'请重试'));
 					}
 				}else{
-					if($Model->where("id=".$result['id'])->save(array('s_answer'=>$answer,'update_time'=>time()))){
+					$tikuModel = M('tiku');
+					$shiti = $tikuModel->field("tiku.answer,tiku_type.is_zgt")->join("tiku_type on tiku.type_id=tiku_type.id")->where("tiku.id=$shiti_id")->find();
+					if(!$shiti['is_zgt']){
+						if($answer == trim($shiti['answer'])){
+							$data['is_right'] = 1;
+						}else{
+							$data['is_right'] = -1;
+						}
+					}else{
+						$data['is_right'] = 0;
+					}
+					$data['s_answer'] = $answer;
+					$data['update_time'] = time();
+					if($Model->where("id=".$result['id'])->save($data)){
 						$this->ajaxReturn(array('status'=>'ok'));
 					}else{
 						$this->ajaxReturn(array('status'=>'error','msg'=>'请重试'));
@@ -65,6 +78,17 @@ class LianxiController extends GlobalController {
 				$data['tiku_id'] = $shiti_id;
 				$data['s_answer'] = $answer;
 				$data['update_time'] = time();
+				$tikuModel = M('tiku');
+				$shiti = $tikuModel->field("tiku.answer,tiku_type.is_zgt")->join("tiku_type on tiku.type_id=tiku_type.id")->where("tiku.id=$shiti_id")->find();
+				if(!$shiti['is_zgt']){
+					if($answer == trim($shiti['answer'])){
+						$data['is_right'] = 1;
+					}else{
+						$data['is_right'] = -1;
+					}
+				}else{
+					$data['is_right'] = 0;
+				}
 				if($Model->add($data)){
 					$this->ajaxReturn(array('status'=>'ok'));
 				}else{
@@ -171,10 +195,25 @@ class LianxiController extends GlobalController {
 		$data['create_time'] = time();
 		$data['course_id'] = $_SESSION['course_id'];
 		$Model = M('lianxi');
+		$Model->startTrans();
 		$id = $Model->add($data);
-		if($id){
+		$extModel = M('lianxi_extend');
+		$result = true;
+		foreach($new_arr as $key=>$val){
+			foreach($val['childs'] as $k=>$v){
+				$_data['lianxi_id'] = $id;
+				$_data['tiku_id'] = $v['id'];
+				$_data['order_char'] = $v['order_char'];
+				if(!$extModel->add($_data)){
+					$result = false;
+				}
+			}
+		}
+		if($id && $result){
+			$Model->commit();
 			redirect('/lianxi/'.$id.'/');
 		}else{
+			$Model->rollback();
 			redirect('/');
 		}
 		

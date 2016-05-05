@@ -89,7 +89,7 @@ class StudycenterController extends GlobalController {
 		$data = $Model->field("lianxi.*,user.nick_name,tiku_course.course_name,tiku_course.course_type")
 		->join("tiku_course ON tiku_course.id=lianxi.course_id")
 		->join("user ON lianxi.user_id=user.id")
-		->where("lianxi.user_id=".$_SESSION['user_id'].$where)->limit($Page->firstRow.','.$Page->listRows)->select();
+		->where("lianxi.user_id=".$_SESSION['user_id'].$where)->limit($Page->firstRow.','.$Page->listRows)->order("lianxi.id DESC")->select();
 		//echo $Model->getLastSql();
 		
 		$this->assign('data',$data);
@@ -99,22 +99,65 @@ class StudycenterController extends GlobalController {
 		$this->addJs(array('js/menu.js','js/xf.js'));
 		$this->display();
 	}
-	public function lxJiexi(){
+
+	public function cpJiexi(){
+		$id = I('get.id');
+		$cpModel = M('ceping');
+		$ceping = $cpModel->field("ceping.course_id,ceping.title,ceping.limit_time,ceping.score")->join("ceping_jon on ceping.id=ceping_jon.ceping_id")->where("ceping.id=$id AND ceping_jon.student=".$_SESSION['user_id'])->find();
+		if(!$ceping){
+			redirect('/');
+		}
+		$extModel = M('ceping_extend');
+		$data = $extModel->field("tiku.id,tiku.content,tiku.options,tiku.type_id,tiku.answer,tiku.analysis,ceping_extend.order_char")->join("tiku on tiku.id=ceping_extend.tiku_id")->where("ceping_id=$id")->order("ceping_extend.order_char ASC")->select();
+		
+		$answerModel = M('ceping_answer');
+		foreach($data as $key=>$val){
+			$answer = $answerModel->field("s_answer,is_right,s_score")->where("ceping_id=$id AND student=".$_SESSION['user_id']." AND tiku_id=".$val['id'])->find();
+			if($answer){
+				$answer['s_answer'] = preg_replace('/\[img:(\S+)\]/U','<img src="$1" />',$answer['s_answer']);
+				$data[$key]['s_answer'] = $answer['s_answer'];
+				$data[$key]['is_right'] = $answer['is_right'];
+				$data[$key]['s_score'] = $answer['s_score'];
+			}else{
+				$data[$key]['is_right'] = -1;
+				$data[$key]['s_score'] = 0;
+			}
+		}
+		//var_dump($data);
+		$course = $this->getCourseById($ceping['course_id']);
+		$this->assign('course',$course);
+		$this->assign('ceping',$ceping);
+		$this->assign('data',$data);
 		$this->setMetaTitle('学习中心'.C('TITLE_SUFFIX'));
 		$this->addCss(array('xf.css','exam_info.css'));
 		$this->addJs(array('js/xf.js'));
 		$this->display();
 	}
-	public function cpJiexi(){
+	public function lxJiexi(){
 		$id = I('get.id');
-		$cpModel = M('ceping');
-		$ceping = $cpModel->field("course_id,title,limit_time,score")->where("id=$id")->find();
-		$extModel = M('ceping_extend');
-		$data = $extModel->field("tiku.id,tiku.content,tiku.answer,tiku.analysis,ceping_extend.order_char")->join("tiku on tiku.id=ceping_extend.tiku_id")->where("ceping_id=$id")->order("ceping_extend.order_char ASC")->select();
-		//var_dump($data);
-		$course = $this->getCourseById($ceping['course_id']);
+		$lxModel = M('lianxi');
+		$lianxi = $lxModel->field("lianxi.course_id,lianxi.title")->where("lianxi.id=$id AND lianxi.user_id=".$_SESSION['user_id'])->find();
+		if(!$lianxi){
+			redirect('/');
+		}
+		$extModel = M('lianxi_extend');
+		$data = $extModel->field("tiku.id,tiku.content,tiku.options,tiku.type_id,tiku.answer,tiku.analysis,lianxi_extend.order_char")->join("tiku on tiku.id=lianxi_extend.tiku_id")->where("lianxi_extend.lianxi_id=$id")->order("lianxi_extend.order_char ASC")->select();
+
+		$answerModel = M('lianxi_answer');
+		foreach($data as $key=>$val){
+			$answer = $answerModel->field("s_answer,is_right")->where("lianxi_id=$id AND user_id=".$_SESSION['user_id']." AND tiku_id=".$val['id'])->find();
+			if($answer){
+				$answer['s_answer'] = preg_replace('/\[img:(\S+)\]/U','<img src="$1" />',$answer['s_answer']);
+				$data[$key]['s_answer'] = $answer['s_answer'];
+				$data[$key]['is_right'] = $answer['is_right'];
+			}else{
+				$data[$key]['is_right'] = -1;
+			}
+		}
+		//var_dump($data);exit;
+		$course = $this->getCourseById($lianxi['course_id']);
 		$this->assign('course',$course);
-		$this->assign('ceping',$ceping);
+		$this->assign('lianxi',$lianxi);
 		$this->assign('data',$data);
 		$this->setMetaTitle('学习中心'.C('TITLE_SUFFIX'));
 		$this->addCss(array('xf.css','exam_info.css'));
