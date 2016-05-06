@@ -63,9 +63,6 @@ class GlobalController extends Controller{
 			$_SESSION['user_type'] = $result['type'];
 			return true;
 	}
-	/**
-	 * 获取所有课程
-	 */
 	public function getCourse(){
 		$Course = M('Tiku_course');
 		$gaozhong_data = $Course->where('status=1 AND course_type=1')->select();
@@ -73,6 +70,29 @@ class GlobalController extends Controller{
 		
 		$chuzhong_data = $Course->where('status=1 AND course_type=2')->select();
 		if($chuzhong_data) $this->assign('chuzhong_data',$chuzhong_data);
+	}
+	public function getAllCourse(){
+		$Course = M('tiku_course');
+		$courseData = $Course->where("status=1")->select();
+		return $courseData;
+	}
+	/**
+	 * 获取$point_id下的所有最后一级知识点
+	 */
+	public function getLastLevelPoint($point_id){
+		static $data;
+		$Model = M('tiku_point');
+		$point = $Model->where("parent_id=$point_id")->select();
+		foreach($point as $key=>$val){
+			$this->getLastLevelPoint($val['id']);
+			if(!$Model->where("parent_id=".$val['id'])->find()){
+				$data[] = $val;
+			}else{
+				continue;
+			}
+			
+		}	
+		return $data;
 	}
 	/**
 	 * 
@@ -124,6 +144,17 @@ class GlobalController extends Controller{
 		}else{
 			return false;
 		}
+	}
+	public function getMyCourse(){
+		$User = M('user');
+		$Course = M('tiku_course');
+		$userInfo = $User->field("my_course")->where("id=".$_SESSION['user_id'])->find();
+		if($userInfo['my_course']){
+			$courseData = $Course->where("id=".$userInfo['my_course'])->find();
+		}else{
+			$courseData = $Course->find();
+		}
+		return $courseData;
 	}
 	public function findChild(&$data, $parent_id = 0) {
         $rootList = array();

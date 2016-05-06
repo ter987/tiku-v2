@@ -16,12 +16,142 @@ class StudycenterController extends GlobalController {
         redirect('/studycenter/mycollect/');
 	}
 	public function myCollect(){
+		$Model = M('user_collected');
+		$allCourse = $this->getAllCourse();
+		$course_id = I('get.cid');
+		if(!$course_id){
+			$myCourse = $this->getMyCourse();
+			$course_id = $myCourse['id'];
+		}else{
+			$param .= 'cid='.$course_id;
+		}
+		$this->assign('course_id',$course_id);
+		$this->assign('all_course',$allCourse);
 		$this->assign('current','collect');
+		
+		$point = $this->_getCollectPoints($course_id);
+		$this->assign('point',$point);
+		
+		$point_id = I('get.pid');
+		if($point_id){
+			$lastPoint = $this->getLastLevelPoint($point_id);
+			foreach($lastPoint as $val){
+				$point_ids .= $val['id'].',';
+			}
+			$point_ids = trim($point_ids,',');
+			$this->assign('point_id',$point_id);
+			$where = " AND tiku_to_point.point_id IN($point_ids)";
+			$param .= '&pid='.$point_id;
+		}else{
+			$this->assign('point_id',0);
+		}
+		$count = $Model
+		->join('`tiku` ON `tiku`.id=`user_collected`.`tiku_id`')
+		->join("tiku_to_point on tiku_to_point.tiku_id=tiku.id")
+		->where("user_collected.user_id=".$_SESSION['user_id']." AND tiku.course_id=$course_id ".$where)->count();
+		$Page = new \Think\Page($count,10);
+		$Page->setConfig('prev',' < 上一页');
+		$Page->setConfig('next','下一页  >  ');
+		$Page->setConfig('first','首页');
+		$Page->setConfig('last','末页');
+		$page_show = $Page->s_show($param);
+		$this->assign('page_show',$page_show);
+		$data = $Model->field("tiku.id,tiku.content,tiku.analysis,tiku.type_id,tiku.options,tiku_difficulty.*,tiku_source.source_name,tiku_type.type_name")
+		->join('`tiku` ON `tiku`.id=`user_collected`.`tiku_id`')
+		->join("tiku_to_point on tiku_to_point.tiku_id=tiku.id")
+		->join("tiku_source ON tiku_source.id=tiku.source_id")
+		->join("tiku_difficulty ON tiku_difficulty.id=tiku.difficulty_id")
+		->join("tiku_type on tiku.type_id=tiku_type.id")
+		->where("user_collected.user_id=".$_SESSION['user_id']." AND tiku.course_id=$course_id ".$where)->limit($Page->firstRow.','.$Page->listRows)->select();
+		//echo $Model->getLastSql();
+		
+		$this->assign('data',$data);
 		//SEO
 		$this->setMetaTitle('学习中心'.C('TITLE_SUFFIX'));
 		$this->addCss(array('xf.css','exam_info.css','study_centre.css'));
 		$this->addJs(array('js/menu.js','js/xf.js'));
 		$this->display();
+	}
+	public function myCuoti(){
+		$Model = M('user_collected');
+		$allCourse = $this->getAllCourse();
+		$course_id = I('get.cid');
+		if(!$course_id){
+			$myCourse = $this->getMyCourse();
+			$course_id = $myCourse['id'];
+		}else{
+			$param .= 'cid='.$course_id;
+		}
+		$this->assign('course_id',$course_id);
+		$this->assign('all_course',$allCourse);
+		$this->assign('current','cuoti');
+		
+		$point = $this->_getCollectPoints($course_id);
+		$this->assign('point',$point);
+		
+		$point_id = I('get.pid');
+		if($point_id){
+			$lastPoint = $this->getLastLevelPoint($point_id);
+			foreach($lastPoint as $val){
+				$point_ids .= $val['id'].',';
+			}
+			$point_ids = trim($point_ids,',');
+			$this->assign('point_id',$point_id);
+			$where = " AND tiku_to_point.point_id IN($point_ids)";
+			$param .= '&pid='.$point_id;
+		}else{
+			$this->assign('point_id',0);
+		}
+		$count = $Model
+		->join('`tiku` ON `tiku`.id=`user_collected`.`tiku_id`')
+		->join("tiku_to_point on tiku_to_point.tiku_id=tiku.id")
+		->where("user_collected.user_id=".$_SESSION['user_id']." AND tiku.course_id=$course_id ".$where)->count();
+		$Page = new \Think\Page($count,10);
+		$Page->setConfig('prev',' < 上一页');
+		$Page->setConfig('next','下一页  >  ');
+		$Page->setConfig('first','首页');
+		$Page->setConfig('last','末页');
+		$page_show = $Page->s_show($param);
+		$this->assign('page_show',$page_show);
+		$data = $Model->field("tiku.id,tiku.content,tiku.analysis,tiku.type_id,tiku.options,tiku_difficulty.*,tiku_source.source_name,tiku_type.type_name")
+		->join('`tiku` ON `tiku`.id=`user_collected`.`tiku_id`')
+		->join("tiku_to_point on tiku_to_point.tiku_id=tiku.id")
+		->join("tiku_source ON tiku_source.id=tiku.source_id")
+		->join("tiku_difficulty ON tiku_difficulty.id=tiku.difficulty_id")
+		->join("tiku_type on tiku.type_id=tiku_type.id")
+		->where("user_collected.user_id=".$_SESSION['user_id']." AND tiku.course_id=$course_id ".$where)->limit($Page->firstRow.','.$Page->listRows)->select();
+		//echo $Model->getLastSql();
+		
+		$this->assign('data',$data);
+		//SEO
+		$this->setMetaTitle('学习中心'.C('TITLE_SUFFIX'));
+		$this->addCss(array('xf.css','exam_info.css','study_centre.css'));
+		$this->addJs(array('js/menu.js','js/xf.js'));
+		$this->display();
+	}
+	protected function _getCollectPoints($course_id){
+		$collectModel = M('user_collected');
+		$point  = $collectModel->field("tiku_to_point.point_id,tiku_point.id,tiku_point.level,tiku_point.parent_id")
+		->join("tiku_to_point on tiku_to_point.tiku_id=user_collected.tiku_id")
+		->join("tiku_point on tiku_to_point.point_id=tiku_point.id")
+		->join("tiku on tiku.id=user_collected.tiku_id")
+		->where("user_collected.user_id=".$_SESSION['user_id']." AND tiku.course_id=".$course_id)->select();
+		$pointModel = M('tiku_point');
+		foreach($point as $val){
+			$level = $val['level'];
+			$parent_id = $val['parent_id'];
+			$result = $val;
+			while($level>1){
+				$result = $pointModel->field("id,parent_id,level,point_name")->where("id=".$parent_id)->find();
+				$level = $result['level'];
+				$parent_id = $result['parent_id'];
+			}
+			if(!in_array($result, $data)){
+				$data[] = $result;
+			}
+			
+		}
+		return $data;
 	}
 	public function myCeping(){
 		$joinModel = M('ceping_jon');

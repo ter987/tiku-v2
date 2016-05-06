@@ -6,27 +6,18 @@
 				<div style="float:left;line-height:68px;color:#0190F2;font-size:24px;font-weight:700;">学习中心</div>
 			</div>
 		</div>
-		<div style="border:1px solid #D9D9D9;width:1006px;min-height:500px;margin-top:20px;margin-bottom:40px;background:#F5F5F5;">
+		<div style="border:1px solid #D9D9D9;width:1006px;margin-top:20px;margin-bottom:40px;background:#F5F5F5;">
 			<include file="studycenter:left" />
 			<div class="study_right">
 				<!-- 我的收藏 -->
 					<div class="show_tab_1" style="padding:10px;">
 						<div style="float:left;">
 							<div class="fl new_select">
-								
-									<select name="" style="width: 100px;" id="course_sel">
+								<select name="" style="width: 100px;" id="course_sel">
 										<volist name="all_course" id="vo" >
 										<option <eq name="vo.id" value="$course_id">selected="" </eq> value="{$vo.id}"><eq name="vo.course_type" value="1">高中<else />初中</eq>{$vo.course_name}</option>
 										</volist>
 									</select>
-								
-								<!-- <div class="sel_down fl"></div>
-								<div class="sel_list">
-									<div class="cp">全部</div>
-									<div class="cp">最近一周</div>
-									<div class="cp">最近一月</div>
-									<div class="cp">最近三月</div>
-								</div> -->
 							</div>
 						</div>
 						<div style="clear:both;"></div>
@@ -34,23 +25,12 @@
 							<div class="fl" style="line-height:40px;">知识点：</div>
 							<div class="fl">
 								<div style="width:740px;height:30px;">
-									<div class="fl" id="plist">
+									<div class="fl">
 										<div class="t_a<eq name="point_id" value="0">_check</eq>" id="0">全部</div>
 										<volist name="point" id="vo">
 										<div class="t_a<eq name="point_id" value="$vo.id">_check</eq>" id="{$vo.id}">{$vo.point_name}</div>
 										</volist>
 								    </div>
-									<!-- <div  class="more_tags button btn_b fr">更多</div>
-									<div class="clear"></div>
-									<div style="width:740px;">
-										<div class="t_a">全部</div>
-										<div class="t_a">新人教版A版</div>
-										<div class="t_a">新人教版B版</div>
-										<div class="t_a">苏教版</div>
-										<div class="t_a">北师大版</div>
-										<div class="t_a">湘教版</div>
-										<div class="t_a">沪教版</div>
-								    </div> -->
 								</div>
 							</div>
 						</div>
@@ -105,12 +85,13 @@
 								</div>  
 								<!-- 点赞使用情况-->
 								<div class="oparate" style="width:806px;border-bottom-left-radius:5px;">
-									<!-- <div style="line-height:40px;float:left;margin-left:10px;"><span>最近一次使用时间：2015-12-23</span></div> -->
-									<div class="add_exam" onclick="add_tiku({$vo.id},$(this))"><span>+加入试卷</span></div>
-									<div class="qxsc"><span>取消收藏</span></div>   
+									<div style="line-height:40px;float:left;margin-left:10px;"><div class="fl my_da">我的答案：C</div><div class="fl right_da">正确答案：D</div></div>
+									<div class="add_exam"><span>+加入试卷</span></div>
+									<div class="qxsc"><span>移除该题</span></div>   
 								</div>  
 							</div>
 						</volist>
+							
 						</div>
 						<div style="clear:both;"></div>
 						<div>						
@@ -123,12 +104,11 @@
 				<!-- 收藏结束 -->
 				
 			</div>
-			<div class="clear"></div>
+			<div style="clear:both;"></div>
 		</div>
 	</div>
 	<!--footer-->
-	<!--本题解析展开收起-->
- <script type="text/javascript">
+<script type="text/javascript">
 	$(".analys").click(function(){
 		if($(this).hasClass('cur')){
 			$(this).removeClass('cur').parents(".big-te").find(".hidde-div").slideUp();
