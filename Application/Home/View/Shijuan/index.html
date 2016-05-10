@@ -21,7 +21,7 @@
 					<div class="topcy" id="ecTools">
 						<ul>
 							<li><a class="goon" href="javascript:;" id="filterReturn" onclick="jixuxuanti()">继续选题</a></li>
-							<li><a class="goon_1" href="javascript:;">在线练习</a></li>
+							<li><a class="goon_1" href="javascript:;" onclick="goLianxi()">在线练习</a></li>
 							<li><a class="goon_1 xf_xffsxs" href="javascript:;" id="filterReturn">发送学生</a></li>
 							<li><a id="paperdownload" class="goon_1" href="javascript:;">生成试卷</a></li>
 							<li><a id="answercar" class="goon_1" href="javascript:;">生成答题卡</a></li>
@@ -151,7 +151,7 @@
 																<div class="quesbox" id="quesbox1579176" data-score="">
 																	<div class="quesopmenu" shiti_id="{$v.id}" juan_no="1" shiti_no="{$kk}" key="{$ks-1}">
 																		<a class="ico_zjgn1" onclick="autoXuanti($(this))">自动选题</a>
-																		<a class="ico_zjgn2">手动选题</a>
+																		<a class="ico_zjgn2" onclick="jixuxuanti()">手动选题</a>
 																		<a class="ico_zjgn3" onclick="moveUp($(this))">上移</a>
 																		<a class="ico_zjgn4" onclick="moveDown($(this))">下移</a>
 																		<a class="ico_zjgn5" onclick="jiexi($(this))">解析</a>
@@ -236,7 +236,7 @@
 															<div class="questypehead" id="questypehead2_5" style="border: 1px solid rgb(255, 255, 255); background: rgb(255, 255, 255) none repeat scroll 0% 0%; color: rgb(0, 0, 0);">
 																<div class="questypemenu">
 																	<div class="check_class" juan_no="2" shiti_no="{$kk}">换一组</div>
-																	<div class="editpart" juan_no="2" shiti_no="{$kk}"></div>
+																	<div class="editpart btn3" juan_no="2" shiti_no="{$kk}"></div>
 																</div>
 																<div class="questypeheadbox" id="questypeheadbox2_5">
 																	<table border="0" cellpadding="0" cellspacing="0" width="100%" height="60px">
@@ -280,9 +280,10 @@
 															<div class="questypebody">
 																<volist name="vo.childs" id="v" key="ks">
 																<div class="quesbox" id="quesbox1579226" data-score="">
-																	<div class="quesopmenu" shiti_id="{$v.id}" juan_no="2" shiti_no="{$kk}" key="{$ks-1}">
+																	<div class="quesopmenu" shiti_id="{$v.id}" juan_no="2" shiti_no="{$kk}" key="{$ks-1}" order="{$v.order_char}">
+																		<if condition="$vo.type_name neq '填空题'"><a class="ico_zjgn0" onclick="setFenzhi($(this))">设置分值</a></if>
 																		<a class="ico_zjgn1" onclick="autoXuanti($(this))">自动选题</a>
-																		<a class="ico_zjgn2">手动选题</a>
+																		<a class="ico_zjgn2" onclick="jixuxuanti()">手动选题</a>
 																		<a class="ico_zjgn3" onclick="moveUp($(this))">上移</a>
 																		<a class="ico_zjgn4" onclick="moveDown($(this))">下移</a>
 																		<a class="ico_zjgn5" onclick="jiexi($(this))">解析</a>
@@ -377,10 +378,10 @@
 						<div style="width:520px;height:20px;">
 							<span>模板</span>
 						</div>
-						<div style="width:520px;">
-							<label class="A4"><input name="doc_model" value="common" type="radio"><span>普通表格</span></label>
-							<label class="B4"><input name="doc_model" value="standard" checked="true" type="radio"><span>标准答题A卡</span></label>
-							<label class="A3"><input name="doc_model" value="intensive" type="radio"><span>标准答题B卡</span></label>
+						<div style="width:520px;" id="dtk_type">
+							<label class="A4"><input name="dtk_type"  value="1" type="radio"><span>普通表格</span></label>
+							<label class="B4"><input  name="dtk_type" value="2" checked="true" type="radio"><span>标准答题A卡</span></label>
+							<label class="A3"><input  name="dtk_type" value="3" type="radio"><span>标准答题B卡</span></label>
 						</div>
 					</li>
 				</ul>
@@ -559,12 +560,15 @@
 		<div class="xf_biaoti">设置分值<a href="JavaScript:;"></a></div>
 		<div class="xf_bianjinner xf_fenzhibox">
 			<ul>
-				<li><span>本题分值：</span><input type="text" /></li>
+				<li><span>本题分值：</span><input type="text" name="x_score" id="x_score"/></li>
 			</ul>
 		</div>
 		<div class="xf_tybutton">
 			<a href="JavaScript:;">取消</a>
-			<a href="JavaScript:;" class='cur'>确定</a>
+			<a href="JavaScript:;" class='cur' onclick="doSetFenzhi($(this))">确定</a>
+			<input type="hidden" id="juan_no" value="" />
+			<input type="hidden" id="shiti_no" value="" />
+			<input type="hidden" id="key" value="" />
 		</div>
 	</div>
 
@@ -859,6 +863,46 @@ function jixuxuanti(){
 		function(data){
 			if(data.status=='ok'){
 				window.location.href = "/tiku/"+data.pinyin+'/';
+			}
+		}
+	);
+}
+function goLianxi(){
+	$.getJSON(
+		'/shijuan/ajaxGoLianxi',
+		function(data){
+			if(data.status=='ok'){
+				window.location.href = '/lianxi/add';
+			}
+		}
+	);
+}
+function setFenzhi(obj){
+	var juan_no = obj.parent().attr('juan_no');
+	var shiti_no = obj.parent().attr('shiti_no');
+	var key = obj.parent().attr('key');
+	$('.xf_bjpoplx5').find('#juan_no').val(juan_no);
+	$('.xf_bjpoplx5').find('#shiti_no').val(shiti_no);
+	$('.xf_bjpoplx5').find('#key').val(key);
+	$(".xf_bjpoplx5").show();
+}
+function doSetFenzhi(obj){
+	var juan_no = obj.siblings('#juan_no').val();
+	var shiti_no = obj.siblings('#shiti_no').val();
+	var key = obj.siblings('#key').val();
+	var x_score = $('#x_score').val();
+	if(isNaN(x_score)){
+		alert("请输入数字");
+		return false;
+	}
+	$.getJSON(
+		'/shijuan/ajaxSetXFenzhi',
+		{juan_no:juan_no,shiti_no:shiti_no,key:key,x_score:$('#x_score').val()},
+		function(data){
+			if(data.status=='success'){
+				var id = 'juan_'+data.juan_no+'_'+data.shiti_no;
+				$('#'+id).html(data.title);
+				$('#pui_testinfo').html(data.subtitle);
 			}
 		}
 	);

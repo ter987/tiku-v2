@@ -94,6 +94,40 @@ class GlobalController extends Controller{
 		}	
 		return $data;
 	}
+	public function addToCuoti($tiku_id,$s_answer){
+		$cuotiModel = M('user_cuoti');
+		if(!$result = $cuotiModel->where("user_id=".$_SESSION['user_id']." AND tiku_id=$tiku_id")->find()){
+			$data['user_id'] = $_SESSION['user_id'];
+			$data['tiku_id'] = $tiku_id;
+			$data['s_answer'] = $s_answer;
+			$data['update_time'] = time();
+			if(!$cuotiModel->add($data)){
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			$data['s_answer'] = $s_answer;
+			$data['update_time'] = time();
+			if(!$cuotiModel->where("id=".$result['id'])->save($data)){
+				return false;
+			}else{
+				return true;
+			}
+		}
+	}
+	public function addToUsed($tiku_id){
+		$Model = M('user_used');
+		if(!$Model->where("user_id=".$_SESSION['user_id']." AND tiku_id=$tiku_id")->find()){
+			$data['user_id'] = $_SESSION['user_id'];
+			$data['tiku_id'] = $tiku_id;
+			$data['update_time'] = time();
+			if(!$Model->add($data)){
+				return false;
+			}
+		}
+		return true;
+	}
 	/**
 	 * 
 	 */

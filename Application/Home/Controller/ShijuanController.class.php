@@ -117,6 +117,7 @@ class ShijuanController extends GlobalController {
 				$second_juan['shiti'][$k]['t_title'] = $v['t_title'];
 				$second_juan['shiti'][$k]['childs'] = $this->_getTikuInfo($v['childs'],$o,2,$k);
 				$second_juan['shiti'][$k]['order_char'] = $oa[$k+$last];
+				$second_juan['shiti'][$k]['type_name'] = $v['type_name'];
 				$_SESSION['shijuan'][2]['shiti'][$k]['order_char'] = $oa[$k+$last];
 			}
 		}
@@ -125,7 +126,7 @@ class ShijuanController extends GlobalController {
 // 1.答题前请填写好自己的班级、姓名、考号等信息</br>
 // 2.请将答案正确填写在答题卡上
 		// ";
-		//var_dump($_SESSION['shijuan']);
+		//var_dump($_SESSION['shijuan'][1]);
 		$shijuan['title'] = $_SESSION['shijuan']['title'];
 		$this->assign('first_juan',$first_juan);
 		$this->assign('shijuan_title',$_SESSION['shijuan']['title']);
@@ -187,9 +188,10 @@ class ShijuanController extends GlobalController {
 		if(!empty($_SESSION['shijuan'][1])){
 			foreach($_SESSION['shijuan'][1]['shiti'] as $val){
 				foreach($val['childs'] as $v){
-					$extendData['tiku_id'] = $v;
+					$extendData['tiku_id'] = $v['id'];
 					$extendData['ceping_id'] = $ce_id;
-					$extendData['order_char'] = $order_char;
+					$extendData['order_char'] = $v['order_char'];
+					$extendData['x_score'] = $v['x_score'];
 					if(!$extendModel->add($extendData)){
 						$_result = false;
 					}
@@ -200,9 +202,10 @@ class ShijuanController extends GlobalController {
 		if(!empty($_SESSION['shijuan'][2])){
 			foreach($_SESSION['shijuan'][2]['shiti'] as $val){
 				foreach($val['childs'] as $v){
-					$extendData['tiku_id'] = $v;
+					$extendData['tiku_id'] = $v['id'];
 					$extendData['ceping_id'] = $ce_id;
-					$extendData['order_char'] = $order_char;
+					$extendData['order_char'] = $v['order_char'];
+					$extendData['x_score'] = !empty($v['x_score'])?$v['x_score']:0;;
 					if(!$extendModel->add($extendData)){
 						$_result = false;
 					}
@@ -242,6 +245,7 @@ class ShijuanController extends GlobalController {
 			
 		}
 	}
+
 	public function ajaxChangeOneTeam(){
 		$juan_no = I('get.juan_no');
 		$shiti_no = I('get.shiti_no');
@@ -271,7 +275,7 @@ class ShijuanController extends GlobalController {
 			$new = $Model->where("id=".$v['id'])->find();
 			$html .= '<div data-score="" id="quesbox1579176" class="quesbox"><div class="quesopmenu" shiti_id="'.$new['id'].'" juan_no="'.$juan_no.'" shiti_no="'.$shiti_no.'" key="'.$kk.'">
 	<a class="ico_zjgn1" onclick="autoXuanti($(this))">自动选题</a>
-	<a class="ico_zjgn2">手动选题</a>
+	<a class="ico_zjgn2" onclick="jixuxuanti()">手动选题</a>
 	<a class="ico_zjgn3" onclick="moveUp($(this))">上移</a>
 	<a class="ico_zjgn4" onclick="moveDown($(this))">下移</a>
 	<a class="ico_zjgn5" onclick="jiexi($(this))">解析</a>
@@ -347,7 +351,7 @@ class ShijuanController extends GlobalController {
 
 		$html = '<div class="quesopmenu" shiti_id="'.$new['id'].'" juan_no="'.$juan_no.'" shiti_no="'.$shiti_no.'" key="'.$key.'">
 	<a class="ico_zjgn1" onclick="autoXuanti($(this))">自动选题</a>
-	<a class="ico_zjgn2">手动选题</a>
+	<a class="ico_zjgn2" onclick="jixuxuanti()">手动选题</a>
 	<a class="ico_zjgn3" onclick="moveUp($(this))">上移</a>
 	<a class="ico_zjgn4" onclick="moveDown($(this))">下移</a>
 	<a class="ico_zjgn5" onclick="jiexi($(this))">解析</a>
@@ -474,7 +478,9 @@ class ShijuanController extends GlobalController {
 		$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['t_title'] = $new;
 		$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['scole'] = $total;
 		$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['xiaoti_score'] = $xiaoti_score;
-		
+		foreach($_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'] as $key=>$val){
+			$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key]['x_score'] = $xiaoti_score;
+		}
 		if(!empty($_SESSION['shijuan'][1])){
 			foreach($_SESSION['shijuan'][1]['shiti'] as $v){
 				$first_score += $v['scole'];
@@ -485,6 +491,46 @@ class ShijuanController extends GlobalController {
 				$second_score += $v['scole'];
 			}
 		}
+		$_SESSION['shijuan']['score'] = $first_score+$second_score;
+		if(preg_match('/满分：\d+分/',$_SESSION['shijuan']['subtitle'])){
+			$_SESSION['shijuan']['subtitle'] = preg_replace('/满分：\d+分/','满分：'.$_SESSION['shijuan']['score'].'分',$_SESSION['shijuan']['subtitle']);
+		}else{
+			$_SESSION['shijuan']['subtitle'] .= ' 满分：'.$_SESSION['shijuan']['score'].'分';
+		}
+		$this->ajaxReturn(array('status'=>'success','title'=>$new,'juan_no'=>$juan_no,'shiti_no'=>$shiti_no,'subtitle'=>$_SESSION['shijuan']['subtitle']));
+	}
+	public function ajaxSetXFenzhi(){
+		$juan_no = I('get.juan_no');
+		$shiti_no = I('get.shiti_no');
+		$x_score = I('get.x_score');
+		$key = I('get.key');
+		
+		$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key]['x_score'] = $x_score;
+		$old = $_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['t_title'];
+		$count = $_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['count'];
+		$new = preg_replace('/(\(\S+\))/','(共'.$count.'小题，每小题'.$xiaoti_score.'分，共'.$total.'分)',$old);
+		$order = $_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$key]['order_char'];
+		if(preg_match('/第'.$order.'小题\d+分/U',$old)){
+			$new = preg_replace('/第'.$order.'小题\d+分/U','第'.$order.'小题'.$x_score.'分',$old);
+		}else{
+			$new = preg_replace('/\((\S+)\)/',"($1,第".$order.'小题'.$x_score.'分)',$old);
+		}
+		$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['t_title'] = $new;
+		if(!empty($_SESSION['shijuan'][1])){
+			foreach($_SESSION['shijuan'][1]['shiti'] as $v){
+				foreach($v['childs'] as $k=>$val){
+					$first_score += $val['x_score'];
+				}
+			}
+		}
+		if(!empty($_SESSION['shijuan'][2])){
+			foreach($_SESSION['shijuan'][2]['shiti'] as $v){
+				foreach($v['childs'] as $k=>$val){
+					$second_score += $val['x_score'];
+				}
+			}
+		}
+
 		$_SESSION['shijuan']['score'] = $first_score+$second_score;
 		if(preg_match('/满分：\d+分/',$_SESSION['shijuan']['subtitle'])){
 			$_SESSION['shijuan']['subtitle'] = preg_replace('/满分：\d+分/','满分：'.$_SESSION['shijuan']['score'].'分',$_SESSION['shijuan']['subtitle']);
@@ -755,30 +801,24 @@ class ShijuanController extends GlobalController {
 	 * 生成word文件
 	 */
 	public function createToWord(){
-		// if(empty($_SESSION['shijuan'])){
-    		// redirect('/');
-    	// }
-    	//var_dump($_SESSION['shijuan']);exit;
 		Vendor('PhpWord.src.PhpWord.Autoloader');
 		\PhpOffice\PhpWord\Autoloader::register();
 		Vendor('PhpOffice.PhpWord.Shared.Font');
 		$PHPWord_Shared_Font = new \PhpOffice\PhpWord\Shared\Font();
-		// Creating the new document...
 		$phpWord = new \PhpOffice\PhpWord\PhpWord();
-		// Every element you want to append to the word document is placed in a section. So you need a section:
 		$model_array = array(
 			'A4'=>array('width'=>'20.9','height'=>'29.6','colsnum'=>'1','orientation'=>'portrait'),
 			'A3'=>array('width'=>'29.6','height'=>'41.91','colsnum'=>'2','orientation'=>'landscape'),
 			'B5'=>array('width'=>'18.1','height'=>'25.6','colsnum'=>'1','orientation'=>'portrait'),
 			'B4'=>array('width'=>'24.9','height'=>'35.2','colsnum'=>'2','orientation'=>'landscape'),
 		);
-		// $sectionStyle = array(
-		    // 'pageSizeW' => $PHPWord_Shared_Font->centimeterSizeToTwips($model_array[$_SESSION['shijuan_model']]['width']),
-		    // 'pageSizeH' => $PHPWord_Shared_Font->centimeterSizeToTwips($model_array[$_SESSION['shijuan_model']]['height']),
-		    // 'colsNum'	=> $model_array[$_SESSION['shijuan_model']]['colsnum'],
-		    // 'orientation'	=> $model_array[$_SESSION['shijuan_model']]['orientation']
-		// );
-		$section = $phpWord->addSection();
+		$sectionStyle = array(
+		    'pageSizeW' => $PHPWord_Shared_Font->centimeterSizeToTwips($model_array[$_SESSION['shijuan_model']]['width']),
+		    'pageSizeH' => $PHPWord_Shared_Font->centimeterSizeToTwips($model_array[$_SESSION['shijuan_model']]['height']),
+		    'colsNum'	=> $model_array[$_SESSION['shijuan_model']]['colsnum'],
+		    'orientation'	=> $model_array[$_SESSION['shijuan_model']]['orientation']
+		);
+		$section = $phpWord->addSection($sectionStyle);
 		//$section->getStyle()->setPageNumberingStart(1);
 		//$footer = $section->addFooter();
 		//$footer->addTextboxes();
@@ -1165,6 +1205,87 @@ class ShijuanController extends GlobalController {
         header('Expires: 0');
         $objWriter->save("php://output");
 	}
+	public function downDatika(){
+		$dtk_type = I('get.dtk_type');
+		if(empty($dtk_type)) $dtk_type = 1;
+		Vendor('PhpWord.src.PhpWord.Autoloader');
+		\PhpOffice\PhpWord\Autoloader::register();
+		Vendor('PhpOffice.PhpWord.Shared.Font');
+		$PHPWord_Shared_Font = new \PhpOffice\PhpWord\Shared\Font();
+		$phpWord = new \PhpOffice\PhpWord\PhpWord();
+		$model_array = array(
+			'A4'=>array('width'=>'20.9','height'=>'29.6','colsnum'=>'1','orientation'=>'portrait'),
+			'A3'=>array('width'=>'29.6','height'=>'41.91','colsnum'=>'2','orientation'=>'landscape'),
+			'B5'=>array('width'=>'18.1','height'=>'25.6','colsnum'=>'1','orientation'=>'portrait'),
+			'B4'=>array('width'=>'24.9','height'=>'35.2','colsnum'=>'2','orientation'=>'landscape'),
+		);
+		$sectionStyle = array(
+		    'pageSizeW' => $PHPWord_Shared_Font->centimeterSizeToTwips($model_array['A4']['width']),
+		    'pageSizeH' => $PHPWord_Shared_Font->centimeterSizeToTwips($model_array['A4']['height']),
+		    'colsNum'	=> $model_array['A4']['colsnum'],
+		    'orientation'	=> $model_array['A4']['orientation']
+		);
+		$section = $phpWord->addSection($sectionStyle);
+		$section->addText($_SESSION['shijuan']['title'].'-答题卡', array( 'size'=>'15'),array('align' => 'center'));
+		$section->addTextBreak(1);
+		$section->addText('学校：___________班级：___________姓名：___________考号：__________', array( 'size'=>'12'),array('align' => 'center'));
+		$section->addTextBreak(1);
+		if(!empty($_SESSION['shijuan'][1])){
+			$section->addText('选择题', array( 'size'=>'12'));
+			$table = $section->addTable(array('borderSize'=>1));
+			$table->addRow();
+			$index = 0;
+			$width = 900;
+			foreach($_SESSION['shijuan'][1]['shiti'] as $val){
+				foreach($val['childs'] as $v){
+					if($index % 10==0 && $index != 0){
+						$table->addRow();
+						for($i=0;$i<10;$i++){
+							$table->addCell($width);
+						}
+						$section->addTextBreak(1);
+						$table = $section->addTable(array('borderSize'=>1));
+						$table->addRow();
+					}
+					$table->addCell($width)->addText($v['order_char'],array( 'size'=>'12'),array('align'=>'center'));
+					$index ++;
+				}
+			}
+			if($index % 10 != 0){
+				$table->addRow();
+				for($i=0;$i<$index%10;$i++){
+					$table->addCell($width);
+				}
+			}
+			$width = 9000;
+			$height = array(900,2500);
+			if(!empty($_SESSION['shijuan'][2])){
+				$section->addTextBreak(1);
+				$section->addText('非选择题（请在各试题的答题区内作答）', array( 'size'=>'12'));
+				foreach($_SESSION['shijuan'][2]['shiti'] as $val){
+					foreach($val['childs'] as $v){
+						$table = $section->addTable(array('borderSize'=>1));
+						if($val['type_name']=='填空题'){
+							$h = $height[0];
+						}else{
+							$h = $height[1];
+						}
+						$table->addRow($h);
+						$table->addCell($width)->addText($v['order_char'].'、',array( 'size'=>'12'));
+						$section->addTextBreak(1);
+					}
+				}
+			}
+		}
+		$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+        header("Content-Description: File Transfer");
+        header('Content-Disposition: attachment; filename="'.$_SESSION['shijuan']['title'].'-答题卡'.'.docx"');
+        header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+        header('Content-Transfer-Encoding: binary');
+        header("Cache-Control: public");
+        header('Expires: 0');
+        $objWriter->save("php://output");
+	}
 	public function saveShijuan(){
 		$Model = M('user_shijuan');
 		if(isset($_SESSION['shijuan']['id'])&&$Model->where("id=".$_SESSION['shijuan']['id'].' AND user_id='.$_SESSION['user_id'])->find()){//更新数据库
@@ -1191,6 +1312,13 @@ class ShijuanController extends GlobalController {
 				return false;
 			}
 		}
+	}
+	public function ajaxGoLianxi(){
+		//先保存试卷
+		if(!$this->saveShijuan()){
+			$this->ajaxReturn(array('status'=>'error'));
+		}
+		$this->ajaxReturn(array('status'=>'ok'));
 	}
 	public function ajaxSave(){
 		$Model = M('user_shijuan');

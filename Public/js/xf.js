@@ -17,9 +17,6 @@ $(function(){
 		$(".xf_showsj em i").click(function(){
 			$(".xf_qksjpop").show();
 		});
-		$(".ico_zjgn0").click(function(){
-			$(".xf_bjpoplx5").show();
-		});
 		
 		
 		$(".xf_qksjpop div a:eq(0)").click(function(){

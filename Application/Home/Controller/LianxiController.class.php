@@ -60,6 +60,7 @@ class LianxiController extends GlobalController {
 							$data['is_right'] = 1;
 						}else{
 							$data['is_right'] = -1;
+							$this->addToCuoti($shiti_id, $answer);
 						}
 					}else{
 						$data['is_right'] = 0;
@@ -85,6 +86,7 @@ class LianxiController extends GlobalController {
 						$data['is_right'] = 1;
 					}else{
 						$data['is_right'] = -1;
+						$this->addToCuoti($shiti_id, $answer);
 					}
 				}else{
 					$data['is_right'] = 0;

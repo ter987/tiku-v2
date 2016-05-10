@@ -23,6 +23,7 @@ dia_log.prototype.init = function(){
 };
 dia_log.prototype.check = function(){
 	$("#paperdownload").click(function(){
+		$('#down_iframe').attr('src','');
 		$("#sj_div").dialog({
 			title:"生成试卷",
 			width:"560",
@@ -48,8 +49,10 @@ dia_log.prototype.check = function(){
 							}
 						}
 					);
-					dialog = this;		
+					dialog = this;	
+						
 					$('#sj_div').dialog("destroy");
+					
 				}
 			},{
 				text:"取消",
@@ -66,6 +69,7 @@ dia_log.prototype.check = function(){
 		});
 	});
 	$("#answercar").click(function(){
+		$('#down_iframe').attr('src','');
 		$("#dtk_div").dialog({
 			title:"生成答题卡",
 			width:"600",
@@ -74,11 +78,14 @@ dia_log.prototype.check = function(){
 			create: function(){
 			},
 			buttons:[{
-				text:"生成word试卷",
+				text:"下载",
 				show:function(){
 					$(":button").slice(2,3).css({"background":"#fff","color":"#000","border":"1px solid #e5e5e5"});
 				},
 				click:function(){
+					var dtk_type = $('#dtk_type').find("input:checked").val();
+					$('#down_iframe').attr('src','/shijuan/downDatika?dtk_type='+dtk_type);
+					
 					dialog = this;		
 					$('#dtk_div').dialog("destroy");
 				}
