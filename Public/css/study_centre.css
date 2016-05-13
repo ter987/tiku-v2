@@ -385,3 +385,76 @@
 	height:80px;
 	line-height:80px;
 }
+.icon_zqda{
+	background:url(../images/icon_zqda.png) 0px center no-repeat;
+	width:25px;
+	height:40px;
+	float:left;
+	margin-right:20px;
+}
+.icon_shang{
+	background:url(../images/icon_shang.png) 0px center no-repeat;
+	width:21px;
+	height:40px;
+	float:left;
+	margin-right:20px;
+}
+.icon_shang:hover{
+	background:url(../images/icon_shang_c.png) 0px center no-repeat;
+}
+.icon_xia{
+	background:url(../images/icon_xia.png) 0px center no-repeat;
+	width:21px;
+	height:40px;
+	float:left;
+	margin-right:20px;
+}
+.icon_xia:hover{
+	background:url(../images/icon_xia_c.png) 0px center no-repeat;
+}
+.ti_tag{	
+	width:78px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	border:1px solid #CCCCCC;
+	float:left;
+	margin:5px;
+	cursor: pointer;
+}
+.ti_tag:hover{
+	border:1px solid #ff9118;
+	background:#ff9118;
+	color:#fff;
+}
+.pg_th{
+	background:url(../images/ti_sel.png) no-repeat 80px center;
+	border-right:1px solid #CCCCCC;
+	width:100px;
+	text-align:center;
+	cursor:pointer;
+}
+.th_list{
+	position:absolute;
+	width:360px;
+	border:1px solid #CCCCCC;
+	top:40px;
+	left:-1px;
+	background:#fff;
+	padding:5px;
+}
+.zqda_div{
+	position:absolute;
+	width:393px;
+	border:1px solid #CCCCCC;
+	top:40px;
+	right:-1px;
+	background:#fff;		
+}
+.pg_content{
+	border:1px solid #CCCCCC;
+	margin-top:10px;
+	height:450px;
+	padding:10px;
+	overflow-y:scroll;
+}

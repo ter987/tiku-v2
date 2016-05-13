@@ -1,0 +1,308 @@
+<include file="common:header" />
+	<div class="xf_qiehuankmbox">
+			<div class="xf_qiehuankminner">
+				<div class="xf_dqkm"><if condition="this_course_type eq 1">高中<elseif condition="this_course_type eq 2">初中</if>
+					<span class="c_blue xf_dqkmlx">{$this_course_name}</span> 
+					<a href="JavaScript:;"> [切换科目]</a>
+				</div>
+				<!-- 选择科目 -->
+				<div class="xf_xuanzekmbox">
+					<notempty name="gaozhong">
+					<div>
+						<em>&lt;高中&gt;</em>
+						<volist name='gaozhong' id='vo'>
+						<a href="javascript::void(0)" <eq name="this_course_id" value="$vo.id">class="cur"</eq> onclick="change_course({$vo.id});">{$vo.course_name}</a>
+						</volist>
+					</div>
+					</notempty>
+					<notempty name="chuzhong">
+					<div>
+						<em>&lt;初中&gt;</em>
+						<volist name='chuzhong' id='vo'>
+						<a href="javascript::void(0)" <eq name="this_course_id" value="$vo.id">class="cur"</eq> onclick="change_course({$vo.id});">{$vo.course_name}</a>
+						</volist>
+					</div>
+					</notempty>
+				</div>
+				<!-- 选择科目end -->
+				<div class="xf_righexzfl">
+					<ul>
+						<li class='cur'><a href="JavaScript:;">在线组课</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<div class='xf_centerbox'>
+			<!--left-->
+			<div class="tk_left j_c_list" style="">
+				<div style="height:80px;line-height:80px;">
+					<div class="fl" style="margin-left:2px;">教材版本：</div>
+					<div class="fl new_select" style="width:140px;margin-top:20px;">
+						<div class="select_div fl" style="width:90px;height:25px;line-height:25px;padding:5px;overflow:hidden;">
+							<select style="width: 90px;" id="round">
+								<volist name="round" id="vo">
+								<option  value="{$vo.id}" <eq name="vo.id" value="$this_round_id">selected=""</eq>>{$vo.title}</option>
+								</volist>
+							</select>
+						</div>
+						<!-- <div class="sel_down fl"></div>
+						<div class="sel_list" style="width:116px;">
+							<div class="cp">高中数学一轮</div>
+							<div class="cp">高中数学二轮</div>
+						</div> -->
+					</div>
+				</div>
+				<h3>全部教材</h3>
+				<div class="tt_left">
+				<ul class="zsd_ul ce">
+					<volist name="topic_tree" id="vo">
+					<li>
+						<a href="javascript:void(0)" class=""><i class="ce_jia"></i> <span id="{$vo.id}">{$vo.title}</span></a>
+						<notempty name="vo.childs">
+						<ul class="er" style="display: none;">
+							<volist name="vo.childs" id="v">
+							<li class="e_li">
+								<a href="javascript:void(0)" class=""><i class="ce_jia"></i><span id="{$v.id}">{$v.title}</span></a>
+								<notempty name="vo.childs">
+								<ul class="thr" style="display: none;">
+									<volist name="v.childs" id="vs">
+									<li class="er_li"><a ><span  id="{$vs.id}"> {$vs.title}</span></a></li>
+									</volist>
+									<div class="clear"></div>
+								</ul>
+								</notempty>
+							</li>
+							</volist>
+						</ul>
+						</notempty>
+					</li>	
+					</volist>
+					
+					<div class="clear"></div>
+				</ul>
+				</div>
+			</div>
+			<div class="fr xf_rightcenterbox" style="width:785px;"> 
+				<div class="xf_xuanzetxnd">
+					<div class="fl" style="width:100%;border-top:1px solid #D9D9D9;border-right:1px solid #D9D9D9;margin-left:-1px;">
+						<div class="fl" style="line-height:40px;padding-left:20px;">模块：</div>
+						<div class='xf_paixulb'>
+							<volist name="resource" id="vo">
+							<div id="{$vo.id}" class="tags">{$vo.title}</div>
+							</volist>
+							<div id="{$vo.id}" class="tags active">典型例题</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+					<!-- <div style="border:1px solid #D9D9D9;padding:10px;margin-left:-1px;">
+						<div style="width:100%;min-height:20px;">
+							<div class="fl" style="margin:10px 12px;">全部类型</div>
+							<div class="fl xf_duoququyu">
+								<div class="tag2 active">不限<div class="tag2_ch"></div></div>
+								<div class="tag2">中考真题<div class="tag2_ch"></div></div>
+								<div class="tag2">自主模拟题<div class="tag2_ch"></div></div>
+								<div class="tag2">名校模拟题<div class="tag2_ch"></div></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div style="width:100%;min-height:20px;">
+							<div class="fl" style="margin:10px 12px;">全部年份</div>
+							<div class="fl xf_duoququyu">
+								<div class="tag2 active">不限<div class="tag2_ch"></div></div>
+								<div class="tag2">2016年<div class="tag2_ch"></div></div>
+								<div class="tag2">2015年<div class="tag2_ch"></div></div>
+								<div class="tag2">2014年<div class="tag2_ch"></div></div>
+								<div class="tag2">2013年<div class="tag2_ch"></div></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div style="width:100%;min-height:20px;">
+							<div class="fl" style="margin:10px 12px;">全部题型</div>
+							<div class="fl xf_duoququyu">
+								<div class="tag2 active">基础知识<div class="tag2_ch"></div></div>
+								<div class="tag2">名句默写<div class="tag2_ch"></div></div>
+								<div class="tag2">现代文阅读<div class="tag2_ch"></div></div>
+								<div class="tag2">文言文阅读<div class="tag2_ch"></div></div>
+								<div class="tag2">诗词鉴赏<div class="tag2_ch"></div></div>
+								<div class="tag2">语言文字运用<div class="tag2_ch"></div></div>
+								<div class="tag2">写作<div class="tag2_ch"></div></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div style="width:100%;min-height:20px;">
+							<div class="fl"style="margin:10px 12px;">全部难度</div>
+							<div class="fl xf_duoququyu">
+								<div class="tag2 active">1.00-0.86(容易)<div class="tag2_ch"></div></div>
+								<div class="tag2">0.85-0.71(较易)<div class="tag2_ch"></div></div>
+								<div class="tag2">0.70-0.56(中等)<div class="tag2_ch"></div></div>
+								<div class="tag2">0.55-0.41(较难)<div class="tag2_ch"></div></div>
+								<div class="tag2">0.40-0.26(困难)<div class="tag2_ch"></div></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="clear"></div>
+					</div> -->
+					<div style="border-bottom:1px solid #D9D9D9;border-right:1px solid #D9D9D9;"> 
+						<div class="fl" style="width:648px;">
+							<div class="fl" style="line-height:40px;padding-left:20px;">排序：</div>
+							<div class='xf_paixulb'>
+								<div id="" class="tags active">默认</div>
+								<div id="" class="tags">最新</div>
+								<div id="" class="tags">最热门</div>
+							</div>
+							<div class="fr xf_shaixuansctm">
+								<a href="JavaScript:;">过滤使用过的题目</a>
+								<a href="JavaScript:;" class='active'>收藏的试题</a>
+							</div>
+						</div>
+						<div class="fr" style="width:116px;height:40px;border-left:1px solid #D9D9D9;line-height:40px;">
+							<div class="fl" style="padding:0px 4px;"><a href=""> < </a></div>
+							<div class="fl" style="width:79px;text-align:center;">
+								<span><i style="color:#1194f3;font-style: normal;">1</i>/3800</span>
+							</div>
+							<div class="fl" style="padding:0px 4px;"><a href=""> > </a></div>
+						</div>
+						<div class="clear"></div>
+					</div>	
+				</div>
+				<div style="height:5px;width:100%;"></div>
+			<volist name="zuke_data" id="vo">
+				<div class='xf_teshuli'>
+
+					<!-- 纠错 -->
+					<div class="xf_jiecuobox">
+						<textarea name="" id="" cols="30" rows="10" placeholder="描述下纠错问题吧，我们会及时改正"></textarea>
+						<div><a href="JavaScript:;">确定</a><a href="JavaScript:;">取消</a></div>
+					</div>
+					<!-- 纠错end -->
+					<a href="JavaScript:;" class="xf_jiucuo">纠错</a>
+					<div style="border-bottom:1px solid #D9D9D9;padding:10px;">
+						学案号：<span>5643</span> &nbsp;&nbsp;资源类型：<span>{$vo.title}</span>
+					</div>
+					<div style="padding:15px 20px 10px 20px;">
+						<p>【{$vo.title}】{$vo.content|htmlspecialchars_decode}</p>
+						<div style="margin-top:10px;">
+							<div class="fr"><a href="#" class='xf_layuanspan'>来源:{$vo.topic_title}</a></div>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div style="border-top:1px solid #D9D9D9;">
+						<div class="fl">
+							<div class="zan">0</div>
+							<div class="hot">0次</div>
+						</div>
+						<div class="fr">
+							<a href="JavaScript:;" class="sc_btn">收藏</a>
+							<a href="JavaScript:;" class="jr_btn">+加入学案</a>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</volist>
+				<!-- 分页 -->
+				<div>
+					<div class="page" style="padding-right:0px;">
+						<a href="##" style="width:100px"> < 上一页</a>
+						<a class="check" href="##">1</a>
+						<a href="##">2</a>
+						<a href="##">3</a>
+						<span>...</span>
+						<a href="##">38</a>
+						<a href="##" style="width:100px;">下一页  >  </a>
+						<div style="clear:both;"></div>
+					</div>	
+				</div>
+				<!-- 分页end -->
+			</div>
+		</div>
+
+	<div class="xf_fanhuidb"><a href="#"></a></div>
+	<div class="xf_dqxuanzet active">
+		<div class="xf_mysjleft">
+			<p>我</p>
+			<p>的</p>
+			<p><i>》</i></p>
+			<p>学</p>
+			<p>案</p>
+			<span>10道</span>
+		</div>
+		<div class="xf_showsj">
+			<em><i>清空</i></em>
+			<p>一、综合题(<span>3</span>/5)</p>
+			<p>二、单选题(<span>3</span>/5)</p>
+			<p>三、多选题(<span>3</span>/5)</p>
+			<p>四、计算题(<span>3</span>/5)</p>
+			<p>五、基础知识题（<span>3</span>/5)</p>
+			<div class='xf_scsjbutton'><a href="JavaScript:;">生成试卷</a></div>
+		</div>
+	</div>
+	<div class="xf_tishijjpop xf_qksjpop">
+		<p>
+			<img src="images/ico_tsjj.png" alt="">
+			<span>收集那么多的好试题，确定要清空试卷吗？</span>
+		</p>
+		<div><a href="JavaScript:;">确定</a><a href="JavaScript:;">取消</a></div>
+	</div>
+<script>
+function change_course(id){
+$.getJSON(
+	'/index.php/home/zuke/ajaxChangeCourse',
+	{id:id},
+	function(data){
+		if(data.status=='ok'){
+				location.reload();
+				
+			}
+		}
+		
+	);
+}
+$('#round').change(function(){
+	var id = $(this).val();
+	$.getJSON(
+	'/index.php/home/zuke/ajaxChangeRound',
+	{id:id},
+	function(data){
+		if(data.status=='ok'){
+				location.reload();
+				
+			}
+		}
+		
+	);
+});
+
+$(
+	function(){
+		var id = $(this).val();
+		$.ajax(
+		'/index.php/home/zuke/ajaxGetCaseData',
+		{resource_id:id},
+		function(data){
+			alert(3);
+			if(data.status=='ok'){
+					
+					
+				}
+			}
+			
+		);
+	}
+);
+$('.xf_paixulb div').click(function(){
+	var id = $(this).attr('id');
+	$.getJSON(
+	'/index.php/home/zuke/ajaxGetCaseData',
+	{resource_id:id},
+	function(data){
+		if(data.status=='ok'){
+				
+				
+			}
+		}
+		
+	);
+});
+</script>
+<include file="common:footer" />

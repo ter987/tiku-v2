@@ -245,6 +245,9 @@ body,form,input,textarea{margin:0;padding:0;font-size:14px;font-family:Microsoft
 .bg_cheng{
 	background:#FF8100;
 }
+.bg_huang{
+	background:yellow;
+}
 .bg_hong{
 	background:#EF4349;
 }

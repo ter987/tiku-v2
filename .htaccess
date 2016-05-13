@@ -1,7 +1,6 @@
 <IfModule mod_rewrite.c>
   Options +FollowSymlinks
   RewriteEngine On
-
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule ^tiku/(\w+)\/(\d*)\/{0,1}$ index.php/home/tiku/index/course/$1/p/$2/
@@ -9,6 +8,7 @@
   RewriteRule ^tiku/detail/(\d+).html$ index.php/home/tiku/detail/id/$1/
   RewriteRule ^member/(\w*)$ index.php/home/member/$1/
   RewriteRule ^shijuan/(\w*)$ index.php/home/shijuan/$1/
+  RewriteRule ^search/(\w*)$ index.php/home/search/$1/
   RewriteRule ^hand/(\w*)$ index.php/home/hand/$1/
   RewriteRule ^smart/(\w*)$ index.php/home/smart/$1/
   RewriteRule ^lianxi/(\w*)$ index.php/home/lianxi/$1/
@@ -24,4 +24,5 @@
   RewriteRule ^qqconnect/(\w*)$ index.php/home/qqconnect/$1/
   RewriteRule ^sinaconnect/(\w*)$ index.php/home/sinaconnect/$1/
   RewriteRule ^weixinconnect/(\w*)$ index.php/home/weixinconnect/$1/
+  RewriteRule ^zuke/(\w*)$ index.php/home/zuke/$1/
 </IfModule>

@@ -616,7 +616,7 @@ class GlobalController extends Controller{
 		$result = json_decode($result,true);
 		if($result['msg']=='OK'){
 			$_SESSION['phone_vcode'] = $rand_code;
-			setcookie(session_name(),session_id(),time()+C('MESSAGE_EXPIRE'));  
+			setcookie(session_name(),session_id(),time()+C('MESSAGE_EXPIRE'),'/',C('EXT_DOMAIN'));  
 			
 			
 			$Model->add($data);

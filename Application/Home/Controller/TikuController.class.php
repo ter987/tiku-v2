@@ -265,7 +265,7 @@ class TikuController extends GlobalController {
 			$_SESSION['course_type'] = $result['course_type'];
 			$_SESSION['course_name'] = $result['course_name'];
 			$_SESSION['pinyin'] = $result['pinyin'];
-			setcookie(session_name(),session_id(),time()+C('SESSION_EXPIRE_TIME'),'/');
+			setcookie(session_name(),session_id(),time()+C('SESSION_EXPIRE_TIME'),'/',C('EXT_DOMAIN'));
 			if($jumpto == 'tiku'){
 				$this->ajaxReturn(array('status'=>'ok','jumpto'=>'/tiku/'.$pinyin.'/'));
 			}else if($jumpto == 'smart'){

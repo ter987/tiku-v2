@@ -1,0 +1,190 @@
+<include file="common:header" />
+	<!--main-->
+	<div id="main"style="margin-top:2px;min-height:500px;">
+		<div style="background:#DBF0FF;border-bottom:4px solid #0190F2;">
+			<div style="width:1000px;height:68px;">
+				<div style="float:left;line-height:68px;color:#0190F2;font-size:24px;font-weight:700;">学习中心</div>
+				<div class='xf_zaixuanzj'>试卷批改</div>
+			</div>
+		</div>
+		<div style="width:998px;border:1px solid #CCCCCC;margin-top:20px;background:#fff;">	
+			<div style="border-bottom:1px solid #CCCCCC;"> 
+				<div class="fl" style="width:135px;border-right:1px dashed #868686;text-align:center;height:40px;line-height:40px;">
+					<a href="" style="color:#0190f2;font-size:15px;"><返回我的测评</a>
+				</div>
+				<div class="fl" style="height:40px;line-height:40px;margin-left:20px;font-size:15px;">
+					{$ceping.title}<span style="font-size:12px;">&nbsp;&nbsp;考试时间：{$ceping.create_time|date="Y-m-d H:i:s",###}</span>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div style="padding:10px;">
+				<div class="fl" style="width:790px;">
+					<div style="border:1px dashed #C9C9C9;height:40px;line-height:40px;background:#F4FAEE;position:relative;">
+						<div class="fl pg_th" style="">第<span id="order_char"></span>题</div>
+						<div class="fl" style="width:687px;">
+							<div class="fl" style="margin-left:5px;">该题您已阅<span id="yiyue">1/10</span>份</div>
+							<div class="fr" >
+								<div class="icon_zqda"></div>
+								<div class="icon_xia"></div>
+								<div class="icon_shang"></div>
+							</div>
+						</div>
+						<div class="th_list" style="display:none;">
+							<volist name="ceping_extend" id="vo">
+							<div class="ti_tag" id="{$vo.tiku_id}">第{$vo.order_char}题</div>
+							</volist>
+						</div>
+						<div class="zqda_div" style="display:none;">
+							<div>【正确答案】</div>
+							<div id="answer">
+								
+							</div>
+						</div>
+					</div>
+					
+					<div class="pg_content">
+						
+					</div>
+				</div>
+				<div class="fl" style="width:175px;border:1px solid #CCCCCC;margin-left:10px;">
+					<div style="height:40px;text-align:center;line-height:40px;border-bottom:1px solid #CCCCCC;background:#F4FAEE;">
+						打分板
+					</div>
+					<div style="padding:10px;">
+						<div>总分：<span id="x_score">5</span>分</div>
+						<div style="margin:10px 0px;">
+							<div class="fl"><input type="text" name="s_score" id="s_score" style="border:1px solid #CCCCCC;width:80px;height:25px;"></div>
+							<div class="fl cp" onclick="qingkong()" style="width:50px;height:25px;line-height:23px;margin-left:10px;border:1px solid #FF9118;color:#FF9118;text-align:center;">清空</div>
+							<div class="clear"></div>
+						</div>
+						<div onclick="pingfen()" style="background:#FF9118;color:#fff;height:30px;line-height:30px;width:96px;text-align:center;cursor: pointer;">
+							提交分数
+						</div>
+						<input type="hidden" id="ceping_id" />
+						<input type="hidden" id="answer_id" />
+						<input type="hidden" id="tiku_id" />
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		
+		
+	</div>
+	<!--footer-->
+ <script type="text/javascript">
+
+	$(".ed1").click(function(){
+		$('.xf_bjpoplx1').show();
+	});
+	$(".ed2").click(function(){
+		$('.xf_bjpoplx2').show();
+	});
+	
+	$(".pg_th").click(function(){
+		if($(this).hasClass('active')){
+			$(".th_list").hide();
+			$(this).removeClass('active');
+		}else{
+			$(".th_list").show();
+			$(this).addClass('active');
+		}
+	});
+	$(".ti_tag").click(function(){
+		var ceping_id = $('#ceping_id').val();
+		var tiku_id = $(this).attr('id');
+		get_student_answer(ceping_id,tiku_id,0,'all');
+		var th=$(this).html();
+		$(".pg_th").html(th).removeClass('active');
+		$(".th_list").hide();
+	});
+	$(".icon_zqda").click(function(){
+		if($(this).hasClass('active')){
+			$(".zqda_div").hide();
+			$(this).removeClass('active');
+		}else{
+			$(".zqda_div").show();
+			$(this).addClass('active');
+		}
+	});
+	$(
+		function(){
+			var tiku_id = '{$tiku_id_not}';
+			if(tiku_id==''){
+				tiku_id = 0;
+			}
+			get_student_answer({$ceping.id},tiku_id);
+		}
+		
+	);
+	function get_student_answer(ceping_id,tiku_id,answer_id=0,by=''){
+		$.getJSON(
+		'/studycenter/ajaxGetStudentAnswer/',
+		{ceping_id:ceping_id,tiku_id:tiku_id,answer_id:answer_id,by:by},
+		function(data){
+			if(data.status=='ok'){
+					$('#answer').html(data.data.answer);
+					$('#ceping_id').val(data.data.ceping_id);
+					$('#tiku_id').val(tiku_id);
+					$('#answer_id').val(data.data.id);
+					$('#order_char').html(data.data.order_char);
+					$('.pg_content').html(data.data.s_answer);
+					$('#x_score').html(data.data.x_score);
+					$('#yiyue').html(data.data.geted+'/'+data.data.total);
+					if(data.data.s_score>0){
+						$('#s_score').val(data.data.s_score);
+					}else{
+						$('#s_score').val('');
+					}
+				}else if(data.status=='finished'){
+					alert(data.msg);
+				}
+			}
+			
+		);
+	}
+	$('.icon_xia').click(function(){
+		var ceping_id = $('#ceping_id').val();
+		var tiku_id = $('#tiku_id').val();
+		var answer_id = $('#answer_id').val();
+		get_student_answer(ceping_id,tiku_id,answer_id,'xia');
+	});
+	$('.icon_shang').click(function(){
+		var ceping_id = $('#ceping_id').val();
+		var tiku_id = $('#tiku_id').val();
+		var answer_id = $('#answer_id').val();
+		get_student_answer(ceping_id,tiku_id,answer_id,'shang');
+	});
+	function qingkong(){
+		$('#s_score').val('');
+	}
+	function pingfen(){
+		var ceping_id = $('#ceping_id').val();
+		var tiku_id = $('#tiku_id').val();
+		var answer_id = $('#answer_id').val();
+		var s_score = $('#s_score').val();
+		var x_score = $('#x_score').html();
+		if(isNaN(s_score) || s_score<=0){
+			alert('请输入有效数字');
+			return false;
+		}
+		if(s_score>x_score){
+			alert('不能超过总分');
+			return false;
+		}
+		$.getJSON(
+		'/studycenter/ajaxpingfen/',
+		{ceping_id:ceping_id,answer_id:answer_id,s_score:s_score,tiku_id:tiku_id},
+		function(data){
+			if(data.status=='ok'){
+					get_student_answer(ceping_id,data.tiku_id);
+				}else if(data.status=='finished'){
+					alert('试卷已改完');
+				}
+			}
+			
+		);
+	}
+</script>
+<include file="common:footer" />
+</html>

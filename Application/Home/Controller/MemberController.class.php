@@ -12,7 +12,9 @@ class MemberController extends GlobalController {
 		$this->assign('course_data',$course_data);
 	}
     public function index(){
-    	redirect('/member/info');
+    	$this->setMetaTitle('个人中心'.C('TITLE_SUFFIX'));
+		$this->addCss(array('xf.css','personal.css'));
+		$this->addJs(array('js/menu.js','js/xf.js'));
         $this->display();
 	}
 	public function info(){
@@ -414,9 +416,10 @@ INNER JOIN tiku ON a.tiku_id=tiku.`id`");
 				$_SESSION['nick_name'] = $result['nick_name'];
 				$_SESSION['user_id'] = $result['id'];
 				$_SESSION['user_type'] = $result['type'];
+				setcookie(session_name(),session_id(),0,'/',C('EXT_DOMAIN'));
 				if(I('post.auto_login')){
-					setcookie('user_name',$user,time()+C('COOKIE_EXPIRE'),'/');
-					setcookie('password',$password,time()+C('COOKIE_EXPIRE'),'/');
+					setcookie('user_name',$user,time()+C('COOKIE_EXPIRE'),'/',C('EXT_DOMAIN'));
+					setcookie('password',$password,time()+C('COOKIE_EXPIRE'),'/',C('EXT_DOMAIN'));
 				}
 				redirect($_COOKIE['pre_page']);
 				//redirect("/member/");
@@ -459,9 +462,10 @@ INNER JOIN tiku ON a.tiku_id=tiku.`id`");
 			$_SESSION['nick_name'] = $result['nick_name'];
 			$_SESSION['user_id'] = $result['id'];
 			$_SESSION['user_type'] = $result['type'];
+			setcookie(session_name(),session_id(),0,'/',C('EXT_DOMAIN'));
 			if(I('post.auto_login')){
-				setcookie('user_name',$user,time()+C('COOKIE_EXPIRE'),'/');
-				setcookie('password',$password,time()+C('COOKIE_EXPIRE'),'/');
+				setcookie('user_name',$user,time()+C('COOKIE_EXPIRE'),'/',C('EXT_DOMAIN'));
+				setcookie('password',$password,time()+C('COOKIE_EXPIRE'),'/',C('EXT_DOMAIN'));
 			}
 			$this->ajaxReturn(array('status'=>'ok'));
 		}

@@ -29,24 +29,24 @@
 								<div class="fr r_bg" style="">3</div>
 								<div class="clear"></div>
 							</div></a>
-							<a href="/member/"><div class="top_user_li" style="">个人中心</div></a>
-							<a href="/member/logout"><div class="top_user_li" style="">退出登录</div></a>
+							<a href="__ROOT__/member/"><div class="top_user_li" style="">个人中心</div></a>
+							<a href="__ROOT__/member/logout"><div class="top_user_li" style="">退出登录</div></a>
 						</div>
 					</div>
 				</div>
 				</notempty>
 				<div class="fr">
-					<empty name="user_id"><div class="fl font_b mr20"><a href="/member/login">登陆 </a>|<a href="/member/register"> 注册</a></div></empty>
+					<empty name="user_id"><div class="fl font_b mr20"><a href="__ROOT__/member/login">登陆 </a>|<a href="__ROOT__/member/register"> 注册</a></div></empty>
 					<div class="fl font_b c_cheng site_home">设为首页</div>
 					<div class="fl collect">收藏</div>
 					<empty name="user_id">
-					<div class="fl top_right"><a href="/sinaconnect/login" class="weibo"></a> <a href="/weixinconnect/login" class="weixin"></a></div>
+					<div class="fl top_right"><a href="__ROOT__/sinaconnect/login" class="weibo"></a> <a href="__ROOT__/weixinconnect/login" class="weixin"></a></div>
 					</empty>
 				</div>
 			</div>
 		</div>
 		<div class="logo_sea">
-			<a href="/"><div class="fl logo"></div></a>
+			<a href="__ROOT__"><div class="fl logo"></div></a>
 			<div class="fl top_line" style="margin-left:100px;">
 				<div class="search">
 					<div class="fl sea_left cp">
@@ -70,7 +70,7 @@
 		<div class="xf_topnavbox">
 			<div class='xf_topnavinner'>
 				<ul>
-					<li><a href="/">首页</a></li>
+					<li><a href="__ROOT__">首页</a></li>
 					<li class='xf_topnavtk <eq name="this_module" value="tiku">cur</eq> '>
 						<a href="#">题库</a>
 						<div class="xf_tikml">
@@ -92,10 +92,12 @@
 							</notempty>
 						</div>
 					</li>
-					<li <eq name="this_module" value="smart">class='cur'</eq>><a href="/smart/">组卷</a></li>
+					<li <eq name="this_module" value="smart">class='cur'</eq>><a href="__ROOT__/smart/">组卷</a></li>
 					<li <eq name="this_module" value="jingpin">class='cur'</eq>><a href="javascript:void(0)" onclick="jingpin()">试卷</a></li>
-					<li <eq name="this_module" value="lianxi">class='cur'</eq>><a href="/lianxi/">在线练习</a></li>
-					<li <eq name="this_module" value="studycenter">class='cur'</eq>><a href="/studycenter/index/">学习中心</a></li>
+					<li <eq name="this_module" value="lianxi">class='cur'</eq>><a href="__ROOT__/lianxi/">在线练习</a></li>
+					<li <eq name="this_module" value="zuke">class='cur'</eq>><a href="__ROOT__/zuke/">组课</a></li>
+					<li <eq name="this_module" value="studycenter">class='cur'</eq>><a href="__ROOT__/studycenter/index/">学习中心</a></li>
+					
 				</ul>
 			</div>
 		</div>

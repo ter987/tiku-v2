@@ -165,5 +165,7 @@ return  array(
     'DATA_CRYPT_TYPE'       =>  'Think',    // 数据加密方式
 	'TMPL_PARSE_STRING'  =>array(
 	'__PUBLIC__' => '/Public', // 更改默认的/Public 替换规则
+	'__ROOT__' => 'http://www.haxue.com',
+	'EXT_DOMAIN' => '.haxue.com',
 	)
 );

@@ -1,0 +1,82 @@
+<include file="common:header" />
+	<!--main-->
+	<div id="main"style="margin-top:2px;min-height:500px;">
+		<div style="background:#DBF0FF;border-bottom:4px solid #0190F2;">
+			<div style="width:1000px;height:68px;">
+				<div style="float:left;line-height:68px;color:#0190F2;font-size:24px;font-weight:700;">学习中心</div>
+			</div>
+		</div>
+		<div style="border:1px solid #D9D9D9;width:1006px;margin-top:20px;margin-bottom:40px;background:#F5F5F5;">
+			<include file="studycenter:left" />
+			<div class="study_right">
+				<!-- 我的作业 -->
+					<div class="show_tab_3">
+						<div style="border-bottom:1px dashed #D9D9D9;padding:10px;">
+							<div class="fl cp" style="background:#FF9C00;color:#fff;padding:6px 10px;margin-left:10px;">+布置新测评</div>
+							<div class="clear"></div>
+						</div>
+						<div style="line-hiehgt:40px;padding:10px;">
+							<div class="fl style_ty_check">进行中</div>
+							<div class="fl style_ty">已结束</div>
+							<div class="fl" style="margin-left:200px;line-height:35px;">组卷时间：</div>
+							<div class="fl new_select">
+								<div class="select_div fl">
+									全部
+								</div>
+								<div class="sel_down fl"></div>
+								<div class="sel_list">
+									<div class="cp">全部</div>
+									<div class="cp">最近一周</div>
+									<div class="cp">最近一月</div>
+									<div class="cp">最近三月</div>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="table_a" style="border-right:0px;border-top:0px;">
+							<div class="table_bg">
+								<div class="xm" style="width:25%;">名称</div>
+								<div class="xm" style="width:10%;">学科</div>
+								<div class="xm" style="width:15%;">组卷时间</div>
+								<div class="xm" style="width:15%;">时间</div>
+								<div class="xm" style="width:15%;">完成情况</div>
+								<div class="xm" style="width:20%;margin-left:-6px;">操作</div>
+								<div class="clear"></div>
+							</div>
+							<volist name="data" id="vo">
+							<div>
+								<div class="xm" style="width:25%;">{$vo.title}</div>
+								<div class="xm" style="width:10%;"><eq name="vo.course_type" value="1">高中<else/>初中</eq>{$vo.course_name}</div>
+								<div class="xm" style="width:15%;">{$vo.create_time|date="Y-m-d",###}</div>
+								<div class="xm" style="width:15%;">{$vo.limit_time}分钟</div>
+								<div class="xm" style="width:15%;"><php>echo $vo['join_num']-$vo['unjoined_num'];</php>/{$vo.join_num}</div>
+								<div class="xm" style="width:20%;margin-left:-6px;">
+									<div class="fl" style="width:33%"><a target="_blank" href="/studycenter/jsjiexi/?id={$vo.id}">查看</a></div>
+									<div class="fl" style="width:33%"><a href="">预览</a></div> 
+									<div class="fl" style="width:33%"><a href="/studycenter/gaijuan/?id={$vo.id}">改卷</a></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							</volist>
+							
+						</div>
+						<div>						
+							<div class="page" style="float:right;padding-right:0px;">
+								<a href="##" style="width:100px">上一页</a>
+								<a class="check" href="##">1</a>
+								<a href="##">2</a>
+								<a href="##">3</a>
+								<span>...</span>
+								<a href="##">38</a>
+								<a href="##" style="width:100px;">下一页</a>
+								<div style="clear:both;"></div>
+							</div>	
+						</div>
+					</div>
+				<!-- 作业结束 -->
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+	</div>
+	<!--footer-->
+<include file="common:footer" />

@@ -42,4 +42,10 @@ return array(
 	'SESSION_EXPIRE_TIME' => 2592000,
 	//上传设置
 	'MAX_FILE_LIMIT' => 2097152,//单位字节，=2M
+	//子域名配置
+	// 'APP_SUB_DOMAIN_DEPLOY' => 1,
+	// 'APP_SUB_DOMAIN_RULES' => array(
+		// 'zuke.haxue.com' => 'Home/zuke'
+	// ),
+	'INDEX_DOMAIN' => 'http://www.haxue.com'
 );

@@ -1,48 +1,211 @@
-<include file="common:_header" />
-<link href="__PUBLIC__/css/user.css" rel="stylesheet" type="text/css" />
-<!--main-->
-<div class="width">
-	<div class="b_top">
-    	<!--left-->
-        	<include file="Member:left" />
-        
-        <!--right-->
-        <div class="uright">
-        	<!--三个小标-->
-            <ul class="zy_ul">
-            	<li><a href=""><img src="images/c1.jpg" /></a></li>
-                <li><a href=""><img src="images/c2.jpg" /></a></li>
-                <li><a href=""><img src="images/c3.jpg" /></a></li>
-            </ul>
-           <!---->
-           
-           <h3>个人主页</h3>
-           <div class="zy_con">
-               <p>小三，欢迎您！</p>
-               <p><span>交易提醒：待支付订单<font class="c_l">（0）</font></span>
-               	  <span>订单总数<font class="c_l">（0）</font></span>
-               </p>
-               <p>
-               		<span>学生卡账余额：<font class="c_z">￥0元</font></span>
-                    <span>账户余额有效期：无</span>
-               </p>
-           </div>
-           
-           <h3>挑错有礼</h3>
-          	<div class="zy_con">
-            	 <p>总计：0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过：0 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  待审核：0</p>
-          		 <p>已奖励：<font class="c_z">0.00元</font>
-                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="" class="c_l">兑换</a>
-                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="" class="c_l">活动规则</a>
-                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="" class="c_l">查看记录</a>
-                 </p>
-            </div>
-            
-           <div class="zy_tit">邮箱绑定：&nbsp;&nbsp;&nbsp;&nbsp;xiaosan2438@163.com      已验证</div>
-           <div class="zy_tit">手机绑定：&nbsp;&nbsp;&nbsp;&nbsp;<a href="" class="c_l">绑定</a></div>
-        </div>
-    
-    </div>
-</div>
+<include file="common:header" />
+	<!--main-->
+	<div id="main"style="margin-top:2px;min-height:500px;">
+		<div style="background:#DBF0FF;border-bottom:4px solid #0190F2;">
+			<div style="width:1000px;height:68px;">
+				<div style="float:left;line-height:68px;color:#4c4c4c;font-size:24px;"><span class="c_blue">个人中心</span></div>
+                <div style="float:right;color:#000;font-size:18px;padding:10px 50px;margin-top:20px;border-top-left-radius:5px;border-top-right-radius:5px;">消息中心<b>→</b></div>
+			</div>
+		</div>
 
+		<div style="width:1000px;margin-top:10px;">
+
+			<!--左边-->
+            <div style="width:190px;height:800px;background:#F5F5F5;float:left;border:1px solid #D9D9D9;">
+            <div class="tk_left zsd_list">
+            <div class="sidebar">
+              <div class="modBrandOut mb10 rankSB-cate">
+                <div class="modBrand">
+                <div class="thA" style="height:50px;line-height:50px;text-align:center;color:#FFF;background:#58BBFF;"><h3>主页</h3></div>
+                  <div class="tbA">
+                    <div class="expA">
+                      <dl class="dlA clearfix">
+                        <dt class="dt-a"><a class="btn" href="javascript://" name="jHide"><h3>个人信息</h3></a></dt>
+                        <dd><a href="">个人资料</a> </dd>
+                        <dd><a href="">修改密码</a></dd>
+                        <dd><a href="">密码保护</a></dd>
+                      </dl>
+                      <dl class="dlA clearfix">
+                        <dt  class="dt-a"> <a class="btn" href="javascript://" name="jHide"><h3>账户管理</h3></a></dt>
+                        <dd><a href="">我的订单</a></dd>
+                        <dd><a href="">充值中心</a></dd>
+                        <dd><a href="">充值记录</a></dd>
+                        <dd><a href="">消费记录</a></dd>
+                      </dl>
+                       <dl class="dlA clearfix">
+                        <dt class="dt-a"> <a class="btn" href="javascript://" name="jHide"><h3>积分管理</h3></a> </dt>
+                        <dd><a href="">积分明细</a></dd>
+                        <dd><a href="">积分兑换</a></dd>
+                        <dd><a href="">积分规则</a></dd>
+                      </dl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        </div>
+
+            
+            <!--右边-->
+			<div class="fr" style="float:left;width:806px;height:800px;border:1px solid #D9D9D9;margin-bottom:40px"> 	
+				<div style="margin:5px 10px">
+ 
+                <div class="PersonData" style="width:785px;margin:15px 5px">
+                 
+                <div class="Rmain">
+                <div class="zytrleft" style="width:785px;">
+					<div style="display:inline;">
+						<div style="width:380px;height:160px;border:1px solid #D9D9D9;float:left">
+							<div style="display:inline;">
+								<div style="float:left;margin:20px 10px;">
+									<img src="./images/headimg.jpg" style="width:120px;height:120px;">
+									<div class="cp" id="check_photo" style="width:120px;height:25px;line-height:25px;text-align:center;margin-top:-25px;background:#fff;filter:alpha(opacity=80);-moz-opacity:0.80;opacity:0.80;color:#E51010;">	
+										更改头像
+									</div>
+								</div>
+								<div style="width:230px;line-height:25px;display:inherit;float:left;margin-top:20px">
+									<div><font style="color:red;font-size:18px;"><b>张三</font style="font-size:18px"> 同学</b></div>
+									<div style="font-size:14px">资料完成度：35%</div>
+									<div style="border:1px solid #D9D9D9;width:230px;height:18px;border-radius:50px;">
+										<div style="width:35%;float:left;background:#FF9118;height:14px;border-radius:50px;margin:2px;"></div>
+									</div>
+									<div style="float:left;display:inline">
+										<div style="width:80px;height:30px;line-height:30px;text-align:center;background:#F5F5F5;border:1px solid #B3B3B3;border-radius:3px;margin-top:20px;margin-left:15px;float:left;cursor:pointer">消息中心</div>
+										<div style="display:inherit;float:left;width:80px;height:30px;line-height:30px;text-align:center;background:#F5F5F5;border:1px solid #B3B3B3;border-radius:3px;margin-top:20px;margin-left:35px;cursor:pointer">修改密码</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div style="width:380px;height:160px;border:1px solid #D9D9D9;display:inline;float:right;">
+						   <div style="width:380px;height:80px;border-bottom:1px solid #D9D9D9;">
+								<div style="width:110px;height:60px;background:#F5F5F5;float:left;border-right:1px solid #D9D9D9;text-align:center;padding-top:20px;">
+									<div>当前积分</div>
+									<div>100</div>
+								</div>
+								<div style="float:left;margin:12px 28px;">
+									<div style="width:210px;height:45px;line-height:45px;text-align:center;background:#CCCCCC;border-radius:5px;">今日已领取</div>
+								</div>
+						   </div>
+						   <div style="width:380px;height:80px;">
+								<div style="width:110px;height:60px;background:#F5F5F5;float:left;border-right:1px solid #D9D9D9;text-align:center;padding-top:20px;">
+									<div>当前余额</div>
+									<div>100</div>
+								</div>
+								<div style="float:left;margin:12px 28px;">
+									<div style="width:210px;height:45px;line-height:45px;text-align:center;background:#FF9118;color:#fff;border-radius:5px;">充值</div>
+								</div>
+						   </div>
+						</div>
+					</div> 
+                </div>
+            
+                 <div class="Rmain" style="width:780px;">
+                  <div class="zyrleft">
+                  <div style="display:inline;">
+                  <div style="float:left;margin-top:5px;"><b>基本信息</b></div>
+                  <div class="update" style="color: #4c4c4c;">修改基本资料</div>
+                  </div>
+                 </div>
+                 
+                   
+          		
+                <div class="Rmain">
+                  <div class="jfrleft">
+                
+                <div class="zhuyee">
+                <ul class="shang">             
+                <li class="biaoqian"><span>登录名称：</span></li>
+                <li class="shuju">921860626@qq.com</li>
+                </ul>
+                <ul class="xia">             
+                <li class="biaoqian"><span>昵称：</span></li>
+                <li class="shuju"></li>
+                </ul>
+                 <ul class="shang">             
+                <li class="biaoqian"><span>真实姓名：</span></li>
+                <li class="shuju">张三</li>
+                </ul>
+                <ul class="xia">              
+                <li class="biaoqian"><span>性别：</span></li>
+                <li class="shuju">男</li>
+                </ul>
+                 <ul class="shang">            
+                <li class="biaoqian"><span>生日：</span></li>
+                <li class="shuju"></li>
+                </ul>
+                <ul class="xia">              
+                <li class="biaoqian"><span>所在学校：</span></li>
+                <li class="shuju">泉州五中</li>
+                </ul>
+                 <ul class="shang">            
+                <li class="biaoqian"><span>所在年段：</span></li>
+                <li class="shuju"></li>
+                </ul>
+                 <ul class="xia">             
+                <li class="biaoqian"><span>手机：</span></li>
+                <li class="shuju">
+                <div style="display:inline">
+                <div style="float:left">18033334444</div>
+                <div class="youcz"><a href="" style="text-decoration:underline;color:red">立即绑定</a></div>
+                </div>
+                
+                </li>
+                </ul>
+                <ul class="shang">           
+                <li class="biaoqian"><span>邮箱：</span></li>
+                <li class="shuju">
+                <div style="display:inline">
+                <div style="float:left">921860626@qq.com</div>
+                <div class="youcz" style="margin-right:30px"><a href="" style="color:red">修改</a></div></li>
+                </ul>
+                </div>
+                 </div>
+                 </div>
+
+                 </div>
+                 </div>                 
+			</div>					
+		</div>		
+	</div>
+</div>
+	<!--头像-->	
+	<div id="head_photo" style="display:none;">
+		<div class="windown-choosePhotoContent" style="width:600px;height:240px" id="windown-content">
+			<div class="choosePhoto">
+				<div class="changearea">
+					<div class="img">
+						<span>男</span>
+						<ul>
+							<li id="wp_li"><a href="javascript:;"><img src="./images/icon_001.jpg" alt="" id="wp_img" height="80" width="80"></a></li>
+							<li id="wp_li"><a href="javascript:;"><img src="./images/icon_001.jpg" alt="" id="wp_img" height="80" width="80"></a></li>
+							<li id="wp_li"><a href="javascript:;"><img src="./images/icon_001.jpg" alt="" id="wp_img" height="80" width="80"></a></li>
+							<li id="wp_li"><a href="javascript:;"><img src="./images/icon_001.jpg" alt="" id="wp_img" height="80" width="80"></a></li>
+							<li id="wp_li"><a href="javascript:;"><img src="./images/icon_001.jpg" alt="" id="wp_img" height="80" width="80"></a></li>
+						</ul>
+					</div>
+					<div class="img">
+						<span>女</span>
+						<ul>
+							<li class="wp_li"><a href="javascript:;"><img src="./images/icon_001.jpg" alt="" id="wp_img" height="80" width="80"></a></li>
+							<li class="wp_li"><a href="javascript:;"><img src="./images/icon_001.jpg" alt="" id="wp_img" height="80" width="80"></a></li>
+							<li class="wp_li"><a href="javascript:;"><img src="./images/icon_001.jpg" alt="" id="wp_img" height="80" width="80"></a></li>
+							<li class="wp_li"><a href="javascript:;"><img src="./images/icon_001.jpg" alt="" id="wp_img" height="80" width="80"></a></li>
+							<li class="wp_li"><a href="javascript:;"><img src="./images/icon_001.jpg" alt="" id="wp_img" height="80" width="80"></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="upload">
+					<span class="myPhoto"></span>
+					<a href="javascript:;"  class="" style="color:#1194F3;">上传头像</a>
+					<a href="javascript:;" class="replace" >换一批</a>
+					<div id="fsUploadProgress" style="height:0;display:none">
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+    <!--footer-->
 <include file="common:footer" />
+</html>

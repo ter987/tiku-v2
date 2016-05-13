@@ -134,32 +134,7 @@ dia_log.prototype.check = function(){
 			}
 		});
 	});
-	$(".jx_zzt").click(function(){
-		$(".jx_xslist").dialog({
-			title:"第1题--A选项学生名单(23人 占比35.3%)",
-			width:"580",
-			height:"auto",
-			modal:true,
-			create: function(){
-			},
-			beforeClose: function() {
-				$('.jx_xslist').dialog("destroy");
-			}
-		});
-	});
-	$(".jx_fx").click(function(){
-		$(".jx_xslist").dialog({
-			title:"第1题--0-3分 学生名单(23人 占比35.3%)",
-			width:"580",
-			height:"auto",
-			modal:true,
-			create: function(){
-			},
-			beforeClose: function() {
-				$('.jx_xslist').dialog("destroy");
-			}
-		});
-	});
+	
 };
 $(function(){
 	new dia_log();

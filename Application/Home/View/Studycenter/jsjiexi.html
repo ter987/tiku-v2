@@ -1,0 +1,279 @@
+<include file="common:header" />
+	<!--main-->
+
+		<div class="xf_qiehuankmbox">
+			<div class="xf_qiehuankminner">
+				<div class="xf_dqkm"><eq name="course.course_type" value="1">高中<else/>初中</eq>
+					<span class="c_blue xf_dqkmlx">{$course.course_name}</span>  
+				</div>
+				<div class='xf_zaixuanzj'>试卷解析</div>
+			</div>
+		</div>	
+		<!-- 试题解析 -->
+		<div class="xf_zhentixlbox" style="position:relative;">
+			<div class="xf_zhentxlbt">
+				<h3>{$ceping.title}</h3>
+				<p>时间：{$ceping.limit_time}分钟   总分：{$ceping.score}分</p>
+			</div>
+			<div style="width:980px;background:#fff;padding:10px;padding-bottom:50px">
+				<div style="border-bottom:1px solid #0190F2;width:100%;height:26px;">
+					<div class="jx_style1 fl">答题情况</div>
+					<div class="fr" style="margin-right:10px;">	
+						<div class="fl">难度系数：</div>
+						<div class="fl">
+							<div class="nd_tag bg_lv fl"></div>
+							<div class="fl" style="margin-left:10px;">1.00-0.86</div>
+						</div>
+						<div class="fl">
+							<div class="nd_tag bg_lan fl"></div>
+							<div class="fl" style="margin-left:10px;">0.85-0.71</div>
+						</div>
+						<div class="fl">
+							<div class="nd_tag bg_cheng fl"></div>
+							<div class="fl" style="margin-left:10px;">0.7-0.56</div>
+						</div>
+						<div class="fl">
+							<div class="nd_tag bg_hong fl"></div>
+							<div class="fl" style="margin-left:10px;">0.55-0.41</div>
+						</div>
+						<div class="fl">
+							<div class="nd_tag bg_huang fl"></div>
+							<div class="fl" style="margin-left:10px;">0.40-0.26</div>
+						</div>
+					</div>
+					
+				</div>
+				<div style="margin:15px 40px;">
+					<volist name="data" id="vo">
+					<if condition="$vo.difficulty_id eq 1">
+					<div class="jx_tag bg_lv">{$vo.order_char}</div>
+					<elseif condition="$vo.difficulty_id eq 2"/>
+					<div class="jx_tag bg_lan">{$vo.order_char}</div>
+					<elseif condition="$vo.difficulty_id eq 3"/>
+					<div class="jx_tag bg_cheng">{$vo.order_char}</div>
+					<elseif condition="$vo.difficulty_id eq 4"/>
+					<div class="jx_tag bg_hong">{$vo.order_char}</div>
+					<elseif condition="$vo.difficulty_id eq 5"/>
+					<div class="jx_tag bg_huang">{$vo.order_char}</div>
+					</if>
+					</volist>
+					
+					<div class="clear"></div>
+				</div>
+				<div style="border-bottom:1px solid #0190F2;width:100%;height:26px;">
+					<div  class="jx_style1 fl">试卷讲评</div>
+				</div>
+			<volist name="data" id="vo">
+                <div class="b_test xf_teshuli" style="width:980px;height:auto;float:left;margin-top:20px;">
+                    <!-- 纠错 -->
+					<div class="xf_jiecuobox">
+						<textarea name="" id="" cols="30" rows="10" placeholder="描述下纠错问题吧，我们会及时改正"></textarea>
+						<div><a href="JavaScript:;" onclick="baocuo($(this),{$vo.id})">确定</a><a href="JavaScript:;" onclick="quxiao($(this))">取消</a></div>
+					</div>
+					<!-- 纠错end -->
+					<a href="JavaScript:;" class="xf_jiucuo" style="text-align:center;line-height:27px;">纠错</a>
+					<div style="width:960px;height:auto;float:left;margin:10px">  
+						<div class="content">
+							<div style="font-size:18px;color:#ff8100;">
+								{$vo.order_char}.
+							</div>
+							<div style="line-height:30px;">
+								{$vo.content|htmlspecialchars_decode}
+							</div>
+							<php>
+	                		if($vo['type_id']=1||$vo['type_id']==6){
+	                			$options = json_decode($vo['options']);
+	                			if(empty($options)) break;
+	                			$options_index = array(0=>'A',1=>'B',2=>'C',3=>'D',4=>'E');
+	                    	</php>
+							<div style="width:960px;">
+								<php>
+	                    			$k = 0;
+	                    			foreach($options as $k=>$val){
+	                    		</php>
+								<div class="fl" style="width:100%;line-height:30px;">
+									<php>echo $options_index[$k]</php>. <php>echo $val</php>
+								</div>
+								<php>}</php>
+							</div>
+							<php>}</php>
+
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div style="width:100%;height:35px;background:#F5F5F5;border-top:1px solid #CCCCCC;">
+						<div class="fl jx_fs" style="line-heigth:35px;margin-left:20px;">
+							平均得分：<span>{$vo.average}</span>分（答对{$vo.dadui}人/答错{$vo.dacuo}人）
+						</div>
+						<div class="fr cp jx_stjx">本题解析 ∨</div>			
+					</div>
+					<div class="jx_xq" style="display:none;" cp='{$vo.ceping_id}' tk='{$vo.id}'>
+						<div style="margin:10px;border-bottom:1px dashed #D9D9D9;">
+							<div style="margin:10px;">
+								<div class="right_sj">【答案】</div>
+								<div style="margin-left:15px;">{$vo.answer|htmlspecialchars_decode}</div>
+							</div>
+						</div>
+						<div style="margin:10px;border-bottom:1px dashed #D9D9D9;">
+							<div style="margin:10px 20px;;" id="tongji">
+
+							</div>
+						</div>
+						<!-- <div style="margin:10px;border-bottom:1px dashed #D9D9D9;">
+							<div style="margin:10px;">
+								<div class="right_sj">【考点】</div>
+								<div style="margin-left:15px;line-height:30px;">
+									<div>分子与细胞>>细胞的结构>>细胞膜的成分和功能 分子与细胞>>细胞的结构>>植物细胞壁的成分和功能 </div>
+									<div>分子与细胞>>细胞的结构>>线粒体的结构和功能 分子与细胞>>细胞的结构>>溶酶体的结构和功能</div>
+									<div>分子与细胞>>细胞的代谢>>有氧呼吸</div>
+								</div>
+							</div>
+						</div> -->
+						<div style="margin:10px;border-bottom:1px dashed #D9D9D9;">
+							<div style="margin:10px;">
+								<div class="right_sj">【解析】</div>
+								<div style="margin-left:15px;">
+									<p style="line-height:30px;">	
+										{$vo.analysis|htmlspecialchars_decode}
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>	
+                </div>
+			</volist>
+				
+				
+				<div class="clear"></div>
+			</div>
+			<div style="width:80px;position:absolute;top:50px;left:-100px;">
+				<div class="jx_l_t">
+				</div>
+				<a href="#num1"><div class="jx_l_c">
+					题目1
+				</div></a>
+				<a href="#num2"><div class="jx_l_check">
+					题目2	
+				</div></a>
+				<a href="#num3"><div class="jx_l_c">
+					题目3
+				</div></a>
+				<a href="#num4"><div class="jx_l_c">
+					题目4
+				</div></a>
+				<div class="jx_l_t">
+				</div>
+			</div>
+		</div>
+		<!-- 试题解析end -->
+	<!-- 显示学生 -->
+	<div class="jx_xslist" style="height:300px;display:none;">
+		<div class="xf_xueshenglb" style="width:540px;background:#fff;height:300px;margin:20px 0px;">
+			<div id="mingdan1"></div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<!-- 显示学生结束 -->
+	
+	<!-- 显示学生 -->
+	<div class="jx_xslist1" style="height:300px;display:none;">
+		<div class="xf_xueshenglb" style="width:540px;background:#fff;height:300px;margin:20px 0px;" id="mingdan2">
+			
+		</div>
+		<div class="clear"></div>
+	</div>
+<link href="__PUBLIC__/js/jquery-ui-1.11.2.custom/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script src="__PUBLIC__/js/jquery-ui-1.11.2.custom/jquery-ui.js" type="text/javascript"></script>	
+<script>
+	$(".jx_stjx").click(function(){
+		if($(this).hasClass('cur')){
+			$(this).removeClass('cur').html("本题解析 ∨").parents(".xf_teshuli").find(".jx_xq").slideUp(300);
+		}else{
+			var ceping_id = $(this).parent().next().attr('cp');
+			var tiku_id = $(this).parent().next().attr('tk');
+			var tongji_html = '';
+			var obj = $(this);
+			$.getJSON(
+				'/studycenter/getTongji/',
+				{ceping_id:ceping_id,tiku_id:tiku_id},
+				function(data){
+					if(data.status=='ok'){
+						if(data.type==1){
+							tongji_html = '<div style="color:#FF8100;">*点击柱状图，可查看学生名单</div>';
+							$.each(data.data,function(key,val){
+								tongji_html += '<div class="jx_zzt cp" onclick="mingdan($(this),'+val.total+','+val.percent+",'"+key+"'"+')"><div class="jx_zzt_l" >选项'+key+'</div><div class="jx_zzt_c"><div class="jx_zzt_bfb" style="width:'+val.percent+'%;"><div class="jx_zzt_text">'+val.total+'人 占比'+val.percent+'%</div></div></div></div>';
+							});
+							obj.parent().next().find('#tongji').html(tongji_html);
+						}else if(data.type==2){
+							tongji_html = '<div style="color:#FF8100;"><span style="color:#1a1a1a;font-size:16px;">分数</span>	*点击柱状图，可查看学生名单</div>';
+							$.each(data.data,function(key,val){
+								tongji_html += '<div class="jx_fx cp" onclick="_mingdan($(this),'+val.total+','+val.percent+",'"+val.range+"'"+')"><div class="jx_fx_l">'+val.range+'</div><div class="jx_fx_c"><div class="jx_fx_bfb" style="width:'+val.percent+'%;"></div></div><div class="jx_fx_r">'+val.total+'人 占'+val.percent+'%</div><div class="clear"></div></div>';
+							});
+							obj.parent().next().find('#tongji').html(tongji_html);
+						}
+					}
+				}
+				
+			);
+			$(this).addClass('cur').html("隐藏解析 ∧").parents(".xf_teshuli").find(".jx_xq").slideDown(300);
+		}
+	});
+	function mingdan(obj,total,percent,key){
+		
+		$(".jx_xslist").dialog({
+			title:key+"选项学生名单("+total+"人 占比"+percent+"%)",
+			width:"580",
+			height:"auto",
+			modal:true,
+			create: function(){
+				var mingdan = '';
+				var ceping_id = obj.parent().parent().parent().attr('cp');
+				var tiku_id = obj.parent().parent().parent().attr('tk');
+				$.getJSON(
+				'/studycenter/getMingdan/',
+				{ceping_id:ceping_id,tiku_id:tiku_id,index:key},
+				function(data){
+					if(data.status=='ok'){
+						$.each(data.data,function(key,val){
+							mingdan += val.nick_name+'、';
+						});
+						$('#mingdan1').html(mingdan);
+					}
+				});
+			},
+			beforeClose: function() {
+				$('.jx_xslist').dialog("destroy");
+			}
+		});
+	}
+	function _mingdan(obj,total,percent,range){
+		$(".jx_xslist1").dialog({
+			title:range+"分 学生名单("+total+"人 占比"+percent+"%)",
+			width:"580",
+			height:"auto",
+			modal:true,
+			create: function(){
+				var mingdan = '';
+				var ceping_id = obj.parent().parent().parent().attr('cp');
+				var tiku_id = obj.parent().parent().parent().attr('tk');
+				$.getJSON(
+				'/studycenter/getMingdanByRange/',
+				{ceping_id:ceping_id,tiku_id:tiku_id,range:range},
+				function(data){
+					if(data.status=='ok'){
+						$.each(data.data,function(key,val){
+							mingdan += '<div class="jx_n">'+val.nick_name+'<span>('+val.s_score+'分)</span></div> ';
+						});
+						$('#mingdan2').html(mingdan);
+					}
+				});
+			},
+			beforeClose: function() {
+				$('.jx_xslist1').dialog("destroy");
+			}
+		});
+	}
+
+</script>
+<include file="common:footer" />
+</html>
