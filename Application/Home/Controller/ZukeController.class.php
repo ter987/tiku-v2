@@ -12,6 +12,7 @@ class ZukeController extends GlobalController {
 	}
 	
     public function index(){
+    	unset($_SESSION['zuke_cart']);
     	$course_id = $_SESSION['course_id'];
 		$round_id = $_SESSION['round_id'];
 		$resource_id = I('resource_id');
@@ -42,6 +43,9 @@ class ZukeController extends GlobalController {
 		//获取资源类型
 		$resource = $this->getResourceByRoundId($round_id);
 		$this->assign('resource',$resource);
+		//获取题型数据
+		$tixing = $this->getTixingByRoundId($round_id);
+		$this->assign('tixing',$tixing);
 		
 		$this->setMetaTitle('组课'.C('TITLE_SUFFIX'));
 		$this->setMetaKeyword(''.C('TITLE_SUFFIX'));
@@ -51,16 +55,130 @@ class ZukeController extends GlobalController {
 		$this->assign('this_module','zuke');
         $this->display();
 	}
+	public function center(){
+		$myCourse = $this->getCourseById($_SESSION['course_id']);
+		if(empty($_SESSION['zuke_cart'])){
+			redirect('/');
+		}
+		asort($_SESSION['zuke_cart']);
+		//var_dump($_SESSION['zuke_cart']);
+		$index = array('一','二','三','四','五','六','七');
+		$i = -1;
+		foreach($_SESSION['zuke_cart'] as $key=>$val){
+			if(!isset($data[$val['resource_id']]['order_char'])){
+				$i++;
+			}
+			$data[$val['resource_id']]['order_char'] = $index[$i];
+			$new[$val['resource_id']]['order_char'] = $index[$i];
+			$data[$val['resource_id']]['resource_name'] = $val['resource_name'];
+			$new[$val['resource_id']]['resource_name'] = $val['resource_name'];
+			$type = $val['resource_id']==10?2:1;
+			$content = $this->getCaseContent($val['id'], $type);
+			$data[$val['resource_id']]['childs'][] = array('id'=>$val['id'],'type'=>$type,'content'=>$content);
+			$new[$val['resource_id']]['childs'][] = array('id'=>$val['id'],'type'=>$type);
+		}
+		$_SESSION['zuke']['shiti'] = $new;
+		var_dump($_SESSION['zuke']['shiti']);
+		$nianduan = $myCourse['course_type']==1?'高中':'初中';
+		$_SESSION['zuke']['title'] = $nianduan.$myCourse['course_name'].'教案-'.date("Ymd");
+		$this->assign('zuke_title',$_SESSION['zuke']['title']);
+		$this->assign('zuke_data',$data);
+		
+		$this->setMetaTitle('组课'.C('TITLE_SUFFIX'));
+		$this->setMetaKeyword(''.C('TITLE_SUFFIX'));
+		$this->setMetaDescription(''.C('TITLE_SUFFIX'));
+		$this->addCss(array('xf.css','style_content.css','preview.css','exam_info.css'));
+		$this->addJs(array('js/dialog.js','js/xf.js','js/jquery-ui-1.11.2.custom/jquery-ui.js'));
+		$this->assign('this_module','zuke');
+		$this->display();
+	}
+	public function getCaseContent($id,$type){
+		if($type==1){
+			$Model = M('zuke_case');
+			$result = $Model->field('content')->where("id=$id")->find();
+			return $result['content'];
+		}elseif($type==2){
+			$Model = M('zuke_shiti');
+			$result = $Model->field('content')->where("id=$id")->find();
+			return $result['content'];
+		}
+		return false;
+	}
+	public function ajaxGetAnalysisById(){
+		$id = I('get.id');
+		$Model = M('zuke_shiti');
+		$result = $Model->field("answer,analysis")->where("id=$id")->find();
+		if($result){
+			$this->ajaxReturn(array('status'=>'ok','data'=>$result));
+		}else{
+			$this->ajaxReturn(array('status'=>'error'));
+		}
+	}
+	public function ajaxGetResourceName(){
+		$shiti_no = I('get.shiti_no');
+		$data['resource_name'] = $_SESSION['zuke']['shiti'][$shiti_no]['resource_name'];
+		$data['resource_note'] = $_SESSION['zuke']['shiti'][$shiti_no]['resource_note'];
+		$this->ajaxReturn(array('status'=>'ok','data'=>$data));
+	}
+	public function ajaxEditResource(){
+		$shiti_no = I('get.shiti_no');
+		$resource_name = I('get.resource_name');
+		$resource_note = I('get.resource_note');
+		$_SESSION['zuke']['shiti'][$shiti_no]['resource_name'] = $resource_name;
+		$_SESSION['zuke']['shiti'][$shiti_no]['resource_note'] = $resource_note;
+		$data['resource_name'] = $_SESSION['zuke']['shiti'][$shiti_no]['resource_name'];
+		$data['resource_note'] = $_SESSION['zuke']['shiti'][$shiti_no]['resource_note'];
+		$this->ajaxReturn(array('status'=>'ok','data'=>$data));
+	}
+	public function ajaxMoveDown(){
+		$key = I('get.key');
+		$shiti_no = I('get.shiti_no');
+		//$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$shiti_id] = array('id'=>);
+		$childs = $_SESSION['zuke']['shiti'][$shiti_no]['childs'];
+		if($key+1!=count($childs)){
+			$down = $_SESSION['zuke']['shiti'][$shiti_no]['childs'][$key+1];
+			$me = $_SESSION['zuke']['shiti'][$shiti_no]['childs'][$key];
+			$_SESSION['zuke']['shiti'][$shiti_no]['childs'][$key+1] = $me;
+			$_SESSION['zuke']['shiti'][$shiti_no]['childs'][$key] = $down;
+			$this->ajaxReturn(array('status'=>'ok'));
+		}
+	}
+	public function ajaxEditTitle(){
+		$title = I('get.title');
+		$_SESSION['zuke']['title'] = $title;
+		$this->ajaxReturn(array('status'=>'ok','data'=>$_SESSION['zuke']['title']));
+	}
+	public function ajaxMoveUp(){
+		$key = I('get.key');
+		$shiti_no = I('get.shiti_no');
+		//$_SESSION['shijuan'][$juan_no]['shiti'][$shiti_no]['childs'][$shiti_id] = array('id'=>);
+		$childs = $_SESSION['zuke']['shiti'][$shiti_no]['childs'];
+		if($key!=0){
+			$up = $_SESSION['zuke']['shiti'][$shiti_no]['childs'][$key-1];
+			$me = $_SESSION['zuke']['shiti'][$shiti_no]['childs'][$key];
+			$_SESSION['zuke']['shiti'][$shiti_no]['childs'][$key-1] = $me;
+			$_SESSION['zuke']['shiti'][$shiti_no]['childs'][$key] = $up;
+			$this->ajaxReturn(array('status'=>'ok'));
+		}
+	}
 	public function ajaxGetCaseData(){
 		$course_id = $_SESSION['course_id'];
 		$round_id = $_SESSION['round_id'];
-		$resource_id = I('resource_id');
+		$resource_id = I('get.resource_id');
+		$topic_id = I('get.topic_id');
 		
 		$where = "zuke_case.round_id=$round_id ";
 		if(!empty($resource_id)){
 			$where .= " && zuke_case.resource_id=$resource_id";
 		}
-		
+		if(!empty($topic_id)){
+			$childs = $this->getChildTopicById($topic_id);
+			foreach($childs as $val){
+				$ids .= $val['id'].',';
+			}
+			$ids = trim($ids,',');
+			$where .= " && zuke_case.topic_id IN($ids)";
+		}
 		if(!empty($_SESSION['order_by'])){
 			if($_SESSION['order_by']=='new'){
 				$order_by = 'tiku.id desc';
@@ -116,13 +234,112 @@ class ZukeController extends GlobalController {
 			$this->redis->SET($cache_name,json_encode($zuke_data));
 			$this->redis->EXPIRE($cache_name,C('REDIS_EXPIRE_TIME'));
 		}
-		$data = array('total'=>$count,'page_count'=>$pageCount,'data'=>$zuke_data);
+		$data = array('total'=>$count,'page_count'=>$pageCount,'cur_page'=>$curPage,'data'=>$zuke_data);
+		$this->ajaxReturn(array('status'=>'ok','data'=>$data));
+	}
+	public function ajaxDelete(){
+		$key = I('get.key');
+		$shiti_no = I('get.shiti_no');
+		unset($_SESSION['zuke']['shiti'][$shiti_no]['childs'][$key]);
+		foreach($_SESSION['zuke']['shiti'][$shiti_no]['childs'] as $k=>$val){
+			$data[] = $val;
+		}
+		$_SESSION['zuke']['shiti'][$shiti_no]['childs'] = $data;
+		$this->ajaxReturn(array('status'=>'ok'));
+	}
+	public function ajaxGetShitiData(){
+		$course_id = $_SESSION['course_id'];
+		$round_id = $_SESSION['round_id'];
+		$topic_id = I('get.topic_id');
+		
+		$where = "zuke_shiti.round_id=$round_id ";
+		if(!empty($topic_id)){
+			$childs = $this->getChildTopicById($topic_id);
+			foreach($childs as $val){
+				$ids .= $val['id'].',';
+			}
+			$ids = trim($ids,',');
+			$where .= " && zuke_shiti.topic_id IN($ids)";
+		}
+		if(!empty($_SESSION['order_by'])){
+			if($_SESSION['order_by']=='new'){
+				$order_by = 'tiku.id desc';
+			}elseif($_SESSION['order_by']=='hot'){
+				$order_by = 'tiku.used_times desc';
+			}
+			$this->assign('order_by',$_SESSION['order_by']);
+		}
+		//echo $join;exit;
+		$Model = M('zuke_shiti');
+
+		//过滤使用过的题目
+		if(!empty($_SESSION['my_used']) && !empty($_SESSION['user_id'])){
+			$usedModel = M('user_used');
+			$result = $usedModel->where("user_id=".$_SESSION['user_id'])->select();
+			if($result){
+				foreach($result as $val){
+					$used_ids .= $val['id'].',';
+				}
+				$used_ids = trim($used_ids,',');
+				$where .= " && tiku.id NOT IN(".$used_ids.')';
+			}
+			//echo $where;exit;
+			$this->assign('my_used',1);
+		}
+		//只选收藏的题目
+		if(!empty($_SESSION['my_collected']) && !empty($_SESSION['user_id'])){
+			$join3= "user_collected ON user_collected.`tiku_id`=tiku.`id`";
+			$where .= " && user_collected.user_id=".$_SESSION['user_id'];
+			$this->assign('my_collected',1);
+		}
+		//获取数据
+		$cache_name = md5('zuke_case_count_'.$where);
+		$count = json_decode($this->redis->GET($cache_name),true);
+		if(!$count){
+			$result = $Model->field("COUNT(*) AS tp_count")->where($where)->find();
+			//echo $Model->getLastSql();
+			$count = $result['tp_count'];
+			$this->redis->SET($cache_name,json_encode($count));
+			$this->redis->EXPIRE($cache_name,C('REDIS_EXPIRE_TIME'));
+		}
+		$curPage = empty($_GET['p'])?1:$_GET['p'];
+		$limit = 10;
+		$start = ($curPage-1)*$limit;
+		$pageCount = ceil($count/10);
+		//S(array('type'=>'Memcache','host'=>C('MEMCACHED_HOST'),'port'=>C('MEMCACHED_POST'),'expire'=>C('MEMCACHED_EXPIRE')));
+		$cache_name = md5($where."limit $start,$limit");
+		$zuke_data = json_decode($this->redis->GET($cache_name),true);
+		if($zuke_data=1){
+			$zuke_data = $Model->field("zuke_shiti.*,zuke_topic.title as topic_title,zuke_tixing.title as tixing_title")
+			->join("zuke_topic on zuke_shiti.topic_id=zuke_topic.id")
+			->join("zuke_tixing on zuke_shiti.tixing_id=zuke_tixing.id")
+			->where($where)->order($order_by)->limit($start.','.$limit)->select();
+			$this->redis->SET($cache_name,json_encode($zuke_data));
+			$this->redis->EXPIRE($cache_name,C('REDIS_EXPIRE_TIME'));
+		}
+		$data = array('total'=>$count,'page_count'=>$pageCount,'cur_page'=>$curPage,'data'=>$zuke_data);
 		$this->ajaxReturn(array('status'=>'ok','data'=>$data));
 	}
 	public function getRoundByCourseId($course_id){
 		$Model = M('course_round');
 		$round = $Model->where("course_id=$course_id")->select();
 		return $round;
+	}
+
+	public function getChildTopicById($topic_id){
+		static $children = array();
+		$Model = M('zuke_topic');
+		$topic = $Model->where("id=$topic_id")->find();
+		if($topic['has_child']){
+			$child = $Model->where("parent_id=$topic_id")->select();
+			foreach($child as $val){
+				$this->getChildTopicById($val['id']);
+			}
+		}else{
+			//var_dump($topic);exit;
+			$children[] =  $topic;
+		}
+		return $children;
 	}
 	public function ajaxChangeCourse(){
 		$course_id = I('get.id');
@@ -141,6 +358,11 @@ class ZukeController extends GlobalController {
 		$topic = $Model->where("round_id=$round_id")->select();
 		$topicTree = $this->getTree($topic,0);
 		return $topicTree;
+	}
+	public function getTixingByRoundId($round_id){
+		$Model = M('zuke_tixing');
+		$data = $Model->field("zuke_tixing.*")->join("round_to_tixing on round_to_tixing.tixing_id=zuke_tixing.id")->where("round_to_tixing.round_id=$round_id")->select();
+		return $data;
 	}
 	public function getResourceByRoundId($round_id){
 		$Model = M('resource');
@@ -176,6 +398,58 @@ class ZukeController extends GlobalController {
         }
         return $rootList;
     }
+    public function ajaxAddCart(){
+    	$id = I('get.id');
+		$type = I('get.type');
+		$key = $type.'-'.$id;
+		if($_SESSION['zuke_cart'][$key]){//如果已存在试题蓝，则移出
+			unset($_SESSION['zuke_cart'][$key]);
+			//$this->ajaxReturn(array('status'=>'success','data'=>$_SESSION['cart']));
+		}else{
+			if($type==1){
+				$Model = M('zuke_case');
+				$data = $Model->field("zuke_case.id,resource.title,resource.id as resource_id")->join("resource ON resource.id=zuke_case.resource_id")->where("zuke_case.id=$id")->find();
+				if($data){
+					$_SESSION['zuke_cart'][$key] = array('resource_id'=>$data['resource_id'],'id'=>$data['id'],'resource_name'=>$data['title']);
+					
+				}else{
+					$this->ajaxReturn(array('status'=>'error'));
+				}
+			}else if($type==2){
+				$Model = M('zuke_shiti');
+				$data = $Model->field("zuke_shiti.id")->where("zuke_shiti.id=$id")->find();
+				if($data){
+					$_SESSION['zuke_cart'][$key] = array('resource_id'=>10,'id'=>$data['id'],'resource_name'=>'典型例题');
+					
+				}else{
+					$this->ajaxReturn(array('status'=>'error'));
+				}
+			}
+		}
+		$arr = array();
+		foreach ($_SESSION['zuke_cart'] as $key => $val) {
+				$arr[$val['resource_id']]['resource_name'] = $val['resource_name'];
+				$arr[$val['resource_id']]['my_total'] += 1;
+			
+		}
+		//var_dump($_SESSION['zuke_cart']);exit;
+		$resource = $this->getResourceByRoundId($_SESSION['round_id']);
+		$resource_arr = array();
+		foreach($resource as $val){
+			$resource_arr[$val['id']]['resource_name'] = $val['title'];
+			$resource_arr[$val['id']]['my_total'] = empty($arr[$val['id']])?0:$arr[$val['id']]['my_total'];
+		}
+
+		$this->ajaxReturn(array('status'=>'ok','data'=>$_SESSION['zuke_cart'],'resource_data'=>$resource_arr));
+    }
+	public function ajaxGoCenter(){
+		if(count($_SESSION['zuke_cart'])){
+			$this->ajaxReturn(array('status'=>'ok'));
+		}else{
+			$this->ajaxReturn(array('status'=>'error'));
+		}
+	}
+	
 	public function ajaxChangeRound(){
 		$id = I('get.id');
 		$Model = M('course_round');

@@ -1,0 +1,396 @@
+<include file="common:header" />
+	<!--main-->
+
+		<div class="xf_qiehuankmbox">
+			<div class="xf_qiehuankminner">
+				<div class="xf_dqkm"><if condition="$this_course_type eq 1">高中<elseif condition="$this_course_type eq 2" />初中</if>
+					<span class="c_blue xf_dqkmlx">{$this_course_name}</span> 
+				</div>
+				<div class='xf_zaixuanzj'>在线组课</div>
+			</div>
+		</div>	
+		<!-- 试题解析 -->
+		<div class="xf_zhentixlbox preview-box" style="position:relative;">
+			<div class="ks_top_title" style="border-bottom:1px solid #ccc;">
+				<div class="topcy" id="ecTools">
+					<ul>
+						<li><a class="goon_1" href="javascript:;">保存</a></li>
+						<li><a id="down_sj" class="goon_1" href="javascript:;">下载</a></li>
+						<li><a class="goon_1 xf_xffsxs" href="javascript:;" id="filterReturn">发送学生</a></li>
+					</ul>
+				</div>
+			</div>
+			<div style="width:980px;background:#fff;padding:10px;padding-bottom:50px;color:#1a1a1a;">
+				<div id="pui_head">
+					<div class="partm">
+						<div class="editpart ed1"></div>
+					</div>
+					<div id="pui_title" style="line-height:30px;border:0px;">
+						<div id="pui_maintitle" style="font-size:24px;" title="教案正标题">
+							{$zuke_title}
+						</div>
+					</div>				
+				</div>
+				<volist name="zuke_data" key="kk" id="vo">
+				<div class="ja_con">
+					<div id="pui_head">
+						<div class="partm">
+							<div class="editpart ed2" shiti_no="{$kk}"></div>
+						</div>
+						<div class="ja_style" style="margin-top:10px;">
+							<span>{$vo.order_char}、</span><g id="{$kk}">{$vo.resource_name}</g>
+						</div>
+					</div>
+
+					<volist name="vo.childs" key="k" id="v">
+					<div class="b_test ja_teshuli quesbox" style="width:980px;padding:0px;margin-top:10px;">
+						<div class="quesopmenu"  shiti_no="{$kk}" key="{$k-1}">
+							<a class="ico_zjgn3" onclick="moveUp($(this))">上移</a>
+							<a class="ico_zjgn4" onclick="moveDown($(this))">下移</a>
+							<a class="ico_zjgn6" onclick="deleteMe($(this))">删除</a>
+						</div>
+
+						<a href="JavaScript:;" class="xf_jiucuo" style="text-align:center;line-height:27px;">纠错</a>
+						<div style="width:960px;height:auto;float:left;margin:10px">  
+							<div class="content" style="width:auto;">
+								<div class="ja_style">
+									<span id="x_order">{$k}</span><span>．</span>{$v.content|htmlspecialchars_decode}
+								</div>
+							</div>
+						</div>	
+					</div>	
+					
+					<div class="clear"></div>
+					<eq name="v.type" value="2">
+					<div style="width:100%;height:35px;background:#F5F5F5;border-top:1px solid #CCCCCC;">
+						
+						<div class="fr cp jx_stjx" id="{$v.id}" onclick="jiexi($(this))">本题解析 ∨</div>			
+					</div>
+					<div class="jx_xq" style="display:none;">
+							
+						</div>	
+						</eq>
+					</volist>
+				</div>
+				</volist>
+
+				
+	
+				<div class="clear"></div>
+			</div>
+			
+		</div>
+		<!-- 试题解析end -->
+	<!--下载-->	
+	<div style="padding:10;display:none;" class="" id="sz_div">
+		<form id="postform2_Lti7a" method="post" target="ajaxframeid" action="">
+			<table style="padding: 15px;" border="0" cellpadding="0" cellspacing="0" width="520px">
+			<tbody>
+			<tr>
+				<td >
+					<b>Word版本</b>
+				</td>
+			</tr>
+			<tr>
+				<td >
+					<input name="docversion" value="docx" style="vertical-align:middle;" id="docx" type="radio"><label for="docx">&nbsp;Word 2007/2010，文件扩展名为<span class="red">docx</span></label><br>
+					<input name="docversion" checked="checked" value="doc" style="vertical-align:middle;" id="doc" type="radio"><label for="doc">&nbsp;Word 2000/2003，文件扩展名为<span class="red">doc</span></label><br>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<div style="border:1px dashed #D9D9D9;margin:5px 0px;"></div>
+				</td>
+			</tr>
+			<tr>
+				<td >
+					<b>纸张大小</b>
+				</td>
+			</tr>
+			<tr>
+				<td >
+					<table border="0" cellpadding="0" cellspacing="0" width="395px">
+					<tbody>
+					<div>
+						<div valign="bottom" style="margin-right:50px;float:Left;">
+							&nbsp;<a id="p_A4"></a>
+						</div>
+						<div valign="bottom" style="margin-right:50px;float:Left;">
+							&nbsp;&nbsp;<a id="p_A4H"></a>
+						</div>
+						<div valign="bottom" style="margin-right:50px;float:Left;">
+							&nbsp;<a id="p_A3"></a>
+						</div>
+						<div valign="bottom" style="float:Left;">
+							&nbsp;<a id="p_A3H"></a>
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div> 
+						<div style="float:left;margin-right:35px">
+							<input name="papersize" checked="checked" value="A4" id="A4" type="radio"><label for="16K">A4纸竖版</label>
+						</div>
+						<div style="float:left;margin-right:40px">
+							<input name="papersize" value="A4H" id="A4H" type="radio"><label for="A4H">A3纸横版</label>
+						</div>
+						<div style="float:left;margin-right:60px">
+							<input name="papersize" value="A3" id="A3" type="radio"><label for="A5">B5纸竖版</label>
+						</div>
+						<div style="float:left;">
+							<input name="papersize" value="A3H" id="A3H" type="radio"><label for="A3H">A4纸横版</label>
+						</div>
+					</div>
+					</tbody>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<div style="border:1px dashed #D9D9D9;margin:5px 0px;"></div>
+				</td>
+			</tr>
+			<tr>
+				<td >
+					<b>其他属性</b>
+				</td>
+			</tr>
+			<tr>
+				<td >
+					<input name="showsoure" value="normal" style="vertical-align:middle;" id="showsoure" type="checkbox"><label for="showsoure">&nbsp;是否对内部成员共享该教案。</label><br>
+					<input name="showsoure" value="normal" style="vertical-align:middle;" id="showsoure" type="checkbox"><label for="showsoure">&nbsp;是否标记每道试题来源。</label><br>
+				</td>
+			</tr>
+			
+			</tbody>
+			</table>
+		</form>
+	</div>	
+	<!-- 发生给学生 -->
+	<div class="xf_fasongxspop">
+		<div class="xf_biaoti">选择学生<a href="JavaScript:;"></a></div>
+		<div class="xf_tianjiaxs"><input type="text"  placeholder="请输入正确的账号" /><a href="JavaScript:;">添加新学生</a></div>
+		<div class="xf_xueshenglb">
+			<ul>
+				<li>张三（账号：152786935）</li>
+				<li>张三（账号：152786935）</li>
+				<li>张三（账号：152786935）</li>
+				<li>张三（账号：152786935）</li>
+			</ul>
+		</div>
+		<div class="xf_quanbfs"><a href="JavaScript:;">全部选择</a></div>
+		<div class="xf_fasongbutton"><a href="JavaScript:;">发送</a></div>
+	</div>
+	<div class="xf_popbg"></div>
+	<!-- 发生给学生end -->
+	<div class="xf_bianjipop xf_bjpoplx1">
+		<div class="xf_biaoti">头部编辑<a href="JavaScript:;"></a></div>
+		<div class="xf_bianjinner" style="padding:20px 10px;">
+			教案标题：<textarea style="width:300px;height:100px;" id="jiaoan_title"></textarea>
+		</div>
+		<div class="xf_tybutton">
+			<a href="JavaScript:;">取消</a>
+			<a href="JavaScript:;" class='cur' onclick="doEditTitle()">确定</a>
+		</div>
+	</div>
+	<div class="xf_bianjipop xf_bjpoplx2">
+		<div class="xf_biaoti">题型编辑<a href="JavaScript:;"></a></div>
+		<div class="xf_bianjinner">
+			<ul>
+				<li><span>题型名称：</span><input type="text" id="resource_name" value=""/></li>
+				<li><span>题型注释：</span><textarea style="width:295px;height:100px;" id="resource_note"></textarea></li>
+			</ul>
+		</div>
+		<div class="xf_tybutton">
+			<a href="JavaScript:;">取消</a>
+			<a href="JavaScript:;" class='cur' onclick="doEditResource()">确定</a>
+			<input type="hidden" id="shiti_no" value="" />
+		</div>
+	</div>
+	<link href="__PUBLIC__/js/jquery-ui-1.11.2.custom/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<!-- footer -->
+<script>
+function jiexi(obj){
+	if(obj.hasClass('cur')){
+		obj.removeClass('cur').html("本题解析 ∨");
+		obj.parent().next('.jx_xq').slideUp(300);
+	}else{
+		var id = obj.attr('id');
+		$.getJSON(
+		'/index.php/home/zuke/ajaxGetAnalysisById',
+		{id:id},
+		function(data){
+			if(data.status=='ok'){
+				var html = '<div style="margin:10px;border-bottom:1px dashed #D9D9D9;">'+
+							'<div style="margin:10px;">'+
+								'<div class="right_sj">【答案】</div>'+
+								'<div style="margin-left:15px;">'+htmlspecialchars_decode(data.data.answer)+'</div>'+
+							'</div>'+
+						'</div>'+
+						'<div style="margin:10px;border-bottom:1px dashed #D9D9D9;">'+
+							'<div style="margin:10px;">'+
+								'<div class="right_sj">【解析】</div>'+
+								'<div style="margin-left:15px;">'+
+									'<p style="line-height:30px;">	'+
+										htmlspecialchars_decode(data.data.analysis)+
+										
+									'</p>'+
+								'</div>'+
+							'</div>'+
+						'</div>';
+				$('.jx_xq').html(html);
+				obj.addClass('cur').html("隐藏解析 ∧");
+				obj.parent().next('.jx_xq').slideDown(300);
+			}
+		});
+		
+		
+	}
+}
+function moveDown(obj){
+	var shiti_no = obj.parent().attr('shiti_no');
+	var key = obj.parent().attr('key');
+	$.getJSON(
+		'/zuke/ajaxMoveDown',
+		{shiti_no:shiti_no,key:key},
+		function(data){
+			if(data.status=='ok'){
+				
+				//alert(obj.parent().parent().find("b").html());
+				var me_order = parseInt(obj.parent().parent().find("#x_order").html())+1;
+				var down_order = parseInt(obj.parent().parent().next().next().find("#x_order").html())-1;
+				obj.parent().parent().find("#x_order").html(me_order);
+				obj.parent().parent().next().next().find("#x_order").html(down_order);
+				
+				var me_k = parseInt(obj.parent().attr("key"))+1;
+				var down_k = parseInt(obj.parent().parent().next().next().find(".quesopmenu").attr("key"))-1;
+				obj.parent().attr("key",me_k);
+				obj.parent().parent().next().next().find(".quesopmenu").attr("key",down_k);
+				
+				var me = obj.parent().parent().html();
+				var down = obj.parent().parent().next().next().html();
+				obj.parent().parent().next().next().html(me);
+				obj.parent().parent().html(down);
+			}
+		}
+	);
+}
+function moveUp(obj){
+	var shiti_no = obj.parent().attr('shiti_no');
+	var key = obj.parent().attr('key');
+	$.getJSON(
+		'/zuke/ajaxMoveup',
+		{shiti_no:shiti_no,key:key},
+		function(data){
+			if(data.status=='ok'){
+				
+				//alert(obj.parent().parent().find("b").html());
+				var me_order = parseInt(obj.parent().parent().find("#x_order").html())-1;
+				var down_order = parseInt(obj.parent().parent().prev().prev().find("#x_order").html())+1;
+				obj.parent().parent().find("#x_order").html(me_order);
+				obj.parent().parent().prev().prev().find("#x_order").html(down_order);
+				
+				var me_k = parseInt(obj.parent().attr("key"))-1;
+				var down_k = parseInt(obj.parent().parent().prev().prev().find(".quesopmenu").attr("key"))+1;
+				obj.parent().attr("key",me_k);
+				obj.parent().parent().prev().prev().find(".quesopmenu").attr("key",down_k);
+				
+				var me = obj.parent().parent().html();
+				var down = obj.parent().parent().prev().prev().html();
+				obj.parent().parent().prev().prev().html(me);
+				obj.parent().parent().html(down);
+			}
+		}
+	);
+}
+function deleteMe(obj){
+	var shiti_no = obj.parent().attr('shiti_no');
+	var key = obj.parent().attr('key');
+	$.getJSON(
+		'/zuke/ajaxdelete',
+		{shiti_no:shiti_no,key:key},
+		function(data){
+			if(data.status=='ok'){
+				$.each(obj.parent().parent().nextAll(".quesbox"),function(){
+					var val = parseInt($(this).find('#x_order').html())-1;
+					$(this).find('#x_order').html(val);
+					
+					var key = parseInt($(this).find('.quesopmenu').attr('key'))-1;
+					$(this).find('.quesopmenu').attr('key',key);
+				});
+				obj.parent().parent().remove();
+			}
+		}
+	);
+}
+ function htmlspecialchars_decode(str){           
+          str = str.replace(/&amp;/g, '&');
+          str = str.replace(/&lt;/g, '<');
+          str = str.replace(/&gt;/g, '>');
+          str = str.replace(/&quot;/g, "''");  
+          str = str.replace(/&#039;/g, "'");  
+          return str;  
+} 
+$(".ed1").click(function(){
+	var title = $.trim($('#pui_maintitle').html());
+	$('#jiaoan_title').val(title);
+	$('.xf_bjpoplx1').show();
+});
+function doEditTitle(){
+	var val = $('#jiaoan_title').val();
+	if(val==''){
+		alert('不能为空');
+		return false;
+	}
+	$.getJSON(
+		'/zuke/ajaxEditTitle',
+		{title:val},
+		function(data){
+			if(data.status=='ok'){
+				$('#pui_maintitle').html(data.data);
+			}
+		}
+	);
+}
+$(".xf_tybutton a,.xf_bianjipop .xf_biaoti a").click(function(){
+	$(".xf_bianjipop,.xf_popbg").hide();
+});
+$(".ed2").click(function(){
+	var shiti_no = $(this).attr('shiti_no');
+	$.getJSON(
+		'/zuke/ajaxGetResourceName',
+		{shiti_no:shiti_no},
+		function(data){
+			if(data.status=='ok'){
+				$('#shiti_no').val(shiti_no);
+				$('#resource_name').val(data.data.resource_name);
+				$('#resource_note').val(data.data.resource_note);
+			}
+		}
+	);
+	$('.xf_bjpoplx2').show();
+});
+function doEditResource(){
+	var shiti_no = $('#shiti_no').val();
+	var resource_name = $('#resource_name').val();
+	var resource_note = $('#resource_note').val();
+	if($.trim(resource_name)==''){
+		alert('不能为空');
+		return false;
+	}
+	$.getJSON(
+		'/zuke/ajaxEditResource',
+		{shiti_no:shiti_no,resource_name:resource_name,resource_note:resource_note},
+		function(data){
+			if(data.status=='ok'){
+				var html = data.data.resource_name;
+				if(data.data.resource_note != ''){
+					html += '('+data.data.resource_note+')';
+				}
+				$('g[id='+shiti_no+']').html(html);
+				//$('#resource_note').val(data.data.resource_note);
+			}
+		}
+	);
+}
+</script>
+<include file="common:footer" />
