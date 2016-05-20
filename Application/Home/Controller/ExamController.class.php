@@ -70,7 +70,31 @@ class ExamController extends GlobalController {
 						$this->ajaxReturn(array('status'=>'error','msg'=>'请重试'));
 					}
 				}else{
-					if($Model->where("id=".$result['id'])->save(array('s_answer'=>$answer,'update_time'=>time()))){
+					$save = array('s_answer'=>$answer,'update_time'=>time());
+					//如果是客观题，直接打分
+					$tikuModel = M('tiku');
+					$results = $tikuModel->field("tiku_type.is_zgt,ceping_extend.x_score,tiku.answer")->join("tiku_type on tiku.type_id=tiku_type.id")
+					->join("ceping_extend on ceping_extend.tiku_id=tiku.id")
+					->where("ceping_extend.ceping_id=".$_SESSION['my_ceping']." AND ceping_extend.tiku_id=$shiti_id")->find();
+					if(!$results['is_zgt']){
+						$jonModel = M('ceping_jon');
+						if($answer == trim($results['answer'])){
+							$is_right = 1;
+							$s_score = $results['x_score'];
+						}else{
+							$is_right = -1;
+							$s_score = 0;
+						}
+						$save = array_merge($save,array('s_score'=>$s_score,'is_right'=>$is_right));
+						if($is_right==1){
+							$jonModel->where("student=".$_SESSION['user_id']." AND ceping_id=".$_SESSION['my_ceping'])->setInc('s_score',$s_score);
+						}
+						if($result['is_right']==1 && $is_right==-1){
+							$jonModel->where("student=".$_SESSION['user_id']." AND ceping_id=".$_SESSION['my_ceping'])->setInc('s_score',$s_score);
+						}
+					}
+					
+					if($Model->where("id=".$result['id'])->save($save)){
 						$this->ajaxReturn(array('status'=>'ok'));
 					}else{
 						$this->ajaxReturn(array('status'=>'error','msg'=>'请重试'));
@@ -82,6 +106,21 @@ class ExamController extends GlobalController {
 				$data['tiku_id'] = $shiti_id;
 				$data['s_answer'] = $answer;
 				$data['update_time'] = time();
+				//如果是客观题，直接打分
+				$tikuModel = M('tiku');
+				$result = $tikuModel->field("tiku_type.is_zgt,ceping_extend.x_score,tiku.answer")->join("tiku_type on tiku.type_id=tiku_type.id")
+				->join("ceping_extend on ceping_extend.tiku_id=tiku.id")
+				->where("ceping_extend.ceping_id=".$_SESSION['my_ceping']." AND ceping_extend.tiku_id=$shiti_id")->find();
+				if(!$result['is_zgt']){
+					if($answer == trim($result)){
+						$is_right = 1;
+						$s_score = $result['x_score'];
+					}else{
+						$is_right = -1;
+						$s_score = 0;
+					}
+					$data = array_merge($data,array('s_score'=>$s_score,'is_right'=>$is_right));
+				}
 				if($Model->add($data)){
 					$this->ajaxReturn(array('status'=>'ok'));
 				}else{

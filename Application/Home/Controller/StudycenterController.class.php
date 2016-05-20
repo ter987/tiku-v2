@@ -268,6 +268,90 @@ class StudycenterController extends GlobalController {
 		$this->addJs(array('js/dialog.js','js/xf.js'));
 		$this->display();
 	}
+	public function zhFenxi(){
+		$id = I('get.id');
+		$Model = M('ceping');
+		$jonModel = M('ceping_jon');
+		$answerModel = M('ceping_answer');
+		$ceping = $Model->field("*")->where("ceping.id=$id AND ceping.teacher=".$_SESSION['user_id'])->find();
+		if(!$ceping){
+			redirect('/');
+		}
+		//计算平均分
+		$result = $jonModel->field("SUM(s_score) AS score_sum")->where("ceping_id=$id")->find();
+		$average = ceil($result['score_sum']/$ceping['join_num']);
+		$this->assign('average',$average);
+		//计算错误率
+		$rightNums = $answerModel->where("ceping_id=$id AND is_right=1")->count();
+		$rightPercent = round($rightNums/($ceping['shiti_num']*$ceping['join_num']),2)*100;
+		$errorPercent = 100-$rightPercent;
+		$this->assign('error_percent',$errorPercent);
+		//计算平均答题时间
+		$result = $jonModel->field("AVG(end_time-start_time) AS avg_time")->where("ceping_id=$id")->find();//平均答卷时间
+		$averageDati = ceil($result['avg_time']/$ceping['shiti_num']);
+		$this->assign('average_dati',$averageDati);
+		//获取ceping_jon 数据
+		$paiming = $jonModel->field("ceping_jon.*,user.nick_name")->join("user on ceping_jon.student=user.id")->where("ceping_jon.ceping_id=$id")->order("ceping_jon.s_score DESC")->limit(20)->select();
+		$this->assign('paiming',$paiming);
+		
+		$this->assign('ceping',$ceping);
+		$this->assign('current','jsceping');
+		$this->setMetaTitle('学习中心'.C('TITLE_SUFFIX'));
+		$this->addCss(array('xf.css','exam_info.css','study_centre.css'));
+		$this->addJs(array('js/dialog.js','js/xf.js'));
+		$this->display();
+	}
+	public function cjFenxi(){
+		$id = I('get.id');
+		$Model = M('ceping');
+		$jonModel = M('ceping_jon');
+		$answerModel = M('ceping_answer');
+		$ceping = $Model->field("*")->where("ceping.id=$id AND ceping.teacher=".$_SESSION['user_id'])->find();
+		if(!$ceping){
+			redirect('/');
+		}
+		
+		$this->assign('ceping',$ceping);
+		$this->assign('current','jsceping');
+		$this->setMetaTitle('学习中心'.C('TITLE_SUFFIX'));
+		$this->addCss(array('xf.css','exam_info.css','study_centre.css'));
+		$this->addJs(array('js/dialog.js','js/xf.js'));
+		$this->display();
+	}
+	public function stFenxi(){
+		$id = I('get.id');
+		$Model = M('ceping');
+		$jonModel = M('ceping_jon');
+		$answerModel = M('ceping_answer');
+		$ceping = $Model->field("*")->where("ceping.id=$id AND ceping.teacher=".$_SESSION['user_id'])->find();
+		if(!$ceping){
+			redirect('/');
+		}
+		
+		$this->assign('ceping',$ceping);
+		$this->assign('current','jsceping');
+		$this->setMetaTitle('学习中心'.C('TITLE_SUFFIX'));
+		$this->addCss(array('xf.css','exam_info.css','study_centre.css'));
+		$this->addJs(array('js/dialog.js','js/xf.js'));
+		$this->display();
+	}
+	public function zsdFenxi(){
+		$id = I('get.id');
+		$Model = M('ceping');
+		$jonModel = M('ceping_jon');
+		$answerModel = M('ceping_answer');
+		$ceping = $Model->field("*")->where("ceping.id=$id AND ceping.teacher=".$_SESSION['user_id'])->find();
+		if(!$ceping){
+			redirect('/');
+		}
+		
+		$this->assign('ceping',$ceping);
+		$this->assign('current','jsceping');
+		$this->setMetaTitle('学习中心'.C('TITLE_SUFFIX'));
+		$this->addCss(array('xf.css','exam_info.css','study_centre.css'));
+		$this->addJs(array('js/dialog.js','js/xf.js'));
+		$this->display();
+	}
 	public function getTongji($ceping_id,$tiku_id){
 		$ceping_id = I('get.ceping_id');
 		$tiku_id = I('get.tiku_id');
@@ -384,7 +468,7 @@ class StudycenterController extends GlobalController {
 		$this->assign('ceping',$result);
 		$this->setMetaTitle('学习中心'.C('TITLE_SUFFIX'));
 		$this->addCss(array('xf.css','exam_info.css','study_centre.css'));
-		$this->addJs(array('js/menu.js','js/xf.js'));
+		$this->addJs(array('js/menu.js'));
 		$this->display();
 	}
 	public function ajaxGetStudentAnswer(){
@@ -429,6 +513,7 @@ class StudycenterController extends GlobalController {
 		$tiku_id = I('get.tiku_id');
 		$s_score = I('get.s_score');
 		$Model = M('ceping_answer');
+		$jonModel = M('ceping_jon');
 		$result = $Model->join("ceping on ceping.id=ceping_answer.ceping_id")
 		->join("ceping_extend ON ceping_answer.`ceping_id`=ceping_extend.`ceping_id` AND ceping_answer.`tiku_id`=ceping_extend.`tiku_id`")
 		->where("ceping.teacher=".$_SESSION['user_id']." AND ceping_answer.id=$answer_id AND ceping_answer.ceping_id=$ceping_id")->find();
@@ -438,7 +523,14 @@ class StudycenterController extends GlobalController {
 			}else{
 				$is_right = -1;
 			}
-			if($Model->where("id=$answer_id")->save(array('s_score'=>$s_score,'is_right'=>$is_right))){
+			
+			$Model->startTrans();
+			$result_1 = $Model->where("id=$answer_id")->save(array('s_score'=>$s_score,'is_right'=>$is_right));
+			$offset = $s_score-$result['s_score'];
+			$result_2 = $jonModel->where("ceping_id=$ceping_id AND student=".$result['student'])->setInc('s_score',$offset);
+			
+			if($result_1 && $result_2){
+				$Model->commit();
 				$Model = M('ceping_answer');
 				$result = $Model->field("ceping_answer.*")
 				->where("ceping_answer.ceping_id=$ceping_id AND ceping_answer.is_right=0 AND ceping_answer.tiku_id=$tiku_id")->find();
@@ -457,6 +549,7 @@ class StudycenterController extends GlobalController {
 				}
 				
 			}else{
+				$Model->rollback();
 				$this->ajaxReturn(array('status'=>'error','msg'=>'服务器出错'));
 			}
 			
