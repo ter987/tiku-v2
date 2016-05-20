@@ -103,6 +103,37 @@ dia_log.prototype.check = function(){
 			}
 		});
 	});
+	$("#down_sj").click(function(){
+		$("#sz_div").dialog({
+			title:"下载",
+			width:"560",
+			height:"auto",
+			modal:true,
+			create: function(){
+			},
+			buttons:[{
+				text:"下载",
+				show:function(){
+					$(":button").slice(2,3).css({"background":"#fff","color":"#000","border":"1px solid #e5e5e5"});
+				},
+				click:function(){
+					dialog = this;		
+					$('#sz_div').dialog("destroy");
+				}
+			},{
+				text:"取消",
+				show:function(){
+					$(":button").slice(2,3).css({"background":"#fff","color":"#000","border":"1px solid #e5e5e5"});
+				},
+				click:function(){
+					$("#sz_div").dialog("destroy");
+				}
+			}],
+			beforeClose: function() {
+				$('#sz_div').dialog("destroy");
+			}
+		});
+	});
 	$(".bjxs").click(function(){
 		$(".bjxs_div").dialog({
 			title:"编辑学生",
@@ -131,6 +162,26 @@ dia_log.prototype.check = function(){
 			}],
 			beforeClose: function() {
 				$('.bjxs_div').dialog("destroy");
+			}
+		});
+	});
+	$("#check_photo").click(function(){
+		$("#head_photo").dialog({
+			title:"选择头像",
+			width:"630",
+			height:"auto",
+			modal:true,
+			create: function(){
+			},
+			buttons:[{
+				text:"确定",
+				click:function(){
+					dialog = this;		
+					$('.bjxs_div').dialog("destroy");
+				}
+			}],
+			beforeClose: function() {
+				$('#head_photo').dialog("destroy");
 			}
 		});
 	});

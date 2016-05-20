@@ -1,47 +1,56 @@
-<include file="common:header" />
-<div class="width">
-	<div class="tk_bg_mm">
-		<div class="tit">
-		    <div class="right"><a href="">首页</a> >><a href="">找回密码</a></div>
-		</div>
-	</div>
-</div>	
-<div class="width">
-	<div class="findPwd">
-	<div>
-		<div style="width:680px;height:68px;margin:40px auto 20px;padding-left:67px;">
-			<div class="resetpass_a resetpass_act">
-				发送重置密码邮件
-			</div>
-			<div class="resetpass_a">
-				重置登录密码
-			</div>
-			<div class="resetpass_a" style="width:186px;padding-right:0">
-				找回成功
+<include file="Member:header" />
+<div class="zh_main">
+		<div>
+			<div class="stu_nav" style="width:900px;">
+				<div class="left m_nav blue_back">验证邮箱</div>
+				<div class="left m_nav blue_back">重置登录密码</div>
+				<div class="left m_nav nav_left">找回成功</div>
 			</div>
 		</div>
-	</div>
-	<div style="line-height:80px;text-align:center;display:block;clear:both;font-size:16px;font-family:微软雅黑;padding-left:33px">
-		<notempty name="email">邮件已经发送到您的邮箱{$email}，<br />请您立即登录该邮箱并按信中提示修改密码。
-
-如果您未收到邮件，请点击<a href="/member/resetpassEmail">再次发送邮件</a><else />请输入您注册时的邮箱账号</notempty>
-	</div>
-	<div class="txt1" <notempty name="email">style="display:none;"</notempty>>
-		<div class="userForm1">
+		<empty name="email">
+		<div style="font-size:20px;margin-top:40px;text-align:center;color:#1a1a1a;">
+			请输入您注册时的邮箱账号
+		</div>
+		<div style="margin-left:120px;">
 			<form action="/member/resetpassEmail" method="post" name="findPwdform" id="findPwdform">
-				<ul>
-					<li>
-						<label>邮箱：</label>
-						<input class="wh5" id="email" name="email" type="text" datatype="e" ajaxurl="/member/ajaxCheckUser" nullmsg="邮箱不能为空！" errormsg="请输入合法的邮箱地址！">
-						
-					</li>
-					<li><input class="btn btn2" value="重置密码" style="padding:10px 20px;margin:20px 150px;background:#ff730c;" type="submit"></li>
-				</ul>
+			<div class="form_list" style="margin-top:30px;">
+				<div class="l_list">
+					<div class="left f_left">
+						<div class="right"><span>邮箱：</span></div>
+					</div>
+					<div class="left f_right"><input id="email" name="email" type="text" datatype="e" ajaxurl="/member/ajaxCheckUser" placeholder="请输入邮箱"/></div>
+				</div>
+				<div>
+					<div class="left btn_sub">
+						重置密码
+					</div>
+				</div>
+			</div>
 			</form>
 		</div>
+		<else />
+		<div>
+			<div class="form_list" style="margin-top:30px;">
+				<div style="width:100%;color:#1a1a1a;">
+					<div class="" style="font-size:36px;color:#ff9c00;line-height:76px;margin:35px 0px;">	
+						<div class="email_img"></div>
+					</div>
+					<div class="f18 text_c c_1a">
+						邮件已经发送到您的邮箱{$email}，请您立即登录该邮箱并按信中提示修改密码
+					</div>
+					<div class="text_c" style="line-height:40px;">
+						如果您未收到邮件，请点击<a href="/member/resetpassemail" style="color:#1194f3;">再次发送邮件</a>
+					</div>
+				</div>
+				<!-- <div>
+					<div class="left btn_sub" style="margin-left:240px;margin-top:50px;">
+						进入邮件
+					</div>
+				</div> -->
+			</div>
+		</div>
+		</empty>
 	</div>
-</div>
-</div>
 <script type="text/javascript" src="__PUBLIC__/lib/Validform/5.3.2/Validform.min.js"></script>
 <link href="/Public/css/validform.css" rel="stylesheet" type="text/css" />
 <script>
@@ -51,6 +60,9 @@
    			{tiptype:3}
    		);
     });
+    $('.btn_sub').click(function(){
+		$("#findPwdform").submit();
+	});
 </script>	
 <!--footer-->
 <include file="common:footer" />

@@ -501,7 +501,30 @@ class StudycenterController extends GlobalController {
 		$this->addJs(array('js/menu.js','js/xf.js'));
 		$this->display();
 	}
-
+	public function myShijuan(){
+		$Model = M('user_shijuan');
+		
+		$count = $Model->where("user_id=".$_SESSION['user_id'].$where)->count();
+		$Page = new \Think\Page($count,10);
+		$Page->setConfig('prev',' < 上一页');
+		$Page->setConfig('next','下一页  >  ');
+		$Page->setConfig('first','首页');
+		$Page->setConfig('last','末页');
+		$page_show = $Page->_show($params);
+		$this->assign('page_show',$page_show);
+		$cepignModel = M('ceping');
+		$data = $Model->field("user_shijuan.*,tiku_course.course_name,tiku_course.course_type")
+		->join("tiku_course ON tiku_course.id=user_shijuan.course_id")
+		->where("user_shijuan.user_id=".$_SESSION['user_id'].$where)->limit($Page->firstRow.','.$Page->listRows)->order("user_shijuan.id DESC")->select();
+		//echo $Model->getLastSql();
+		
+		$this->assign('data',$data);
+		$this->assign('current','shijuan');
+		$this->setMetaTitle('学习中心'.C('TITLE_SUFFIX'));
+		$this->addCss(array('xf.css','exam_info.css','study_centre.css'));
+		$this->addJs(array('js/menu.js','js/xf.js'));
+		$this->display();
+	}
 	public function cpJiexi(){
 		$id = I('get.id');
 		$cpModel = M('ceping');

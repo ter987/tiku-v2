@@ -1,23 +1,42 @@
-<include file="common:header" />
-<div class="width">
-	<div class="tk_bg_mm">
-		<div class="tit">
-		    <div class="right"><a href="">首页</a> >><a href="">找回密码</a></div>
-		</div>
+<include file="Member:header" />
+<div class="zh_main">
+	<div style="font-size:20px;margin-top:60px;text-align:center;color:#1a1a1a;">
+		请选择找回密码的方式
 	</div>
-</div>	
-<div class="width">
-	<div class="findPwd">
-		<div>
-			<p style="margin:90px auto 40px;font-family:微软雅黑;text-align:center;font-size:14px;">
-				请选择找回密码的方式
-			</p>
-			<div style="width:600px;height:68px;margin:40px auto 20px;padding-left:128px;">
-				<a class="resetpass" href="/member/resetpassemail" style="color:#fff;">用邮箱找回密码</a>
-				<a class="resetpass" href="/member/resetpassphone" style="background:#f43c5e;color:#fff;">用手机号找回密码</a>
-			</div>
+	<div style="margin:50px 220px 0px 220px;" id="type">
+		<div class="zh_phone" id="1">
+			手机号找回
 		</div>
+		<div class="zh_email" id="2">
+			邮箱找回
+		</div>
+		<div class="clear"></div>
 	</div>
-</div>	
+	<div style="margin:10px 35px;">
+		<div class="radio_img_c" id="1"></div>
+		<div class="radio_img" id="2"></div>
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+	<div class="queding" style="margin-top:40px;">确定</div>
+</div>
 <!--footer-->
+<script>
+	$('#type div').click(function(){
+		var id = $(this).attr('id');
+		$(this).parent().next().find(".radio_img_c").addClass('radio_img');
+		$(this).parent().next().find(".radio_img_c").removeClass('radio_img_c');
+		
+		$(this).parent().next().find("div[id="+id+"]").removeClass('radio_img');
+		$(this).parent().next().find("div[id="+id+"]").addClass('radio_img_c');
+	});
+	$('.queding').click(function(){
+		var id = $('.radio_img_c').attr('id');
+		if(id==1){
+			window.location.href = '/member/resetpassphone';
+		}else{
+			window.location.href = '/member/resetpassemail';
+		}
+	});
+</script>
 <include file="common:footer" />

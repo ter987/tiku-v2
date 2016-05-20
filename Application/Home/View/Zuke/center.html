@@ -14,7 +14,7 @@
 			<div class="ks_top_title" style="border-bottom:1px solid #ccc;">
 				<div class="topcy" id="ecTools">
 					<ul>
-						<li><a class="goon_1" href="javascript:;">保存</a></li>
+						<li><a class="goon_1" id="savethis" href="javascript:;">保存</a></li>
 						<li><a id="down_sj" class="goon_1" href="javascript:;">下载</a></li>
 						<li><a class="goon_1 xf_xffsxs" href="javascript:;" id="filterReturn">发送学生</a></li>
 					</ul>
@@ -168,13 +168,10 @@
 	<!-- 发生给学生 -->
 	<div class="xf_fasongxspop">
 		<div class="xf_biaoti">选择学生<a href="JavaScript:;"></a></div>
-		<div class="xf_tianjiaxs"><input type="text"  placeholder="请输入正确的账号" /><a href="JavaScript:;">添加新学生</a></div>
+		<div class="xf_tianjiaxs"><input type="text" id="student_text"  placeholder="请输入正确的账号" /><a href="JavaScript:;" onclick="add_student()">添加新学生</a></div>
 		<div class="xf_xueshenglb">
-			<ul>
-				<li>张三（账号：152786935）</li>
-				<li>张三（账号：152786935）</li>
-				<li>张三（账号：152786935）</li>
-				<li>张三（账号：152786935）</li>
+			<ul id="my_students">
+
 			</ul>
 		</div>
 		<div class="xf_quanbfs"><a href="JavaScript:;">全部选择</a></div>
@@ -392,5 +389,84 @@ function doEditResource(){
 		}
 	);
 }
+$('#savethis').click(function(){
+	$.getJSON(
+		'/zuke/ajaxsave',
+		function(data){
+			if(data.status=='ok'){
+				alert('保存成功！');
+			}
+		}
+	);
+});
+$(".xf_xffsxs").click(function(){
+	$.getJSON(
+		'/index.php/home/member/ajaxGetMyStudents',
+		function(data){
+			//alert(data.id);
+			if(data.status=='ok'){
+				var html = '';
+				$.each(data.data, function(index,vo) {
+				  html += '<li id="'+vo.id+'" onclick="student_sel($(this))">'+vo.nick_name+'</li>';
+			
+				});
+				$('#my_students').html(html);
+			}
+		}
+		
+	);
+	$(".xf_fasongxspop,.xf_popbg").show();
+});
+function add_student(){
+	var val = $('#student_text').val();
+	if(val=='') return false;
+	$.getJSON(
+		'/index.php/home/member/ajaxAddStudent',
+		{student:val},
+		function(data){
+			//alert(data.id);
+			if(data.status=='ok'){
+				var html = '<li id="'+data.data.id+'" onclick="student_sel($(this))">'+data.data.nick_name+'</li>';
+				$('#my_students').append(html);
+			}else{
+				alert(data.msg);
+			}
+		}
+		
+	);
+}
+//选择学生
+function student_sel(obj){
+	if(obj.hasClass('active')){
+		obj.removeClass('active');
+	}else{
+		obj.addClass('active');
+	}
+}
+//发给学生
+$('.xf_fasongbutton a').click(function(){
+	var obj = $('#my_students li[class=active]');
+	var ids = '';
+	if(obj.length>0){
+		obj.each(function(){
+			ids += $(this).attr('id')+',';
+		});
+		$.getJSON(
+		'/index.php/home/shijuan/ajaxSendStudent',
+		{ids:ids},
+		function(data){
+			//alert(data.id);
+			if(data.status=='success'){
+				$(".xf_fasongxspop,.xf_popbg").hide();
+			}else{
+				alert(data.msg);
+			}
+		}
+		
+	);
+	}else{
+		alert('请选择学生');
+	}
+});
 </script>
 <include file="common:footer" />

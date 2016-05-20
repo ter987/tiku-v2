@@ -1,0 +1,69 @@
+<include file="common:header" />
+	<!--main-->
+	<div id="main"style="margin-top:2px;min-height:500px;">
+		<div style="background:#DBF0FF;border-bottom:4px solid #0190F2;">
+			<div style="width:1000px;height:68px;">
+				<div style="float:left;line-height:68px;color:#0190F2;font-size:24px;font-weight:700;">学习中心</div>
+			</div>
+		</div>
+		<div style="border:1px solid #D9D9D9;width:1006px;margin-top:20px;margin-bottom:40px;background:#F5F5F5;">
+			<include file="studycenter:left" />
+			<div class="study_right">
+				<!-- 组卷记录 -->
+					<div class="show_tab_5">
+						<div style="line-hiehgt:40px;padding:10px;">
+							<div class="fl new_select">
+								<select name="" style="width: 100px;" id="course_sel">
+									<option value="0">全部科目</option>
+									<volist name="gaozhong" id="vo" >
+									<option <eq name="vo.id" value="$course_id">selected="" </eq> value="{$vo.id}"><eq name="vo.course_type" value="1">高中<else />初中</eq>{$vo.course_name}</option>
+									</volist>
+								</select>
+							</div>
+							
+							
+							<div class="clear"></div>
+						</div>
+						<div class="table_a" style="width:800px;border-right:0px;">
+							<div class="table_bg">
+								<div class="xm" style="width:35%;">名称</div>
+								<div class="xm" style="width:15%;">学科</div>
+								<div class="xm" style="width:20%;">组卷时间</div>
+								<div class="xm" style="width:30%;margin-left:-4px;">操作</div>
+								<div class="clear"></div>
+							</div>
+							<volist name="data" id="vo">
+							<div>
+								<div class="xm" style="width:35%;">{$vo.title}</div>
+								<div class="xm" style="width:15%;"><eq name="vo.course_type" value="1">高中<else/>初中</eq>{$vo.course_name}</div>
+								<div class="xm" style="width:20%;">{$vo.create_time|date="Y-m-d",###}</div>
+								<div class="xm" style="width:30%;margin-left:-4px;">
+									<div class="fl" style="margin:0px 20px;"><a href="">预览</a></div> 
+									<div class="fl" style="margin:0px 20px;"><a href="">删除</a></div>
+									<div class="fl" style="margin:0px 20px;"><a href="">下载试卷</a></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							</volist>
+							
+						</div>
+						<div>						
+							<div class="page" style="float:right;padding-right:0px;">
+								<a href="##" style="width:100px">上一页</a>
+								<a class="check" href="##">1</a>
+								<a href="##">2</a>
+								<a href="##">3</a>
+								<span>...</span>
+								<a href="##">38</a>
+								<a href="##" style="width:100px;">下一页</a>
+								<div style="clear:both;"></div>
+							</div>	
+						</div>
+					</div>
+				<!-- 记录结束 -->
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+	</div>
+	<!--footer-->
+<include file="common:footer" />

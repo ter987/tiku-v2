@@ -16,7 +16,7 @@ class MailController extends GlobalController {
 		$mail->setReceiver($mailto);
 		$mail->setFrom(C('MAIL_ADDRESS'));
 		$mail_template = $this->getMailTemplate($template_code);
-		//var_dump($template_code);exit;
+		//var_dump($mail_template);exit;
 		$mail_subject = $mail_template['template_subject'];
 		if($url){
 			$mail_content = str_replace('{$'.$template_code.'}',$url,$mail_template['template_content']);

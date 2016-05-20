@@ -14,9 +14,7 @@ $(function(){
 				$(this).find("i").text("》");
 			}
 		});
-		$(".xf_showsj em i").click(function(){
-			$(".xf_qksjpop").show();
-		});
+		
 		
 		
 		$(".xf_qksjpop div a:eq(0)").click(function(){

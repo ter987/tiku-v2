@@ -12,10 +12,7 @@ class MemberController extends GlobalController {
 		$this->assign('course_data',$course_data);
 	}
     public function index(){
-    	$this->setMetaTitle('个人中心'.C('TITLE_SUFFIX'));
-		$this->addCss(array('xf.css','personal.css'));
-		$this->addJs(array('js/menu.js','js/xf.js'));
-        $this->display();
+    	redirect('/member/info');
 	}
 	public function info(){
 		$Modle = M('user');
@@ -28,6 +25,10 @@ class MemberController extends GlobalController {
 		$womenPhotos = $this->getPhotoByRand('women');
 		$this->assign('menPhotos',$menPhotos);
 		$this->assign('womenPhotos',$womenPhotos);
+		
+		$this->setMetaTitle('个人中心'.C('TITLE_SUFFIX'));
+		$this->addCss(array('xf.css','personal.css','study_centre.css'));
+		$this->addJs(array('js/menu.js','js/xf.js'));
 		$this->display();
 	}
 	public function register(){
@@ -495,6 +496,10 @@ INNER JOIN tiku ON a.tiku_id=tiku.`id`");
 		}
 	}
 	public function resetpass(){
+		$this->setMetaTitle('找回密码'.C('TITLE_SUFFIX'));
+		$this->setMetaKeyword(''.C('TITLE_SUFFIX'));
+		$this->setMetaDescription(''.C('TITLE_SUFFIX'));
+		$this->addCss(array('index.css'));
 		$this->display();
 	}
 	public function resetpassEmail(){
@@ -513,10 +518,17 @@ INNER JOIN tiku ON a.tiku_id=tiku.`id`");
 			$Mail->sendMail('resetpass_email',$email,$_SERVER['HTTP_HOST'].'/member/newpass?hash='.$hash.'&t='.$time_encrypt);
 			$this->assign('email',$email);
 		}
+		$this->setMetaTitle('找回密码'.C('TITLE_SUFFIX'));
+		$this->setMetaKeyword(''.C('TITLE_SUFFIX'));
+		$this->setMetaDescription(''.C('TITLE_SUFFIX'));
+		$this->addCss(array('index.css'));
 		$this->display();
 	}
 	public function resetpassPhone(){
-		
+		$this->setMetaTitle('找回密码'.C('TITLE_SUFFIX'));
+		$this->setMetaKeyword(''.C('TITLE_SUFFIX'));
+		$this->setMetaDescription(''.C('TITLE_SUFFIX'));
+		$this->addCss(array('index.css'));
 		$this->display();
 	}
 	public function resetpassPhone_two(){
@@ -568,6 +580,10 @@ INNER JOIN tiku ON a.tiku_id=tiku.`id`");
 				redirect('/');
 			}
 			if(empty($_POST)){
+				$this->setMetaTitle('找回密码'.C('TITLE_SUFFIX'));
+				$this->setMetaKeyword(''.C('TITLE_SUFFIX'));
+				$this->setMetaDescription(''.C('TITLE_SUFFIX'));
+				$this->addCss(array('index.css'));
 				$this->display();
 			}else{
 				$new_password = I('post.new_password');
@@ -584,7 +600,10 @@ INNER JOIN tiku ON a.tiku_id=tiku.`id`");
 		}
 	}
 	public function resetok(){
-		
+		$this->setMetaTitle('找回密码'.C('TITLE_SUFFIX'));
+		$this->setMetaKeyword(''.C('TITLE_SUFFIX'));
+		$this->setMetaDescription(''.C('TITLE_SUFFIX'));
+		$this->addCss(array('index.css'));
 		$this->display();
 	}
 	public function ajaxCollect(){

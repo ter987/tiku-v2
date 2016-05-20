@@ -12,7 +12,7 @@ class ZukeController extends GlobalController {
 	}
 	
     public function index(){
-    	unset($_SESSION['zuke_cart']);
+    	unset($_SESSION['zuke']);
     	$course_id = $_SESSION['course_id'];
 		$round_id = $_SESSION['round_id'];
 		$resource_id = I('resource_id');
@@ -43,6 +43,9 @@ class ZukeController extends GlobalController {
 		//获取资源类型
 		$resource = $this->getResourceByRoundId($round_id);
 		$this->assign('resource',$resource);
+		//获取组课试题蓝
+		$zukeCart = $this->getZukeCart($resource);
+		$this->assign('zuke_cart',$zukeCart);
 		//获取题型数据
 		$tixing = $this->getTixingByRoundId($round_id);
 		$this->assign('tixing',$tixing);
@@ -78,7 +81,7 @@ class ZukeController extends GlobalController {
 			$new[$val['resource_id']]['childs'][] = array('id'=>$val['id'],'type'=>$type);
 		}
 		$_SESSION['zuke']['shiti'] = $new;
-		var_dump($_SESSION['zuke']['shiti']);
+		//var_dump($_SESSION['zuke']['shiti']);
 		$nianduan = $myCourse['course_type']==1?'高中':'初中';
 		$_SESSION['zuke']['title'] = $nianduan.$myCourse['course_name'].'教案-'.date("Ymd");
 		$this->assign('zuke_title',$_SESSION['zuke']['title']);
@@ -91,6 +94,21 @@ class ZukeController extends GlobalController {
 		$this->addJs(array('js/dialog.js','js/xf.js','js/jquery-ui-1.11.2.custom/jquery-ui.js'));
 		$this->assign('this_module','zuke');
 		$this->display();
+	}
+	public function getZukeCart($resource){
+		$data = array();
+		foreach($resource as $val){
+			if(empty($data[$val['id']])){
+				$data[$val['id']]['title'] = $val['title'];
+				$data[$val['id']]['total'] = 0;
+			}
+			foreach($_SESSION['zuke_cart'] as $v){
+				if($v['resource_id']==$val['id']){
+					$data[$val['id']]['total'] += 1;
+				}
+			}
+		}
+		return $data;
 	}
 	public function getCaseContent($id,$type){
 		if($type==1){
@@ -113,6 +131,10 @@ class ZukeController extends GlobalController {
 		}else{
 			$this->ajaxReturn(array('status'=>'error'));
 		}
+	}
+	public function ajaxClearCart(){
+		unset($_SESSION['zuke_cart']);
+		$this->ajaxReturn(array('status'=>'ok'));
 	}
 	public function ajaxGetResourceName(){
 		$shiti_no = I('get.shiti_no');
@@ -251,8 +273,24 @@ class ZukeController extends GlobalController {
 		$course_id = $_SESSION['course_id'];
 		$round_id = $_SESSION['round_id'];
 		$topic_id = I('get.topic_id');
+		$type_id = I('get.type_id');
+		$tixing_id = I('get.tixing_id');
+		$difficulty_id = I('get.difficulty_id');
+		$year_id = I('get.year_id');
 		
 		$where = "zuke_shiti.round_id=$round_id ";
+		if(!empty($type_id)){
+			$where .= " && zuke_shiti.type=$type_id";
+		}
+		if(!empty($difficulty_id)){
+			$where .= " && zuke_shiti.difficulty=$difficulty_id";
+		}
+		if(!empty($year_id)){
+			$where .= " && zuke_shiti.year=$year_id";
+		}
+		if(!empty($tixing_id)){
+			$where .= " && zuke_shiti.tixing_id=$tixing_id";
+		}
 		if(!empty($topic_id)){
 			$childs = $this->getChildTopicById($topic_id);
 			foreach($childs as $val){
@@ -320,6 +358,33 @@ class ZukeController extends GlobalController {
 		$data = array('total'=>$count,'page_count'=>$pageCount,'cur_page'=>$curPage,'data'=>$zuke_data);
 		$this->ajaxReturn(array('status'=>'ok','data'=>$data));
 	}
+	public function ajaxSave(){
+		$Model = M('user_jiaoan');
+		if(isset($_SESSION['zuke']['id'])&&$Model->where("id=".$_SESSION['zuke']['id'].' AND user_id='.$_SESSION['user_id'])->find()){//更新数据库
+			$data['id'] = $_SESSION['zuke']['id'];
+			$data['update_time'] = time();
+			$data['content'] = json_encode($_SESSION['zuke']['shiti']);
+			$data['title'] = $_SESSION['zuke']['title'];
+			if($Model->data($data)->save()){
+				$this->ajaxReturn(array('status'=>'ok','action'=>'update'));
+			}else{
+				$this->ajaxReturn(array('status'=>'error','action'=>'update'));
+			}
+		}else{//添加到数据库
+			$data['title'] = $_SESSION['zuke']['title'];
+			$data['user_id'] = $_SESSION['user_id'];
+			$data['create_time'] = $data['update_time'] = time();
+			$data['content'] = json_encode($_SESSION['zuke']['shiti']);
+			$data['course_id'] = $_SESSION['course_id'];
+			if($id = $Model->add($data)){
+				$_SESSION['zuke']['id'] = $id;
+				$this->ajaxReturn(array('status'=>'ok','action'=>'add'));
+			}else{
+				$this->ajaxReturn(array('status'=>'error','action'=>'add'));
+			}
+		}
+		
+	}
 	public function getRoundByCourseId($course_id){
 		$Model = M('course_round');
 		$round = $Model->where("course_id=$course_id")->select();
@@ -347,6 +412,7 @@ class ZukeController extends GlobalController {
 		if($result){
 			$_SESSION['course_id'] = $result['id'];
 			unset($_SESSION['round_id']);
+			unset($_SESSION['zuke_cart']);
 			setcookie(session_name(),session_id(),time()+C('SESSION_EXPIRE_TIME'),'/',C('EXT_DOMAIN'));
 			$this->ajaxReturn(array('status'=>'ok'));
 		}else{

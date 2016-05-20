@@ -1,46 +1,53 @@
-<include file="common:header" />
-<div class="width">
-	<div class="tk_bg_mm">
-		<div class="tit">
-		    <div class="right"><a href="">首页</a> >><a href="">找回密码</a></div>
-		</div>
-	</div>
-</div>	
-<div class="width">
-	<div class="findPwd">
+<include file="Member:header" />
+<div class="zh_main">
 		<div>
-			<div style="width:680px;height:68px;margin:40px auto 20px;padding-left:67px;">
-				<div class="resetpass_a resetpass_act">
-					验证手机号
-				</div>
-				<div class="resetpass_a">
-					重置登录密码
-				</div>
-				<div class="resetpass_a" style="width:186px;padding-right:0">
-					找回成功
-				</div>
+			<div class="stu_nav" style="width:900px;">
+				<div class="left m_nav blue_back">验证手机号</div>
+				<div class="left m_nav nav_left">重置登录密码</div>
+				<div class="left m_nav">找回成功</div>
 			</div>
 		</div>
-		<div style="line-height:80px;text-align:center;display:block;clear:both;font-size:16px;font-family:微软雅黑;padding-left:33px">
-			请输入您绑定的手机号
+		<div style="font-size:20px;margin-top:40px;text-align:center;color:#1a1a1a;">
+			请输入你绑定的手机号
 		</div>
-		<div class="txt1">
-		<div class="userForm1">
+		<div style="margin-left:120px;">
 			<form action="/member/resetpassPhone_two" method="post" name="findPwdform" id="findPwdform">
-				<ul>
-					<li><label>验证码：</label><input class="confirm" id="yzm" name="verify_code" type="text" datatype="*">
-					<a href="javascript:;"><img id="verify" src="/member/verifyCode" alt="验证码" height="35" width="70" onclick="$(this).attr('src','/member/verifyCode?'+Math.random());"></a>
-					<a href="javascript:;" id="change_code" onclick="$('#verify').attr('src','/member/verifyCode?'+Math.random());">换一换</a>
-					</li>
-					<li><label>手机号：</label><input class="wh5" id="phone" name="telphone" datatype="m" type="text" ajaxurl="/member/ajaxCheckUser"><input class="send_phone_button send_confirm_button" id="send_phone" value="获取验证码" onclick="send_vcode($(this))" type="button"></li>
-					<li><label>手机验证码：</label><input class="wh5" id="yanzhengma"  datatype="*" name="yanzhengma" type="text" ajaxurl="/member/ajaxCheckPvCode"><span class="onShow" style="margin:0;padding:0;background:transparent none repeat scroll 0 0" id="yanzhengmaTip"></span></li>
-					<li><input class="btn btn2" value="继续" style="padding:5px 20px;margin:20px 150px;" type="submit"></li>
-				</ul>
+			<div class="form_list" style="margin-top:30px;">
+				<div class="l_list">
+					<div class="left f_left">
+						<div class="right"><span>验证码：</span></div>
+					</div>
+					<div class="left f_right" style="width:180px;">
+						<input id="yzm" name="verify_code" type="text" datatype="*" style="width:128px;" placeholder="请输入图片验证码"/>
+					</div>
+					<div class="left" style="margin-right:10px;"><img src="/member/verifyCode" onclick="$(this).attr('src','/member/verifyCode?'+Math.random());" style="width:150px;height:50px;"></div>
+					<div class="left right_img" style="display:none;"></div>
+				</div>
+				<div class="l_list">
+					<div class="left f_left">
+						<div class="right"><span>手机号：</span></div>
+					</div>
+					<div class="left f_right"><input id="phone" name="telphone" datatype="m" ajaxurl="/member/ajaxCheckUser" type="text" placeholder="请输入手机号"/></div>
+				</div>
+				<div class="l_list" style="height:53px;">
+					<div class="left f_left">
+						<div class="right"><span>手机激活码：</span></div>
+					</div>
+					<div class="left f_right" style="width:180px;">
+						<input id="yanzhengma"  datatype="*" name="yanzhengma" type="text" ajaxurl="/member/ajaxCheckPvCode" style="width:128px;" placeholder="请输入激活码"/>
+					</div>
+					<div class="left n_code" id="" onclick="send_vcode($(this))">获取短信激活码</div>
+				</div>
+				
+				<div>
+					<div class="left btn_sub">
+						继续
+					</div>
+				</div>
+			</div>
 			</form>
 		</div>
 	</div>
-</div>
-</div>	
 <script type="text/javascript" src="__PUBLIC__/lib/Validform/5.3.2/Validform.min.js"></script>
 <link href="/Public/css/validform.css" rel="stylesheet" type="text/css" />
 <script>
@@ -98,6 +105,9 @@ function send_vcode(obj){
 	}
 	
 }
+$('.btn_sub').click(function(){
+	$("#findPwdform").submit();
+});
 </script>
 <!--footer-->
 <include file="common:footer" />

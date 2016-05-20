@@ -31,6 +31,7 @@ table {
 .text_c{text-align:center;}
 .c_1a{color:#1a1a1a;}
 .c_cc{color:#cccccc;}
+.c_red{color:#EA4040;}
 .c_blue{color:#0190f2;}
 .c_cheng{color:#ff9118;}
 .font_b{font-weight:bold;}
@@ -218,27 +219,35 @@ table {
 	background:#0190F2;
 }
 .na{
-	border-bottom:2px solid #CCCCCC;
-	height:45px;
+	border-bottom:1px solid #CCCCCC;
+	height:44px;
 	width:1000px;
 	margin-top:15px;
 }
+.na1{
+	border-bottom:1px solid #CCCCCC;
+	height:44px;
+	width:760px;
+	margin-top:15px;
+	margin-left:15px;
+}
+
 .na_n{
-	border:2px solid #D2D2D2;
+	border:1px solid #D2D2D2;
 	margin-left:10px;
 	line-height:43px;
 	padding:0px 20px;
 	cursor:pointer;
 }
 .na_n:hover{
-	border-top:2px solid #0190F2;
-	border-bottom:2px solid #fff;
+	border-top:1px solid #0190F2;
+	border-bottom:1px solid #fff;
 	color:#0190F2;
 }
 .na_n_check{
-	border:2px solid #D2D2D2;
-	border-top:2px solid #0190F2;
-	border-bottom:2px solid #fff;
+	border:1px solid #D2D2D2;
+	border-top:1px solid #0190F2;
+	border-bottom:1px solid #fff;
 	margin-left:10px;
 	line-height:43px;
 	padding:0px 20px;
@@ -479,7 +488,7 @@ table {
 	padding:0px 6px;
 	cursor: pointer;
 	float:left;
-	border-radius:3px;
+	border-radius:2px;
 }
 .tags:hover{
 	background:#FF9118;
@@ -520,6 +529,8 @@ table {
 	float:left;
 	font-size:14px;
 	background:#F5F5F5;
+	min-width: 55px;
+	text-align:center;
 }
 .tag2 .tag2_ch{
 	width:13px;
@@ -902,4 +913,10 @@ table {
 	line-height:30px;
 	width:116px;
 	padding:0px 10px;
+	z-index:100;
 }
+.stu_1{width:90px;height:35px;line-height:35px;background:#1194F3;color:#fff;text-align:center;float:left;margin:0px 5px 5px 0px;cursor:pointer;}
+.stu_1_check{width:90px;height:35px;line-height:35px;color:#fff;text-align:center;background:#1194F3 url(../images/stu_r_t1.gif) 81px 0px no-repeat;float:left;margin:0px 5px 5px 0px;}
+.stu_2{width:90px;height:35px;line-height:35px;background:#FF9C00;color:#fff;text-align:center;float:left;margin:0px 5px 5px 0px;cursor:pointer;}
+.stu_2_check{width:90px;height:35px;line-height:35px;color:#fff;text-align:center;background:#FF9C00 url(../images/stu_r_t.gif) 81px 0px no-repeat;float:left;margin:0px 5px 5px 0px;}
+.stu_3{width:88px;height:33px;line-height:33px;background:#F5F5F5;border:1px solid #B3B3B3;color:#fff;text-align:center;float:left;margin:0px 5px 5px 0px;cursor:pointer;color:#1A1A1A;}
