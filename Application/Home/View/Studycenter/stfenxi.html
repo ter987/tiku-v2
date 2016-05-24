@@ -11,16 +11,16 @@
 			<div class="study_right">
 					<div class="show_tab_2">
 						<div style="width:810px;height:70px;">
-							<a href="/studycenter/zhfenxi/?id={$ceping.id}"><div class="t_a big_t">综合分析</div></a>
-							<a href="/studycenter/cjfenxi/?id={$ceping.id}"><div class="t_a big_t">成绩分析</div></a>
-							<a href="/studycenter/stfenxi/?id={$ceping.id}"><div class="t_a_check big_t">试题分析</div></a>
-							<a href="/studycenter/zsdfenxi/?id={$ceping.id}"><div class="t_a big_t">知识点分析</div></a>
+							<a href="/studycenter/zhfenxi/?id={$ceping_id}"><div class="t_a big_t">综合分析</div></a>
+							<a href="/studycenter/cjfenxi/?id={$ceping_id}"><div class="t_a big_t">成绩分析</div></a>
+							<a href="/studycenter/stfenxi/?id={$ceping_id}"><div class="t_a_check big_t">试题分析</div></a>
+							<a href="/studycenter/zsdfenxi/?id={$ceping_id}"><div class="t_a big_t">知识点分析</div></a>
 						</div>
 						<div class="clear:both;"></div>
 						<div class="table_a" style="width:800px;border-right:0px;">
 							<div class="table_bg" style="border-right:1px solid #E7E7E7;padding-right:5px;">
 								<div class="fl" style="width:410px;text-align:left;padding-left:10px;">试题分析</div>
-								<div class="fr"><a href="" style="color:#0190F2;">查看全部试题解析</a></div>
+								<!-- <div class="fr"><a href="" style="color:#0190F2;">查看全部试题解析</a></div> -->
 								<div class="clear"></div>
 							</div>
 							<div class="table_bg">
@@ -31,87 +31,29 @@
 								<div class="xm_1" style="width:30%;margin-left:-5px;">错题的学生</div>
 								<div class="clear"></div>
 							</div>
+							<volist name="fenxi" id="vo">
 							<div>
-								<div class="xm_1" style="width:15%;">第1题（<a href="">查看</a>）</div>
-								<div class="xm_1" style="width:8%;">100%</div>
-								<div class="xm_1" style="width:10%;">0.75-0.56</div>
-								<div class="xm" style="width:35%;padding:15px 1%;line-height:25px;">匀强磁场中的安培力，牛顿运动定律，牛顿定律的应用，匀变速直线运动及其公式，图形</div>
+								<div class="xm_1" style="width:15%;">第{$vo.order_char}题（<a href="">查看</a>）</div>
+								<div class="xm_1" style="width:8%;">{$vo.error_percent}%</div>
+								<div class="xm_1" style="width:10%;">{$vo.section}</div>
+								<div class="xm" style="width:35%;padding:15px 1%;line-height:25px;">{$vo.point_name}</div>
 								<div class="xm_1" style="width:30%;margin-left:-5px;">
-									<div class="fl ml10">张三，李四，王五</div>
-									<div class="fr lan_bg" style="margin-top:28px;">共计6个
+									<div class="fl ml10">{$vo.error_mingdan}</div>
+									<if condition="vo.error_count gt 2">
+									<div class="fr lan_bg" style="margin-top:28px;">共计{$vo.error_count}个
 										<div class="log">
 											<div class="xq_log">
-												词语（包括熟语），辨析并修改病语，
-												词语（包括熟语），辨析并修改病语，
-												词语（包括熟语），
+												{$vo.error_mingdan}
 											</div>
 											<div class="log_down"></div>
 										</div>
 									</div>
+									</if>
 								</div>
 								<div class="clear"></div>
 							</div>
-							<div>
-								<div class="xm_1" style="width:15%;">第1题（<a href="">查看</a>）</div>
-								<div class="xm_1" style="width:8%;">100%</div>
-								<div class="xm_1" style="width:10%;">0.75-0.56</div>
-								<div class="xm" style="width:35%;padding:15px 1%;line-height:25px;">匀强磁场中的安培力，牛顿运动定律，牛顿定律的应用，匀变速直线运动及其公式，图形</div>
-								<div class="xm_1" style="width:30%;margin-left:-5px;">
-									<div class="fl ml10">张三，李四，王五</div>
-									<div class="fr lan_bg" style="margin-top:28px;">共计6个
-										<div class="log">
-											<div class="xq_log">
-												词语（包括熟语），辨析并修改病语，
-												词语（包括熟语），辨析并修改病语，
-												词语（包括熟语），
-											</div>
-											<div class="log_down"></div>
-										</div>
-									</div>
-								</div>
-								<div class="clear"></div>
-							</div>
-							<div>
-								<div class="xm_1" style="width:15%;">第1题（<a href="">查看</a>）</div>
-								<div class="xm_1" style="width:8%;">100%</div>
-								<div class="xm_1" style="width:10%;">0.75-0.56</div>
-								<div class="xm" style="width:35%;padding:15px 1%;line-height:25px;">匀强磁场中的安培力，牛顿运动定律，牛顿定律的应用，匀变速直线运动及其公式，图形</div>
-								<div class="xm_1" style="width:30%;margin-left:-5px;">
-									<div class="fl ml10">张三，李四，王五</div>
-									<div class="fr lan_bg" style="margin-top:28px;">共计6个
-										<div class="log">
-											<div class="xq_log">
-												词语（包括熟语），辨析并修改病语，
-												词语（包括熟语），辨析并修改病语，
-												词语（包括熟语），
-											</div>
-											<div class="log_down"></div>
-										</div>
-									</div>
-								</div>
-								<div class="clear"></div>
-							</div>
-							<div>
-								<div class="xm_1" style="width:15%;">第1题（<a href="">查看</a>）</div>
-								<div class="xm_1" style="width:8%;">100%</div>
-								<div class="xm_1" style="width:10%;">0.75-0.56</div>
-								<div class="xm" style="width:35%;padding:15px 1%;line-height:25px;">匀强磁场中的安培力，牛顿运动定律，牛顿定律的应用，匀变速直线运动及其公式，图形</div>
-								<div class="xm_1" style="width:30%;margin-left:-5px;">
-									<div class="fl ml10">张三，李四，王五</div>
-									<div class="fr lan_bg" style="margin-top:28px;">共计6个
-										<div class="log">
-											<div class="xq_log">
-												词语（包括熟语），辨析并修改病语，
-												词语（包括熟语），辨析并修改病语，
-												词语（包括熟语），
-											</div>
-											<div class="log_down"></div>
-										</div>
-									</div>
-								</div>
-								<div class="clear"></div>
-							</div>				
-							<div class="page" style="float:right;padding-right:0px;">
+							</volist>			
+							<!-- <div class="page" style="float:right;padding-right:0px;">
 								<a href="##" style="width:100px">上一页</a>
 								<a class="check" href="##">1</a>
 								<a href="##">2</a>
@@ -120,7 +62,7 @@
 								<a href="##">38</a>
 								<a href="##" style="width:100px;">下一页</a>
 								<div style="clear:both;"></div>
-							</div>	
+							</div>	 -->
 						</div>	
 					</div>
 			</div>

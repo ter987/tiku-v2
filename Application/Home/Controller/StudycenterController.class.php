@@ -306,12 +306,39 @@ class StudycenterController extends GlobalController {
 		$Model = M('ceping');
 		$jonModel = M('ceping_jon');
 		$answerModel = M('ceping_answer');
-		$ceping = $Model->field("*")->where("ceping.id=$id AND ceping.teacher=".$_SESSION['user_id'])->find();
-		if(!$ceping){
+		$extModel = M('ceping_extend');
+		$pointModel = M('tiku_point');
+		$cepingJon = $jonModel->field("ceping_jon.*,user.id,user.nick_name,ceping.shiti_num")
+		->join('ceping on ceping.id=ceping_jon.ceping_id')
+		->join("user on ceping_jon.student=user.id")->where("ceping_jon.ceping_id=$id")->order("s_score DESC")->select();
+		if(!$cepingJon){
 			redirect('/');
 		}
-		
-		$this->assign('ceping',$ceping);
+		foreach($cepingJon as $key=> $val){
+			$pointArr = array();
+			for($i=1;$i<=$val['shiti_num'];$i++){
+				$tiku = $extModel->field("tiku_point.*,ceping_extend.*")->join("tiku_to_point on tiku_to_point.tiku_id=ceping_extend.tiku_id")
+				->join("tiku_point on tiku_to_point.point_id=tiku_point.id")
+				->where("ceping_extend.order_char=$i AND ceping_id=".$val['ceping_id'])->find();
+				if($tiku['level']==3){
+					$point = $pointModel->where("id=".$tiku['parent_id'])->find();
+					if(!in_array($point['point_name'], $pointArr)){
+						$pointArr = array_merge($pointArr,array($point['point_name']));
+					}
+					
+				}
+				$answer = $answerModel->where("ceping_id=".$val['ceping_id']." AND student=".$val['student']." AND tiku_id=".$tiku['tiku_id'])->find();
+				if($answer['is_right'] != 1){
+					$cepingJon[$key]['cuoti'] .= $tiku['order_char'].',';
+					if($i==$val['shiti_num']){
+						$cepingJon[$key]['zsd_count'] = count($pointArr);
+						$cepingJon[$key]['zsd'] = implode(',',$pointArr);
+					}
+				}
+			}
+		}
+		$this->assign('ceping_jon',$cepingJon);
+		$this->assign('ceping_id',$id);
 		$this->assign('current','jsceping');
 		$this->setMetaTitle('学习中心'.C('TITLE_SUFFIX'));
 		$this->addCss(array('xf.css','exam_info.css','study_centre.css'));
@@ -323,12 +350,48 @@ class StudycenterController extends GlobalController {
 		$Model = M('ceping');
 		$jonModel = M('ceping_jon');
 		$answerModel = M('ceping_answer');
+		$extModel = M('ceping_extend');
+		$pointModel = M('tiku_point');
 		$ceping = $Model->field("*")->where("ceping.id=$id AND ceping.teacher=".$_SESSION['user_id'])->find();
 		if(!$ceping){
 			redirect('/');
 		}
+		$jonData = $jonModel->field("user.id,user.nick_name")->join("user on ceping_jon.student=user.id")->where("ceping_jon.ceping_id=$id")->select();
+		$pointArr = array();
+		for($i=1;$i<=$ceping['shiti_num'];$i++){
+			$tiku = $extModel->field("tiku_point.*,ceping_extend.*,tiku_difficulty.section")->join("tiku_to_point on tiku_to_point.tiku_id=ceping_extend.tiku_id")
+			->join("tiku_point on tiku_to_point.point_id=tiku_point.id")
+			->join("tiku on ceping_extend.tiku_id=tiku.id")
+			->join("tiku_difficulty on tiku_difficulty.id=tiku.difficulty_id")
+			->where("ceping_extend.order_char=$i AND ceping_id=".$id)->find();
+			if($tiku['level']==3){
+				$point = $pointModel->where("id=".$tiku['parent_id'])->find();
+				$point_name = $point['point_name'];
+				
+			}else{
+				$point_name = $tiku['point_name'];
+			}
+			$data[$i]['order_char'] = $i;
+			$data[$i]['section'] = $tiku['section'];
+			$data[$i]['point_name'] = $point_name;
+			$rightAnswer = $answerModel->field("user.id,user.nick_name")->join("user on ceping_answer.student=user.id")->where("ceping_answer.ceping_id=".$id." AND ceping_answer.is_right=1 AND  ceping_answer.tiku_id=".$tiku['tiku_id'])->select();
+			$rightCount = count($rightAnswer);
+			$rightPercent = round($rightCount/$ceping['join_num'],2)*100;
+			$errorPercent = 100-$rightPercent;
+			$data[$i]['error_percent'] = $errorPercent;
+			//var_dump($rightAnswer);exit;
+			$errorArr = array();
+			foreach($jonData as $key=>$val){
+				if(!in_array($val,$rightAnswer)){
+					$errorArr = array_merge($errorArr,array($val['nick_name']));
+				}
+			}
+			$data[$i]['error_count'] = count($errorArr);
+			$data[$i]['error_mingdan'] = implode(',',$errorArr);
+		}
 		
-		$this->assign('ceping',$ceping);
+		$this->assign('fenxi',$data);
+		$this->assign('ceping_id',$id);
 		$this->assign('current','jsceping');
 		$this->setMetaTitle('学习中心'.C('TITLE_SUFFIX'));
 		$this->addCss(array('xf.css','exam_info.css','study_centre.css'));
@@ -340,12 +403,64 @@ class StudycenterController extends GlobalController {
 		$Model = M('ceping');
 		$jonModel = M('ceping_jon');
 		$answerModel = M('ceping_answer');
+		$extModel = M('ceping_extend');
+		$pointModel = M('tiku_point');
 		$ceping = $Model->field("*")->where("ceping.id=$id AND ceping.teacher=".$_SESSION['user_id'])->find();
 		if(!$ceping){
 			redirect('/');
 		}
-		
-		$this->assign('ceping',$ceping);
+		$jonData = $jonModel->field("user.id,user.nick_name")->join("user on ceping_jon.student=user.id")->where("ceping_jon.ceping_id=$id")->select();
+		$pointArr = array();
+		for($i=1;$i<=$ceping['shiti_num'];$i++){
+			$tiku = $extModel->field("tiku_point.id as point_id,tiku_point.parent_id,tiku_point.point_name,tiku_point.level,ceping_extend.*,tiku_difficulty.section")->join("tiku_to_point on tiku_to_point.tiku_id=ceping_extend.tiku_id")
+			->join("tiku_point on tiku_to_point.point_id=tiku_point.id")
+			->join("tiku on ceping_extend.tiku_id=tiku.id")
+			->join("tiku_difficulty on tiku_difficulty.id=tiku.difficulty_id")
+			->where("ceping_extend.order_char=$i AND ceping_id=".$id)->find();
+			
+			$rightAnswer = $answerModel->field("user.id,user.nick_name")->join("user on ceping_answer.student=user.id")->where("ceping_answer.ceping_id=".$id." AND ceping_answer.is_right=1 AND  ceping_answer.tiku_id=".$tiku['tiku_id'])->select();
+			//$rightCount = count($rightAnswer);
+			//$rightPercent = round($rightCount/$ceping['join_num'],2)*100;
+			//$errorPercent = 100-$rightPercent;
+			//$data[$i]['error_percent'] = $errorPercent;
+			//var_dump($rightAnswer);exit;
+			$errorArr = array();
+			foreach($jonData as $key=>$val){
+				if(!in_array($val,$rightAnswer)){
+					//if(!in_array($val['nick_name'],$errorArr)){
+						$errorArr = array_merge($errorArr,array($val['nick_name']));
+					//}
+					
+				}
+			}
+			//var_dump($errorArr);exit;
+			//$data[$i]['error_count'] = count($errorArr);
+			//$data[$i]['error_mingdan'] = implode(',',$errorArr);
+			
+			
+			$point = $pointModel->where("id=".$tiku['parent_id'])->find();
+			if(!isset($data[$point['id']]['e_mingdan'])){
+				$data[$point['id']]['e_mingdan'] = array();
+			}
+			$point_name = $point['point_name'];
+			$data[$point['id']]['point_name'] = $point['point_name'];
+			$data[$point['id']]['count'] += 1;
+			$data[$point['id']]['shiti'] .= $i.',';
+			$data[$point['id']]['x_score'] += $tiku['x_score'];
+			$data[$point['id']]['e_mingdan'] = array_merge($data[$point['id']]['e_mingdan'],$errorArr);
+			$data[$point['id']]['e_mingdan'] = array_unique($data[$point['id']]['e_mingdan']);
+			$data[$point['id']]['right_count'] += count($rightAnswer);
+			
+		}
+		foreach($data as $key=> $val){
+			$data[$key]['bili'] = round($val['x_score']/$ceping['score'],2)*100;
+			$data[$key]['e_count'] = count($val['e_mingdan']);
+			$data[$key]['e_mingdan'] = implode(',',$val['e_mingdan']);
+			$rightPercent = round($data[$key]['right_count']/($ceping['join_num']*$ceping['shiti_num']),2)*100;
+			$data[$key]['error_percent'] = 100-$rightPercent;
+		}
+		$this->assign('fenxi',$data);
+		$this->assign('ceping_id',$id);
 		$this->assign('current','jsceping');
 		$this->setMetaTitle('学习中心'.C('TITLE_SUFFIX'));
 		$this->addCss(array('xf.css','exam_info.css','study_centre.css'));

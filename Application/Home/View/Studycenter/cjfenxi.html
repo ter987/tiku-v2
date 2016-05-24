@@ -12,10 +12,10 @@
 				
 					<div class="show_tab_2">
 						<div style="width:810px;height:70px;">
-							<a href="/studycenter/zhfenxi/?id={$ceping.id}"><div class="t_a big_t">综合分析</div></a>
-							<a href="/studycenter/cjfenxi/?id={$ceping.id}"><div class="t_a_check big_t">成绩分析</div></a>
-							<a href="/studycenter/stfenxi/?id={$ceping.id}"><div class="t_a big_t">试题分析</div></a>
-							<a href="/studycenter/zsdfenxi/?id={$ceping.id}"><div class="t_a big_t">知识点分析</div></a>
+							<a href="/studycenter/zhfenxi/?id={$ceping_id}"><div class="t_a big_t">综合分析</div></a>
+							<a href="/studycenter/cjfenxi/?id={$ceping_id}"><div class="t_a_check big_t">成绩分析</div></a>
+							<a href="/studycenter/stfenxi/?id={$ceping_id}"><div class="t_a big_t">试题分析</div></a>
+							<a href="/studycenter/zsdfenxi/?id={$ceping_id}"><div class="t_a big_t">知识点分析</div></a>
 						</div>
 						<div class="clear:both;"></div>
 						<div class="table_a" style="width:800px;">
@@ -31,93 +31,30 @@
 								<div class="pc" style="width:45%;margin-left:-4px;">错题知识点</div>
 								<div class="clear"></div>
 							</div>
+							<volist name="ceping_jon" id="vo" key="k">
 							<div>
-								<div class="xm" style="width:10%;">第1名</div>
-								<div class="zsd" style="width:13%;">张三（<a href="">查看</a>）</div>
-								<div class="xm" style="width:7%;">100</div>
-								<div class="xm" style="width:25%;">1.6.4.9.20.13</div>
+								<div class="xm" style="width:10%;">第{$k}名</div>
+								<div class="zsd" style="width:13%;">{$vo.nick_name}（<a href="">查看</a>）</div>
+								<div class="xm" style="width:7%;">{$vo.s_score}</div>
+								<div class="xm" style="width:25%;">{$vo.cuoti}</div>
 								<div class="pc" style="width:45%;margin-left:-4px;">
-									<div class="fl ml10">词语（包括熟语），辨析并修改病语，</div>
-									<div class="fl lan_bg">共计6个
+									<div class="fl ml10">{$vo.zsd}</div>
+									<if condition="vo.zsd_count gt 1">
+									<div class="fl lan_bg">共计{$vo.zsd}个
 										<div class="log">
 											<div class="xq_log">
-												词语（包括熟语），辨析并修改病语，
-												词语（包括熟语），辨析并修改病语，
-												词语（包括熟语），
+												{$vo.zsd}
 											</div>
 											<div class="log_down"></div>
 										</div>
 									</div>
-									
+									</if>
 								</div>
 								<div class="clear"></div>
 							</div>
-							<div>
-								<div class="xm" style="width:10%;">第1名</div>
-								<div class="zsd" style="width:13%;">张三（<a href="">查看</a>）</div>
-								<div class="xm" style="width:7%;">100</div>
-								<div class="xm" style="width:25%;">1.6.4.9.20.13</div>
-								<div class="pc" style="width:45%;margin-left:-4px;">
-									<div class="fl ml10">词语（包括熟语），辨析并修改病语，</div>
-									<div class="fl lan_bg">共计6个
-										<div class="log">
-											<div class="xq_log">
-												词语（包括熟语），辨析并修改病语，
-												词语（包括熟语），辨析并修改病语，
-												词语（包括熟语），
-											</div>
-											<div class="log_down"></div>
-										</div>
-									</div>
-									
-								</div>
-								<div class="clear"></div>
-							</div>
-							<div>
-								<div class="xm" style="width:10%;">第1名</div>
-								<div class="zsd" style="width:13%;">张三（<a href="">查看</a>）</div>
-								<div class="xm" style="width:7%;">100</div>
-								<div class="xm" style="width:25%;">1.6.4.9.20.13</div>
-								<div class="pc" style="width:45%;margin-left:-4px;">
-									<div class="fl ml10">词语（包括熟语），辨析并修改病语，</div>
-									<div class="fl lan_bg">共计6个
-										<div class="log">
-											<div class="xq_log">
-												词语（包括熟语），辨析并修改病语，
-												词语（包括熟语），辨析并修改病语，
-												词语（包括熟语），
-											</div>
-											<div class="log_down"></div>
-										</div>
-									</div>
-									
-								</div>
-								<div class="clear"></div>
-							</div>
-							<div>
-								<div class="xm" style="width:10%;">第1名</div>
-								<div class="zsd" style="width:13%;">张三（<a href="">查看</a>）</div>
-								<div class="xm" style="width:7%;">100</div>
-								<div class="xm" style="width:25%;">1.6.4.9.20.13</div>
-								<div class="pc" style="width:45%;margin-left:-4px;">
-									<div class="fl ml10">词语（包括熟语），辨析并修改病语，</div>
-									<div class="fl lan_bg">共计6个
-										<div class="log">
-											<div class="xq_log">
-												词语（包括熟语），辨析并修改病语，
-												词语（包括熟语），辨析并修改病语，
-												词语（包括熟语），辨析并修改病语，
-												词语（包括熟语），辨析并修改病语，
-											
-											</div>
-											<div class="log_down"></div>
-										</div>
-									</div>
-									
-								</div>
-								<div class="clear"></div>
-							</div>
-						<div>						
+							</volist>
+							
+						<!-- <div>						
 							<div class="page" style="float:right;padding-right:0px;">
 								<a href="##" style="width:100px"><上一页</a>
 								<a class="check" href="##">1</a>
@@ -128,7 +65,7 @@
 								<a href="##" style="width:100px;">下一页></a>
 								<div style="clear:both;"></div>
 							</div>	
-						</div>
+						</div> -->
 					</div>
 				
 			</div>
