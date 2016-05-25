@@ -31,6 +31,40 @@ class MemberController extends GlobalController {
 		$this->addJs(array('js/menu.js','js/xf.js'));
 		$this->display();
 	}
+	public function passProtect(){
+		$Modle = M('user');
+		$data = $Modle->where("id=".$_SESSION['user_id'])->find();
+		if(!$data){
+			redirect('/');
+		}
+		$this->assign('user_info',$data);
+		$menPhotos = $this->getPhotoByRand('men');
+		$womenPhotos = $this->getPhotoByRand('women');
+		$this->assign('menPhotos',$menPhotos);
+		$this->assign('womenPhotos',$womenPhotos);
+		
+		$this->setMetaTitle('个人中心'.C('TITLE_SUFFIX'));
+		$this->addCss(array('xf.css','personal.css','study_centre.css'));
+		$this->addJs(array('js/menu.js','js/xf.js'));
+		$this->display();
+	}
+	public function passChange(){
+		$Modle = M('user');
+		$data = $Modle->where("id=".$_SESSION['user_id'])->find();
+		if(!$data){
+			redirect('/');
+		}
+		$this->assign('user_info',$data);
+		$menPhotos = $this->getPhotoByRand('men');
+		$womenPhotos = $this->getPhotoByRand('women');
+		$this->assign('menPhotos',$menPhotos);
+		$this->assign('womenPhotos',$womenPhotos);
+		
+		$this->setMetaTitle('个人中心'.C('TITLE_SUFFIX'));
+		$this->addCss(array('xf.css','personal.css','study_centre.css'));
+		$this->addJs(array('js/menu.js','js/xf.js'));
+		$this->display();
+	}
 	public function register(){
 		if($_POST){
 			$is_mail = I('post.is_mail');

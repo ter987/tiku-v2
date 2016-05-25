@@ -1,0 +1,135 @@
+<include file="common:header" />
+	<!--main-->
+	<div id="main"style="margin-top:2px;min-height:500px;">
+		<div style="background:#DBF0FF;border-bottom:4px solid #0190F2;">
+			<div style="width:1000px;height:68px;">
+				<div style="float:left;line-height:68px;color:#0190F2;font-size:24px;font-weight:700;">学习中心</div>
+			</div>
+		</div>
+		<div style="border:1px solid #D9D9D9;width:1006px;margin-top:20px;margin-bottom:40px;background:#F5F5F5;">
+			<include file="studycenter:left" />
+			<div class="study_right">
+					<div class="show_tab_2" style="padding:10px;">
+						<div>
+							<div style="float:left;">
+								<div class="fl new_select">
+									<select name="" style="width: 100px;" id="course_sel">
+										<volist name="all_course" id="vo" >
+										<option <eq name="vo.id" value="$course_id">selected="" </eq> value="{$vo.id}"><eq name="vo.course_type" value="1">高中<else />初中</eq>{$vo.course_name}</option>
+										</volist>
+									</select>
+									<!-- <div class="select_div fl">
+										高中语文
+									</div>
+									<div class="sel_down fl"></div>
+									<div class="sel_list">
+										<div class="cp">高中语文</div>
+										<div class="cp">高中语文</div>
+										<div class="cp">高中语文</div>
+										<div class="cp">高中语文</div>
+									</div> -->
+								</div>
+							</div>
+							<div style="clear:both;"></div>
+							<div>
+								<div class="round1">
+									<div style="border-bottom:2px dashed #0190F2;height:85px;line-height:110px;font-size:38px;">{$average.a_score}</div>
+									<div style="font-size:22px;line-height:50px;">平均分</div>
+								</div>
+								<div class="round2">
+									<div style="border-bottom:2px dashed #EF4349;height:85px;line-height:110px;font-size:38px;">{$average.error_percent}%</div>
+									<div style="font-size:22px;line-height:50px;">错误率</div>
+								</div>
+								<div class="round3">
+									<div style="border-bottom:2px dashed #FF8100;height:85px;line-height:110px;font-size:38px;">{$average.a_dati}s</div>
+									<div style="font-size:22px;line-height:50px;">平均答题时间</div>
+								</div>
+								<div class="round4">
+									<div style="border-bottom:2px dashed #2DB920;height:85px;line-height:90px;font-size:64px;">D</div>
+									<div style="font-size:22px;line-height:50px;">评分等级</div>
+								</div>
+								<div class="clear">
+								</div>
+							</div>
+							<div class="table_a" style="width:800px;border-right:0px;">
+								<div class="table_bg" style="border-right:1px solid #E7E7E7;">
+									<div class="fl" style="width:100px;text-align:left;padding-left:10px;">试卷基本信息</div>
+									<!-- <div class="fr" style="margin-right:10px;">
+										<a href=""><</a>
+										<span  style="padding:0px 15px;">1/38</span>
+										<a href="">></a>
+									</div> -->
+									<div class="clear"></div>
+								</div>
+								<div class="table_bg">
+									<div class="xh" style="width:30%;">试卷名称</div>
+									<div class="xm" style="width:10%">试题数量</div>
+									<div class="cj" style="width:8%;">总分</div>
+									<div class="pm" style="width:12%;">答题时间</div>
+									<div class="xm" style="width:10%;">知识点</div>
+									<div class="xm" style="width:30%;margin-left:-6px;">操作</div>
+									<div class="clear"></div>
+								</div>
+								<volist name="ceping_data" id="vo">
+								<div>
+									<div class="xh" style="width:30%;">{$vo.title}</div>
+									<div class="xm" style="width:10%;">{$vo.shiti_num}</div>
+									<div class="cj" style="width:8%;">{$vo.score}</div>
+									<div class="pm" style="width:12%;">{$vo.limit_time}分钟</div>
+									<div class="xm" style="width:10%;">{$vo.point_count}个</div>
+									<div class="xm" style="width:30%;margin-left:-6px;">
+										<div class="fl chakan" style="margin-left:35px;"><a target="_blank" href="/baogao/shijuan/?id={$vo.id}">查看报告</a></div>
+										<div class="fl yuanjian"><a href="">查看原卷</a></div>
+									</div>
+									<div class="clear"></div>
+								</div>
+								</volist>
+
+							</div>
+							
+							<div class="table_a" style="width:800px;border-right:0px;margin-top:20px;">
+								<div class="table_bg" style="border-right:1px solid #E7E7E7;">
+									<div class="fl" style="width:100px;text-align:left;padding-left:10px;">知识点掌握统计</div>
+									<div class="clear"></div>
+								</div>
+								<div style="border-right:1px solid #E7E7E7;border-top:1px solid #E7E7E7;">
+									<volist name="zsd_tongji" id="vo">
+									<div style="line-height:40px;">
+										<div class="fl" style="width:46%;padding:0px 2%;text-align:left;">{$vo.point_name}</div>
+										<div class="fl" style="width:50%;">
+											<div class="fl" style="border:1px solid #E7E7E7;width:278px;height:18px;margin-top:11px;"><div class="fl" style="width:{$vo.right_percent}%;height:18px;background:#FF8100"></div></div>
+											<div class="fl ml10">正确率{$vo.right_percent}%</div>
+										</div>
+									</div>
+									</volist>
+									<div class="clear"></div>
+								</div>	
+							</div>
+							<!-- <div>						
+								<div class="page" style="float:right;padding-right:0px;">
+									<a href="##" style="width:100px">上一页</a>
+									<a class="check" href="##">1</a>
+									<a href="##">2</a>
+									<a href="##">3</a>
+									<span>...</span>
+									<a href="##">38</a>
+									<a href="##" style="width:100px;">下一页</a>
+									<div style="clear:both;"></div>
+								</div>	
+							</div> -->
+						</div>
+						
+					</div>	
+			</div>
+			
+			<div style="clear:both;"></div>
+		</div>
+	</div>
+	<script>
+		$('#course_sel').change(function(){
+			var val = $(this).val();
+			window.location.href = "/baogao/index/?cid="+val;
+		});
+	</script>
+	<!--footer-->
+<include file="common:footer" />

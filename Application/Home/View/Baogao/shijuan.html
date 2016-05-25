@@ -1,0 +1,139 @@
+<include file="common:header" />
+	<!--main-->
+	<div id="main"style="margin-top:2px;min-height:500px;">
+		<div style="background:#DBF0FF;border-bottom:4px solid #0190F2;">
+			<div style="width:1000px;height:68px;">
+				<div style="float:left;line-height:68px;color:#0190F2;font-size:24px;font-weight:700;">学习中心</div>
+			</div>
+		</div>
+		<div style="border:1px solid #D9D9D9;width:1006px;margin-top:20px;margin-bottom:40px;background:#F5F5F5;">
+			<include file="studycenter:left" />
+			<div class="study_right">
+					<div class="show_tab_2" style="padding:10px;">
+						<div>
+							<!-- <div style="float:left;">
+								<div class="fl new_select">
+									<div class="select_div fl">
+										高中语文
+									</div>
+									<div class="sel_down fl"></div>
+									<div class="sel_list">
+										<div class="cp">高中语文</div>
+										<div class="cp">高中语文</div>
+										<div class="cp">高中语文</div>
+										<div class="cp">高中语文</div>
+									</div>
+								</div>
+							</div> -->
+							<div style="clear:both;"></div>
+							<div class="table_a" style="width:800px;margin-top:10px;">
+							
+								<div class="table_bg">
+									<div class="fl" style="width:410px;text-align:left;padding-left:10px;">试卷基本信息</div>
+									<div class="clear"></div>
+								</div>
+								<div class="table_bg">
+									<div class="sjmc" style="width:337px;">试卷名称</div>
+									<div class="sj_num" style="width:102px;">试题数量</div>
+									<div class="zf" style="width:88px;">总分</div>
+									<div class="dtsj" style="width:130px;">考试时间</div>
+									<div class="xm" style="width:138px;">知识点</div>
+									<div class="clear"></div>
+								</div>
+								<div>
+									<div class="sjmc" style="width:337px;">{$ceping.title}</div>
+									<div class="sj_num" style="width:102px;">{$ceping.shiti_num}</div>
+									<div class="zf" style="width:88px;">{$ceping.score}</div>
+									<div class="dtsj" style="width:130px;">{$ceping.limit_time}分钟</div>
+									<div class="xm" style="width:138px;">{$zsd_count}个</div>
+									<div class="clear"></div>
+								</div>
+							</div>
+							<div>
+								<div class="round1">
+									<div style="border-bottom:2px dashed #0190F2;height:85px;line-height:110px;font-size:38px;">80</div>
+									<div style="font-size:22px;line-height:50px;">平均分</div>
+								</div>
+								<div class="round2">
+									<div style="border-bottom:2px dashed #EF4349;height:85px;line-height:110px;font-size:38px;">60%</div>
+									<div style="font-size:22px;line-height:50px;">错误率</div>
+								</div>
+								<div class="round3">
+									<div style="border-bottom:2px dashed #FF8100;height:85px;line-height:110px;font-size:38px;">{$ceping.average_dati}s</div>
+									<div style="font-size:22px;line-height:50px;">平均答题时间</div>
+								</div>
+								<div class="round4">
+									<div style="border-bottom:2px dashed #2DB920;height:85px;line-height:90px;font-size:64px;">D</div>
+									<div style="font-size:22px;line-height:50px;">评分等级</div>
+								</div>
+								<div class="clear">
+								</div>
+							</div>
+							<div class="table_a" style="width:800px;border-right:0px;">
+								<div class="table_bg" style="border-right:1px solid #E7E7E7;">
+									<div class="fl" style="width:100px;text-align:left;padding-left:10px;">试题分析</div>
+									<!-- <div class="fr" style="margin-right:10px;">
+										<a href="" style="color:#0190F2;">查看全部试题解析</a>
+									</div> -->
+									<div class="clear"></div>
+								</div>
+								<div class="table_bg">
+									<div class="xm" style="width:115px;">试题</div>
+									<div class="xm" style="width:135px;">对错</div>
+									<div class="xm" style="width:100px;">难度系数</div>
+									<div class="xm" style="width:446px;">知识点</div>
+									<div class="clear"></div>
+								</div>
+								<volist name="shitifenxi" id="vo">
+								<div>
+									<div class="xm_1" style="width:115px;">第{$vo.order_char}题（<a href="" style="color:#0190F2;">查看</a>）</div>
+									<div class="xm_1" style="width:135px;"><eq name="vo.is_right" value="1"><div class="icon_right"></div><else /><div class="icon_error">已加入错题本</div></eq></div>
+									<div class="xm_1" style="width:100px;">{$vo.section}</div>
+									<div class="xm_1" style="width:446px;">
+										{$vo.point_name}
+									</div>
+									<div class="clear"></div>
+								</div>
+								</volist>
+							</div>
+							<!-- <div>						
+								<div class="page" style="float:right;padding-right:0px;">
+									<a href="##" style="width:100px">上一页</a>
+									<a class="check" href="##">1</a>
+									<a href="##">2</a>
+									<a href="##">3</a>
+									<span>...</span>
+									<a href="##">38</a>
+									<a href="##" style="width:100px;">下一页</a>
+									<div style="clear:both;"></div>
+								</div>	
+							</div> -->
+						</div>
+						
+					</div>	
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+	</div>
+	<!--footer-->
+	<div id="footer">
+		<div class="footer">
+			<div><a href="">关于我们</a> 丨 <a href="">隐私保护政策</a>  丨  <a href="">服务条款</a> 丨 <a href="">联系我们</a> </div>  
+			<div><span style="font-size:12px;">COPYRIGHT 2015  哈学库  版权所有   www.haxueku.com</span></div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery1.42.min.js"></script>
+	<!--本题解析展开收起-->
+ <script type="text/javascript">
+	$(".analys").click(function(){
+		if($(this).hasClass('cur')){
+			$(this).removeClass('cur').parents(".big-te").find(".hidde-div").slideUp();
+		}else{
+			$(this).addClass('cur').parents(".big-te").find(".hidde-div").slideDown();
+		}
+	});
+	
+</script>
+	<script src="js/menu.js" type="text/javascript"></script>
+</body>
+</html>

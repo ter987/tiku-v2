@@ -18,6 +18,7 @@
   RewriteRule ^tongbu/(\w+)\/(\d*)\/{0,1}$ index.php/home/tongbu/index/course/$1/p/$2/
   RewriteRule ^tongbu/(\w+)\/([\w|-]+)\/(\d*)\/{0,1}$ index.php/home/tongbu/index/course/$1/param/$2/p/$3/
   RewriteRule ^studycenter/(\w+)\/$ index.php/home/studycenter/$1/
+  RewriteRule ^baogao/(\w+)\/$ index.php/home/baogao/$1/
   RewriteRule ^exam/(\w+)\/(\d+)\/$ index.php/home/exam/$1/id/$2/
   RewriteRule ^lianxi/(\w+)$ index.php/home/lianxi/$1/
   RewriteRule ^lianxi/(\d+)\/$ index.php/home/lianxi/start/id/$1/
