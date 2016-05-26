@@ -25,9 +25,9 @@
                     <div class="fl na_n">
                         修改密码
                     </div>
-                    <div class="fl na_n">
+                    <!-- <div class="fl na_n">
                         密码保护
-                    </div>
+                    </div> -->
                	</div>
                 <div class="PersonData" style="width:780;margin:15px 25px">
 					<!-- <div class="Rmain">
@@ -132,30 +132,39 @@
 						</div>
 						<div class="rright"> 
 							<div class="fl new_select" style="width:110px;">
-								<div class="select_div fl" style="width:50px;">
+								<!-- <div class="select_div fl" style="width:50px;">
 									请选择
 								</div>
 								<div class="sel_down fl"></div>
 								<div class="sel_list" style="width:86px;">
 									<div class="cp">2016</div>
-								</div>
+								</div> -->
+								<select style="width:110px;" id="province">
+									<option value="0">请选择</option>
+									<volist name="province" id="vo">
+										<option value="{$vo.region_id}">{$vo.region_name}</option>
+									</volist>
+								</select>
 							</div>
 							<div class="fl" style="line-height:35px;padding:0px 10px;">
 								省（市）
 							</div>
 							<div class="fl new_select" style="width:110px;">
-								<div class="select_div fl" style="width:50px;">
+								<!-- <div class="select_div fl" style="width:50px;">
 									请选择
 								</div>
 								<div class="sel_down fl"></div>
 								<div class="sel_list" style="width:86px;">
 									<div class="cp">2016</div>
-								</div>
+								</div> -->
+								<select style="width:110px;" id="city">
+									<option value="0">请选择</option>
+								</select>
 							</div>
 							<div class="fl" style="line-height:35px;padding:0px 10px;">
 								市（区）
 							</div>
-							<div class="fl new_select" style="width:110px;">
+							<!-- <div class="fl new_select" style="width:110px;">
 								<div class="select_div fl" style="width:50px;">
 									请选择
 								</div>
@@ -166,7 +175,7 @@
 							</div>
 							<div class="fl" style="line-height:35px;padding:0px 10px;">
 								县（区）
-							</div>
+							</div> -->
 						 </div>    
 					</div>
 					 
@@ -177,7 +186,7 @@
 						<div class="rright"> 
 							<div style="display:inline">
 								<div>
-									<div class="fl new_select" style="width:110px;">
+									<!-- <div class="fl new_select" style="width:110px;">
 										<div class="select_div fl" style="width:50px;">
 											请选择
 										</div>
@@ -188,7 +197,10 @@
 									</div>
 									<div class="fl" style="line-height:35px;padding:0px 10px;">
 										学校
-									</div>
+									</div> -->
+									<select style="width:150px;" id="school">
+										<option value="0">请选择</option>
+									</select>
 									<span style="margin-left:5px;line-height:35px;color:#1194f3;cursor:pointer">没有您的学校？</span> 
 								</div>  
 								<div class="hide">
@@ -205,14 +217,14 @@
 						</div>
 						<div class="rright" style="width:300px;height:80px;color: #fff;"> 
 							<div class="gradelist">
-								<div class="stu_1_check">初一</div> 
-								<div class="stu_1">初二</div>
-								<div class="stu_1">初三</div>
+								<div class="stu_1 active" id="1">初一</div> 
+								<div class="stu_1" id="2">初二</div>
+								<div class="stu_1" id="3">初三</div>
 							</div>  
 							<div class="gradelist">
-								<div class="stu_2_check">高一</div> 
-								<div class="stu_2">高二</div>
-								<div class="stu_2">高三</div>
+								<div class="stu_2_check" id="4">高一</div> 
+								<div class="stu_2" id="5">高二</div>
+								<div class="stu_2" id="6">高三</div>
 							</div>
 						</div>  
 					</div>
@@ -222,15 +234,10 @@
 						</div>
 						<div class="rright" style="width:300px;height:120px;color: #fff;"> 
 							<div class="gradelist">
-								<div class="stu_1">语文</div> 
-								<div class="stu_3">数学</div>
+								<volist name='gaozhong' id='vo'>
+								<div class="stu_3">{$vo.course_name}</div> 
+								</volist>
 								<div class="stu_1">英语</div>
-								<div class="stu_3">物理</div> 
-								<div class="stu_3">化学</div>
-								<div class="stu_3">生物</div>
-								<div class="stu_3">历史</div>
-								<div class="stu_3">政治</div>
-								<div class="stu_3">地理</div>
 							</div>
 							<div class="clear"></div>
 						</div>  	
@@ -345,6 +352,45 @@
    		$(".page_content").Validform(
    			{tiptype:3}
    		);
+    });
+    $('#province').change(function(){
+    	var id = $(this).val();
+    	$.getJSON(
+    		'/member/ajaxgetcitydata',
+    		{id:id},
+    		function(data){
+    			if(data.status=='ok'){
+    				var html = '<option value="0">请选择</option>';
+    				$.each(data.data,function(key,val){
+    					html += '<option value="'+val.region_id+'">'+val.region_name+'</option>';
+    				});
+    				$('#city').html(html);
+    			}else{
+    				var html = '<option value="0">请选择</option>';
+    				$('#city').html(html);
+    				$('#school').html(html);
+    			}
+    		}
+    	);
+    });
+     $('#city').change(function(){
+    	var id = $(this).val();
+    	$.getJSON(
+    		'/member/ajaxgetschooldata',
+    		{id:id},
+    		function(data){
+    			if(data.status=='ok'){
+    				var html = '<option value="0">请选择</option>';
+    				$.each(data.data,function(key,val){
+    					html += '<option value="'+val.id+'">'+val.school_name+'</option>';
+    				});
+    				$('#school').html(html);
+    			}else{
+    				var html = '<option value="0">请选择</option>';
+    				$('#school').html(html);
+    			}
+    		}
+    	);
     });
 </script>
 <!--footer-->

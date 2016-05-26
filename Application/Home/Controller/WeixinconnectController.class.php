@@ -60,7 +60,7 @@ class WeixinconnectController extends GlobalController {
 			$userId = $userModel->add($userData);
 			if($weixinId && $userId){
 				$Model->commit();
-				$_SESSION['_user_id'] = $userId;//用于选择老师或学生时用，选择后销毁
+				$_SESSION['_user_id'] = $weixinId;//用于选择老师或学生时用，选择后销毁
 				$_SESSION['open_login'] = 'wx';
 				redirect('/weixinconnect/seltype');
 			}else{

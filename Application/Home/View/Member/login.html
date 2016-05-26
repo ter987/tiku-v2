@@ -12,10 +12,10 @@
 						</div>
 						<form id="login_form" action="/member/login" method="post">
 						<div class="form_list" style="margin-top:25px;">
-                        <div id="busybox">
+                        <div id="busybox" <notempty name="error_msg">class="Validform_checktip Validform_wrong"</notempty>>
                         	<notempty name="error_msg">
 							<span>{$error_msg}</span>
-							<div class="error_img"></div>
+							<!-- <div class="error_img"></div> -->
 							</notempty>
 						</div>
 							<div class="l_list1">	

@@ -26,10 +26,44 @@ class MemberController extends GlobalController {
 		$this->assign('menPhotos',$menPhotos);
 		$this->assign('womenPhotos',$womenPhotos);
 		
+		$provinceData = $this->getProvinceData();
+		$this->assign('province',$provinceData);
+		
 		$this->setMetaTitle('个人中心'.C('TITLE_SUFFIX'));
 		$this->addCss(array('xf.css','personal.css','study_centre.css'));
 		$this->addJs(array('js/menu.js','js/xf.js'));
 		$this->display();
+	}
+	public function getProvinceData(){
+		$Model = M('region');
+		$data = $Model->where("region_type=1")->select();
+		return $data;
+	}
+	public function ajaxGetCityData(){
+		$id = I('get.id');
+		if(!$id){
+			$this->ajaxReturn(array('status'=>'error'));
+		}
+		$Model = M('region');
+		$data = $Model->where("parent_id=$id")->select();
+		if($data){
+			$this->ajaxReturn(array('status'=>'ok','data'=>$data));
+		}else{
+			$this->ajaxReturn(array('status'=>'error'));
+		}
+	}
+	public function ajaxGetSchoolData(){
+		$id = I('get.id');
+		if(!$id){
+			$this->ajaxReturn(array('status'=>'error'));
+		}
+		$Model = M('school');
+		$data = $Model->where("region_id=$id")->select();
+		if($data){
+			$this->ajaxReturn(array('status'=>'ok','data'=>$data));
+		}else{
+			$this->ajaxReturn(array('status'=>'error'));
+		}
 	}
 	public function passProtect(){
 		$Modle = M('user');
@@ -416,6 +450,8 @@ INNER JOIN tiku ON a.tiku_id=tiku.`id`");
 	}
 	
 	public function login(){
+		$this->addCss(array('login.css'));
+		$this->setMetaTitle('登录'.C('TITLE_SUFFIX'));
 		if($_POST){
 			$error_msg = '';
 			$user = I('post.username');
@@ -461,8 +497,7 @@ INNER JOIN tiku ON a.tiku_id=tiku.`id`");
 			}
 			
 		}else{
-			$this->addCss(array('login.css'));
-			$this->setMetaTitle('登录'.C('TITLE_SUFFIX'));
+			
 			setcookie('pre_page',$_SERVER['HTTP_REFERER']);
 			$this->display();
 		}
@@ -510,7 +545,10 @@ INNER JOIN tiku ON a.tiku_id=tiku.`id`");
 			redirect('/');
 		}
 		$Model = M('user');
-		$user = $Model->where("id=".$_SESSION['_user_id'])->find();
+		$user = $Model->where($_SESSION['open_login']."_id=".$_SESSION['_user_id'])->find();
+		if(!$user){
+			redirect('/');
+		}
 		if($_POST){
 			$type = I('post.type');
 			if($type != 1 && $type != 2){

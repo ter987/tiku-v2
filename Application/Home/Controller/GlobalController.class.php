@@ -30,12 +30,9 @@ class GlobalController extends Controller{
 				redirect('/member/');
 			}
 		}else{
-			$login_controller_arr = array('/member/index','/member/info','/member/myshijuan','/member/mycollect','/member/teacherceping',
-			'/member/mynote','/ceping/index','/ceping/ajaxCheckStudent','/ceping/xuanti','/ceping/exam','/ceping/start',
-			'/onlinetest/index','/onlinetest/start','/onlinetest/exam','/onlinetest/ajaxExam','/onlinetest/submit',
-			'/smart/index','/smart/start','/hand/index','/hand/start',
-			'/member/studentceping','/shijuan/index','/shijuan/createToWord');
-			if(in_array('/'.strtolower(CONTROLLER_NAME).'/'.strtolower(ACTION_NAME), $login_controller_arr)){
+			$pattern = '/studycenter\/\w+|shijuan\/\w+|member\/info|smart\/\w+|zuke\/\w+|member\/passchange|baogao\/\w+/';
+			$uri = strtolower(CONTROLLER_NAME).'/'.strtolower(ACTION_NAME);
+			if(preg_match($pattern,$uri,$match)){
 				redirect('/member/login');
 			}
 		}

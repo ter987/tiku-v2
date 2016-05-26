@@ -27,6 +27,31 @@ class AddtikuController extends Controller {
 		$this->rows = 200;
 		
 	}
+	public function school(){
+		$Model = M('region');
+		$schoolModel = M('school');
+		$region = $Model->where("region_type=2")->select();
+		foreach($region as $v){
+			$shiQuId = $v['region_id'];
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array("Cookie:PHPSESSID=20vvojno9fp8qg8m7j4j470781"));
+			curl_setopt($ch, CURLOPT_URL, "http://www.yitiku.cn/User/xuanZeXueXiao");
+			curl_setopt($ch, CURLOPT_POSTFIELDS, array('shiQuId'=>$shiQuId));
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			$data = curl_exec($ch);
+			curl_close($ch);
+			$data = json_decode($data,true);
+			//var_dump($data);exit;
+			$school = $data['selectSchool'];
+			preg_match_all('/<li>(.+)<\/li>/U',$school,$matchs);
+			foreach($matchs[1] as $val){
+				$data['school_name'] = $val;
+				$data['region_id'] = $shiQuId;
+				$schoolModel->add($data);
+			}
+		}
+		echo 'OK';
+	}
 	/*
 	 * 过滤解析字段非法字符
 	 */ 
