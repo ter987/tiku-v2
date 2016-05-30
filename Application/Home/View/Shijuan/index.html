@@ -598,22 +598,36 @@
 		}
 	});
 	$(".xf_xffsxs").click(function(){
+		//检查时间和分值是否设置
 		$.getJSON(
-			'/index.php/home/member/ajaxGetMyStudents',
+			'/index.php/home/shijuan/ajaxCheckIsOk',
 			function(data){
 				//alert(data.id);
-				if(data.status=='ok'){
-					var html = '';
-					$.each(data.data, function(index,vo) {
-					  html += '<li id="'+vo.id+'" onclick="student_sel($(this))">'+vo.nick_name+'</li>';
-				
-					});
-					$('#my_students').html(html);
+				if(data.status=='error'){
+					alert(data.msg);
+					return false;
+				}else{
+					$.getJSON(
+						'/index.php/home/member/ajaxGetMyStudents',
+						function(data){
+							//alert(data.id);
+							if(data.status=='ok'){
+								var html = '';
+								$.each(data.data, function(index,vo) {
+								  html += '<li id="'+vo.id+'" onclick="student_sel($(this))">'+vo.nick_name+'</li>';
+							
+								});
+								$('#my_students').html(html);
+							}
+						}
+						
+					);
+					$(".xf_fasongxspop,.xf_popbg").show();
 				}
 			}
 			
 		);
-		$(".xf_fasongxspop,.xf_popbg").show();
+		
 	});
 function add_student(){
 	var val = $('#student_text').val();

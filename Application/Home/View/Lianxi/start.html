@@ -25,17 +25,17 @@
 					<div class="xf_dajuanlx">
 						<!-- <i class='xf_kszjt'><</i> -->
 						<ul>
-							<volist name="type_arr" id="vo">
-							<li><a href="#">{$vo.type_name}</a></li>
+							<volist name="type_arr" id="vo" key="k">
+							<li><a href="#" id="{$k}">{$vo.type_name}</a></li>
 							</volist>
 						</ul>
 						<!-- <i class='xf_ksrjt'>></i> -->
 					</div>
 				</div>
 			</div>
-			<volist name="shiti" id="vo">
+			<volist name="shiti" id="vo" key="kk">
 			<div class="xf_datibox">
-				<div class="xf_datilx">
+				<div class="xf_datilx" id="dati_{$kk}">
 					<em>{$vo.order_char}、{$vo.type_name}</em>
 					<!-- <div>
 						<h3>阅读下面的文字，完成8—9题</h3>
@@ -320,5 +320,15 @@
 				
 			);
 		}
+		$('.xf_dajuanlx a').click(function(){
+			var id = $(this).attr('id');
+			//alert(id);
+			$("html,body").animate({scrollTop: $("#dati_"+id).offset().top-100}, 1000);
+		});
+		$(".xf_datika ul li div i").click(function(){
+			var id = $(this).attr('id');
+			//alert(id);
+			$("html,body").animate({scrollTop: $("li[id="+id+"]").offset().top-100}, 1000);
+		});
 	</script>
 <include file="common:footer" />

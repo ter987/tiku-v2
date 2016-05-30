@@ -24,11 +24,14 @@ class LianxiController extends GlobalController {
 		$this->assign('course',$course);
 		$shiti = json_decode($data['shiti'],true);
 		$o = 1;
+		$type_arr = array();
 		foreach($shiti as $key=> $val){
 			$shiti[$key]['childs'] = $this->_getTikuInfo($val['childs']);
-			$type_arr[]['id'] = $val['type_id'];
-			$type_arr[]['type_name'] = $val['type_name'];
+			$type['id'] = $val['type_id'];
+			$type['type_name'] = $val['type_name'];
+			$type_arr[] = $type;
 		}
+		//var_dump($shiti);
 		$this->assign('type_arr',$type_arr);
 		$this->assign('shiti',$shiti);
 		$this->assign('data',$data);

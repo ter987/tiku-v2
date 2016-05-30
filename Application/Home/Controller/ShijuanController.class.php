@@ -143,6 +143,24 @@ class ShijuanController extends GlobalController {
 		$this->addJs(array('js/menu.js','js/xf.js','js/jquery-ui-1.11.2.custom/jquery-ui.js','js/dialog.js'));
         $this->display();
 	}
+	public function ajaxCheckIsOk(){
+		if(empty($_SESSION['shijuan']['limittime'])){
+			$this->ajaxReturn(array('status'=>'error','msg'=>'请先设置考试时间'));
+		}
+		for($i=1;$i<=2;$i++){
+			if(!empty($_SESSION['shijuan'][$i])){
+				foreach($_SESSION['shijuan'][$i]['shiti'] as $val){
+					foreach($val['childs'] as $v){
+						if(empty($v['x_score'])){
+							$this->ajaxReturn(array('status'=>'error','msg'=>'还有试题未设置分值'));
+						}
+					}
+				}
+			}
+			
+		}
+		$this->ajaxReturn(array('status'=>'ok'));
+	}
 	public function ajaxSendStudent(){
 		$ids = trim(I('get.ids'),',');
 		if(empty($ids)){
@@ -168,17 +186,21 @@ class ShijuanController extends GlobalController {
 		$cpData['unjoined_num'] = count($result);
 		$cpData['create_time'] = time();
 		$data = array();
+		$shiti_num = 0;
 		if(!empty($_SESSION['shijuan'][1])){
 			foreach($_SESSION['shijuan'][1]['shiti'] as $val){
 				$data = array_merge($data,array($val));
+				$shiti_num += count($val['childs']);
 			}
 		}
 		if(!empty($_SESSION['shijuan'][2])){
 			foreach($_SESSION['shijuan'][2]['shiti'] as $val){
 				$data = array_merge($data,array($val));
+				$shiti_num += count($val['childs']);
 			}
 		}
 		$cpData['shiti'] = json_encode($data);
+		$cpData['shiti_num'] = $shiti_num;
 		//var_dump($data);exit;
 		$ce_id = $cepingModel->add($cpData);
 		

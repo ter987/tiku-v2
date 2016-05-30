@@ -28,13 +28,7 @@ $(function(){
 				$(this).addClass('active');
 			}
 		});
-		$(".xf_datika ul li div i").click(function(){
-			if($(this).hasClass('cur')){
-				$(this).removeClass('cur');
-			}else{
-				$(this).addClass('cur');
-			}
-		});
+		
 
 		$(".xf_xuanzekm").click(function(){
 			if($(this).hasClass('active')){

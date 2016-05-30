@@ -156,7 +156,7 @@
 							</th>
 							<volist name="tiku_type" id="vo">
 							<th>
-								<p>
+								<p >
 									{$vo.type_name}
 								</p>
 							</th>
@@ -165,13 +165,13 @@
 						</tr>
 						<tr class="table_title">
 							<th>
-								<p id="sum">
+								<p id="sum" >
 									0
 								</p>
 							</th>
 							<volist name="tiku_type" id="vo">
 							<th>
-								<p id="sn">
+								<p id="t_{$vo.id}">
 									0
 								</p>
 							</th>
@@ -256,22 +256,36 @@ function jian(obj,point_id,type_id){
 		{point_id:point_id,type_id:type_id,num:val},
 		function(data){
 			if(data.status=='ok'){
-				
+				var val = parseInt(obj.parent().parent().parent().siblings('.sum_tr').html())-1;
+				obj.parent().parent().parent().siblings('.sum_tr').html(val);
+				var sum = parseInt($('#sum').html())-1;
+				$('#sum').html(sum);
+				var t_sum = parseInt($('.table_title').find('p[id=t_'+type_id+']').html())-1;
+				$('.table_title').find('p[id=t_'+type_id+']').html(t_sum);
 			}
 		}
 		
 	);
 }
 function jia(obj,point_id,type_id){
+	var count = parseInt(obj.parent().next().html());
 	var val = parseInt(obj.parent().prev().val());
 	val = val +1;
+	if(val>count){
+		return false;
+	}
 	obj.parent().prev().val(val);
 	$.getJSON(
 		'/index.php/home/smart/ajaxChangeNums',
 		{point_id:point_id,type_id:type_id,num:val},
 		function(data){
 			if(data.status=='ok'){
-				
+				var val = parseInt(obj.parent().parent().parent().siblings('.sum_tr').html())+1;
+				obj.parent().parent().parent().siblings('.sum_tr').html(val);
+				var sum = parseInt($('#sum').html())+1;
+				$('#sum').html(sum);
+				var t_sum = parseInt($('.table_title').find('p[id=t_'+type_id+']').html())+1;
+				$('.table_title').find('p[id=t_'+type_id+']').html(t_sum);
 			}
 		}
 		
@@ -322,6 +336,21 @@ function del_p(id){
 		
 	);
 }
+$("div[id^='kd_']").click(function(){
+		var id = (this.id.toString().match(/\d+/ig)||[])[0];
+		
+		$.getJSON(
+			'/index.php/home/smart/ajaxSelDifficulty',
+			{id:id},
+			function(data){
+				if(data.status=='ok'){
+					$("#kd").val(id);
+					$(".kedu_"+id).show().parents().siblings("div[id^='kd_']").children().hide();
+				}
+			}
+			
+		);
+	});	
 	</script>
 <!--footer-->
 <include file="common:footer" />

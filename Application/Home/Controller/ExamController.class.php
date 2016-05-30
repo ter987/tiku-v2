@@ -40,8 +40,9 @@ class ExamController extends GlobalController {
 		$o = 1;
 		foreach($shiti as $key=> $val){
 			$shiti[$key]['childs'] = $this->_getTikuInfo($val['childs'],$o);
-			$type_arr[]['id'] = $val['type_id'];
-			$type_arr[]['type_name'] = $val['type_name'];
+			$type['id'] = $val['type_id'];
+			$type['type_name'] = $val['type_name'];
+			$type_arr[] = $type;
 		}
 		//var_dump($shiti);
 		$this->assign('shiti',$shiti);

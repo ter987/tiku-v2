@@ -14,7 +14,9 @@ class SmartController extends GlobalController {
 		unset($_SESSION['shijuan']);
 		unset($_SESSION['smart']);
 		unset($_SESSION['cart']);
-		$_SESSION['difficulty'] = 3;
+		if(!isset($_SESSION['difficulty'])){
+			$_SESSION['difficulty'] = 3;
+		}
 		//后期改成从用户信息中选取course
 		if(empty($_SESSION['course_id'])){
 			$courseModel = M('tiku_course');
@@ -80,6 +82,11 @@ class SmartController extends GlobalController {
 			$this->ajaxReturn(array('status'=>'ok'));
 		}
 		
+	}
+	public function ajaxSelDifficulty(){
+		$id = I('get.id');
+		$_SESSION['difficulty'] = $id;
+		$this->ajaxReturn(array('status'=>'ok'));
 	}
 	public function start(){
 		if(empty($_SESSION['smart'])){
