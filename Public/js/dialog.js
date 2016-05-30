@@ -176,8 +176,19 @@ dia_log.prototype.check = function(){
 			buttons:[{
 				text:"确定",
 				click:function(){
-					dialog = this;		
-					$('.bjxs_div').dialog("destroy");
+					if($('#phpto_hidden').val()!=''){
+						$.getJSON(
+						'/member/ajaxeditPhoto',
+						{photo:$('#phpto_hidden').val()},
+						function(data){
+							if(data.status=='success'){
+								$('#photo_id').attr('src',data.photo);
+								$('#head_photo').dialog("destroy");
+							}
+						}
+						);
+					}
+					
 				}
 			}],
 			beforeClose: function() {

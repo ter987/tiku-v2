@@ -46,7 +46,7 @@
 							<span>头像设置：</span> 
 						 </div>
 						 <div class="rright"> 
-							<img src="./images/headimg.jpg" width="120px" height="120px">
+							<img id="photo_id" src="{$user_info.photo}"  width="120px" height="120px">
 							<div class="cp" id="check_photo" style="width:120px;height:25px;line-height:25px;text-align:center;margin-top:-25px;background:#fff;filter:alpha(opacity=80);-moz-opacity:0.80;opacity:0.80;color:#E51010;">	
 								更改头像
 							</div>
@@ -67,7 +67,7 @@
 							<span>真实姓名：</span>
 						</div>
 						<div class="rright">
-							<input type="text"  placeholder="请输入真实姓名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入真实姓名'" value="{$user_info.real_name}"/>
+							<input type="text" id="real_name"  placeholder="请输入真实姓名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入真实姓名'" value="{$user_info.real_name}"/>
 						</div>
 					</div>
 					 
@@ -142,7 +142,7 @@
 								<select style="width:110px;" id="province">
 									<option value="0">请选择</option>
 									<volist name="province" id="vo">
-										<option value="{$vo.region_id}">{$vo.region_name}</option>
+										<option value="{$vo.region_id}"  <eq name="vo.region_id" value="$user_info.province_id">selected=""</eq>>{$vo.region_name}</option>
 									</volist>
 								</select>
 							</div>
@@ -178,7 +178,9 @@
 							</div> -->
 						 </div>    
 					</div>
-					 
+					 <input type="hidden" id="province_id" value="{$user_info.province_id}" />
+					 <input type="hidden" id="city_id" value="{$user_info.city_id}" />
+					 <input type="hidden" id="school_id" value="{$user_info.school_id}" />
 					<div class="Rmain">
 						<div class="rleft">
 							<span>所在学校：</span>
@@ -201,12 +203,12 @@
 									<select style="width:150px;" id="school">
 										<option value="0">请选择</option>
 									</select>
-									<span style="margin-left:5px;line-height:35px;color:#1194f3;cursor:pointer">没有您的学校？</span> 
+									<!-- <span style="margin-left:5px;line-height:35px;color:#1194f3;cursor:pointer">没有您的学校？</span>  -->
 								</div>  
-								<div class="hide">
+								<!-- <div class="hide">
 									<div class="hideinput"><input type="" style="width:180px;height:30px;padding:5px;"/></div>
 									<div class="del">-</div> 
-								</div>
+								</div> -->
 							</div>  	 
 						</div>
 					</div>
@@ -215,16 +217,16 @@
 						<div class="rleft">
 							<span>所在年段：</span>
 						</div>
-						<div class="rright" style="width:300px;height:80px;color: #fff;"> 
-							<div class="gradelist">
-								<div class="stu_1 active" id="1">初一</div> 
-								<div class="stu_1" id="2">初二</div>
-								<div class="stu_1" id="3">初三</div>
+						<div class="rright" id="grade" style="width:300px;height:80px;color: #fff;"> 
+							<div class="gradelist gradelist1">
+								<div class="stu_1 gr <eq name="user_info.my_grade" value="1">active</eq>" id="1">初一</div> 
+								<div class="stu_1 gr <eq name="user_info.my_grade" value="2">active</eq>" id="2">初二</div>
+								<div class="stu_1 gr <eq name="user_info.my_grade" value="3">active</eq>" id="3">初三</div>
 							</div>  
-							<div class="gradelist">
-								<div class="stu_2_check" id="4">高一</div> 
-								<div class="stu_2" id="5">高二</div>
-								<div class="stu_2" id="6">高三</div>
+							<div class="gradelist gradelist2">
+								<div class="stu_2 gr <eq name="user_info.my_grade" value="4">active</eq>" id="4" >高一</div> 
+								<div class="stu_2 gr <eq name="user_info.my_grade" value="5">active</eq>" id="5">高二</div>
+								<div class="stu_2 gr <eq name="user_info.my_grade" value="6">active</eq>" id="6">高三</div>
 							</div>
 						</div>  
 					</div>
@@ -233,11 +235,10 @@
 							<span>所选学科：</span>
 						</div>
 						<div class="rright" style="width:300px;height:120px;color: #fff;"> 
-							<div class="gradelist">
+							<div class="gradelist gradelist3">
 								<volist name='gaozhong' id='vo'>
-								<div class="stu_3">{$vo.course_name}</div> 
+								<div class="stu_3" id="{$vo.id}">{$vo.course_name}</div> 
 								</volist>
-								<div class="stu_1">英语</div>
 							</div>
 							<div class="clear"></div>
 						</div>  	
@@ -247,7 +248,7 @@
 							<span>个人介绍：</span>
 						</div>
 						<div class="rright"> 
-							<textarea placeholder="介绍一下自己吧..." onfocus="this.placeholder=''" onblur="this.placeholder='介绍一下自己吧...'" style="border:1px solid #CCC;overflow:auto;width:450px;height:70px;padding: 8px;"></textarea> 
+							<textarea id="description" placeholder="介绍一下自己吧..." onfocus="this.placeholder=''" onblur="this.placeholder='介绍一下自己吧...'" style="border:1px solid #CCC;overflow:auto;width:450px;height:70px;padding: 8px;">{$user_info.description}</textarea> 
 						</div> 
 					</div>  
 					  
@@ -267,12 +268,13 @@
 	<div id="head_photo" style="display:none;">
 		<div class="windown-choosePhotoContent" style="width:600px;height:240px" id="windown-content">
 			<div class="choosePhoto">
+				<input type="hidden" id="phpto_hidden" />
 				<div class="changearea">
 					<div class="img">
 						<span>男</span>
 						<ul>
 							<volist name="menPhotos" id="vo">
-							<li id="wp_li"><a href="javascript:;" ><img src="{$vo}" alt="" id="wp_img" height="80" width="80"></a></li>
+							<li id="wp_li"><a href="javascript:;" class="photo_a"><img src="{$vo}" alt="" id="wp_img" height="80" width="80"></a></li>
 							</volist>
 						</ul>
 					</div>
@@ -280,18 +282,18 @@
 						<span>女</span>
 						<ul>
 							<volist name="womenPhotos" id="vo">
-							<li id="wp_li"><a href="javascript:;"><img src="{$vo}" alt="" id="wp_img" height="80" width="80"></a></li>
+							<li id="wp_li"><a href="javascript:;" class="photo_a"><img src="{$vo}" alt="" id="wp_img" height="80" width="80"></a></li>
 							</volist>
 						</ul>
 					</div>
 				</div>
-				<div class="upload">
+				<!-- <div class="upload">
 					<span class="myPhoto"></span>
 					<a href="javascript:;"  class="" style="color:#1194F3;">上传头像</a>
 					<a href="javascript:;" class="replace" >换一批</a>
 					<div id="fsUploadProgress" style="height:0;display:none">
 					</div>
-				</div>
+				</div> -->
 				
 			</div>
 		</div>
@@ -303,23 +305,7 @@
 	$('.photo_a').click(function(){
 		$('#phpto_hidden').val($(this).find('img').attr('src'));
 	});
-	$('#phpto_btn').click(function(){
-		if($('#phpto_hidden').val()!=''){
-			$.getJSON(
-			'/member/ajaxeditPhoto',
-			{photo:$('#phpto_hidden').val()},
-			function(data){
-				if(data.status=='success'){
-					$('#photo_id').show();
-					$('#photo_id').find('img').attr('src',data.photo);
-					$('.face').find('span').show();
-					$('.face').find('span').find('img').attr('src',data.photo);
-					$('#head_photo').dialog("close");
-				}
-			}
-			);
-		}
-	});
+
 	$('#change_a').click(function(){
 		$(this).hide();
 		$(this).next().show();
@@ -352,6 +338,57 @@
    		$(".page_content").Validform(
    			{tiptype:3}
    		);
+    });
+    $(function(){
+    	var province_id = $('#province_id').val();
+    	var city_id = $('#city_id').val();
+    	var school_id = $('#school_id').val();
+    	if(province_id>0){
+    		$.getJSON(
+	    		'/member/ajaxgetcitydata',
+	    		{id:province_id},
+	    		function(data){
+	    			if(data.status=='ok'){
+	    				var html = '<option value="0">请选择</option>';
+	    				$.each(data.data,function(key,val){
+	    					if(val.region_id==city_id){
+	    						html += '<option value="'+val.region_id+'" selected="">'+val.region_name+'</option>';
+	    					}else{
+	    						html += '<option value="'+val.region_id+'">'+val.region_name+'</option>';
+	    					}
+	    				});
+	    				$('#city').html(html);
+	    			}else{
+	    				var html = '<option value="0">请选择</option>';
+	    				$('#city').html(html);
+	    				$('#school').html(html);
+	    			}
+	    		}
+	    	);
+    	}
+    	if(school_id>0){
+    		$.getJSON(
+	    		'/member/ajaxgetschooldata',
+	    		{id:city_id},
+	    		function(data){
+	    			if(data.status=='ok'){
+	    				var html = '<option value="0">请选择</option>';
+	    				$.each(data.data,function(key,val){
+	    					
+	    					if(val.id==school_id){
+	    						html += '<option value="'+val.id+'" selected="">'+val.school_name+'</option>';
+	    					}else{
+	    						html += '<option value="'+val.id+'">'+val.school_name+'</option>';
+	    					}
+	    				});
+	    				$('#school').html(html);
+	    			}else{
+	    				var html = '<option value="0">请选择</option>';
+	    				$('#school').html(html);
+	    			}
+	    		}
+	    	);
+    	}
     });
     $('#province').change(function(){
     	var id = $(this).val();
@@ -388,6 +425,72 @@
     			}else{
     				var html = '<option value="0">请选择</option>';
     				$('#school').html(html);
+    			}
+    		}
+    	);
+    });
+    $('#grade div .gr').click(function(){
+    	var val = $(this).attr('id');
+    	var obj = $(this);
+    	$.getJSON(
+    		'/member/ajaxSelGrade',
+    		{id:val},
+    		function(data){
+    			if(data.status=='ok'){
+    				obj.addClass('active');
+			    	obj.siblings().removeClass('active');
+			    	obj.parent().siblings().find('.gr').removeClass('active');
+    			}
+    		}
+    	);
+    });
+    $('.gradelist3').children('div').click(function(){
+    	var len = $('#grade').find(".active").length;
+    	if(len==0){
+    		alert('请先选择年段');
+    		return false;
+    	}
+    	var val = $(this).attr('id');
+    	var obj = $(this);
+    	if(obj.hasClass('active')){
+    		obj.removeClass('active');
+    	}else{
+    		obj.addClass('active');
+    	}
+    });
+    $('.save_btn').click(function(){
+    	var real_name = $('#real_name').val();
+    	if($.trim(real_name)==''){
+    		alert('请输入真实姓名');
+    		return false;
+    	}
+    	var school_id = $('#school').val();
+    	if(school_id==0){
+    		alert('请选择您所在学校');
+    		return false;
+    	}
+    	var province_id = $('#province').val();
+    	if(province_id==0){
+    		alert('请选择您所在省份');
+    		return false;
+    	}
+    	var city_id = $('#city').val();
+    	if(city_id==0){
+    		alert('请选择您所在市');
+    		return false;
+    	}
+    	var len = $('#grade').find(".active").length;
+    	if(len==0){
+    		alert('请先选择年段');
+    		return false;
+    	}
+    	var description = $('#description').val();
+    	$.getJSON(
+    		'/member/ajaxEditInfo',
+    		{real_name:real_name,school_id:school_id,description:description,province_id:province_id,city_id:city_id},
+    		function(data){
+    			if(data.status=='ok'){
+    				alert('修改成功');
     			}
     		}
     	);

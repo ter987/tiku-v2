@@ -1,4 +1,4 @@
-﻿*{margin:0; padding:0; list-style:none; margin:0px auto;}
+*{margin:0; padding:0; list-style:none; margin:0px auto;}
 body{background:#fff;font-family:Microsoft yahei;}
 body,form,input,textarea{margin:0;padding:0;font-size:14px;font-family:Microsoft yahei;}
 input{vertical-align:middle;outline:none;}
@@ -432,6 +432,15 @@ table {
     margin: 0;
 }
 .kedu span:hover,.kedu.hover span{
+	background:url(../images/keducur.png) no-repeat;
+}
+.kedu{
+	background:url(../images/kedu.png) no-repeat;
+	width:20px;
+	height:33px;
+	margin-top:-12px;
+}
+.kedu:hover{
 	background:url(../images/keducur.png) no-repeat;
 }
 .kd_1{
@@ -915,8 +924,9 @@ table {
 	padding:0px 10px;
 	z-index:100;
 }
-.stu_1{width:90px;height:35px;line-height:35px;background:#1194F3;color:#fff;text-align:center;float:left;margin:0px 5px 5px 0px;cursor:pointer;}
-.stu_1_check{width:90px;height:35px;line-height:35px;color:#fff;text-align:center;background:#1194F3 url(../images/stu_r_t1.gif) 81px 0px no-repeat;float:left;margin:0px 5px 5px 0px;}
-.stu_2{width:90px;height:35px;line-height:35px;background:#FF9C00;color:#fff;text-align:center;float:left;margin:0px 5px 5px 0px;cursor:pointer;}
-.stu_2_check{width:90px;height:35px;line-height:35px;color:#fff;text-align:center;background:#FF9C00 url(../images/stu_r_t.gif) 81px 0px no-repeat;float:left;margin:0px 5px 5px 0px;}
-.stu_3{width:88px;height:33px;line-height:33px;background:#F5F5F5;border:1px solid #B3B3B3;color:#fff;text-align:center;float:left;margin:0px 5px 5px 0px;cursor:pointer;color:#1A1A1A;}
+.gradelist1 .stu_1{width:90px;height:35px;line-height:35px;background:#1194F3;color:#fff;text-align:center;float:left;margin:0px 5px 5px 0px;cursor:pointer;}
+.gradelist1 .active{width:90px;height:35px;line-height:35px;color:#fff;text-align:center;background:#1194F3 url(../images/stu_r_t1.gif) 81px 0px no-repeat;float:left;margin:0px 5px 5px 0px;}
+.gradelist2 .stu_2{width:90px;height:35px;line-height:35px;background:#FF9C00;color:#fff;text-align:center;float:left;margin:0px 5px 5px 0px;cursor:pointer;}
+.gradelist2 .active{width:90px;height:35px;line-height:35px;color:#fff;text-align:center;background:#FF9C00 url(../images/stu_r_t.gif) 81px 0px no-repeat;float:left;margin:0px 5px 5px 0px;}
+.gradelist3 .stu_3{width:88px;height:33px;line-height:33px;background:#F5F5F5;border:1px solid #B3B3B3;color:#fff;text-align:center;float:left;margin:0px 5px 5px 0px;cursor:pointer;color:#1A1A1A;}
+.gradelist3 .active{width:88px;height:33px;line-height:33px;background:#1194F3;color:#fff;text-align:center;float:left;margin:0px 5px 5px 0px;cursor:pointer;}

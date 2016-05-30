@@ -52,6 +52,19 @@ class MemberController extends GlobalController {
 			$this->ajaxReturn(array('status'=>'error'));
 		}
 	}
+	public function ajaxEditInfo(){
+		$real_name = I('get.real_name');
+		$school_id = I('get.school_id');
+		$province_id = I('get.province_id');
+		$city_id = I('get.city_id');
+		$description = I('get.description');
+		$Model = M('user');
+		if($Model->where("id=".$_SESSION['user_id'])->save(array('real_name'=>$real_name,'school_id'=>$school_id,'description'=>$description,'province_id'=>$province_id,'city_id'=>$city_id))){
+			$this->ajaxReturn(array('status'=>'ok'));
+		}else{
+			$this->ajaxReturn(array('status'=>'error'));
+		}
+	}
 	public function ajaxGetSchoolData(){
 		$id = I('get.id');
 		if(!$id){
@@ -695,6 +708,15 @@ INNER JOIN tiku ON a.tiku_id=tiku.`id`");
 			$Model->add($data);
 			$tag = $this->getDefaultTag($id);
 			$this->ajaxReturn(array('status'=>'success','action'=>'add','tag'=>$tag,'tiku_id'=>$id));
+		}
+	}
+	public function ajaxSelGrade(){
+		$id = I('get.id');
+		$Model = M('user');
+		if($Model->where("id=".$_SESSION['user_id'])->save(array('my_grade'=>$id))){
+			$this->ajaxReturn(array('status'=>'ok'));
+		}else{
+			$this->ajaxReturn(array('status'=>'error','msg'=>'服务器出错，请重试！'));
 		}
 	}
 	public function ajaxAddTag(){
