@@ -15,7 +15,7 @@
 				<div class="topcy" id="ecTools">
 					<ul>
 						<li><a class="goon_1" id="savethis" href="javascript:;">保存</a></li>
-						<li><a id="down_sj" class="goon_1" href="javascript:;">下载</a></li>
+						<li><a id="down_kj" class="goon_1" href="javascript:;">下载</a></li>
 						<li><a class="goon_1 xf_xffsxs" href="javascript:;" id="filterReturn">发送学生</a></li>
 					</ul>
 				</div>
@@ -31,7 +31,7 @@
 						</div>
 					</div>				
 				</div>
-				<volist name="zuke_data" key="kk" id="vo">
+				<foreach name="zuke_data" key="kk" item="vo">
 				<div class="ja_con">
 					<div id="pui_head">
 						<div class="partm">
@@ -42,9 +42,9 @@
 						</div>
 					</div>
 
-					<volist name="vo.childs" key="k" id="v">
+					<foreach name="vo.childs" key="k" item="v">
 					<div class="b_test ja_teshuli quesbox" style="width:980px;padding:0px;margin-top:10px;">
-						<div class="quesopmenu"  shiti_no="{$kk}" key="{$k-1}">
+						<div class="quesopmenu"  shiti_no="{$kk}" key="{$k}">
 							<a class="ico_zjgn3" onclick="moveUp($(this))">上移</a>
 							<a class="ico_zjgn4" onclick="moveDown($(this))">下移</a>
 							<a class="ico_zjgn6" onclick="deleteMe($(this))">删除</a>
@@ -54,7 +54,7 @@
 						<div style="width:960px;height:auto;float:left;margin:10px">  
 							<div class="content" style="width:auto;">
 								<div class="ja_style">
-									<span id="x_order">{$k}</span><span>．</span>{$v.content|htmlspecialchars_decode}
+									<span id="x_order">{$k+1}</span><span>．</span>{$v.content|htmlspecialchars_decode}
 								</div>
 							</div>
 						</div>	
@@ -70,9 +70,9 @@
 							
 						</div>	
 						</eq>
-					</volist>
+					</foreach>
 				</div>
-				</volist>
+				</foreach>
 
 				
 	
@@ -204,6 +204,7 @@
 		</div>
 	</div>
 	<link href="__PUBLIC__/js/jquery-ui-1.11.2.custom/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<iframe src="" id="down_iframe" style="display:none;"></iframe>
 	<!-- footer -->
 <script>
 function jiexi(obj){
@@ -467,6 +468,9 @@ $('.xf_fasongbutton a').click(function(){
 	}else{
 		alert('请选择学生');
 	}
+});
+$('#down_kj').click(function(){
+	$('#down_iframe').attr('src','/zuke/download');
 });
 </script>
 <include file="common:footer" />

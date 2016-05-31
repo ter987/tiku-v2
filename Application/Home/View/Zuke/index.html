@@ -151,12 +151,8 @@
 								<a href="JavaScript:;" class='active'>收藏的试题</a>
 							</div>
 						</div>
-						<div class="fr" style="width:116px;height:40px;border-left:1px solid #D9D9D9;line-height:40px;">
-							<div class="fl" style="padding:0px 4px;"><a href=""> < </a></div>
-							<div class="fl" style="width:79px;text-align:center;">
-								<span id="pages"><i style="color:#1194f3;font-style: normal;">1</i>/3800</span>
-							</div>
-							<div class="fl" style="padding:0px 4px;"><a href=""> > </a></div>
+						<div class="fr" id="pages" style="width:116px;height:40px;border-left:1px solid #D9D9D9;line-height:40px;">
+							
 						</div>
 						<div class="clear"></div>
 					</div>	
@@ -164,6 +160,8 @@
 				<div style="height:5px;width:100%;" id="after"></div>
 				<div id="content"></div>
 				<!-- 分页 -->
+				<input type="hidden" id="cur_page" value=""/>
+				<input type="hidden" id="total_page" value="" />
 				<div>
 					<div class="page" style="padding-right:0px;">
 						<a href="##" style="width:100px"> < 上一页</a>
@@ -286,6 +284,170 @@ $(
 		);
 	}
 );
+function next_page(){
+	var to_page = parseInt($('#cur_page').val())+1;
+	var total_page = parseInt($('#total_page').val());
+	if(to_page>total_page){
+		return false;
+	}
+	var topic_id = $('.tt_left').find('.active').attr('id');
+	var resource_id = $('#module').find('.active').attr('id');
+	var param = {
+		resource_id:resource_id,
+		topic_id:topic_id,
+		p:to_page
+	};
+	$.getJSON(
+	'/index.php/home/zuke/ajaxGetCaseData',
+	param,
+	function(data){
+		
+		if(data.status=='ok'){
+				show_data(data.data);
+			}
+		}
+		
+	);
+}
+function _next_page(){
+	var to_page = parseInt($('#cur_page').val())+1;
+	var total_page = parseInt($('#total_page').val());
+	if(to_page>total_page){
+		return false;
+	}
+	var topic_id = $('.tt_left').find('.active').attr('id');
+	var type_id = $('#type_id').find(".active").attr('id');
+	var tixing_id = $('#tixing_id').find(".active").attr('id');
+	var difficulty_id = $('#difficulty_id').find(".active").attr('id');
+	var year_id = $('#year_id').find(".active").attr('id');
+	var param = {
+		topic_id:topic_id,
+		p:to_page,
+		type_id:type_id,
+		tixing_id:tixing_id,
+		difficulty_id:difficulty_id,
+		year_id:year_id
+	};
+	$.getJSON(
+	'/index.php/home/zuke/ajaxGetShitiData',
+	param,
+	function(data){
+		
+		if(data.status=='ok'){
+				_show_data(data.data);
+			}
+		}
+		
+	);
+}
+function prev_page(){
+	var to_page = parseInt($('#cur_page').val())-1;
+	var total_page = parseInt($('#total_page').val());
+	if(to_page<1){
+		return false;
+	}
+	var topic_id = $('.tt_left').find('.active').attr('id');
+	var resource_id = $('#module').find('.active').attr('id');
+	var param = {
+		resource_id:resource_id,
+		topic_id:topic_id,
+		p:to_page
+	};
+	$.getJSON(
+	'/index.php/home/zuke/ajaxGetCaseData',
+	param,
+	function(data){
+		
+		if(data.status=='ok'){
+				show_data(data.data);
+			}
+		}
+		
+	);
+}
+function _prev_page(){
+	var to_page = parseInt($('#cur_page').val())-1;
+	var total_page = parseInt($('#total_page').val());
+	if(to_page<1){
+		return false;
+	}
+	var topic_id = $('.tt_left').find('.active').attr('id');
+	var type_id = $('#type_id').find(".active").attr('id');
+	var tixing_id = $('#tixing_id').find(".active").attr('id');
+	var difficulty_id = $('#difficulty_id').find(".active").attr('id');
+	var year_id = $('#year_id').find(".active").attr('id');
+	var param = {
+		topic_id:topic_id,
+		p:to_page,
+		type_id:type_id,
+		tixing_id:tixing_id,
+		difficulty_id:difficulty_id,
+		year_id:year_id
+	};
+	$.getJSON(
+	'/index.php/home/zuke/ajaxGetShitiData',
+	param,
+	function(data){
+		
+		if(data.status=='ok'){
+				_show_data(data.data);
+			}
+		}
+		
+	);
+}
+function go_page(page){
+	var to_page = parseInt(page);
+	var total_page = parseInt($('#total_page').val());
+	
+	var topic_id = $('.tt_left').find('.active').attr('id');
+	var resource_id = $('#module').find('.active').attr('id');
+	var param = {
+		resource_id:resource_id,
+		topic_id:topic_id,
+		p:to_page
+	};
+	$.getJSON(
+	'/index.php/home/zuke/ajaxGetCaseData',
+	param,
+	function(data){
+		
+		if(data.status=='ok'){
+				show_data(data.data);
+			}
+		}
+		
+	);
+}
+function _go_page(page){
+	var to_page = parseInt(page);
+	var total_page = parseInt($('#total_page').val());
+	
+	var topic_id = $('.tt_left').find('.active').attr('id');
+	var type_id = $('#type_id').find(".active").attr('id');
+	var tixing_id = $('#tixing_id').find(".active").attr('id');
+	var difficulty_id = $('#difficulty_id').find(".active").attr('id');
+	var year_id = $('#year_id').find(".active").attr('id');
+	var param = {
+		topic_id:topic_id,
+		p:to_page,
+		type_id:type_id,
+		tixing_id:tixing_id,
+		difficulty_id:difficulty_id,
+		year_id:year_id
+	};
+	$.getJSON(
+	'/index.php/home/zuke/ajaxGetshitiData',
+	param,
+	function(data){
+		
+		if(data.status=='ok'){
+				_show_data(data.data);
+			}
+		}
+		
+	);
+}
 $('#module').children('div[type=1]').click(function(){
 	$('#tixing').hide();
 	var resource_id = $(this).attr('id');
@@ -378,11 +540,75 @@ function show_data(data){
 			'</div>'+
 		'</div>';
 		});
-		var page_html = '<i style="color:#1194f3;font-style: normal;">'+data.cur_page+'</i>/'+data.page_count;
+
+		var page_html = '<div class="fl" style="padding:0px 4px;"><a href="javascript:void(0);" onclick="prev_page();"> < </a></div>'+
+							'<div class="fl" style="width:79px;text-align:center;">'+
+								'<span ><i style="color:#1194f3;font-style: normal;">'+data.cur_page+'</i>/'+data.page_count+'</span>'+
+							'</div>'+
+							'<div class="fl" style="padding:0px 4px;"><a href="javascript:void(0);" onclick="next_page();"> > </a></div>';
+		$('#cur_page').val(data.cur_page);
+		$('#total_page').val(data.page_count);
 		$('#pages').html(page_html);
+		show_page(data.cur_page,data.page_count);
 		$('#content').html(html);
 }
 
+function show_page(cur_page,total_page){
+	cur_page = parseInt(cur_page);
+	total_page = parseInt(total_page);
+	var page_html = '';
+	if(total_page>1){
+		if(cur_page>1){
+			page_html += '<a href="javascript:void(0);" style="width:100px" onclick="prev_page()"> < 上一页</a>';
+		}
+		var t = 0;
+		for(i=cur_page-3;i<=total_page;i++){
+			//alert(i);
+			if(i>0 && i<=total_page && t<5){
+				t++;
+				if(i==cur_page){
+					page_html += '<a class="check" href="javascript:void(0);" onclick="go_page('+i+')">'+i+'</a>';
+				}else{
+					page_html += '<a  href="javascript:void(0);" onclick="go_page('+i+')">'+i+'</a>';
+				}
+				
+			}
+		}
+		if(cur_page<total_page){
+			page_html += '<a href="javascript:void(0);" style="width:100px;" onclick="next_page()">下一页  >  </a>';
+		}
+	}
+	page_html += '<div style="clear:both;"></div>';
+	$('.page').html(page_html);
+}
+function _show_page(cur_page,total_page){
+	cur_page = parseInt(cur_page);
+	total_page = parseInt(total_page);
+	var page_html = '';
+	if(total_page>1){
+		if(cur_page>1){
+			page_html += '<a href="javascript:void(0);" style="width:100px" onclick="_prev_page()"> < 上一页</a>';
+		}
+		var t = 0;
+		for(i=cur_page-3;i<=total_page;i++){
+			//alert(i);
+			if(i>0 && i<=total_page && t<5){
+				t++;
+				if(i==cur_page){
+					page_html += '<a class="check" href="javascript:void(0);" onclick="go_page('+i+')">'+i+'</a>';
+				}else{
+					page_html += '<a  href="javascript:void(0);" onclick="_go_page('+i+')">'+i+'</a>';
+				}
+				
+			}
+		}
+		if(cur_page<total_page){
+			page_html += '<a href="javascript:void(0);" style="width:100px;" onclick="_next_page()">下一页  >  </a>';
+		}
+	}
+	page_html += '<div style="clear:both;"></div>';
+	$('.page').html(page_html);
+}
 function _show_data(data){
 	var html = '';
 	$.each(data.data,function(key,val){
@@ -427,9 +653,16 @@ function _show_data(data){
 					'</div>'+
 				'</div>';
 		});
-		var page_html = '<i style="color:#1194f3;font-style: normal;">'+data.cur_page+'</i>/'+data.page_count;
+		var page_html = '<div class="fl" style="padding:0px 4px;"><a href="javascript:void(0);" onclick="_prev_page();"> < </a></div>'+
+							'<div class="fl" style="width:79px;text-align:center;">'+
+								'<span ><i style="color:#1194f3;font-style: normal;">'+data.cur_page+'</i>/'+data.page_count+'</span>'+
+							'</div>'+
+							'<div class="fl" style="padding:0px 4px;"><a href="javascript:void(0);" onclick="_next_page();"> > </a></div>';
 		$('#pages').html(page_html);
 		$('#content').html(html);
+		$('#cur_page').val(data.cur_page);
+		$('#total_page').val(data.page_count);
+		_show_page(data.cur_page,data.page_count);
 }
 function add_cart(id,type,obj){
 	$.getJSON(

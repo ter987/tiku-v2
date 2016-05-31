@@ -733,6 +733,29 @@ class StudycenterController extends GlobalController {
 		$this->addJs(array('js/menu.js','js/xf.js'));
 		$this->display();
 	}
+	public function myJiaoan(){
+		$Model = M('user_jiaoan');
+		
+		$count = $Model->where("user_id=".$_SESSION['user_id'].$where)->count();
+		$Page = new \Think\Page($count,10);
+		$Page->setConfig('prev',' < 上一页');
+		$Page->setConfig('next','下一页  >  ');
+		$Page->setConfig('first','首页');
+		$Page->setConfig('last','末页');
+		$page_show = $Page->_show($params);
+		$this->assign('page_show',$page_show);
+		$data = $Model->field("user_jiaoan.*,tiku_course.course_name,tiku_course.course_type")
+		->join("tiku_course ON tiku_course.id=user_jiaoan.course_id")
+		->where("user_jiaoan.user_id=".$_SESSION['user_id'].$where)->limit($Page->firstRow.','.$Page->listRows)->order("user_jiaoan.id DESC")->select();
+		//echo $Model->getLastSql();
+		
+		$this->assign('data',$data);
+		$this->assign('current','jiaoan');
+		$this->setMetaTitle('学习中心'.C('TITLE_SUFFIX'));
+		$this->addCss(array('xf.css','exam_info.css','study_centre.css'));
+		$this->addJs(array('js/menu.js','js/xf.js'));
+		$this->display();
+	}
 	public function cpJiexi(){
 		$id = I('get.id');
 		$cpModel = M('ceping');
@@ -796,5 +819,164 @@ class StudycenterController extends GlobalController {
 		$this->addCss(array('xf.css','exam_info.css'));
 		$this->addJs(array('js/xf.js'));
 		$this->display();
+	}
+	public function downloadJiaoAn(){
+		$id = I('get.id');
+		$Model = M('user_jiaoan');
+		$result = $Model->where("id=$id AND user_id=".$_SESSION['user_id'])->find();
+		if(!$result){
+			return false;
+		}
+		$Zuke = A('Zuke');
+		Vendor('PhpWord.src.PhpWord.Autoloader');
+		\PhpOffice\PhpWord\Autoloader::register();
+		Vendor('PhpOffice.PhpWord.Shared.Font');
+		$PHPWord_Shared_Font = new \PhpOffice\PhpWord\Shared\Font();
+		$phpWord = new \PhpOffice\PhpWord\PhpWord();
+		$sectionStyle = array(
+		    'pageSizeW' => $PHPWord_Shared_Font->centimeterSizeToTwips(20.9),
+		    'pageSizeH' => $PHPWord_Shared_Font->centimeterSizeToTwips(29.6),
+		    'colsNum'	=> 1,
+		    'orientation'	=> 'portrait'
+		);
+		$section = $phpWord->addSection($sectionStyle);
+		$section->addText($result['title'], array( 'size'=>'15','bold'=>true),array('align' => 'center'));
+		$shiti = json_decode($result['content'],true);
+		$title = $result['title'];
+		foreach($shiti as $val){
+			$section->addText($val['order_char'].'、'.$val['resource_name'],array('size'=>13));
+			
+			foreach($val['childs'] as $key=>$v){
+				$textrun = $section->createTextRun(array('widowControl'=>'true'));
+				$order_char = $key+1;
+				$textrun->addText($order_char.'.',array('size'=>13));
+				$result = $Zuke->getCaseContent($v['id'], $v['type']);
+				$content = htmlspecialchars_decode($result['content']);
+				//echo $content;exit;
+				$content = trim(strip_tags($content,'<br><img>'));
+				$content = preg_replace('/(&nbsp;)*/','',$content);
+				$text_arr = preg_split('/<img[\s|\S]+>/U',$content);
+				preg_match_all('/src="[\s|\S]+"/U',$content,$matchs);
+				//var_dump($text_arr);exit;
+				//echo $content;exit;
+				if($matchs){
+					$img_arr = preg_replace('/(src="\/)|"/U','',$matchs[0]);
+					$i=0;
+					$text_count = count($text_arr);
+					$img_count = count($img_arr);
+					while($i<$text_count){
+						//echo $text_arr[$i];exit;
+						//$text_arr[$i]='以制备某物质为目的：这种题型其实是利用某些原料来制备物质的过程,它可能包含分离、提纯等实验基本操作,解题的基本思路是先浏览流程及需解决的问题有哪些,其次要明白制备什么物质,这些物质有着什么性质,通过什么方法制备,该反应造成了什么后果,制备过程中产生了什么杂质,杂质如何去除,然后带着问题结合基础知识和题目信息解答。例2 [2014·天津卷] 合成氨是人类科学技术上的一项重大突破，其反应原理为N2(g)＋3H2(g)⇌2NH3(g) ΔH＝－92.4 kJ·mol－1。一种工业合成氨的简式流程图如下：';
+						$tts = preg_split('/<br\s*\/{0,1}>/U',$text_arr[$i]);
+						//var_dump($tts);exit;
+						if($tts){
+							foreach($tts as $vv){
+								$textrun->addText($vv,array('size'=>13));
+								//$section->addTextBreak();
+								$textrun = $section->createTextRun(array('widowControl'=>'true'));
+							}
+						}else{
+							$textrun->addText($text_arr[$i],array('size'=>13));
+						}
+						
+						if($i==$img_count) break;
+						$textrun->addImage($img_arr[$i]);
+						$i++;
+					}
+					
+				}else{
+					$section->addText($content,array('size'=>13,'align'=>'both'));
+				}
+				if($v['type']==2){
+					//输出答案
+					$textrun = $section->createTextRun(array('widowControl'=>'true'));
+					$textrun->addText('【答案】',array('size'=>13));
+					$answer = htmlspecialchars_decode($result['answer']);
+					//echo $content;exit;
+					$answer = trim(strip_tags($answer,'<br><img>'));
+					$answer = preg_replace('/(&nbsp;)*/','',$answer);
+					$text_arr = preg_split('/<img[\s|\S]+>/U',$answer);
+					preg_match_all('/src="[\s|\S]+"/U',$answer,$matchs);
+					//var_dump($text_arr);exit;
+					//echo $content;exit;
+					if($matchs){
+						$img_arr = preg_replace('/(src="\/)|"/U','',$matchs[0]);
+						$i=0;
+						$text_count = count($text_arr);
+						$img_count = count($img_arr);
+						while($i<$text_count){
+							//echo $text_arr[$i];exit;
+							//$text_arr[$i]='以制备某物质为目的：这种题型其实是利用某些原料来制备物质的过程,它可能包含分离、提纯等实验基本操作,解题的基本思路是先浏览流程及需解决的问题有哪些,其次要明白制备什么物质,这些物质有着什么性质,通过什么方法制备,该反应造成了什么后果,制备过程中产生了什么杂质,杂质如何去除,然后带着问题结合基础知识和题目信息解答。例2 [2014·天津卷] 合成氨是人类科学技术上的一项重大突破，其反应原理为N2(g)＋3H2(g)⇌2NH3(g) ΔH＝－92.4 kJ·mol－1。一种工业合成氨的简式流程图如下：';
+							$tts = preg_split('/<br\s*\/{0,1}>/U',$text_arr[$i]);
+							//var_dump($tts);exit;
+							if($tts){
+								foreach($tts as $vv){
+									$textrun->addText($vv,array('size'=>13));
+									//$section->addTextBreak();
+									$textrun = $section->createTextRun(array('widowControl'=>'true'));
+								}
+							}else{
+								$textrun->addText($text_arr[$i],array('size'=>13));
+							}
+							
+							if($i==$img_count) break;
+							$textrun->addImage($img_arr[$i]);
+							$i++;
+						}
+						
+					}else{
+						$section->addText($answer,array('size'=>13,'align'=>'both'));
+					}
+					//输出解析
+					$textrun = $section->createTextRun(array('widowControl'=>'true'));
+					$textrun->addText('【解析】',array('size'=>13));
+					$analysis = htmlspecialchars_decode($result['analysis']);
+					//echo $content;exit;
+					$analysis = trim(strip_tags($analysis,'<br><img>'));
+					$analysis = preg_replace('/(&nbsp;)*/','',$analysis);
+					$text_arr = preg_split('/<img[\s|\S]+>/U',$analysis);
+					preg_match_all('/src="[\s|\S]+"/U',$analysis,$matchs);
+					//var_dump($text_arr);exit;
+					//echo $content;exit;
+					if($matchs){
+						$img_arr = preg_replace('/(src="\/)|"/U','',$matchs[0]);
+						$i=0;
+						$text_count = count($text_arr);
+						$img_count = count($img_arr);
+						while($i<$text_count){
+							//echo $text_arr[$i];exit;
+							//$text_arr[$i]='以制备某物质为目的：这种题型其实是利用某些原料来制备物质的过程,它可能包含分离、提纯等实验基本操作,解题的基本思路是先浏览流程及需解决的问题有哪些,其次要明白制备什么物质,这些物质有着什么性质,通过什么方法制备,该反应造成了什么后果,制备过程中产生了什么杂质,杂质如何去除,然后带着问题结合基础知识和题目信息解答。例2 [2014·天津卷] 合成氨是人类科学技术上的一项重大突破，其反应原理为N2(g)＋3H2(g)⇌2NH3(g) ΔH＝－92.4 kJ·mol－1。一种工业合成氨的简式流程图如下：';
+							$tts = preg_split('/<br\s*\/{0,1}>/U',$text_arr[$i]);
+							//var_dump($tts);exit;
+							if($tts){
+								foreach($tts as $vv){
+									$textrun->addText($vv,array('size'=>13));
+									//$section->addTextBreak();
+									$textrun = $section->createTextRun(array('widowControl'=>'true'));
+								}
+							}else{
+								$textrun->addText($text_arr[$i],array('size'=>13));
+							}
+							
+							if($i==$img_count) break;
+							$textrun->addImage($img_arr[$i]);
+							$i++;
+						}
+						
+					}else{
+						$section->addText($analysis,array('size'=>13,'align'=>'both'));
+					}
+				}
+			}
+		}
+		$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+        header("Content-Description: File Transfer");
+        header('Content-Disposition: attachment; filename="'.$title.'.docx"');
+        //header("Content-Type: application/docx");
+        header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+        header('Content-Transfer-Encoding: binary');
+        header("Cache-Control: public");
+        header('Expires: 0');
+        $objWriter->save("php://output");
 	}
 }

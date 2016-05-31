@@ -27,6 +27,18 @@ class AddtikuController extends Controller {
 		$this->rows = 200;
 		
 	}
+	public function zuke(){
+		$Model = M('zuke_shiti');
+		for($i=1;$i<=20410;$i++){
+			$result = $Model->where("id=$i")->find();
+			if($result){
+				$data['answer'] = str_replace('【答案】','',$result['answer']);
+				$data['analysis'] = str_replace('【解析】','',$result['analysis']);
+				$Model->where("id=$i")->save($data);
+			}
+		}
+		echo 'OK';
+	}
 	public function school(){
 		$Model = M('region');
 		$schoolModel = M('school');
